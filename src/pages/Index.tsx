@@ -5,6 +5,12 @@ import { MarqueeSection } from "@/components/MarqueeSection";
 import { VideoSection } from "@/components/VideoSection";
 import { AboutSection } from "@/components/AboutSection";
 import { WorkSection } from "@/components/WorkSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { ClientsSection } from "@/components/ClientsSection";
+import { TrendingSection } from "@/components/TrendingSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { ContactLocationsSection } from "@/components/ContactLocationsSection";
+import { Footer } from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -16,6 +22,12 @@ const Index = () => {
       <VideoSection />
       <AboutSection />
       <WorkSection />
+      <ServicesSection />
+      <ClientsSection />
+      <TrendingSection />
+      <TestimonialsSection />
+      <ContactLocationsSection />
+      <Footer />
     </div>
   );
 };
