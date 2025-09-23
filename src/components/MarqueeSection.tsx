@@ -1,26 +1,24 @@
 export const MarqueeSection = () => {
   return (
-    <section className="py-12 bg-foreground text-background overflow-hidden">
-      <div className="marquee-container">
-        <div className="animate-marquee flex items-center gap-12 text-2xl md:text-4xl font-bold whitespace-nowrap">
+    <div className="bg-primary text-primary-foreground py-8 overflow-hidden relative">
+      {/* Primary marquee */}
+      <div className="flex animate-marquee">
+        <div className="flex space-x-12 text-2xl md:text-4xl font-bold whitespace-nowrap">
           <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
+          <span className="text-primary-foreground/60">★</span>
           <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
+          <span className="text-primary-foreground/60">★</span>
           <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
+          <span className="text-primary-foreground/60">★</span>
           <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
+          <span className="text-primary-foreground/60">★</span>
           <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
-          <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
-          <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
-          <span>IT'S TIME TO CREATE A SCHBANG</span>
-          <span className="text-6xl">✦</span>
+          <span className="text-primary-foreground/60">★</span>
         </div>
       </div>
-    </section>
+      
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-transparent to-primary pointer-events-none"></div>
+    </div>
   );
 };
