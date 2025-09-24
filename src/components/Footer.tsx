@@ -5,8 +5,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="text-2xl font-bold mb-6">
-              Schbang
-              <span className="text-primary-foreground/70 text-base font-normal">.Production</span>
+              Inowix
+              <span className="text-primary-foreground/70 text-base font-normal">.in</span>
             </div>
             <p className="text-primary-foreground/80 leading-relaxed">
               Proudly created in India.<br />
@@ -45,7 +45,7 @@ export const Footer = () => {
         
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="text-center text-primary-foreground/80">
-            <p>&copy; 2024 Schbang. All rights reserved.</p>
+            <p>&copy; 2022 Inowix.in All rights reserved.</p>
           </div>
         </div>
       </div>

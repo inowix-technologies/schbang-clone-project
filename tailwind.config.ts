@@ -52,7 +52,25 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        
+      black: "var(--black)",
+      darkBlack: "var(--dark-black)",
+      blueBlack: "var(--blue-black)",
+      white: "var(--white)",
+      lightWhite: "var(--light-white)",
+      red: "var(--red-color)",
+      borderColor: "var(--border-color)",
+      lightBlue: "var(--light-blue)",
+      lightGreen: "var(--light-green)",
+      lightRed: "var(--light-red)",
+      lightPurple: "var(--light-purple)",
+      whiteGreen: "var(--white-green)",
+      lightYellow: "var(--light-yellow)",
+      lightPink: "var(--light-pink)",
+      lightOrange: "var(--light-orange)",
+   
       },
+      
       spacing: {
         'section': 'var(--section-padding)',
       },

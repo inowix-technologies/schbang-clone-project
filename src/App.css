@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+.card {
+  @apply rounded-xl border border-borderColor bg-black shadow-brand transition-transform duration-500 ease-in-out;
+}
+
+.card:hover {
+  @apply scale-105 shadow-lg;
+}
+
+.signature {
+  color: var(--light-blue);
+  text-shadow: 0 0 8px rgba(185, 217, 255, 0.4);
+}

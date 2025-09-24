@@ -4,23 +4,13 @@ import { Button } from "@/components/ui/button";
 const locations = [
   {
     code: "MU",
-    city: "Mumbai",
-    time: "12:22 PM",
-    timezone: "India",
-    office: "Base Creative",
-    address: "Kamala Mills Compound, 301/302 Trade World, Tower D, Lower Parel, Mumbai, Maharashtra 400013",
-    phones: ["+91 963254875", "+91 9658745123"],
-    email: "bd@schbang.com"
-  },
-  {
-    code: "BLR", 
-    city: "Bangalore",
+    city: "banglore",
     time: "12:22 PM",
     timezone: "India",
     office: "Base Creative",
     address: "OXFORD TOWER-2, Door no. 901 8th floor, 139, Kodihalli, Bengaluru, Karnataka 560008",
-    phones: ["+91 963254875", "+91 9658745123"],
-    email: "bd@schbang.com"
+    phones: ["+91 8769626027"],
+    email: "admin@inowix.in"
   },
   {
     code: "DL",
@@ -29,19 +19,19 @@ const locations = [
     timezone: "India",
     office: "Base Creative",
     address: "1-A, Khasra No. 275, First Floor, Westend Marg, Saidulajab, Saket, New Delhi, Delhi 110030",
-    phones: ["+91 963254875", "+91 9658745123"],
-    email: "bd@schbang.com"
+    phones: ["+91 8769626027"],
+    email: "admin@inowix.in"
   },
   {
-    code: "LDN",
-    city: "London",
-    time: "07:52 AM", 
-    timezone: "London",
+    code: "CH",
+    city: "Chandigarh", 
+    time: "12:22 PM",
+    timezone: "India",
     office: "Base Creative",
-    address: "15/F The Hennessy 256 Hennessy Road Wan Chai, Hong Kong",
-    phones: ["+91 963254875", "+91 9658745123"],
-    email: "bd@schbang.com"
-  }
+    address: "SBP South City , Zirakpur , Chandigarh",
+    phones: ["+91 8769626027"],
+    email: "admin@inowix.in"
+  },
 ];
 
 export const ContactLocationsSection = () => {

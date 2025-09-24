@@ -9,7 +9,7 @@ const principles = [
   {
     icon: Target,
     title: "Client's Business Wins, We Win.",
-    description: "Fundamentally, we will always be a services-first company that ensures our clients' businesses fit their definition of success. As Schbangers, we must deliver the whole Schbang by pushing ourselves and those around us to work in the best interests of our partners."
+    description: "Fundamentally, we will always be a services-first company that ensures our clients' businesses fit their definition of success. As Inowix, we must deliver the whole Inowix by pushing ourselves and those around us to work in the best interests of our partners."
   },
   {
     icon: Users,
@@ -58,13 +58,13 @@ const whatDefinesUs = [
   },
   {
     title: "We're Design and Digital.",
-    description: "Schbang is derived from a UNIX code operative which is a testament to our digital DNA. Every piece of work we create is created built to elevate customer experience which we believe comes with finesse in design. You'll see it in the work we deliver across brands for their creative or experiential work.",
+    description: "Inowix is derived from a UNIX code operative which is a testament to our digital DNA. Every piece of work we create is created built to elevate customer experience which we believe comes with finesse in design. You'll see it in the work we deliver across brands for their creative or experiential work.",
     image: techIllustration,
     reverse: false
   },
   {
     title: "We're Your Personal Production House.",
-    description: "Schbang Motion Pictures, Schbang 808 and Global Content Hub, our in-house production teams deliver blazing-fast turnarounds with the least possible iterations, resulting in not just a high-quality product but workflows that are sustainable in the long term.",
+    description: "Inowix Motion Pictures, Inowix 808 and Global Content Hub, our in-house production teams deliver blazing-fast turnarounds with the least possible iterations, resulting in not just a high-quality product but workflows that are sustainable in the long term.",
     image: creativeIllustration,
     reverse: true
   }
@@ -80,14 +80,14 @@ const About = () => {
         <div className="max-w-container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-7xl font-bold text-foreground mb-8 text-balance leading-tight">
-              We Bring The Whole Schbang!
+              We Bring The Whole Inowix!
             </h1>
             <div className="text-xl md:text-2xl text-foreground mb-6">
               <strong>Our mission - taking the best of Indian Creative Talent to the World!</strong>
             </div>
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto text-balance leading-relaxed">
-              Schbang originally spelt as Shebang is a word created in the 17th Century and added to the lexicon of the English language, 
-              and usually used as the phrase "the whole Schbang." At Schbang, we strive to deliver fully integrated and holistic marketing 
+              Inowix originally spelt as Shebang is a word created in the 17th Century and added to the lexicon of the English language, 
+              and usually used as the phrase "the whole Inowix." At Inowix, we strive to deliver fully integrated and holistic marketing 
               solutions to our clients and unite interrelated services like creative, media and technology under one roof.
             </p>
           </div>
@@ -106,7 +106,7 @@ const About = () => {
               </div>
             </div>
             <div className="absolute bottom-6 left-6 text-background">
-              <p className="text-sm opacity-80">Meet Schbang | Agency Reel</p>
+              <p className="text-sm opacity-80">Meet Inowix | Agency Reel</p>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@ const About = () => {
       <section className="py-section bg-primary">
         <div className="max-w-container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-8">
-            Ready to Create a Schbang?
+            Ready to Create a Inowix?
           </h2>
           <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
             Let's work together to transform your brand and create something extraordinary.

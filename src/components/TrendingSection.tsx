@@ -2,7 +2,7 @@ import { ArrowRight, Clock } from "lucide-react";
 
 const trendingPosts = [
   {
-    title: "Schbang Wins Performance Mandate for Pyng; Launches Full-Funnel AI-Powered Campaign Using Google Veo 3",
+    title: "Inowix Wins Performance Mandate for Pyng; Launches Full-Funnel AI-Powered Campaign Using Google Veo 3",
     readTime: "2 Minutes",
     category: "Press Release",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",

@@ -5,28 +5,12 @@ import { ArrowRight, MapPin, Clock, Users } from "lucide-react";
 
 const openings = [
   {
-    title: "Senior Creative Director",
-    department: "Creative", 
-    location: "Mumbai",
-    type: "Full-time",
-    experience: "8+ years",
-    description: "Lead creative vision and strategy for major brand campaigns."
-  },
-  {
     title: "Frontend Developer",
     department: "Technology",
     location: "Bangalore", 
     type: "Full-time",
     experience: "3+ years",
     description: "Build responsive web experiences using modern technologies."
-  },
-  {
-    title: "Digital Marketing Manager",
-    department: "Media",
-    location: "Delhi",
-    type: "Full-time", 
-    experience: "5+ years",
-    description: "Drive digital marketing strategies across multiple channels."
   },
   {
     title: "UX/UI Designer",
@@ -80,10 +64,10 @@ const Careers = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Why Schbang?
+                Why Inowix?
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                We're not just building campaigns; we're building careers. At Schbang, you'll work 
+                We're not just building campaigns; we're building careers. At Inowix, you'll work 
                 alongside some of the most talented professionals in the industry, on projects that 
                 matter for brands that inspire.
               </p>

@@ -1,17 +1,21 @@
+import ezbuzz from "../assets/Easebuzz_Logo.jpg";
+import e2e from "../assets/66f39d4fdfb2bfc1091c408a_e2e-logo-white.webp"
+import shopify from "../assets/60ccab9786c6e542b5601be6_5f0439b0f26a5acaf2f50e1a_shopify.png"
+import phonepay from "../assets/PhonePe-Logo.wine.png"
+import tata from "../assets/tata-comm-collaborates-with-amazon-to-establish-advanced-ai-ready-network-in-india.webp"
+import paytm from "../assets/Paytm-Logo.516dcbea24a48dc1f0187700fbd0f6a48f9a18c3.png"
+import razorpay from "../assets/Razorpay_logo.svg"
+
+
 const clients = [
-  { name: "Xiaomi", logo: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=120&h=60&fit=crop" },
-  { name: "Jio", logo: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=120&h=60&fit=crop" },
-  { name: "Fevicol", logo: "https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=120&h=60&fit=crop" },
-  { name: "Domino's", logo: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=120&h=60&fit=crop" },
-  { name: "Tata Communications", logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=60&fit=crop" },
-  { name: "PayTM", logo: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=120&h=60&fit=crop" },
-  { name: "Hershey's", logo: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=120&h=60&fit=crop" },
-  { name: "Johnson & Johnson", logo: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=120&h=60&fit=crop" },
-  { name: "Cipla", logo: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=120&h=60&fit=crop" },
-  { name: "Garnier", logo: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=120&h=60&fit=crop" },
-  { name: "Britannia", logo: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=120&h=60&fit=crop" },
-  { name: "Prime Video", logo: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=120&h=60&fit=crop" }
-];
+  { name: "Ezbuzz", logo: ezbuzz },
+  { name: "E2e", logo: e2e },
+  { name: "Shopify", logo: shopify },
+  { name: "Phone pay", logo: phonepay },
+  { name: "Tata Communications", logo: tata },
+  { name: "PayTM", logo: paytm },
+  { name: "Razorpay", logo: razorpay },
+  ];
 
 export const ClientsSection = () => {
   return (
@@ -27,7 +31,7 @@ export const ClientsSection = () => {
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="h-12 w-auto object-contain"
+                  className="h-16 w-auto object-contain" // Increased size
                 />
               </div>
             ))}

@@ -1,43 +1,68 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import image1 from "../assets/ow1.png"
+import image6 from "../assets/ow6.png"
+import image7 from "../assets/ow7.png"
+import image8 from "../assets/ow8.png"
+import image2 from "../assets/ow2.png"
+import image3 from "../assets/ow3.png"
+import image4 from "../assets/ow4.png"
+import image5 from "../assets/ow5.png"
+
+
 
 const projects = [
   {
     id: 1,
-    title: "Winning Domino's 43K Followers in <6 hours",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&h=600&fit=crop",
+    title: "AI-Powered Business Analytics Platform",
+    image: image1,
   },
   {
     id: 2,
-    title: "New-age website experience for India's most trusted bank",
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
+    title: "Intelligent Automation System for Manufacturing",
+    image: image2,
   },
   {
     id: 3,
-    title: "#BrighterThanEver Film for a Global Fashion Brand",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+    title: "Agentic AI Workflow Optimization for Enterprises",
+    image: image3,
   },
   {
     id: 4,
-    title: "Stickiest Social Distancing Campaign for Fevicol",
-    image: "https://images.unsplash.com/photo-1607703703520-bb638e84caf2?w=800&h=600&fit=crop",
+    title: "Smart Customer Engagement Chatbot for E-commerce",
+    image: image4,
   },
   {
     id: 5,
-    title: "Creative Road Safety Awareness Campaign with Mumbai Police",
-    image: "https://images.unsplash.com/photo-1545073508-7d8ffbc7dfce?w=800&h=600&fit=crop",
+    title: "AI-Driven Marketing Automation for SMEs",
+    image: image5,
   },
   {
     id: 6,
-    title: "Raising Tuberculosis Awareness for a healthcare brand",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop",
+    title: "Small Business Inventory Management System",
+    image: image6,
   },
   {
     id: 7,
-    title: "Finding #CoffeeKaBetterHalf with Karan Johar",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=600&fit=crop",
+    title: "Personalized AI Recommendation Engine for Retail",
+    image: image7,
   },
+  {
+    id: 8,
+    title: "Automated Appointment & Booking System for Clinics",
+    image: image8,
+  },
+  {
+    id: 9,
+    title: "Digital Transformation Website for Local Businesses",
+    image: "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?w=800&h=600&fit=crop",
+  },
+  {
+    id: 10,
+    title: "AI-Driven Financial Insights Dashboard",
+    image: image8,
+  }
 ];
 
 export const WorkSection = () => {

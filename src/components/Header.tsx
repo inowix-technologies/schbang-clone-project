@@ -24,15 +24,16 @@ export const Header = () => {
     setActiveDropdown(null);
   };
 
+  
   return (
-    <header className="sticky top-0 z-50 bg-background border-b border-border">
+    <header className="sticky top-0 z-50 bg-background border-b border-border transition-opacity duration-700 z-[100]">
       <div className="max-w-container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
             <a href="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors">
-              Schbang
-              <span className="text-muted-foreground text-base font-normal">.Production</span>
+              Inowix
+              <span className="text-muted-foreground text-base font-normal">.in</span>
             </a>
           </div>
 
@@ -135,7 +136,7 @@ export const Header = () => {
                     className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-primary rounded-lg transition-all duration-200 group"
                   >
                     <div className="w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <span>Schbang Network</span>
+                    <span>Inowix Network</span>
                   </a>
                 </div>
               </div>
@@ -280,7 +281,7 @@ export const Header = () => {
                     className="block py-2 text-muted-foreground hover:text-primary transition-colors duration-200" 
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Schbang Network
+                    Inowix Network
                   </a>
                 </div>
               </div>

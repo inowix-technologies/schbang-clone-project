@@ -23,7 +23,7 @@ const services = [
   },
   {
     title: "Film & Photography",
-    description: "Schbang Motion Pictures, Global Content Hub and Schbang 808 produce and launch high-quality ad films, rapid video content and branded audio.",
+    description: "Inowix Motion Pictures, Global Content Hub and Inowix 808 produce and launch high-quality ad films, rapid video content and branded audio.",
     href: "/schbang-network"
   }
 ];

@@ -4,22 +4,22 @@ import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
-    quote: "When Schbang presented the concept and storyboard to Sony Music and us, they brought a rich visual language to our song and we knew, immediately, that they were the right partners for Roz Roz.",
+    quote: "When Inowix presented the concept and storyboard to Sony Music and us, they brought a rich visual language to our song and we knew, immediately, that they were the right partners for Roz Roz.",
     author: "The Yellow Diary Team",
     image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=80&fit=crop&crop=face"
   },
   {
-    quote: "India is a key market for our growth agenda and investing in building the Date Crown brand is key to the long-term success of this agenda. Our partnership with Schbang has been a great stepping stone in building a strong Date Crown brand.",
+    quote: "India is a key market for our growth agenda and investing in building the Date Crown brand is key to the long-term success of this agenda. Our partnership with Inowix has been a great stepping stone in building a strong Date Crown brand.",
     author: "Paul O'Neill, Vice President Marketing, Date Crown", 
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
   },
   {
-    quote: "Fevicol has over the years come to epitomize strong bonds. The Friendship Day campaign with Schbang provided us with an apt opportunity to bring alive this proposition; fantastic to see such a wide array of brands interact with Fevicol through this medium!",
+    quote: "Fevicol has over the years come to epitomize strong bonds. The Friendship Day campaign with Inowix provided us with an apt opportunity to bring alive this proposition; fantastic to see such a wide array of brands interact with Fevicol through this medium!",
     author: "Giridhar Seetharam, Chief Business Officer, Fevicol",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face"
   },
   {
-    quote: "The campaign #MoodHiBadalDiya for Tata Neu has received a wonderful response from our social community. This campaign has seen excellent effort from every single one of the team members involved behind the scenes. Thank you for being part of this journey Schbang!",
+    quote: "The campaign #MoodHiBadalDiya for Tata Neu has received a wonderful response from our social community. This campaign has seen excellent effort from every single one of the team members involved behind the scenes. Thank you for being part of this journey Inowix!",
     author: "Isha Shroff, Associate Director Social Media, Tata Neu",
     image: "https://images.unsplash.com/photo-1494790108755-2616b612b172?w=80&h=80&fit=crop&crop=face"
   }

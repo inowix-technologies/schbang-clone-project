@@ -8,31 +8,24 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const offices = [
   {
-    city: "Mumbai",
-    address: "Kamala Mills Compound, 301/302 Trade World, Tower D, Lower Parel, Mumbai, Maharashtra 400013",
-    phone: "+91 963254875",
-    email: "mumbai@schbang.com",
-    time: "12:22 PM"
-  },
-  {
     city: "Bangalore", 
     address: "OXFORD TOWER-2, Door no. 901 8th floor, 139, Kodihalli, Bengaluru, Karnataka 560008",
-    phone: "+91 963254875",
-    email: "bangalore@schbang.com",
+    phone: "+91 8769626027",
+    email: "admin@inowix.in",
     time: "12:22 PM"
   },
   {
     city: "Delhi",
     address: "1-A, Khasra No. 275, First Floor, Westend Marg, Saidulajab, Saket, New Delhi, Delhi 110030", 
-    phone: "+91 963254875",
-    email: "delhi@schbang.com",
+    phone: "+91 8769626027",
+    email: "admin@inowix.in",
     time: "12:22 PM"
   },
   {
-    city: "London",
-    address: "15/F The Hennessy 256 Hennessy Road Wan Chai, Hong Kong",
-    phone: "+44 20 7946 0958", 
-    email: "london@schbang.com",
+    city: "Chandigarh",
+    address: "SBP South city , Zirakpur , Chandigarh",
+    phone: "+91 8769626027", 
+    email: "admin@inowix.in",
     time: "07:52 AM"
   }
 ];

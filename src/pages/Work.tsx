@@ -1,6 +1,8 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useState } from "react";
+import HeroSection from "@/components/portfolio/HeroSection";
+import ProjectsGrid from "@/components/portfolio/ProjectsGrid";
 
 const categories = ["All", "Brand Strategy", "Digital Marketing", "Web Development", "Film & Photography"];
 
@@ -59,9 +61,13 @@ const Work = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+
+       <HeroSection />
+       <ProjectsGrid />
       
       {/* Hero Section */}
       <section className="py-section">
+      
         <div className="max-w-container mx-auto px-6">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-8">
