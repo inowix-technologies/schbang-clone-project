@@ -1,12 +1,14 @@
+import logo from "../assets/24e85f30-f1ab-4cf2-9ba1-9cb571f22241.png"
+
 export const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground py-16">
       <div className="max-w-container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
-            <div className="text-2xl font-bold mb-6">
-              Inowix
-              <span className="text-primary-foreground/70 text-base font-normal">.in</span>
+            <div className="text-2xl font-bold mb-6 flex flex-row gap-1">
+              <img className="w-[10rem]" src={logo} />
+              <span className="text-primary-foreground/70 text-base text-[1.4rem] font-normal mt-[1.2rem]">.in</span>
             </div>
             <p className="text-primary-foreground/80 leading-relaxed">
               Proudly created in India.<br />

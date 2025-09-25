@@ -61,14 +61,14 @@ const ProjectCard = ({
         </p>
       </div>
       
-      <div className="relative mt-8 lg:mt-12 overflow-hidden rounded-2xl shadow-card group-hover:scale-105 transition-transform duration-700 ease-spring">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-48 lg:h-64 xl:h-80 object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      </div>
+      <div className="relative h-48 lg:h-64 xl:h-80 mt-8 lg:mt-12 overflow-hidden rounded-2xl shadow-card group-hover:scale-105 transition-transform duration-700 ease-spring">
+  <img
+    src={image}
+    alt={title}
+    className="w-full h-full object-contain  object-center"
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+</div>
       
         {/* Decorative gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import logo from "../assets/logoinowix.png"
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const location = useLocation();
@@ -30,12 +32,10 @@ export const Header = () => {
       <div className="max-w-container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center">
-            <a href="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors">
-              Inowix
-              <span className="text-muted-foreground text-base font-normal">.in</span>
-            </a>
-          </div>
+          <Link to="/" className="text-2xl font-bold mb-6 flex flex-row items-end">
+  <img className="w-40 ml-6 mt-4" src={logo} alt="Inowix Logo" />
+  <span className="text-primary text-xl font-normal mb-[2.7rem] -ml-3 ">.in</span>
+</Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">

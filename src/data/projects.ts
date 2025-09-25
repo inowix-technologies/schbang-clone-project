@@ -1,5 +1,5 @@
 
-export type ProjectCategory = 'Apps' | 'AI' | 'SaaS' | 'Web App';
+export type ProjectCategory = 'Apps' | 'AI' | 'SaaS' | 'Web App' | 'Healthcare' | 'E-commerce' | 'Services' | 'Blockchain' | 'Fintech' | 'EdTech';
 
 export interface ProjectStat {
   icon: LucideIcon;
@@ -87,6 +87,8 @@ import {
   Smile,
   Globe,
   Leaf,
+  Home,
+  Video,
   Truck,
   Star,
   MessageSquare,
@@ -113,14 +115,26 @@ import retailxImage from "@/assets/retailx-dashboard.jpg";
 import nextstopImage from "@/assets/nextstop-app.jpg";
 import tradexImage from "@/assets/tradex-app.jpg";
 import finnovaImage from "@/assets/finnova-app.jpg";
-import bigoHealthImage from "@/assets/bigohealth-app.jpg";
-import jiviImage from "@/assets/jivi-app.jpg";
-import siyaAyurvedaImage from "@/assets/siya-ayurveda.jpg";
-import amrutamImage from "@/assets/amrutam-global.jpg";
-import theBumpImage from "@/assets/the-bump-app.jpg";
-import nationwideVisasImage from "@/assets/nationwide-visas.jpg";
-import divineBibleImage from "@/assets/divine-bible-app.jpg";
-import solAlgoImage from "@/assets/solalgo-app.jpg";
+import bigoHealthImage from "@/assets/bigo.webp";
+import jiviImage from "@/assets/jivi.webp";
+import siyaAyurvedaImage from "@/assets/siyaayurveda.webp";
+import amrutamImage from "@/assets/only_text_Amrutam_Logo_in_Green-09.webp";
+import theBumpImage from "@/assets/Bump.png";
+import nationwideVisasImage from "@/assets/nationwide-visas-logo.png";
+import solAlgoImage from "@/assets/solAlgo.png";
+import darazImage from "../assets/Daraz-Rebrand.png"
+import carrefourImage from "../assets/Carrefour.webp"
+import boltImage from "../assets/Bolt_logo.png"
+import luvImage from "../assets/luv.webp"
+import airena from "../assets/airena.jpeg"
+import polaraImage from "../assets/getplara.png"
+import taikonzImag from "../assets/taikonz.webp"
+import titoImage from "../assets/Tito.png"
+import fintrackImage from "../assets/fintrackImage.png"
+import taskflowImage from "../assets/taskflow.png"
+import learnsphereImage from "../assets/LearnSphere.jpeg"
+import bayutImage from "../assets/bayut.png"
+
 
 
 export const projects: Project[] = [
@@ -772,7 +786,7 @@ export const projects: Project[] = [
     shortDescription: "Telemedicine & healthcare platform for rural India.",
     slug: "bigohealth-telemedicine-platform",
     category: "Healthcare",
-    heroImage: "bigohealthImage",
+    heroImage: bigoHealthImage,
     colorVariant: 1,
     stats: [
       { icon: "Users", value: "75K+", label: "Patients served in Tier-3 & Tier-4 cities" },
@@ -860,7 +874,7 @@ export const projects: Project[] = [
     shortDescription: "AI-powered personal health companion for instant advice.",
     slug: "jivi-ai-personal-doctor",
     category: "AI",
-    heroImage: "jiviImage",
+    heroImage: jiviImage,
     colorVariant: 2,
     stats: [
       { icon: "Download", value: "1.2M+", label: "App installs across 170+ countries" },
@@ -948,7 +962,7 @@ export const projects: Project[] = [
     shortDescription: "Shopify e-commerce for Ayurvedic skin & hair products.",
     slug: "siya-ayurveda-ecommerce-wellness",
     category: "E-commerce",
-    heroImage: "siyaayurvedaImage",
+    heroImage: siyaAyurvedaImage,
     colorVariant: 3,
     stats: [
       { icon: "Leaf", value: "100%", label: "Natural and herbal ingredients" },
@@ -1030,7 +1044,7 @@ export const projects: Project[] = [
     shortDescription: "The one-stop online marketplace for South Asia.",
     slug: "daraz-online-shopping-platform",
     category: "E-commerce",
-    heroImage: "darazImage",
+    heroImage: darazImage,
     colorVariant: 5,
     stats: [
       { icon: "Users", value: "4M+", label: "Daily active users" },
@@ -1113,7 +1127,7 @@ export const projects: Project[] = [
     shortDescription: "Online grocery and retail shopping app.",
     slug: "maf-carrefour-online-shopping",
     category: "E-commerce",
-    heroImage: "carrefourImage",
+    heroImage: carrefourImage,
     colorVariant: 6,
     stats: [
       { icon: "ShoppingCart", value: "60-minute", label: "Express grocery delivery" },
@@ -1196,7 +1210,7 @@ export const projects: Project[] = [
     shortDescription: "Super-app for rides, scooters, and food delivery.",
     slug: "bolt-ride-hailing-mobility",
     category: "Services",
-    heroImage: "boltImage",
+    heroImage: boltImage,
     colorVariant: 3,
     stats: [
       { icon: "Users", value: "100M+", label: "Active users globally" },
@@ -1279,7 +1293,7 @@ export const projects: Project[] = [
     shortDescription: "Exclusive dating app for career-focused singles.",
     slug: "luv-dating-for-professionals",
     category: "Apps",
-    heroImage: "luvImage",
+    heroImage: luvImage,
     colorVariant: 4,
     stats: [
       { icon: "UserCheck", value: "100%", label: "Profile verification process" },
@@ -1362,7 +1376,7 @@ export const projects: Project[] = [
     shortDescription: "Competitive platform for generative AI models.",
     slug: "airena-generative-ai-arena",
     category: "AI",
-    heroImage: "airenaImage",
+    heroImage: airena,
     colorVariant: 1,
     stats: [
       { icon: "BarChart", value: "100+", label: "Public AI model leaderboards" },
@@ -1445,7 +1459,7 @@ export const projects: Project[] = [
     shortDescription: "AI platform for generating marketing copy and visuals.",
     slug: "polara-ai-content-creation",
     category: "SaaS",
-    heroImage: "polaraImage",
+    heroImage: polaraImage,
     colorVariant: 5,
     stats: [
       { icon: "Clock", value: "10x", label: "Faster content creation workflow" },
@@ -1528,7 +1542,7 @@ export const projects: Project[] = [
     shortDescription: "Web3 platform for exclusive brand NFTs.",
     slug: "taikonz-nft-web3-platform",
     category: "Blockchain",
-    heroImage: "taikonzImage",
+    heroImage: taikonzImag,
     colorVariant: 6,
     stats: [
       { icon: "Users", value: "100K+", label: "Community members" },
@@ -1611,7 +1625,7 @@ export const projects: Project[] = [
     shortDescription: "ICO landing page for a blockchain ticketing project.",
     slug: "tito-ico-ticketing",
     category: "Blockchain",
-    heroImage: "titoImage",
+    heroImage: titoImage,
     colorVariant: 4,
     stats: [
       { icon: "FileText", value: "Clear", label: "Whitepaper presentation" },
@@ -1693,7 +1707,7 @@ export const projects: Project[] = [
     shortDescription: "AI-powered app for budgeting and expense tracking.",
     slug: "fintrack-personal-finance-app",
     category: "Fintech",
-    heroImage: "fintrackImage",
+    heroImage: fintrackImage,
     colorVariant: 2,
     stats: [
       { icon: "TrendingUp", value: "15%", label: "Average monthly savings increase" },
@@ -1776,7 +1790,7 @@ export const projects: Project[] = [
     shortDescription: "Visual project management tool for agile teams.",
     slug: "taskflow-agile-project-management",
     category: "SaaS",
-    heroImage: "taskflowImage",
+    heroImage: taskflowImage,
     colorVariant: 1,
     stats: [
       { icon: "Clock", value: "25%", label: "Faster project completion rates" },
@@ -1859,7 +1873,7 @@ export const projects: Project[] = [
     shortDescription: "AI-driven EdTech platform for personalized learning.",
     slug: "learnsphere-ai-learning-platform",
     category: "EdTech",
-    heroImage: "learnsphereImage",
+    heroImage: learnsphereImage,
     colorVariant: 5,
     stats: [
       { icon: "TrendingUp", value: "2x", label: "Faster skill acquisition" },
@@ -1933,7 +1947,425 @@ export const projects: Project[] = [
       position: "Head of L&D",
       content: "LearnSphere has revolutionized our employee training programs. The personalized paths keep our team engaged, and the analytics dashboard gives me clear insight into our skills inventory. Completion rates have never been higher."
     }
+  },
+  {
+    id: "21",
+    title: "Amrutam: Holistic Ayurvedic Wellness",
+    subtitle: "A global platform for authentic Ayurveda.",
+    description: "Amrutam is a comprehensive wellness platform that connects users with certified Ayurvedic experts for online consultations. It also functions as an e-commerce store offering a wide range of authentic, in-house manufactured Ayurvedic products for health, skincare, and hair care, promoting a lifestyle of holistic well-being.",
+    shortDescription: "E-commerce & consultation platform for Ayurveda.",
+    slug: "amrutam-ayurvedic-wellness",
+    category: "E-commerce",
+    heroImage: amrutamImage,
+    colorVariant: 4,
+    stats: [
+      { icon: Users, value: "50K+", label: "Community members" },
+      { icon: UserCheck, value: "100+", label: "Verified Ayurvedic experts" },
+      { icon: Package, value: "150+", label: "Unique Ayurvedic products" },
+      { icon: MessageSquare, value: "10K+", label: "Online consultations completed" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Making Ancient Wisdom Accessible",
+        content: "Authentic Ayurvedic knowledge is often fragmented and inaccessible to a global audience. Our goal was to build a trusted digital ecosystem where anyone could receive personalized guidance from real Ayurvedic doctors and purchase high-quality, authentic products directly."
+      },
+      {
+        type: "challenges",
+        title: "Building Trust in a Crowded Market",
+        content: [
+          "Difficulty in finding verified and experienced Ayurvedic doctors online",
+          "Prevalence of low-quality or counterfeit Ayurvedic products",
+          "Lack of personalized guidance for individual health concerns",
+          "Bridging the gap between traditional wisdom and modern e-commerce"
+        ]
+      },
+      {
+        type: "solution",
+        title: "An Integrated Ayurvedic Health Platform",
+        content: "We developed a multi-faceted platform combining consultations with a seamless e-commerce experience, establishing Amrutam as a one-stop-shop for holistic health.",
+        highlights: [
+          "Secure video/chat portal for one-on-one doctor consultations",
+          "A robust Shopify-based e-commerce store for their product line",
+          "In-depth product descriptions with ingredients and benefits",
+          "A rich content library with blogs and health guides",
+          "Community features to connect like-minded wellness enthusiasts"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["Shopify", "React", "Node.js"],
+      languages: ["Liquid", "JavaScript", "TypeScript"],
+      cloud: ["Shopify Plus", "AWS"],
+      database: ["N/A (Managed by Shopify)", "PostgreSQL"]
+    },
+    features: [
+      {
+        title: "Expert Consultations",
+        description: "Book confidential online consultations with experienced Ayurvedic practitioners."
+      },
+      {
+        title: "Authentic Products",
+        description: "Shop from a wide range of MALTS, skincare, and hair care products made with traditional recipes."
+      },
+      {
+        title: "Knowledge Base",
+        description: "Access a wealth of information on Ayurvedic principles, ingredients, and healthy living."
+      }
+    ],
+    process: [
+      { title: "Doctor Onboarding", description: "Created a rigorous vetting and onboarding process for Ayurvedic experts", icon: UserCheck },
+      { title: "E-commerce Development", description: "Built and customized a scalable Shopify store for a global audience", icon: ShoppingCart },
+      { title: "Content Strategy", description: "Developed an SEO-driven content plan to educate and attract users", icon: FileText },
+      { title: "Platform Integration", description: "Seamlessly connected the consultation service with the e-commerce platform", icon: Link }
+    ],
+    team: [
+      { title: "Ayurvedic Doctors", description: "Providing consultations and product knowledge", icon: UserCheck },
+      { title: "E-commerce Developers", description: "Managing and optimizing the Shopify store", icon: Code },
+      { title: "Content & Marketing Team", description: "Creating educational content and managing brand presence", icon: TrendingUp },
+      { title: "Customer Support", description: "Assisting users with orders and consultations", icon: Users }
+    ],
+    testimonial: {
+      company: "Wellness Advocate",
+      position: "User",
+      content: "Amrutam has been my guide to a healthier lifestyle. The consultation was incredibly insightful, and the products are of the highest quality. It's a brand that genuinely cares about holistic well-being."
+    }
+  },
+  {
+    id: "22",
+    title: "The Bump: Pregnancy & Baby Tracker",
+    subtitle: "Your expert guide from pregnancy to parenthood.",
+    description: "The Bump is a leading all-in-one pregnancy and parenting platform that provides expecting parents with expert-backed information, personalized content, and essential tracking tools. From a 3D baby growth visualizer to a comprehensive baby registry, it supports users through every stage of their journey.",
+    shortDescription: "All-in-one pregnancy and parenting tracker app.",
+    slug: "the-bump-pregnancy-parenting-app",
+    category: "Apps",
+    heroImage: theBumpImage,
+    colorVariant: 1,
+    stats: [
+      { icon: Star, value: "4.8", label: "Average app store rating" },
+      { icon: Users, value: "15M+", label: "Monthly users" },
+      { icon: FileText, value: "10K+", label: "Expert articles and guides" },
+      { icon: Package, value: "Top-rated", label: "Baby registry platform" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Empowering Parents with Confidence",
+        content: "The journey to parenthood is filled with questions and uncertainty. Our goal was to create a single, trusted resource that replaces anxiety with empowerment, providing medically reviewed advice and practical tools in a beautiful, easy-to-use application."
+      },
+      {
+        type: "challenges",
+        title: "Navigating the Overload of Information",
+        content: [
+          "Expecting parents are often overwhelmed by conflicting online advice",
+          "Difficulty tracking important developmental milestones and appointments",
+          "The process of creating and managing a baby registry is fragmented",
+          "Lack of a supportive community and personalized content"
+        ]
+      },
+      {
+        type: "solution",
+        title: "A Personalized Companion for Pregnancy & Parenthood",
+        content: "We developed The Bump as a comprehensive mobile app that delivers personalized, stage-specific content and tools to guide and support parents.",
+        highlights: [
+          "Daily and weekly personalized content about baby's development",
+          "Interactive 3D visualization of baby's growth",
+          "A universal baby registry to add gifts from any store",
+          "Planner for doctor's appointments with question prompts",
+          "A vast library of medically reviewed articles on every topic"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React Native", "Swift", "Kotlin"],
+      languages: ["JavaScript", "Swift", "Kotlin"],
+      cloud: ["AWS"],
+      database: ["PostgreSQL", "DynamoDB"]
+    },
+    features: [
+      {
+        title: "Week-by-Week Tracker",
+        description: "Get personalized updates on your pregnancy and your baby's development."
+      },
+      {
+        title: "Universal Baby Registry",
+        description: "Add any item from any online store to one easy-to-manage registry list."
+      },
+      {
+        title: "Expert Content",
+        description: "Access thousands of articles, guides, and tools reviewed by medical experts."
+      }
+    ],
+    process: [
+      { title: "User Research", description: "Conducted extensive interviews with expecting and new parents", icon: Search },
+      { title: "Content Development", description: "Partnered with medical experts to create a library of trusted content", icon: FileText },
+      { title: "Mobile App Development", description: "Built high-performance, native-like applications for iOS and Android", icon: Code },
+      { title: "Community Building", description: "Fostered a supportive user community through forums and social channels", icon: Users }
+    ],
+    team: [
+      { title: "Editorial & Medical Review Board", description: "Ensuring all content is accurate and up-to-date", icon: Shield },
+      { title: "Mobile Engineers", description: "Developing and maintaining the iOS and Android apps", icon: Code },
+      { title: "Product Managers", description: "Defining features to meet the needs of parents", icon: Lightbulb },
+      { title: "UX/UI Designers", description: "Creating an empathetic and user-friendly experience", icon: Palette }
+    ],
+    testimonial: {
+      company: "First-Time Mom",
+      position: "User",
+      content: "The Bump was my go-to app throughout my entire pregnancy. The articles were so reassuring, and I loved the weekly updates with the 3D baby model. It made the whole experience feel more connected and less stressful."
+    }
+  },
+  {
+    id: "23",
+    title: "Nationwide Visas: Immigration Services",
+    subtitle: "Your trusted partner for global immigration.",
+    description: "Nationwide Visas is a leading immigration and visa consultancy firm. Their platform provides comprehensive services for individuals and families looking to migrate, specializing in skilled worker visas for countries like Canada and Australia. They offer eligibility checks, documentation assistance, and application processing.",
+    shortDescription: "Immigration and visa consultancy platform.",
+    slug: "nationwide-visas-immigration-services",
+    category: "Services",
+    heroImage: nationwideVisasImage,
+    colorVariant: 2,
+    stats: [
+      { icon: CheckCircle, value: "98%", label: "Visa application success rate" },
+      { icon: Users, value: "20K+", label: "Happy clients served" },
+      { icon: Globe, value: "15+", label: "Years of immigration experience" },
+      { icon: Zap, value: "24-hour", label: "Response time for inquiries" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Simplifying the Path to a New Life",
+        content: "The immigration process is notoriously complex, bureaucratic, and stressful. Our goal was to build a digital-first platform backed by human expertise that simplifies the entire journey, providing clarity, transparency, and a high chance of success for our clients."
+      },
+      {
+        type: "challenges",
+        title: "Hurdles in the Immigration Process",
+        content: [
+          "Constantly changing and complex immigration laws",
+          "High risk of rejection due to documentation errors",
+          "Lack of a clear, step-by-step process to follow",
+          "Difficulty in assessing eligibility and choosing the right visa program"
+        ]
+      },
+      {
+        type: "solution",
+        title: "A Technology-Driven Consultancy Platform",
+        content: "We developed a client-centric web platform that streamlines every aspect of the visa application process, from initial assessment to final submission.",
+        highlights: [
+          "Online eligibility assessment tool for instant feedback",
+          "A secure client portal for document uploading and tracking",
+          "Automated checklists and reminders to keep applications on track",
+          "Direct communication channels with dedicated case managers",
+          "A knowledge base with the latest immigration news and guides"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["WordPress", "React"],
+      languages: ["PHP", "JavaScript"],
+      cloud: ["AWS"],
+      database: ["MySQL"]
+    },
+    features: [
+      {
+        title: "Free Assessment",
+        description: "Use our online tool to quickly check your eligibility for various immigration programs."
+      },
+      {
+        title: "Document Management",
+        description: "Securely upload and manage all your required documents through our client portal."
+      },
+      {
+        title: "Application Tracking",
+        description: "Monitor the real-time status of your visa application from start to finish."
+      }
+    ],
+    process: [
+      { title: "Process Mapping", description: "Analyzed and mapped every step of the visa application lifecycle", icon: Map },
+      { title: "Platform Development", description: "Built a secure and scalable client management portal", icon: Code },
+      { title: "Consultant Training", description: "Trained case managers to leverage the platform for maximum efficiency", icon: UserCheck },
+      { title: "Continuous Updates", description: "Constantly updating the platform to reflect the latest immigration rule changes", icon: RefreshCw }
+    ],
+    team: [
+      { title: "Licensed Immigration Consultants", description: "Providing expert legal and procedural advice", icon: UserCheck },
+      { title: "Case Managers", description: "Guiding clients through the end-to-end process", icon: Users },
+      { title: "Web Developers", description: "Building and maintaining the client portal and website", icon: Code },
+      { title: "Compliance Team", description: "Ensuring adherence to all legal and regulatory standards", icon: Shield }
+    ],
+    testimonial: {
+      company: "Client from India",
+      position: "Canada Permanent Resident",
+      content: "Nationwide Visas made my dream of moving to Canada a reality. Their process was so clear and organized. The client portal was amazing for tracking my progress, and my case manager was always there to help. I couldn't have done it without them."
+    }
+  },
+
+  {
+  id: "24",
+  title: "Bayut: UAE Real Estate Portal",
+  subtitle: "The definitive property search engine for the UAE.",
+  description: "Bayut is a leading UAE property portal that provides users with a comprehensive and data-rich platform for buying, selling, and renting properties. It features advanced search, 3D tours, detailed pricing analytics, and robust tools for real estate agents.",
+  shortDescription: "Feature-rich real estate portal with 3D tours.",
+  slug: "bayut-uae-real-estate-portal",
+  category: "Web App",
+  heroImage: bayutImage, // Replace with your image import variable
+  colorVariant: 2,
+  stats: [
+    { icon: Home, value: "1M+", label: "Active property listings" },
+    { icon: Users, value: "5M+", label: "Monthly website visitors" },
+    { icon: Video, value: "50K+", label: "Properties with 3D tours" },
+    { icon: BarChart, value: "Detailed", label: "Market trend analytics" }
+  ],
+  sections: [
+    {
+      type: "idea",
+      title: "Creating a Transparent Property Market",
+      content: "The real estate market in the UAE is fast-paced and complex. Our goal was to build a powerful web application that empowers users with all the tools and data they need to make informed decisions, from immersive 3D tours to in-depth pricing trends, all in one place."
+    },
+    {
+      type: "challenges",
+      title: "Managing Scale and Data Complexity",
+      content: [
+        "Handling a massive and constantly changing dataset of property listings",
+        "Integrating and rendering high-resolution 3D tours efficiently",
+        "Processing vast amounts of data for accurate market analytics",
+        "Building a performant and intuitive user interface for both buyers and agents"
+      ]
+    },
+    {
+      type: "solution",
+      title: "A Centralized and Data-Driven Platform",
+      content: "We developed Bayut as a high-performance web application that serves as a central hub for the UAE real estate market, providing value to all stakeholders.",
+      highlights: [
+        "A powerful search engine with dozens of advanced filters",
+        "Integration of immersive 3D and virtual property walkthroughs",
+        "A comprehensive agent portal for managing listings and leads",
+        "Data-driven insights on neighborhood trends and price history",
+        "A mobile-responsive design for seamless access on any device"
+      ]
+    }
+  ],
+  techStack: {
+    frameworks: ["React", "Node.js"],
+    languages: ["JavaScript", "TypeScript"],
+    cloud: ["AWS"],
+    database: ["MongoDB", "PostgreSQL"]
+  },
+  features: [
+    {
+      title: "Advanced Property Search",
+      description: "Filter millions of listings by location, price, property type, amenities, and more."
+    },
+    {
+      title: "3D Live & TruCheck™",
+      description: "Explore properties with immersive 3D tours and view listings validated for authenticity and availability."
+    },
+    {
+      title: "Market Intelligence",
+      description: "Access detailed reports on price trends, rental yields, and neighborhood popularity."
+    }
+  ],
+  process: [
+    { title: "Market Research", description: "Analyzed the needs of property seekers and real estate agents in the UAE", icon: Search },
+    { title: "Platform Architecture", description: "Designed a scalable system to handle high traffic and large datasets", icon: Server },
+    { title: "Feature Development", description: "Built key features like 3D tour integration and advanced search in agile sprints", icon: Code },
+    { title: "Data Analytics Engine", description: "Developed the backend service for processing and presenting market trends", icon: BarChart }
+  ],
+  team: [
+    { title: "Full-Stack Developers", description: "Building and maintaining the core web application", icon: Code },
+    { title: "Data Scientists", description: "Powering the market intelligence and analytics features", icon: BarChart },
+    { title: "UX/UI Designers", description: "Creating an intuitive and seamless property search experience", icon: Palette },
+    { title: "GIS Specialists", description: "Managing mapping data and location-based features", icon: Map }
+  ],
+  testimonial: {
+    company: "Real Estate Agent",
+    position: "Property Consultant",
+    content: "Bayut is an essential tool for my business. The platform's TruCheck™ feature gives my listings credibility, and the detailed analytics help me advise my clients effectively. It has significantly improved my lead generation."
   }
+},
+  
+  {
+    id: "25",
+    title: "SolAlgo: AI & Blockchain Conglomerate",
+    subtitle: "Revolutionizing DeFi with an AI-driven business acquisition model.",
+    description: "Solalgo is a unique cryptocurrency project that utilizes a proprietary AI algorithm to analyze and acquire profitable real-world businesses. Profits from these businesses are then used to buy back and burn the SLGO token, creating a deflationary ecosystem that bridges traditional enterprise with decentralized finance.",
+    shortDescription: "AI-powered cryptocurrency that acquires real businesses.",
+    slug: "solalgo-ai-blockchain",
+    category: "AI",
+    heroImage: solAlgoImage,
+    colorVariant: 3,
+    stats: [
+      { icon: Brain, value: "Proprietary", label: "AI business analysis algorithm" },
+      { icon: RefreshCw, value: "Deflationary", label: "Tokenomics model (Buy & Burn)" },
+      { icon: Briefcase, value: "Real-world", label: "Business acquisitions" },
+      { icon: Globe, value: "Global", label: "Vision for stock exchange listing" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Creating Intrinsic Value in Crypto",
+        content: "Many cryptocurrencies lack tangible, real-world value. Our vision was to create a token whose value is directly tied to the performance of a growing portfolio of real businesses. We use AI to make smarter acquisition decisions, creating a self-sustaining and value-generating ecosystem."
+      },
+      {
+        type: "challenges",
+        title: "Bridging DeFi and Traditional Business",
+        content: [
+          "The high volatility and speculative nature of most crypto assets",
+          "Lack of clear utility and revenue models for tokens",
+          "Difficulty in performing due diligence on business acquisitions at scale",
+          "Building trust and transparency between the on-chain and off-chain worlds"
+        ]
+      },
+      {
+        type: "solution",
+        title: "An AI-Powered, Deflationary Ecosystem",
+        content: "We developed a unique model where an AI algorithm identifies acquisition targets, and the resulting profits feed back into the cryptocurrency through a buy-and-burn mechanism.",
+        highlights: [
+          "An AI algorithm trained to analyze financial statements and market potential",
+          "A deflationary BEP20 token (SLGO) with a decreasing supply",
+          "A transparent process for announcing and integrating acquired businesses",
+          "A long-term roadmap to list the conglomerate on a traditional stock exchange"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["BNB Smart Chain", "Hardhat", "React"],
+      languages: ["Solidity", "Python", "TypeScript"],
+      cloud: ["AWS"],
+      database: ["Blockchain", "PostgreSQL"]
+    },
+    features: [
+      {
+        title: "AI Business Analysis",
+        description: "Our proprietary AI vets potential business acquisitions for profitability and growth."
+      },
+      {
+        title: "Buyback & Burn",
+        description: "Profits from the business portfolio are used to buy SLGO tokens from the market and permanently burn them."
+      },
+      {
+        title: "Transparent Governance",
+        description: "Token holders are kept informed about the performance and strategy of the growing conglomerate."
+      }
+    ],
+    process: [
+      { title: "AI Algorithm Development", description: "Built and trained a machine learning model for business analysis", icon: Brain },
+      { title: "Smart Contract Deployment", description: "Launched the SLGO token and governance contracts on the BNB Chain", icon: FileCode },
+      { title: "Business Acquisition Pipeline", description: "Established a pipeline for vetting and acquiring target companies", icon: Briefcase },
+      { title: "Community Building", description: "Grew a community of investors who believe in the long-term vision", icon: Users }
+    ],
+    team: [
+      { title: "AI/ML Engineers", description: "Developing and maintaining the acquisition algorithm", icon: Brain },
+      { title: "Blockchain Developers", description: "Managing the smart contracts and tokenomics", icon: Code },
+      { title: "M&A Specialists", description: "Handling the legal and financial aspects of business acquisitions", icon: Briefcase },
+      { title: "Financial Analysts", description: "Monitoring the performance of the business portfolio", icon: BarChart }
+    ],
+    testimonial: {
+      company: "Early Investor",
+      position: "Community Member",
+      content: "SolAlgo is one of the most innovative projects in crypto. The idea of backing a token with real, profitable businesses is a game-changer. The team's use of AI for acquisitions gives me confidence in the long-term value."
+    }
+  }
+
+  
 ];
     
 

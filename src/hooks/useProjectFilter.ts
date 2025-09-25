@@ -9,16 +9,22 @@ export const useProjectFilter = () => {
     return filterProjects(selectedCategory, searchQuery);
   }, [selectedCategory, searchQuery]);
 
-  const categoryStats = useMemo(() => {
-    const stats = {
-      'All': projects.length,
-      'Apps': projects.filter(p => p.category === 'Apps').length,
-      'AI': projects.filter(p => p.category === 'AI').length,
-      'SaaS': projects.filter(p => p.category === 'SaaS').length,
-      'Web App': projects.filter(p => p.category === 'Web App').length,
-    };
-    return stats;
-  }, []);
+const categoryStats = useMemo(() => {
+  const stats = {
+    'All': projects.length,
+    'Apps': projects.filter(p => p.category === 'Apps').length,
+    'AI': projects.filter(p => p.category === 'AI').length,
+    'SaaS': projects.filter(p => p.category === 'SaaS').length,
+    'Web App': projects.filter(p => p.category === 'Web App').length,
+    'Healthcare': projects.filter(p => p.category === 'Healthcare').length,
+    'E-commerce': projects.filter(p => p.category === 'E-commerce').length,
+    'Services': projects.filter(p => p.category === 'Services').length,
+    'Blockchain': projects.filter(p => p.category === 'Blockchain').length,
+    'Fintech': projects.filter(p => p.category === 'Fintech').length,
+    'EdTech': projects.filter(p => p.category === 'EdTech').length,
+  };
+  return stats;
+}, [projects]); 
 
   const clearFilters = () => {
     setSelectedCategory(undefined);

@@ -1,10 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
 import video from "../assets/Inowix_AI_Storyline_Generation.mp4";
+import { useIsDesktop } from "@/hooks/IsDesktop"; // Adjust path if needed
 
 export const VideoSection = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // NEW: Use the custom hook to check screen size
+  const isDesktop = useIsDesktop();
 
   // smooth scroll target & animation refs
   const targetTimeRef = useRef<number>(0);
@@ -14,6 +18,9 @@ export const VideoSection = () => {
   const velocityRef = useRef<number>(0);
 
   useEffect(() => {
+    // If it's not a desktop, don't run any of the video logic
+    if (!isDesktop) return;
+
     const videoEl = videoRef.current!;
     const containerEl = containerRef.current!;
     const headerEl = document.querySelector("header") as HTMLElement;
@@ -90,14 +97,21 @@ export const VideoSection = () => {
         const diff = target - current;
 
         const vel = Math.abs(velocityRef.current);
-        const baseLerp = 0.06;
-        const adaptive = Math.min(0.45, baseLerp + Math.min(vel * 0.12, 0.35));
 
+        // --- SMOOTHNESS TWEAK ---
+        // Increased the base lerp for a more responsive feel, reducing perceived lag.
+        // This makes the video feel more connected to the scroll action.
+        const baseLerp = 0.08;
+        const adaptive = Math.min(0.45, baseLerp + Math.min(vel * 0.1, 0.3));
+        
         let newTime = current + diff * adaptive;
 
         // clamp per-frame movement
         const delta = newTime - current;
-        const clampedDelta = Math.max(-maxStepSeconds, Math.min(maxStepSeconds, delta));
+        const clampedDelta = Math.max(
+          -maxStepSeconds,
+          Math.min(maxStepSeconds, delta)
+        );
         newTime = current + clampedDelta;
 
         if (Math.abs(diff) > smallDiffThreshold) {
@@ -126,7 +140,13 @@ export const VideoSection = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       observer.disconnect();
     };
-  }, []);
+    // Add isDesktop to the dependency array
+  }, [isDesktop]);
+
+  // NEW: If not on a desktop, render nothing.
+  if (!isDesktop) {
+    return null;
+  }
 
   return (
     <section
@@ -135,15 +155,15 @@ export const VideoSection = () => {
     >
       {/* Fixed fullscreen video */}
       <div className="sticky top-0 h-screen w-screen z-[50]">
-    <video
-      ref={videoRef}
-      src={video}
-      className="h-full w-full object-cover"
-      muted
-      playsInline
-      preload="auto"
-    />
-  </div>
+        <video
+          ref={videoRef}
+          src={video}
+          className="h-full w-full object-cover"
+          muted
+          playsInline
+          preload="auto"
+        />
+      </div>
     </section>
   );
 };

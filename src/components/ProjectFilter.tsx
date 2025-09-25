@@ -15,11 +15,17 @@ interface ProjectFilterProps {
 }
 
 const categories: Array<{ label: string; value: ProjectCategory | undefined }> = [
-  { label: 'All', value: undefined },
+{ label: 'All', value: undefined },
   { label: 'Apps', value: 'Apps' },
   { label: 'AI', value: 'AI' },
   { label: 'SaaS', value: 'SaaS' },
   { label: 'Web App', value: 'Web App' },
+  { label: 'Healthcare', value: 'Healthcare' },
+  { label: 'E-commerce', value: 'E-commerce' },
+  { label: 'Services', value: 'Services' },
+   { label: 'Blockchain', value: 'Blockchain' },
+  { label: 'Fintech', value: 'Fintech' },
+  { label: 'EdTech', value: 'EdTech' },
 ];
 
 const ProjectFilter = ({
