@@ -6,7 +6,24 @@ export const useProjectFilter = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filteredProjects = useMemo(() => {
-    return filterProjects(selectedCategory, searchQuery);
+    let filtered = projects;
+    
+    // Filter by category
+    if (selectedCategory) {
+      filtered = filtered.filter(p => p.category === selectedCategory);
+    }
+    
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.title.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query)
+      );
+    }
+    
+    return filtered;
   }, [selectedCategory, searchQuery]);
 
 const categoryStats = useMemo(() => {
