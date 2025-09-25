@@ -2943,3 +2943,8 @@ export const projects: Project[] = [
 export const getProjectBySlug = (slug: string): Project | null => {
   return projects.find(project => project.slug === slug) || null;
 };
+
+export const filterProjects = (projects: Project[], category: ProjectCategory | 'All'): Project[] => {
+  if (category === 'All') return projects;
+  return projects.filter(project => project.category === category);
+};
