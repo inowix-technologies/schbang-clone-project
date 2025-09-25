@@ -105,7 +105,8 @@ import {
   RefreshCw,
   FileCode,
   Rocket,
-  MapPin
+  MapPin,
+  type LucideIcon
 } from 'lucide-react';
 
 // Import images
@@ -261,10 +262,10 @@ export const projects: Project[] = [
     heroImage: carzentraImage,
     colorVariant: 1,
     stats: [
-      { icon: "Clock", value: "50%", label: "Reduced showroom visit time" },
-      { icon: "Users", value: "3x", label: "Increased customer engagement" },
-      { icon: "Zap", value: "40%", label: "Faster purchase decisions" },
-      { icon: "TrendingUp", value: "75%", label: "Higher conversion rates" }
+      { icon: Clock, value: "50%", label: "Reduced showroom visit time" },
+      { icon: Users, value: "3x", label: "Increased customer engagement" },
+      { icon: Zap, value: "40%", label: "Faster purchase decisions" },
+      { icon: TrendingUp, value: "75%", label: "Higher conversion rates" }
     ],
     sections: [
       {
@@ -319,22 +320,22 @@ export const projects: Project[] = [
       {
         title: "Market Research",
         description: "Analyzed car buying behaviors and pain points",
-        icon: "Search"
+        icon: Search
       },
       {
         title: "3D Modeling",
         description: "Created detailed vehicle models for VisionOS",
-        icon: "Box"
+        icon: Box
       },
       {
         title: "VisionOS Development",
         description: "Built immersive car exploration features",
-        icon: "Code"
+        icon: Code
       },
       {
         title: "Testing & Launch",
         description: "Validated user experience and deployed to market",
-        icon: "Rocket"
+        icon: Rocket
       }
     ],
     team: [
