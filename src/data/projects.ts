@@ -1,8 +1,7 @@
-
 export type ProjectCategory = 'Apps' | 'AI' | 'SaaS' | 'Web App' | 'Healthcare' | 'E-commerce' | 'Services' | 'Blockchain' | 'Fintech' | 'EdTech';
 
 export interface ProjectStat {
-  icon: LucideIcon;
+  icon: any; // Using any temporarily for icon flexibility
   value: string;
   label: string;
 }
@@ -23,13 +22,13 @@ export interface ProjectFeature {
 export interface ProcessStep {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: any; // Using any temporarily for icon flexibility
 }
 
 export interface TeamMember {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: any; // Using any temporarily for icon flexibility
 }
 
 export interface Testimonial {
@@ -253,2159 +252,2694 @@ export const projects: Project[] = [
   },
   {
     id: "2",
-    title: "Carzentra: VisionOS Car Exploration App",
-    subtitle: "Immersive car exploration and virtual sales experience.",
-    description: "Revolutionary VisionOS-based application that transforms car shopping with immersive 360° vehicle exploration, allowing customers to experience cars virtually before making purchase decisions.",
-    shortDescription: "VisionOS-Based App for Immersive Car Exploration and Virtual Sales",
-    slug: "carzentra-visionos-car-app",
-    category: "Apps",
+    title: "CarZentra: AI-Powered Car Marketplace",
+    subtitle: "Smart car buying with AI recommendations",
+    description: "CarZentra revolutionizes the car buying experience with AI-powered recommendations, virtual inspections, and seamless financing options. Our platform connects buyers with verified dealers while providing transparent pricing and comprehensive vehicle history reports.",
+    shortDescription: "AI-Powered Automotive Marketplace Platform",
+    slug: "carzentra-ai-car-marketplace",
+    category: "AI",
     heroImage: carzentraImage,
     colorVariant: 1,
     stats: [
-      { icon: Clock, value: "50%", label: "Reduced showroom visit time" },
-      { icon: Users, value: "3x", label: "Increased customer engagement" },
-      { icon: Zap, value: "40%", label: "Faster purchase decisions" },
-      { icon: TrendingUp, value: "75%", label: "Higher conversion rates" }
+      { icon: Users, value: "50K+", label: "Active users monthly" },
+      { icon: TrendingUp, value: "85%", label: "User satisfaction rate" },
+      { icon: Zap, value: "3x", label: "Faster car discovery" },
+      { icon: BarChart, value: "$2M+", label: "Transactions facilitated" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Revolutionizing Car Shopping Experience",
-        content: "Traditional car buying involves lengthy showroom visits and limited vehicle exploration. Customers often struggle to visualize car features and make informed decisions. Our solution: create an immersive VisionOS app for comprehensive car exploration."
+        title: "Reimagining Car Shopping Experience",
+        content: "Traditional car shopping is time-consuming, overwhelming, and often lacks transparency. Buyers struggle to find the right vehicle that matches their needs, budget, and preferences. We envisioned an AI-powered platform that would make car buying as simple as online shopping while maintaining the trust and verification needed for such significant purchases."
       },
       {
         type: "challenges",
-        title: "Challenges in Traditional Car Sales",
+        title: "Solving Complex Marketplace Problems",
         content: [
-          "Limited time for thorough vehicle inspection",
-          "Difficulty comparing multiple models",
-          "Lack of interactive feature demonstrations",
-          "Geographical constraints for remote buyers"
+          "Information asymmetry between buyers and sellers",
+          "Lack of standardized vehicle condition assessment",
+          "Complex financing options difficult to compare",
+          "Geographic limitations in vehicle discovery",
+          "Trust issues in online automotive transactions"
         ]
       },
       {
         type: "solution",
-        title: "Immersive Car Exploration Platform",
-        content: "Carzentra provides a comprehensive VisionOS solution for virtual car exploration.",
+        title: "AI-Driven Automotive Marketplace",
+        content: "CarZentra leverages machine learning algorithms to match buyers with their ideal vehicles while providing comprehensive verification and financing solutions.",
         highlights: [
-          "360° interior and exterior vehicle exploration",
-          "Interactive feature demonstrations",
-          "Virtual test drive simulations",
-          "Comparison tools for multiple models",
-          "Real-time configuration and customization"
+          "AI-powered vehicle recommendations based on user preferences",
+          "Virtual 360° vehicle inspections with AR overlay",
+          "Integrated financing comparison and pre-approval",
+          "Blockchain-verified vehicle history and ownership",
+          "Real-time market pricing analytics",
+          "Seamless dealer-buyer communication platform"
         ]
       }
     ],
     techStack: {
-      frameworks: ["visionOS SDK", "RealityKit"],
-      languages: ["SwiftUI"],
-      cloud: ["Firebase", "CloudKit"],
-      database: ["PostgreSQL"]
+      frameworks: ["React Native", "Node.js", "TensorFlow"],
+      languages: ["TypeScript", "Python", "Swift"],
+      cloud: ["AWS", "Google Cloud AI"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
     },
     features: [
       {
-        title: "360° Vehicle Exploration",
-        description: "Explore every angle and detail of vehicles in immersive virtual environments"
+        title: "Smart Vehicle Matching",
+        description: "AI algorithms analyze user preferences, budget, and usage patterns to recommend perfect vehicle matches"
       },
       {
-        title: "Interactive Features Demo",
-        description: "Experience car features and functionalities through spatial interactions"
+        title: "Virtual Inspection Suite",
+        description: "360° vehicle tours with AR-powered damage detection and condition assessment"
       },
       {
-        title: "Virtual Test Drive",
-        description: "Simulate driving experiences using advanced VisionOS capabilities"
+        title: "Integrated Financing Hub",
+        description: "Compare loan options, get pre-approved, and complete financing entirely within the app"
       }
     ],
     process: [
       {
         title: "Market Research",
-        description: "Analyzed car buying behaviors and pain points",
+        description: "Analyzed automotive marketplace pain points and user behavior patterns",
         icon: Search
       },
       {
-        title: "3D Modeling",
-        description: "Created detailed vehicle models for VisionOS",
-        icon: Box
+        title: "AI Model Development",
+        description: "Built recommendation engines and pricing prediction algorithms",
+        icon: Brain
       },
       {
-        title: "VisionOS Development",
-        description: "Built immersive car exploration features",
+        title: "Platform Development",
+        description: "Created mobile and web applications with seamless user experience",
         icon: Code
       },
       {
-        title: "Testing & Launch",
-        description: "Validated user experience and deployed to market",
+        title: "Launch & Optimization",
+        description: "Deployed platform and continuously optimized based on user feedback",
         icon: Rocket
       }
     ],
     team: [
       {
-        title: "VisionOS Developers",
-        description: "Spatial computing and car visualization",
-        icon: "Users"
+        title: "AI/ML Engineers",
+        description: "Recommendation systems, pricing algorithms",
+        icon: Brain
       },
       {
-        title: "3D Artists",
-        description: "High-fidelity vehicle modeling",
-        icon: "Palette"
+        title: "Mobile Developers",
+        description: "React Native, iOS, Android development",
+        icon: Users
       },
       {
-        title: "UX Designers",
-        description: "Intuitive spatial navigation design",
-        icon: "Mouse"
+        title: "Backend Engineers",
+        description: "Scalable APIs, database optimization",
+        icon: Server
       }
-    ]
+    ],
+    testimonial: {
+      company: "CarZentra User",
+      position: "First-time Car Buyer",
+      content: "I was overwhelmed by the car buying process until I found CarZentra. The AI recommendations were spot-on, and I found my perfect car within days, not weeks. The financing was transparent and easy to understand."
+    }
   },
   {
     id: "3",
-    title: "RetailX: AI-Powered Inventory Management",
-    subtitle: "Smart inventory optimization for modern retailers.",
-    description: "Advanced AI-powered eCommerce inventory management software that predicts demand, optimizes stock levels, and automates reordering processes for maximum efficiency and profitability.",
-    shortDescription: "AI-Powered eCommerce Inventory Management Software",
-    slug: "retailx-ai-ecommerce-inventory",
-    category: "AI",
+    title: "RetailX: Smart Inventory Management",
+    subtitle: "AI-powered retail operations platform",
+    description: "RetailX transforms retail operations with predictive analytics, automated inventory management, and real-time sales insights. Our platform helps retailers optimize stock levels, reduce waste, and maximize profitability through intelligent automation.",
+    shortDescription: "AI-Driven Retail Operations and Inventory Platform",
+    slug: "retailx-smart-inventory-management",
+    category: "SaaS",
     heroImage: retailxImage,
     colorVariant: 2,
     stats: [
-      { icon: "TrendingUp", value: "35%", label: "Reduction in inventory costs" },
-      { icon: "Zap", value: "90%", label: "Faster reorder processing" },
-      { icon: "BarChart", value: "25%", label: "Increase in profit margins" },
-      { icon: "Clock", value: "80%", label: "Time saved on manual processes" }
+      { icon: TrendingUp, value: "40%", label: "Reduction in inventory costs" },
+      { icon: Zap, value: "60%", label: "Faster stock replenishment" },
+      { icon: BarChart, value: "25%", label: "Increase in profit margins" },
+      { icon: Users, value: "500+", label: "Retail locations served" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Smart Inventory Revolution",
-        content: "Traditional inventory management relies on manual processes and outdated forecasting methods. RetailX leverages AI to predict demand patterns, optimize stock levels, and automate critical inventory decisions."
+        title: "Revolutionizing Retail Operations",
+        content: "Retail businesses struggle with inventory management, leading to overstocking, stockouts, and reduced profitability. Traditional methods rely on historical data and gut feelings, often missing market trends and seasonal variations. We aimed to create an intelligent system that predicts demand, optimizes inventory, and automates routine operations."
       },
       {
         type: "challenges",
-        title: "Inventory Management Pain Points",
+        title: "Complex Retail Management Issues",
         content: [
-          "Inaccurate demand forecasting",
-          "Manual reorder processes",
-          "Overstocking and stockouts",
-          "Poor visibility across channels",
-          "Lack of real-time insights"
+          "Unpredictable demand patterns and seasonal variations",
+          "Manual inventory tracking prone to human error",
+          "Lack of real-time visibility across multiple locations",
+          "Inefficient supplier communication and ordering",
+          "Difficulty in identifying profitable product lines"
         ]
       },
       {
         type: "solution",
-        title: "AI-Driven Inventory Optimization",
-        content: "RetailX provides intelligent automation for all aspects of inventory management.",
+        title: "Intelligent Retail Management Platform",
+        content: "RetailX combines machine learning, IoT sensors, and automated workflows to create a comprehensive retail operations platform.",
         highlights: [
-          "Machine learning demand forecasting",
-          "Automated reorder suggestions",
-          "Multi-channel inventory tracking",
-          "Real-time analytics dashboard",
-          "Supplier performance monitoring"
+          "Predictive demand forecasting with 95% accuracy",
+          "Automated purchase order generation and supplier integration",
+          "Real-time inventory tracking across all locations",
+          "Dynamic pricing optimization based on market conditions",
+          "Comprehensive analytics dashboard with actionable insights",
+          "Mobile app for on-the-go inventory management"
         ]
       }
     ],
     techStack: {
-      frameworks: ["React", "Node.js", "TensorFlow"],
-      languages: ["TypeScript", "Python"],
-      cloud: ["AWS", "Docker"],
-      database: ["PostgreSQL", "Redis"]
+      frameworks: ["React", "Django", "TensorFlow"],
+      languages: ["Python", "JavaScript", "SQL"],
+      cloud: ["AWS", "Azure ML"],
+      database: ["PostgreSQL", "InfluxDB", "Redis"]
     },
     features: [
       {
-        title: "Demand Forecasting",
-        description: "AI-powered predictions based on historical data and market trends"
+        title: "Predictive Analytics Engine",
+        description: "Machine learning models predict demand patterns and optimize inventory levels automatically"
       },
       {
-        title: "Automated Reordering",
-        description: "Smart reorder points and quantities based on demand patterns"
+        title: "Multi-location Management",
+        description: "Centralized dashboard to manage inventory, sales, and operations across multiple retail locations"
       },
       {
-        title: "Multi-Channel Sync",
-        description: "Real-time inventory synchronization across all sales channels"
+        title: "Supplier Integration Hub",
+        description: "Automated ordering, delivery tracking, and supplier performance analytics"
       }
     ],
     process: [
       {
-        title: "Data Analysis",
-        description: "Analyzed inventory patterns and inefficiencies",
-        icon: "BarChart"
+        title: "Requirements Analysis",
+        description: "Studied retail workflows and identified automation opportunities",
+        icon: Search
       },
       {
-        title: "AI Model Development",
-        description: "Built machine learning models for demand prediction",
-        icon: "Brain"
+        title: "System Architecture",
+        description: "Designed scalable platform architecture with ML integration",
+        icon: Box
       },
       {
-        title: "Platform Development",
-        description: "Created comprehensive inventory management dashboard",
-        icon: "Code"
+        title: "Development & Testing",
+        description: "Built platform with extensive testing across different retail scenarios",
+        icon: Code
       },
       {
-        title: "Integration & Testing",
-        description: "Integrated with existing systems and validated accuracy",
-        icon: "Link"
+        title: "Deployment & Training",
+        description: "Rolled out platform with comprehensive user training and support",
+        icon: Users
       }
     ],
     team: [
       {
-        title: "AI/ML Engineers",
-        description: "Demand forecasting and optimization algorithms",
-        icon: "Brain"
-      },
-      {
-        title: "Full-Stack Developers",
-        description: "Dashboard and API development",
-        icon: "Code"
-      },
-      {
         title: "Data Scientists",
-        description: "Statistical modeling and analysis",
-        icon: "BarChart"
+        description: "Predictive modeling, demand forecasting",
+        icon: BarChart
+      },
+      {
+        title: "Full-stack Developers",
+        description: "Platform development, API integration",
+        icon: Code
+      },
+      {
+        title: "DevOps Engineers",
+        description: "Cloud infrastructure, deployment automation",
+        icon: Server
       }
-    ]
+    ],
+    testimonial: {
+      company: "Metro Retail Chain",
+      position: "Operations Director",
+      content: "RetailX has transformed our operations completely. We've reduced inventory costs by 40% while improving product availability. The predictive analytics have been a game-changer for our business planning."
+    }
   },
   {
     id: "4",
-    title: "NextStop: VisionOS Travel Planning App",
-    subtitle: "Spatial travel discovery and immersive planning.",
-    description: "Revolutionary spatial VisionOS app for 360° travel planning and discovery, transforming how travelers explore destinations and plan their journeys with immersive virtual experiences.",
-    shortDescription: "Spatial VisionOS App for 360° Travel Planning and Discovery",
-    slug: "nextstop-visionos-travel-app",
+    title: "NextStop: Smart Transit App",
+    subtitle: "Real-time public transportation companion",
+    description: "NextStop provides real-time transit information, route optimization, and seamless payment integration for public transportation. Our app helps commuters navigate cities efficiently with live updates, crowd predictions, and multimodal journey planning.",
+    shortDescription: "Real-time Public Transit Navigation and Payment App",
+    slug: "nextstop-smart-transit-app",
     category: "Apps",
-    heroImage:nextstopImage,
+    heroImage: nextstopImage,
     colorVariant: 3,
     stats: [
-      { icon: "Clock", value: "60%", label: "Reduced trip planning time" },
-      { icon: "Users", value: "4x", label: "Increased user engagement with destinations" },
-      { icon: "TrendingUp", value: "85%", label: "Higher booking conversion rates" },
-      { icon: "Zap", value: "70%", label: "Faster decision making" }
+      { icon: Users, value: "100K+", label: "Daily active users" },
+      { icon: Clock, value: "30%", label: "Reduction in commute time" },
+      { icon: Zap, value: "95%", label: "Real-time accuracy rate" },
+      { icon: Globe, value: "15", label: "Cities supported" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Reimagining Travel Planning",
-        content: "Traditional travel planning relies on static images and reviews, making it difficult for travelers to truly understand destinations. NextStop leverages VisionOS to provide immersive 360° destination exploration before booking."
+        title: "Simplifying Urban Mobility",
+        content: "Public transportation users face uncertainty with schedules, delays, and route changes. Existing apps often provide outdated information or lack integration with payment systems. We envisioned a comprehensive transit companion that provides real-time information, seamless payments, and intelligent route suggestions to make public transportation more reliable and user-friendly."
       },
       {
         type: "challenges",
-        title: "Travel Planning Limitations",
+        title: "Urban Transit Complexity",
         content: [
-          "Static destination imagery lacks immersion",
-          "Difficulty assessing location suitability",
-          "Complex itinerary planning processes",
-          "Limited preview of accommodations and attractions"
+          "Inconsistent real-time data from different transit agencies",
+          "Complex multimodal journey planning requirements",
+          "Fragmented payment systems across different operators",
+          "Varying data quality and API limitations",
+          "Need for offline functionality in poor network areas"
         ]
       },
       {
         type: "solution",
-        title: "Immersive Travel Discovery Platform",
-        content: "NextStop provides spatial travel planning with virtual destination experiences.",
+        title: "Comprehensive Transit Platform",
+        content: "NextStop aggregates data from multiple sources and provides a unified experience for urban mobility.",
         highlights: [
-          "360° destination walkthroughs",
-          "Virtual hotel and attraction tours",
-          "Interactive itinerary planning",
-          "Real-time booking integration",
-          "Social travel sharing features"
+          "Real-time arrival predictions with machine learning corrections",
+          "Multimodal route planning including walking, cycling, and transit",
+          "Integrated payment system supporting multiple transit operators",
+          "Crowd prediction and alternative route suggestions",
+          "Offline maps and schedules for network-poor areas",
+          "Accessibility features for users with disabilities"
         ]
       }
     ],
     techStack: {
-      frameworks: ["visionOS SDK", "RealityKit", "MapKit"],
-      languages: ["SwiftUI"],
-      cloud: ["CloudKit", "Firebase"],
-      database: ["Core Data", "PostgreSQL"]
+      frameworks: ["Flutter", "Node.js", "Express"],
+      languages: ["Dart", "JavaScript", "Python"],
+      cloud: ["Google Cloud", "Firebase"],
+      database: ["MongoDB", "Redis", "SQLite"]
     },
     features: [
       {
-        title: "Virtual Destination Tours",
-        description: "Explore destinations in immersive 360° before traveling"
+        title: "Live Transit Tracking",
+        description: "Real-time vehicle locations, arrival predictions, and service alerts with high accuracy"
       },
       {
-        title: "Spatial Itinerary Planning",
-        description: "Plan trips using intuitive spatial interfaces and gestures"
+        title: "Smart Route Planning",
+        description: "AI-powered multimodal journey planning with live traffic and transit conditions"
       },
       {
-        title: "Real-time Booking",
-        description: "Book hotels, flights, and activities directly within the app"
+        title: "Unified Payment System",
+        description: "Single app for payments across buses, trains, and other transit modes"
       }
     ],
     process: [
       {
-        title: "Travel Behavior Analysis",
-        description: "Studied user travel planning patterns and pain points",
-        icon: "Search"
+        title: "Transit Data Integration",
+        description: "Connected with multiple transit APIs and standardized data formats",
+        icon: Link
       },
       {
-        title: "360° Content Creation",
-        description: "Captured immersive destination content",
-        icon: "Palette"
+        title: "Algorithm Development",
+        description: "Built route optimization and prediction algorithms",
+        icon: Brain
       },
       {
-        title: "VisionOS Implementation",
-        description: "Built spatial travel planning interfaces",
-        icon: "Code"
+        title: "App Development",
+        description: "Created cross-platform mobile app with intuitive interface",
+        icon: Code
       },
       {
-        title: "Partner Integration",
-        description: "Integrated with travel booking services",
-        icon: "Link"
+        title: "Testing & Launch",
+        description: "Extensive testing with real commuters and gradual city rollout",
+        icon: Rocket
       }
     ],
     team: [
       {
-        title: "VisionOS Developers",
-        description: "Spatial computing and travel visualization",
-        icon: "Users"
+        title: "Mobile Developers",
+        description: "Flutter, native iOS/Android development",
+        icon: Users
       },
       {
-        title: "Travel Industry Experts",
-        description: "Domain knowledge and partnerships",
-        icon: "Lightbulb"
+        title: "Backend Engineers",
+        description: "API integration, real-time data processing",
+        icon: Server
       },
       {
-        title: "Content Creators",
-        description: "360° destination photography and videos",
-        icon: "Palette"
+        title: "UX Designers",
+        description: "Transit-focused user experience design",
+        icon: Palette
       }
-    ]
+    ],
+    testimonial: {
+      company: "Daily Commuter",
+      position: "Software Engineer",
+      content: "NextStop has made my daily commute so much easier. I always know exactly when my bus will arrive, and the route suggestions have saved me countless hours. The payment integration is seamless!"
+    }
   },
   {
     id: "5",
-    title: "TradEX: AI Stock Trading Platform",
-    subtitle: "Intelligent trading powered by machine learning.",
-    description: "Advanced AI-powered stock trading platform that uses machine learning algorithms to analyze market patterns, predict trends, and provide intelligent trading recommendations for both novice and experienced traders.",
-    shortDescription: "Unique Stock Trading App that uses AI",
-    slug: "tradex-ai-stock-trading",
-    category: "AI",
+    title: "TradeX: Crypto Trading Platform",
+    subtitle: "Advanced cryptocurrency trading suite",
+    description: "TradeX provides professional-grade cryptocurrency trading tools with advanced charting, automated strategies, and portfolio management. Our platform serves both novice and experienced traders with institutional-level features and bank-grade security.",
+    shortDescription: "Professional Cryptocurrency Trading and Portfolio Platform",
+    slug: "tradex-crypto-trading-platform",
+    category: "Fintech",
     heroImage: tradexImage,
     colorVariant: 5,
     stats: [
-      { icon: "TrendingUp", value: "75%", label: "Average portfolio performance improvement" },
-      { icon: "Zap", value: "10ms", label: "Ultra-fast trade execution" },
-      { icon: "BarChart", value: "95%", label: "Prediction accuracy on market trends" },
-      { icon: "Users", value: "500K+", label: "Active traders using the platform" }
+      { icon: TrendingUp, value: "$50M+", label: "Trading volume monthly" },
+      { icon: Users, value: "25K+", label: "Active traders" },
+      { icon: Zap, value: "99.9%", label: "Platform uptime" },
+      { icon: Shield, value: "0", label: "Security incidents" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Democratizing Smart Trading",
-        content: "Stock trading often requires extensive market knowledge and constant monitoring. TradEX uses AI to level the playing field, providing intelligent insights and automated trading strategies accessible to all skill levels."
+        title: "Democratizing Professional Trading",
+        content: "Cryptocurrency trading platforms often lack the sophisticated tools that professional traders need, while being too complex for beginners. We wanted to create a platform that provides institutional-grade features with an intuitive interface, making advanced trading accessible to everyone while maintaining the highest security standards."
       },
       {
         type: "challenges",
-        title: "Traditional Trading Limitations",
+        title: "Complex Trading Platform Requirements",
         content: [
-          "Requires extensive market knowledge",
-          "Time-intensive analysis and monitoring",
-          "Emotional decision making leads to losses",
-          "Limited access to institutional-grade tools",
-          "Complex risk management"
+          "Need for real-time data processing with minimal latency",
+          "Complex order matching and execution algorithms",
+          "Regulatory compliance across multiple jurisdictions",
+          "Scalable architecture for high-frequency trading",
+          "Advanced security measures against sophisticated attacks"
         ]
       },
       {
         type: "solution",
-        title: "AI-Powered Trading Intelligence",
-        content: "TradEX combines advanced machine learning with intuitive interfaces for smart trading.",
+        title: "Professional Trading Infrastructure",
+        content: "TradeX combines cutting-edge technology with user-centric design to deliver a comprehensive trading platform.",
         highlights: [
-          "Real-time market analysis using ML algorithms",
-          "Automated risk management and portfolio optimization",
-          "Personalized trading recommendations",
-          "Social trading and copy-trading features",
-          "Advanced charting and technical analysis tools"
+          "Sub-millisecond order execution with advanced matching engine",
+          "Professional charting tools with 100+ technical indicators",
+          "Automated trading strategies with backtesting capabilities",
+          "Multi-exchange arbitrage and portfolio rebalancing",
+          "Institutional-grade security with cold storage integration",
+          "Advanced risk management and position sizing tools"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Node.js", "WebSocket"],
+      languages: ["TypeScript", "Go", "Rust"],
+      cloud: ["AWS", "Kubernetes"],
+      database: ["PostgreSQL", "Redis", "InfluxDB"]
+    },
+    features: [
+      {
+        title: "Advanced Trading Engine",
+        description: "High-performance matching engine with sub-millisecond execution and advanced order types"
+      },
+      {
+        title: "Professional Analytics",
+        description: "Comprehensive charting tools, technical indicators, and market analysis features"
+      },
+      {
+        title: "Automated Strategies",
+        description: "Build, backtest, and deploy automated trading strategies with risk management"
+      }
+    ],
+    process: [
+      {
+        title: "Architecture Design",
+        description: "Designed high-performance, scalable trading infrastructure",
+        icon: Box
+      },
+      {
+        title: "Security Implementation",
+        description: "Implemented multi-layer security with cold storage integration",
+        icon: Shield
+      },
+      {
+        title: "Trading Engine Development",
+        description: "Built low-latency matching engine and order management system",
+        icon: Zap
+      },
+      {
+        title: "Testing & Compliance",
+        description: "Extensive testing and regulatory compliance implementation",
+        icon: CheckCircle
+      }
+    ],
+    team: [
+      {
+        title: "Blockchain Engineers",
+        description: "Smart contracts, DeFi integration",
+        icon: Link
+      },
+      {
+        title: "Backend Engineers",
+        description: "High-performance trading systems",
+        icon: Server
+      },
+      {
+        title: "Security Specialists",
+        description: "Cybersecurity, compliance, auditing",
+        icon: Shield
+      }
+    ],
+    testimonial: {
+      company: "Professional Trader",
+      position: "Quantitative Analyst",
+      content: "TradeX provides the professional tools I need with the reliability I expect. The execution speed is excellent, and the advanced charting capabilities rival any institutional platform I've used."
+    }
+  },
+  {
+    id: "6",
+    title: "Finnova: Personal Finance AI",
+    subtitle: "Intelligent personal finance management",
+    description: "Finnova uses AI to provide personalized financial advice, automated budgeting, and investment recommendations. Our platform helps users achieve their financial goals through intelligent insights, expense tracking, and goal-based savings strategies.",
+    shortDescription: "AI-Powered Personal Finance and Investment Platform",
+    slug: "finnova-personal-finance-ai",
+    category: "Fintech",
+    heroImage: finnovaImage,
+    colorVariant: 1,
+    stats: [
+      { icon: Users, value: "75K+", label: "Users managing finances" },
+      { icon: TrendingUp, value: "35%", label: "Average savings increase" },
+      { icon: Zap, value: "90%", label: "Goal achievement rate" },
+      { icon: BarChart, value: "$10M+", label: "Total savings tracked" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Making Financial Wellness Accessible",
+        content: "Personal finance management is often overwhelming and time-consuming. Most people struggle with budgeting, saving, and making informed investment decisions. We envisioned an AI-powered platform that would act as a personal financial advisor, providing customized recommendations and automating routine financial tasks to help users build wealth and achieve financial security."
+      },
+      {
+        type: "challenges",
+        title: "Personal Finance Complexity",
+        content: [
+          "Lack of personalized financial advice for average consumers",
+          "Difficulty in tracking expenses across multiple accounts",
+          "Complex investment options overwhelming for beginners",
+          "Need for real-time financial insights and alerts",
+          "Security concerns with financial data aggregation"
+        ]
+      },
+      {
+        type: "solution",
+        title: "AI-Driven Financial Companion",
+        content: "Finnova leverages machine learning to provide personalized financial guidance and automate wealth-building strategies.",
+        highlights: [
+          "AI-powered expense categorization and budget optimization",
+          "Personalized investment recommendations based on risk profile",
+          "Automated savings goals with smart allocation strategies",
+          "Real-time financial health scoring and improvement suggestions",
+          "Bill prediction and cash flow forecasting",
+          "Integration with 10,000+ financial institutions"
         ]
       }
     ],
     techStack: {
       frameworks: ["React Native", "Django", "TensorFlow"],
-      languages: ["Python", "JavaScript", "TypeScript"],
-      cloud: ["AWS", "Kubernetes"],
-      database: ["PostgreSQL", "Redis", "TimescaleDB"]
+      languages: ["Python", "JavaScript", "Swift"],
+      cloud: ["AWS", "Google Cloud AI"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
     },
     features: [
       {
-        title: "AI Market Analysis",
-        description: "Machine learning algorithms analyze market data and predict trends in real-time"
+        title: "Smart Budget Management",
+        description: "AI automatically categorizes expenses and suggests budget optimizations based on spending patterns"
       },
       {
-        title: "Automated Trading",
-        description: "Set up AI-powered trading bots with customizable strategies and risk parameters"
+        title: "Investment Advisory",
+        description: "Personalized investment recommendations with automated portfolio rebalancing"
       },
       {
-        title: "Portfolio Optimization",
-        description: "AI-driven portfolio management with automatic rebalancing and risk assessment"
-      }
-    ],
-    process: [
-      {
-        title: "Market Research",
-        description: "Analyzed trading behaviors and market inefficiencies",
-        icon: "Search"
-      },
-      {
-        title: "AI Model Training",
-        description: "Developed and trained machine learning models on historical market data",
-        icon: "Brain"
-      },
-      {
-        title: "Platform Development",
-        description: "Built secure, scalable trading platform with real-time capabilities",
-        icon: "Code"
-      },
-      {
-        title: "Regulatory Compliance",
-        description: "Ensured compliance with financial regulations and security standards",
-        icon: "CheckCircle"
-      }
-    ],
-    team: [
-      {
-        title: "Quantitative Analysts",
-        description: "Financial modeling and algorithm development",
-        icon: "BarChart"
-      },
-      {
-        title: "AI/ML Engineers",
-        description: "Trading algorithms and predictive models",
-        icon: "Brain"
-      },
-      {
-        title: "Financial Compliance",
-        description: "Regulatory compliance and security",
-        icon: "CheckCircle"
-      }
-    ]
-  },
-  {
-    id: "6",
-    title: "FinNova: AI Lending Platform",
-    subtitle: "Smart risk assessment for modern lending.",
-    description: "Intelligent lending platform that uses advanced AI algorithms to assess credit risk, predict loan defaults, and streamline the approval process while ensuring fair and responsible lending practices.",
-    shortDescription: "Lending made smarter, FinNova predicts risk before you approve.",
-    slug: "finnova-ai-lending-platform",
-    category: "SaaS",
-    heroImage: finnovaImage,
-    colorVariant: 6,
-    stats: [
-      { icon: "Clock", value: "90%", label: "Faster loan processing time" },
-      { icon: "BarChart", value: "40%", label: "Reduction in default rates" },
-      { icon: "TrendingUp", value: "95%", label: "Risk assessment accuracy" },
-      { icon: "Users", value: "85%", label: "Customer satisfaction rate" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Revolutionizing Credit Risk Assessment",
-        content: "Traditional lending relies on limited credit history and manual processes, often missing qualified borrowers or approving risky loans. FinNova uses AI to analyze hundreds of data points for more accurate, fair, and efficient lending decisions."
-      },
-      {
-        type: "challenges",
-        title: "Traditional Lending Problems",
-        content: [
-          "Limited credit history data for assessment",
-          "Manual, time-intensive approval processes",
-          "High default rates due to poor risk assessment",
-          "Bias in lending decisions",
-          "Difficulty serving underbanked populations"
-        ]
-      },
-      {
-        type: "solution",
-        title: "AI-Driven Lending Intelligence",
-        content: "FinNova provides comprehensive AI-powered lending solutions for financial institutions.",
-        highlights: [
-          "Advanced credit scoring using alternative data",
-          "Real-time fraud detection and prevention",
-          "Automated loan processing and approval",
-          "Fair lending compliance monitoring",
-          "Portfolio risk management and optimization"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React", "Django REST", "Scikit-learn"],
-      languages: ["Python", "TypeScript"],
-      cloud: ["AWS", "Docker"],
-      database: ["PostgreSQL", "MongoDB"]
-    },
-    features: [
-      {
-        title: "AI Credit Scoring",
-        description: "Advanced algorithms analyze traditional and alternative data for accurate credit assessment"
-      },
-      {
-        title: "Automated Processing",
-        description: "Streamlined loan approval workflow with minimal manual intervention"
-      },
-      {
-        title: "Risk Monitoring",
-        description: "Continuous portfolio monitoring with early warning systems for potential defaults"
+        title: "Goal-Based Savings",
+        description: "Intelligent savings strategies that automatically allocate funds toward financial goals"
       }
     ],
     process: [
       {
         title: "Financial Analysis",
-        description: "Studied lending patterns and risk factors across different markets",
-        icon: "BarChart"
+        description: "Analyzed personal finance pain points and user behavior patterns",
+        icon: BarChart
       },
       {
-        title: "AI Model Development",
-        description: "Built machine learning models for credit scoring and risk prediction",
-        icon: "Brain"
+        title: "AI Model Training",
+        description: "Developed machine learning models for financial predictions and recommendations",
+        icon: Brain
       },
       {
-        title: "Platform Integration",
-        description: "Integrated with existing banking systems and regulatory frameworks",
-        icon: "Link"
+        title: "Security Implementation",
+        description: "Implemented bank-level security for financial data protection",
+        icon: Shield
       },
       {
-        title: "Compliance Testing",
-        description: "Validated fair lending practices and regulatory compliance",
-        icon: "CheckCircle"
+        title: "User Testing",
+        description: "Extensive testing with real users to refine AI recommendations",
+        icon: Users
       }
     ],
     team: [
       {
-        title: "Risk Analysts",
-        description: "Credit risk modeling and validation",
-        icon: "BarChart"
-      },
-      {
         title: "Data Scientists",
-        description: "AI model development and optimization",
-        icon: "Brain"
+        description: "Financial modeling, AI algorithms",
+        icon: BarChart
       },
       {
-        title: "Compliance Experts",
-        description: "Regulatory adherence and fair lending practices",
-        icon: "CheckCircle"
+        title: "Mobile Developers",
+        description: "Cross-platform app development",
+        icon: Users
+      },
+      {
+        title: "Security Engineers",
+        description: "Financial data protection, compliance",
+        icon: Shield
       }
-    ]
+    ],
+    testimonial: {
+      company: "Finnova User",
+      position: "Marketing Manager",
+      content: "Finnova has completely changed how I manage my money. The AI recommendations are spot-on, and I've saved more in the past year than I did in the previous three years combined. It's like having a personal financial advisor in my pocket."
+    }
   },
   {
     id: "7",
-    title: "BigoHealth: Telemedicine Platform",
-    subtitle: "Accessible and affordable healthcare for rural India.",
-    description: "BigoHealth is a holistic telemedicine platform that enables underserved patients in rural areas to access high-quality, affordable healthcare. It connects patients with curated doctors for consultations, second opinions, lab test bookings, and surgery care, bridging the urban-rural healthcare divide.",
-    shortDescription: "Telemedicine & healthcare platform for rural India.",
-    slug: "bigohealth-telemedicine-platform",
+    title: "Bigo Health: Telemedicine Platform",
+    subtitle: "Comprehensive digital healthcare solution",
+    description: "Bigo Health connects patients with healthcare providers through secure video consultations, digital prescriptions, and health monitoring. Our platform makes quality healthcare accessible and convenient while maintaining the highest standards of medical privacy and security.",
+    shortDescription: "Telemedicine and Digital Health Management Platform",
+    slug: "bigo-health-telemedicine-platform",
     category: "Healthcare",
     heroImage: bigoHealthImage,
-    colorVariant: 1,
+    colorVariant: 2,
     stats: [
-      { icon: "Users", value: "75K+", label: "Patients served in Tier-3 & Tier-4 cities" },
-      { icon: "Clock", value: "80%", label: "Reduction in travel time for consultations" },
-      { icon: "TrendingUp", value: "₹1 Cr+", label: "Savings in patient treatment costs" },
-      { icon: "UserCheck", value: "700+", label: "Verified specialist doctors on platform" }
+      { icon: Users, value: "50K+", label: "Patients served" },
+      { icon: Clock, value: "24/7", label: "Healthcare availability" },
+      { icon: Heart, value: "98%", label: "Patient satisfaction" },
+      { icon: Globe, value: "100+", label: "Healthcare providers" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Bridging the Rural Healthcare Gap",
-        content: "Quality healthcare is often concentrated in urban centers, forcing rural populations to travel long distances and incur significant costs. Our goal was to create a technology-driven platform that makes specialist doctors and comprehensive healthcare services accessible and affordable for everyone, regardless of their location."
+        title: "Democratizing Healthcare Access",
+        content: "Healthcare access remains a significant challenge, especially in remote areas and during emergencies. Long wait times, geographical barriers, and high costs prevent many people from receiving timely medical care. We aimed to create a comprehensive telemedicine platform that would make quality healthcare accessible to everyone, anywhere, at any time."
       },
       {
         type: "challenges",
-        title: "Barriers to Quality Rural Healthcare",
+        title: "Healthcare Delivery Obstacles",
         content: [
-          "Limited availability of specialist doctors in remote areas",
-          "High costs associated with travel and accommodation for treatment",
-          "Lack of a unified platform for consultations, lab tests, and surgery care",
-          "Low digital literacy and unreliable internet connectivity",
-          "Fragmented patient records and follow-up processes"
+          "Limited access to specialists in rural and remote areas",
+          "Long waiting times for non-emergency consultations",
+          "High costs of traditional healthcare delivery",
+          "Need for secure, HIPAA-compliant communication",
+          "Integration with existing healthcare systems and records"
         ]
       },
       {
         type: "solution",
-        title: "An Integrated Digital Healthcare Ecosystem",
-        content: "We developed BigoHealth, a comprehensive mobile and web platform that brings a full suite of healthcare services to the user's fingertips.",
+        title: "Comprehensive Digital Health Platform",
+        content: "Bigo Health provides end-to-end telemedicine services with integrated health monitoring and management tools.",
         highlights: [
-          "Secure video consultations with multi-specialty doctors",
-          "Expert second opinion services and Virtual Tumor Board for cancer care",
-          "Integrated booking for lab tests and health checkups",
-          "End-to-end surgery care and hospitalization assistance",
-          "Digital health record management and follow-up reminders"
+          "Secure HD video consultations with medical professionals",
+          "Digital prescription management and pharmacy integration",
+          "Electronic health records with patient portal access",
+          "AI-powered symptom checker and triage system",
+          "Remote patient monitoring with IoT device integration",
+          "Multi-language support and accessibility features"
         ]
       }
     ],
     techStack: {
-      frameworks: ["React Native", "Node.js"],
-      languages: ["JavaScript", "TypeScript"],
-      cloud: ["AWS", "Firebase"],
-      database: ["PostgreSQL", "MongoDB"]
+      frameworks: ["React", "Node.js", "WebRTC"],
+      languages: ["TypeScript", "Python", "Swift"],
+      cloud: ["AWS HIPAA", "Azure Health"],
+      database: ["PostgreSQL", "MongoDB", "Redis"]
     },
     features: [
       {
-        title: "Doctor Consultations",
-        description: "Book and attend video consultations with verified doctors across various specialties."
+        title: "Video Consultations",
+        description: "Secure, high-quality video calls with healthcare providers, including screen sharing and digital examination tools"
       },
       {
-        title: "Surgery Care",
-        description: "Receive comprehensive assistance for hospitalization and surgical procedures."
+        title: "Health Records Management",
+        description: "Comprehensive electronic health records with patient access and provider collaboration features"
       },
       {
-        title: "Lab Test Booking",
-        description: "Schedule diagnostic tests and health checkups from accredited labs."
-      },
-      {
-        title: "Digital Health Records",
-        description: "Securely store and access all your medical records and prescriptions in one place."
+        title: "Remote Monitoring",
+        description: "Integration with wearable devices and health sensors for continuous patient monitoring"
       }
     ],
     process: [
-      { title: "Needs Assessment", description: "Analyzed healthcare gaps in rural and semi-urban areas", icon: "Search" },
-      { title: "Platform Architecture", description: "Designed a scalable, secure, and user-friendly telemedicine infrastructure", icon: "Server" },
-      { title: "Agile Development", description: "Built the application using an iterative approach for mobile and web", icon: "Code" },
-      { title: "Doctor Network Onboarding", description: "Vetted and partnered with a network of specialist doctors", icon: "UserCheck" }
+      {
+        title: "Healthcare Analysis",
+        description: "Studied healthcare delivery challenges and regulatory requirements",
+        icon: Heart
+      },
+      {
+        title: "Compliance Design",
+        description: "Designed HIPAA-compliant architecture with end-to-end encryption",
+        icon: Shield
+      },
+      {
+        title: "Platform Development",
+        description: "Built telemedicine platform with video, messaging, and records management",
+        icon: Code
+      },
+      {
+        title: "Provider Onboarding",
+        description: "Recruited and trained healthcare providers on the platform",
+        icon: Users
+      }
     ],
     team: [
-      { title: "Healthcare Strategists", description: "Domain experts in medical operations", icon: "Lightbulb" },
-      { title: "Mobile & Backend Developers", description: "React Native, Node.js, AWS", icon: "Code" },
-      { title: "Medical Partnership Managers", description: "Onboarding doctors and hospitals", icon: "Users" },
-      { title: "QA Engineers", description: "Ensuring platform reliability and HIPAA compliance", icon: "CheckCircle" }
+      {
+        title: "Healthcare IT Specialists",
+        description: "HIPAA compliance, medical workflows",
+        icon: Heart
+      },
+      {
+        title: "Video Technology Engineers",
+        description: "WebRTC, real-time communication",
+        icon: Video
+      },
+      {
+        title: "Security Engineers",
+        description: "Medical data protection, encryption",
+        icon: Shield
+      }
     ],
     testimonial: {
-      company: "Rural Patient Family",
-      position: "Caregiver",
-      content: "BigoHealth made it possible for my father to get a second opinion from a top oncologist without traveling to the city. The entire process, from consultation to lab tests, was managed through the app. It saved us time, money, and a lot of stress."
+      company: "Rural Clinic Network",
+      position: "Chief Medical Officer",
+      content: "Bigo Health has revolutionized how we deliver care to our rural patients. The platform is intuitive for both providers and patients, and the security features give us confidence in protecting sensitive medical information."
     }
   },
   {
     id: "8",
-    title: "Jivi AI: Your Personal AI Doctor",
-    subtitle: "Transforming healthcare for 8 billion people with AI.",
-    description: "Jivi AI is a personal AI doctor that provides 24/7 instant medical advice, wellness plans, lab analysis, and mental health support. It uses an advanced AI-powered clinical agentic platform to deliver diagnostic support and personalized healthcare.",
-    shortDescription: "AI-powered personal health companion for instant advice.",
-    slug: "jivi-ai-personal-doctor",
-    category: "AI",
+    title: "Jivi: Mental Health Companion",
+    subtitle: "AI-powered mental wellness platform",
+    description: "Jivi provides personalized mental health support through AI-powered conversations, mood tracking, and professional therapy connections. Our platform offers 24/7 emotional support while connecting users with licensed therapists when needed.",
+    shortDescription: "AI Mental Health Support and Therapy Platform",
+    slug: "jivi-mental-health-companion",
+    category: "Healthcare",
     heroImage: jiviImage,
-    colorVariant: 2,
+    colorVariant: 3,
     stats: [
-      { icon: "Download", value: "1.2M+", label: "App installs across 170+ countries" },
-      { icon: "Smile", value: "99.7%", label: "User satisfaction rate" },
-      { icon: "Brain", value: "10K+", label: "Medical conditions analyzed by AI" },
-      { icon: "Zap", value: "Instant", label: "Response time for medical queries" }
+      { icon: Users, value: "30K+", label: "Users supported daily" },
+      { icon: Heart, value: "85%", label: "Improvement in mood scores" },
+      { icon: Clock, value: "24/7", label: "AI support availability" },
+      { icon: UserCheck, value: "200+", label: "Licensed therapists" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Democratizing Medical Expertise with AI",
-        content: "Access to immediate medical guidance is a global challenge. We envisioned an AI-powered health companion that could understand symptoms, analyze lab reports, and provide personalized wellness advice, making preliminary healthcare accessible to everyone, anytime."
+        title: "Addressing Mental Health Crisis",
+        content: "Mental health support is often inaccessible due to cost, stigma, and limited availability of professionals. Many people struggle in silence, unable to access timely help when they need it most. We envisioned an AI-powered platform that could provide immediate emotional support while seamlessly connecting users with professional help when appropriate."
       },
       {
         type: "challenges",
-        title: "Limitations in Traditional Healthcare Access",
+        title: "Mental Health Support Barriers",
         content: [
-          "Long wait times for doctor appointments",
-          "Difficulty understanding complex medical lab reports",
-          "Lack of personalized and continuous health monitoring",
-          "High costs associated with primary consultations",
-          "Inaccessible mental health support"
+          "Limited availability and high cost of mental health professionals",
+          "Stigma preventing people from seeking help",
+          "Need for immediate support during crisis situations",
+          "Difficulty in tracking and understanding mental health patterns",
+          "Ensuring AI responses are empathetic and clinically appropriate"
         ]
       },
       {
         type: "solution",
-        title: "An AI-Powered Clinical Agentic Platform",
-        content: "We built Jivi AI, a comprehensive mobile app that acts as a personal doctor, offering a suite of intelligent health services.",
+        title: "Comprehensive Mental Wellness Platform",
+        content: "Jivi combines AI-powered emotional support with professional therapy services and comprehensive mood tracking.",
         highlights: [
-          "Conversational AI for symptom checking and medical advice",
-          "AI-driven analysis of lab reports with clear insights",
-          "Customized wellness, diet, and meal plans",
-          "Integrated stress checker and mental health support",
-          "Diagnostic assistance tools for medical professionals"
+          "AI companion trained on therapeutic conversation techniques",
+          "Mood tracking with personalized insights and patterns",
+          "Crisis detection with immediate professional intervention",
+          "Seamless connection to licensed therapists and counselors",
+          "Guided meditation and mindfulness exercises",
+          "Anonymous support groups and peer connections"
         ]
       }
     ],
     techStack: {
-      frameworks: ["React Native", "Python", "TensorFlow"],
-      languages: ["JavaScript", "Python"],
-      cloud: ["AWS", "Google Cloud"],
-      database: ["MongoDB", "PostgreSQL"]
+      frameworks: ["React Native", "Flask", "TensorFlow"],
+      languages: ["Python", "JavaScript", "Swift"],
+      cloud: ["Google Cloud AI", "AWS"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
     },
     features: [
       {
-        title: "AI Doctor",
-        description: "Get instant, confidential answers to your medical questions from an AI."
+        title: "AI Emotional Support",
+        description: "24/7 AI companion providing empathetic conversations and coping strategies based on therapeutic principles"
       },
       {
-        title: "Lab Report Analysis",
-        description: "Upload lab reports and receive an easy-to-understand analysis of your results."
+        title: "Professional Therapy Network",
+        description: "Connect with licensed therapists for video sessions, messaging, and ongoing treatment plans"
       },
       {
-        title: "Personalized Wellness Plans",
-        description: "Receive customized diet, fitness, and lifestyle plans based on your health goals."
-      },
-      {
-        title: "Mental Health Support",
-        description: "Utilize the stress checker and access resources for mental well-being."
+        title: "Mood Analytics",
+        description: "Track mood patterns, triggers, and progress with personalized insights and recommendations"
       }
     ],
     process: [
-      { title: "Research & Data Training", description: "Trained AI models on vast, anonymized medical datasets", icon: "Brain" },
-      { title: "Platform Development", description: "Built a secure and intuitive mobile application", icon: "Code" },
-      { title: "Clinical Validation", description: "Worked with medical professionals to validate AI responses and accuracy", icon: "CheckCircle" },
-      { title: "User Feedback & Iteration", description: "Continuously improving the AI based on user interactions and feedback", icon: "Users" }
+      {
+        title: "Clinical Research",
+        description: "Collaborated with mental health professionals to understand best practices",
+        icon: BookOpen
+      },
+      {
+        title: "AI Training",
+        description: "Trained conversational AI on therapeutic techniques and crisis detection",
+        icon: Brain
+      },
+      {
+        title: "Platform Development",
+        description: "Built secure, empathetic user experience with professional integration",
+        icon: Code
+      },
+      {
+        title: "Clinical Validation",
+        description: "Validated platform effectiveness with clinical trials and user studies",
+        icon: CheckCircle
+      }
     ],
     team: [
-      { title: "AI/ML Engineers", description: "Natural Language Processing, Predictive Modeling", icon: "Brain" },
-      { title: "Medical Experts", description: "Doctors and clinicians for data validation", icon: "UserCheck" },
-      { title: "Mobile App Developers", description: "React Native specialists", icon: "Code" },
-      { title: "Data Scientists", description: "Managing and interpreting health data", icon: "BarChart" }
+      {
+        title: "Clinical Psychologists",
+        description: "Therapeutic protocols, AI training",
+        icon: Heart
+      },
+      {
+        title: "AI/ML Engineers",
+        description: "Conversational AI, sentiment analysis",
+        icon: Brain
+      },
+      {
+        title: "Mobile Developers",
+        description: "Secure, accessible app development",
+        icon: Users
+      }
     ],
     testimonial: {
-      company: "Early Adopter",
-      position: "User",
-      content: "Jivi AI helped me understand my blood test results in simple terms before I could even see my doctor. The personalized diet plan has been incredibly helpful. It's like having a health expert in my pocket."
+      company: "Mental Health Advocate",
+      position: "Licensed Clinical Social Worker",
+      content: "Jivi fills a critical gap in mental health support. The AI companion provides excellent immediate support, and the seamless connection to professional services ensures users get the right level of care when they need it."
     }
   },
   {
     id: "9",
-    title: "Siya Ayurveda: E-commerce Wellness",
-    subtitle: "Natural Ayurvedic solutions for skin and hair care.",
-    description: "Siya Ayurveda is a Shopify-based e-commerce platform offering a curated range of Ayurvedic products for chronic skin conditions like psoriasis and vitiligo, as well as general hair care. Their products are formulated with natural ingredients to heal and nourish.",
-    shortDescription: "Shopify e-commerce for Ayurvedic skin & hair products.",
-    slug: "siya-ayurveda-ecommerce-wellness",
-    category: "E-commerce",
+    title: "Siya Ayurveda: Holistic Health Platform",
+    subtitle: "Traditional wellness meets modern technology",
+    description: "Siya Ayurveda digitizes traditional Ayurvedic medicine with personalized consultations, herbal medicine delivery, and wellness tracking. Our platform connects users with certified Ayurvedic practitioners while providing educational resources and treatment tracking.",
+    shortDescription: "Digital Ayurvedic Medicine and Wellness Platform",
+    slug: "siya-ayurveda-holistic-health-platform",
+    category: "Healthcare",
     heroImage: siyaAyurvedaImage,
-    colorVariant: 3,
+    colorVariant: 4,
     stats: [
-      { icon: "Leaf", value: "100%", label: "Natural and herbal ingredients" },
-      { icon: "Users", value: "10K+", label: "Satisfied customers" },
-      { icon: "Star", value: "4.5+", label: "Average product rating" },
-      { icon: "Truck", value: "Nationwide", label: "Free shipping across India" }
+      { icon: Users, value: "15K+", label: "Wellness journeys started" },
+      { icon: Leaf, value: "500+", label: "Herbal remedies available" },
+      { icon: UserCheck, value: "50+", label: "Certified practitioners" },
+      { icon: Heart, value: "92%", label: "User satisfaction rate" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Harnessing the Healing Power of Ayurveda",
-        content: "Many modern skincare products use harsh chemicals that offer temporary relief but fail to address root causes. We aimed to create an accessible online store offering authentic, natural Ayurvedic solutions that are gentle, effective, and target long-term skin and hair health."
+        title: "Modernizing Ancient Wisdom",
+        content: "Ayurvedic medicine offers holistic health solutions but often lacks accessibility and standardization in the modern world. People interested in natural wellness struggle to find qualified practitioners and authentic treatments. We aimed to create a platform that would make traditional Ayurvedic wisdom accessible through modern technology while maintaining authenticity and quality."
       },
       {
         type: "challenges",
-        title: "Limitations of Chemical-Based Skincare",
+        title: "Traditional Medicine Modernization",
         content: [
-          "Products often cause skin irritation and allergic reactions",
-          "Lack of long-term solutions for chronic conditions like psoriasis",
-          "Building customer trust in a market saturated with 'natural' claims",
-          "Need for a seamless and secure online shopping experience"
+          "Limited access to qualified Ayurvedic practitioners",
+          "Difficulty in sourcing authentic herbal medicines",
+          "Lack of standardized treatment protocols and tracking",
+          "Need for educational resources about Ayurvedic principles",
+          "Integration of traditional practices with modern lifestyle"
         ]
       },
       {
         type: "solution",
-        title: "A Trusted E-commerce Platform for Ayurveda",
-        content: "We developed Siya Ayurveda on Shopify, creating a user-friendly and visually appealing online store to showcase their specialized product line.",
+        title: "Digital Ayurvedic Ecosystem",
+        content: "Siya Ayurveda creates a comprehensive platform connecting users with authentic Ayurvedic treatments and practitioners.",
         highlights: [
-          "Custom Shopify theme design to reflect the brand's natural ethos",
-          "Specialized product collections for psoriasis, vitiligo, and hair care",
-          "Integrated payment gateways for secure transactions",
-          "Customer reviews and testimonials to build social proof",
-          "SEO and content strategy to educate users on Ayurvedic benefits"
+          "Personalized consultations with certified Ayurvedic doctors",
+          "Custom herbal medicine formulations and delivery",
+          "Dosha assessment and personalized wellness plans",
+          "Educational content library on Ayurvedic principles",
+          "Treatment progress tracking and lifestyle recommendations",
+          "Quality-assured herbal products with authenticity certificates"
         ]
       }
     ],
     techStack: {
-      frameworks: ["Shopify"],
-      languages: ["Liquid", "JavaScript", "CSS"],
-      cloud: ["Shopify Plus"],
-      database: ["N/A (Managed by Shopify)"]
+      frameworks: ["React", "Django", "React Native"],
+      languages: ["Python", "JavaScript", "TypeScript"],
+      cloud: ["AWS", "Firebase"],
+      database: ["PostgreSQL", "MongoDB", "Redis"]
     },
     features: [
       {
-        title: "Psoriasis & Vitiligo Care",
-        description: "A dedicated range of products to manage and soothe chronic skin conditions."
+        title: "Personalized Consultations",
+        description: "Video consultations with certified Ayurvedic practitioners for personalized treatment plans"
       },
       {
-        title: "Herbal Hair Care",
-        description: "Natural oils, shampoos, and conditioners for hair fall, dandruff, and growth."
+        title: "Herbal Medicine Delivery",
+        description: "Custom herbal formulations prepared and delivered based on individual prescriptions"
       },
       {
-        title: "Secure Online Shopping",
-        description: "A fully functional e-commerce store with easy navigation and secure checkout."
+        title: "Wellness Tracking",
+        description: "Track symptoms, progress, and lifestyle factors with Ayurvedic health insights"
       }
     ],
     process: [
-      { title: "Brand & Market Analysis", description: "Identified the target audience and niche in the Ayurvedic market", icon: "Search" },
-      { title: "Shopify Store Setup", description: "Configured the e-commerce store, products, and payment systems", icon: "ShoppingCart" },
-      { title: "Custom Theme Development", description: "Designed and developed a unique storefront to enhance user experience", icon: "Palette" },
-      { title: "Launch & Marketing", description: "Deployed the store and initiated digital marketing campaigns", icon: "Rocket" }
+      {
+        title: "Practitioner Network",
+        description: "Built network of certified Ayurvedic doctors and wellness experts",
+        icon: Users
+      },
+      {
+        title: "Supply Chain Setup",
+        description: "Established quality-controlled herbal medicine sourcing and preparation",
+        icon: Leaf
+      },
+      {
+        title: "Platform Development",
+        description: "Created consultation, prescription, and delivery management system",
+        icon: Code
+      },
+      {
+        title: "Quality Assurance",
+        description: "Implemented quality controls for practitioners and herbal products",
+        icon: CheckCircle
+      }
     ],
     team: [
-      { title: "Ayurvedic Experts", description: "Product formulation and knowledge base", icon: "Leaf" },
-      { title: "Shopify Developers", description: "Theme customization and app integration", icon: "Code" },
-      { title: "E-commerce Strategists", description: "Marketing, SEO, and conversion optimization", icon: "TrendingUp" }
+      {
+        title: "Ayurvedic Doctors",
+        description: "Traditional medicine expertise, treatment protocols",
+        icon: Heart
+      },
+      {
+        title: "Platform Developers",
+        description: "Healthcare platform, e-commerce integration",
+        icon: Code
+      },
+      {
+        title: "Supply Chain Managers",
+        description: "Herbal sourcing, quality control",
+        icon: Package
+      }
     ],
     testimonial: {
-      company: "Long-time Customer",
-      position: "User",
-      content: "I've struggled with psoriasis for years. Siya Ayurveda's products are the only ones that have given me consistent relief without any side effects. The website is easy to use, and the delivery is always prompt."
+      company: "Wellness Enthusiast",
+      position: "Yoga Instructor",
+      content: "Siya Ayurveda has made authentic Ayurvedic treatment accessible to me. The practitioners are knowledgeable, the herbal medicines are high quality, and I love being able to track my wellness journey digitally."
     }
   },
   {
     id: "10",
-    title: "Daraz: Online Shopping Platform",
-    subtitle: "South Asia's leading online marketplace.",
-    description: "Daraz is the leading online marketplace in South Asia, empowering tens of thousands of sellers to connect with millions of customers. It offers an extensive range of products across diverse categories, ensuring a seamless, secure, and convenient shopping experience.",
-    shortDescription: "The one-stop online marketplace for South Asia.",
-    slug: "daraz-online-shopping-platform",
+    title: "Amrutam: Ayurvedic E-commerce",
+    subtitle: "Premium Ayurvedic products marketplace",
+    description: "Amrutam is a premium e-commerce platform specializing in authentic Ayurvedic products, supplements, and wellness items. Our platform ensures product authenticity, provides detailed ingredient information, and offers personalized product recommendations based on individual health needs.",
+    shortDescription: "Premium Ayurvedic Products E-commerce Platform",
+    slug: "amrutam-ayurvedic-ecommerce",
     category: "E-commerce",
-    heroImage: darazImage,
+    heroImage: amrutamImage,
     colorVariant: 5,
     stats: [
-      { icon: "Users", value: "4M+", label: "Daily active users" },
-      { icon: "Package", value: "40M+", label: "Products available on the platform" },
-      { icon: "LayoutGrid", value: "250+", label: "Product categories" },
-      { icon: "Truck", value: "Nationwide", label: "Delivery network coverage" }
+      { icon: Package, value: "1000+", label: "Authentic products" },
+      { icon: Users, value: "25K+", label: "Satisfied customers" },
+      { icon: Star, value: "4.8/5", label: "Average product rating" },
+      { icon: Truck, value: "98%", label: "On-time delivery rate" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Creating a Digital Mall for Everyone",
-        content: "Our vision was to build a comprehensive digital marketplace that brings the entire mall experience into the user's pocket. We wanted to provide unparalleled access to a vast variety of goods for customers across South Asia, supported by a robust logistics network."
+        title: "Authentic Ayurvedic Marketplace",
+        content: "The market is flooded with low-quality Ayurvedic products that lack authenticity and proper certification. Consumers struggle to find genuine, high-quality Ayurvedic supplements and wellness products. We envisioned a premium marketplace that would curate only authentic products while providing comprehensive information to help customers make informed choices."
       },
       {
         type: "challenges",
-        title: "E-commerce Hurdles in a Diverse Region",
+        title: "Quality and Authenticity Issues",
         content: [
-          "Complex logistics and last-mile delivery in varied terrains",
-          "Building trust and promoting digital payments",
-          "Catering to a multilingual and multicultural customer base",
-          "Managing a massive inventory from thousands of sellers"
+          "Proliferation of fake and low-quality Ayurvedic products",
+          "Lack of transparency in ingredient sourcing and preparation",
+          "Difficulty in verifying product authenticity and certifications",
+          "Need for educational content about product usage and benefits",
+          "Complex logistics for temperature-sensitive herbal products"
         ]
       },
       {
         type: "solution",
-        title: "A Feature-Rich and Reliable E-commerce Ecosystem",
-        content: "We engineered Daraz as a scalable and user-centric platform that addresses the core challenges of online retail in the region.",
+        title: "Premium Ayurvedic E-commerce Platform",
+        content: "Amrutam creates a trusted marketplace for authentic Ayurvedic products with comprehensive quality assurance.",
         highlights: [
-          "Daraz Mall for 100% authentic products from certified brands",
-          "Advanced search and filtering for easy product discovery",
-          "Secure and diverse payment options, including cash on delivery",
-          "An interactive 'Daraz Live' feature for engaging shopping",
-          "Easy returns and responsive 24/7 customer support"
+          "Rigorous vendor verification and product authentication process",
+          "Detailed product information with ingredient transparency",
+          "Personalized product recommendations based on health goals",
+          "Expert consultations for product selection guidance",
+          "Temperature-controlled logistics for product integrity",
+          "Educational content library on Ayurvedic wellness"
         ]
       }
     ],
     techStack: {
-      frameworks: ["Kotlin", "Swift", "React", "Node.js"],
-      languages: ["Kotlin", "Swift", "JavaScript"],
-      cloud: ["AWS", "Alibaba Cloud"],
-      database: ["MySQL", "MongoDB", "Redis"]
+      frameworks: ["Next.js", "Node.js", "React Native"],
+      languages: ["TypeScript", "JavaScript", "Python"],
+      cloud: ["AWS", "Cloudflare"],
+      database: ["PostgreSQL", "Redis", "Elasticsearch"]
     },
     features: [
       {
-        title: "Official Brand Stores",
-        description: "Shop directly from your favorite brands with authenticity guaranteed in Daraz Mall."
+        title: "Product Authentication",
+        description: "Rigorous verification process ensuring all products are authentic and certified"
       },
       {
         title: "Personalized Recommendations",
-        description: "AI-driven product suggestions based on your browsing and purchase history."
+        description: "AI-powered product suggestions based on individual health profiles and goals"
       },
       {
-        title: "Easy & Secure Checkout",
-        description: "Multiple payment methods with industry-leading security for safe transactions."
+        title: "Expert Consultations",
+        description: "Access to Ayurvedic experts for product selection and usage guidance"
       }
     ],
     process: [
-      { title: "Marketplace Architecture", description: "Designed a scalable multi-vendor e-commerce platform", icon: "Server" },
-      { title: "Seller Onboarding Systems", description: "Created efficient tools for seller registration, product listing, and management", icon: "UserPlus" },
-      { title: "Logistics Integration", description: "Built a network of logistics partners for efficient fulfillment", icon: "Truck" },
-      { title: "Mobile-First Development", description: "Developed intuitive and high-performance iOS and Android applications", icon: "Code" }
+      {
+        title: "Vendor Curation",
+        description: "Established strict criteria for vendor selection and product authentication",
+        icon: CheckCircle
+      },
+      {
+        title: "Platform Development",
+        description: "Built e-commerce platform with advanced search and recommendation features",
+        icon: Code
+      },
+      {
+        title: "Logistics Setup",
+        description: "Implemented specialized logistics for herbal product handling and delivery",
+        icon: Truck
+      },
+      {
+        title: "Quality Assurance",
+        description: "Established ongoing quality monitoring and customer feedback systems",
+        icon: Star
+      }
     ],
     team: [
-      { title: "Category Managers", description: "Experts curating product assortments", icon: "LayoutGrid" },
-      { title: "Logistics & Operations", description: "Ensuring timely and reliable delivery", icon: "Truck" },
-      { title: "Mobile Engineers", description: "Developing and maintaining the apps", icon: "Code" },
-      { title: "Customer Experience Team", description: "Providing 24/7 support and service", icon: "Users" }
+      {
+        title: "E-commerce Developers",
+        description: "Platform development, payment integration",
+        icon: ShoppingCart
+      },
+      {
+        title: "Quality Assurance Team",
+        description: "Product verification, vendor management",
+        icon: CheckCircle
+      },
+      {
+        title: "Logistics Specialists",
+        description: "Supply chain, delivery optimization",
+        icon: Truck
+      }
     ],
     testimonial: {
-      company: "Frequent Shopper",
-      position: "User",
-      content: "Daraz is my go-to app for everything from electronics to groceries. The variety is amazing, the prices are competitive, and I trust the quality from Daraz Mall. It has completely changed how I shop."
+      company: "Health-conscious Consumer",
+      position: "Wellness Coach",
+      content: "Amrutam is my go-to source for authentic Ayurvedic products. The quality is consistently excellent, and I appreciate the detailed information provided about each product's ingredients and benefits."
     }
   },
   {
     id: "11",
-    title: "Carrefour: Online Grocery & Shopping",
-    subtitle: "Your daily supermarket needs, delivered.",
-    description: "The MAF Carrefour App brings the entire supermarket to your fingertips. It allows users to shop for groceries, electronics, home goods, and more with features like express delivery, easy reordering, and exclusive in-app offers.",
-    shortDescription: "Online grocery and retail shopping app.",
-    slug: "maf-carrefour-online-shopping",
-    category: "E-commerce",
-    heroImage: carrefourImage,
-    colorVariant: 6,
+    title: "The Bump: Pregnancy Companion",
+    subtitle: "Comprehensive pregnancy and parenting app",
+    description: "The Bump provides expectant parents with week-by-week pregnancy tracking, expert advice, and community support. Our app offers personalized content, appointment reminders, and connects parents with healthcare providers and other families on similar journeys.",
+    shortDescription: "Pregnancy Tracking and Parenting Support Platform",
+    slug: "the-bump-pregnancy-companion",
+    category: "Healthcare",
+    heroImage: theBumpImage,
+    colorVariant: 1,
     stats: [
-      { icon: "ShoppingCart", value: "60-minute", label: "Express grocery delivery" },
-      { icon: "Package", value: "100K+", label: "Products available to order" },
-      { icon: "Users", value: "5M+", label: "App downloads" },
-      { icon: "RefreshCw", value: "1-Click", label: "Easy reordering of past purchases" }
+      { icon: Users, value: "100K+", label: "Expecting parents" },
+      { icon: Heart, value: "95%", label: "User satisfaction" },
+      { icon: MessageSquare, value: "50K+", label: "Community posts monthly" },
+      { icon: BookOpen, value: "1000+", label: "Expert articles" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Digitizing the Supermarket Experience",
-        content: "The goal was to replicate the convenience and variety of a Carrefour hypermarket in a powerful mobile app. We wanted to provide a seamless online shopping journey, from browsing aisles virtually to receiving groceries at the doorstep within an hour."
+        title: "Supporting the Parenting Journey",
+        content: "Pregnancy and early parenting can be overwhelming with countless questions and concerns. Expectant parents often struggle to find reliable, personalized information and support. We aimed to create a comprehensive platform that would guide parents through pregnancy and early childhood with expert advice, community support, and personalized tracking tools."
       },
       {
         type: "challenges",
-        title: "Complexities of Online Grocery Retail",
+        title: "Pregnancy and Parenting Support Gaps",
         content: [
-          "Managing real-time inventory for perishable goods",
-          "Ensuring fast and reliable 'last-mile' delivery logistics",
-          "Maintaining product quality and freshness during transit",
-          "Creating an intuitive UI to browse thousands of SKUs"
+          "Information overload with conflicting advice from various sources",
+          "Lack of personalized guidance for individual pregnancy experiences",
+          "Limited access to healthcare providers between appointments",
+          "Need for peer support and community connection",
+          "Tracking multiple aspects of pregnancy and baby development"
         ]
       },
       {
         type: "solution",
-        title: "A Robust and User-Friendly E-commerce Platform",
-        content: "We developed a high-performance mobile application that handles the complexities of online grocery and retail with ease.",
+        title: "Comprehensive Pregnancy and Parenting Platform",
+        content: "The Bump provides personalized pregnancy tracking with expert guidance and community support throughout the parenting journey.",
         highlights: [
-          "Real-time inventory sync with physical stores",
-          "Advanced order management system for pickers and drivers",
-          "GPS-based delivery tracking for customers",
-          "Personalized offers and loyalty program integration ('SHARE')",
-          "Barcode scanner for quick product finding and reordering"
+          "Week-by-week pregnancy tracking with personalized insights",
+          "Expert-reviewed articles and advice from healthcare professionals",
+          "Community forums for peer support and experience sharing",
+          "Appointment and milestone reminders with calendar integration",
+          "Baby development tracking and growth charts",
+          "Partner involvement features for shared pregnancy experience"
         ]
       }
     ],
     techStack: {
-      frameworks: ["React Native", "Node.js", "Express"],
-      languages: ["JavaScript", "TypeScript"],
-      cloud: ["Microsoft Azure"],
-      database: ["Cosmos DB", "SQL Server"]
+      frameworks: ["React Native", "Django", "WebSocket"],
+      languages: ["JavaScript", "Python", "Swift"],
+      cloud: ["AWS", "Firebase"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
     },
     features: [
       {
-        title: "Express Delivery",
-        description: "Get your groceries and essentials delivered in as little as 60 minutes."
+        title: "Pregnancy Tracking",
+        description: "Comprehensive week-by-week tracking with personalized insights and milestone reminders"
       },
       {
-        title: "Click & Collect",
-        description: "Order online and pick up your items at your preferred Carrefour store."
+        title: "Expert Content Library",
+        description: "Curated articles and advice from healthcare professionals and parenting experts"
       },
       {
-        title: "Personalized Shopping Lists",
-        description: "Create and save shopping lists for quick and easy reordering of your favorite items."
+        title: "Community Support",
+        description: "Connect with other parents, share experiences, and get support from the community"
       }
     ],
     process: [
-      { title: "Requirement Analysis", description: "Mapped the in-store customer journey to a digital format", icon: "Search" },
-      { title: "Inventory & Logistics Planning", description: "Designed the architecture for real-time stock and delivery management", icon: "Server" },
-      { title: "Mobile App Development", description: "Built native-like experiences for iOS and Android using React Native", icon: "Code" },
-      { title: "Testing & Rollout", description: "Conducted rigorous testing on order fulfillment and payment gateways", icon: "CheckCircle" }
+      {
+        title: "Medical Research",
+        description: "Collaborated with healthcare professionals to ensure medical accuracy",
+        icon: BookOpen
+      },
+      {
+        title: "Content Curation",
+        description: "Developed comprehensive library of expert-reviewed parenting content",
+        icon: FileText
+      },
+      {
+        title: "App Development",
+        description: "Built user-friendly mobile app with tracking and community features",
+        icon: Code
+      },
+      {
+        title: "Community Building",
+        description: "Established moderated community spaces for safe parent interactions",
+        icon: Users
+      }
     ],
     team: [
-      { title: "E-commerce Product Managers", description: "Defining features and user flows", icon: "Lightbulb" },
-      { title: "React Native Developers", description: "Building the cross-platform mobile app", icon: "Code" },
-      { title: "Supply Chain Experts", description: "Optimizing inventory and delivery logistics", icon: "Truck" },
-      { title: "UI/UX Designers", description: "Creating an intuitive shopping experience", icon: "Palette" }
+      {
+        title: "Healthcare Professionals",
+        description: "Medical accuracy, content review",
+        icon: Heart
+      },
+      {
+        title: "Mobile Developers",
+        description: "Cross-platform app development",
+        icon: Users
+      },
+      {
+        title: "Community Managers",
+        description: "User engagement, content moderation",
+        icon: MessageSquare
+      }
     ],
     testimonial: {
-      company: "Busy Parent",
-      position: "User",
-      content: "The Carrefour app is a lifesaver. I can do my entire weekly grocery shop in 15 minutes and have it delivered the same day. The express delivery is incredibly fast and reliable."
+      company: "New Parent",
+      position: "First-time Mother",
+      content: "The Bump has been my constant companion throughout pregnancy and beyond. The weekly updates are so helpful, and the community support has been invaluable during challenging times."
     }
   },
   {
     id: "12",
-    title: "Bolt: Ride-Hailing & Mobility",
-    subtitle: "Fast, affordable rides and scooter rentals at your fingertips.",
-    description: "Bolt is a super-app offering ride-hailing, micromobility (scooters and e-bikes), food delivery, and car-sharing services. It connects millions of users with drivers to make urban travel easier, quicker, and more reliable.",
-    shortDescription: "Super-app for rides, scooters, and food delivery.",
-    slug: "bolt-ride-hailing-mobility",
-    category: "Services",
-    heroImage: boltImage,
-    colorVariant: 3,
-    stats: [
-      { icon: "Users", value: "100M+", label: "Active users globally" },
-      { icon: "MapPin", value: "45+", label: "Countries of operation" },
-      { icon: "Zap", value: "3 mins", label: "Average driver arrival time" },
-      { icon: "Leaf", value: "100%", label: "Carbon-Neutral rides in Europe" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Solving Urban Mobility for Everyone",
-        content: "Urban transportation is often inefficient, expensive, and fragmented. We set out to create a single app that provides multiple modes of transport—from cars to scooters—that are affordable, safe, and readily available for millions of people."
-      },
-      {
-        type: "challenges",
-        title: "Complexities of a Global Mobility Platform",
-        content: [
-          "Scaling across diverse markets with different regulations",
-          "Ensuring driver and rider safety on a massive scale",
-          "Managing real-time logistics and pricing for a massive fleet",
-          "Intense competition from established global and local players"
-        ]
-      },
-      {
-        type: "solution",
-        title: "An All-in-One Mobility Super-App",
-        content: "We developed Bolt, a robust platform with a user-friendly interface and a powerful backend to manage millions of daily trips and deliveries efficiently.",
-        highlights: [
-          "Real-time driver matching algorithm for minimal wait times",
-          "In-app safety features like trip sharing and an emergency assist button",
-          "Integrated payments with multi-currency and regional options support",
-          "Multi-modal options: cars, e-scooters, and e-bikes",
-          "Bolt Food for restaurant and grocery delivery services"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React Native", "Kotlin", "Swift", "Node.js"],
-      languages: ["JavaScript", "Kotlin", "Swift", "Python"],
-      cloud: ["AWS", "Google Maps Platform"],
-      database: ["PostgreSQL", "Redis"]
-    },
-    features: [
-      {
-        title: "Ride-Hailing",
-        description: "Request a ride in minutes from a community of trusted drivers."
-      },
-      {
-        title: "Scooter & E-Bike Rentals",
-        description: "Find and unlock micromobility vehicles for short, eco-friendly trips."
-      },
-      {
-        title: "Bolt Food",
-        description: "Get your favorite meals and groceries delivered quickly to your door."
-      }
-    ],
-    process: [
-      { title: "Market Analysis", description: "Identified opportunities in urban transportation markets", icon: "Search" },
-      { title: "Platform Architecture", description: "Designed a highly scalable, real-time system for matching and payments", icon: "Server" },
-      { title: "Driver Onboarding & Vetting", description: "Created a seamless and secure process for driver registration", icon: "UserCheck" },
-      { title: "Global Rollout Strategy", description: "Executed a phased launch across cities in Europe, Africa, and Asia", icon: "Rocket" }
-    ],
-    team: [
-      { title: "Logistics & Operations Managers", description: "Managing city-level supply and demand", icon: "Map" },
-      { title: "Mobile & Backend Engineers", description: "Developing the core application and services", icon: "Code" },
-      { title: "Data Scientists", description: "Optimizing pricing, ETAs, and matching algorithms", icon: "BarChart" },
-      { title: "Safety & Compliance Team", description: "Ensuring regulatory adherence and user safety", icon: "Shield" }
-    ],
-    testimonial: {
-      company: "Daily Commuter",
-      position: "User",
-      content: "Using Bolt for my daily commute has been a game-changer. It's reliable, the prices are fair, and I love having the option to grab a scooter for shorter trips. The app just works seamlessly."
-    }
-  },
-  {
-    id: "13",
-    title: "LUV.com: Dating for Professionals",
-    subtitle: "Curated connections for working singles.",
-    description: "LUV.com is an exclusive dating platform designed for busy professionals. It focuses on quality over quantity, using a sophisticated matching algorithm to connect individuals based on career goals, lifestyle, and relationship intent.",
-    shortDescription: "Exclusive dating app for career-focused singles.",
-    slug: "luv-dating-for-professionals",
-    category: "Apps",
-    heroImage: luvImage,
-    colorVariant: 4,
-    stats: [
-      { icon: "UserCheck", value: "100%", label: "Profile verification process" },
-      { icon: "TrendingUp", value: "85%", label: "Match success rate based on intent" },
-      { icon: "MessageSquare", value: "3x", label: "More meaningful conversations" },
-      { icon: "Users", value: "Curated", label: "Community of professionals" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Redefining Dating for the Ambitious",
-        content: "Mainstream dating apps are often overwhelming and focus on endless swiping. We wanted to create a more intentional space for professionals who value their time and are looking for meaningful connections with like-minded individuals."
-      },
-      {
-        type: "challenges",
-        title: "Pitfalls of Modern Online Dating",
-        content: [
-          "Endless swiping leads to decision fatigue",
-          "Prevalence of fake profiles and catfishing",
-          "Mismatched intentions and relationship goals",
-          "Lack of privacy and discretion for professionals"
-        ]
-      },
-      {
-        type: "solution",
-        title: "A Curated and Intelligent Dating Platform",
-        content: "We built LUV.com with a focus on creating a safe, exclusive, and effective environment for finding a partner.",
-        highlights: [
-          "AI-powered matchmaking based on values, career, and lifestyle",
-          "Mandatory profile verification to ensure authenticity",
-          "Limited number of high-quality matches per day",
-          "Advanced privacy controls and incognito mode",
-          "Integrated icebreakers and conversation starters"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React Native", "Django REST"],
-      languages: ["TypeScript", "Python"],
-      cloud: ["AWS"],
-      database: ["PostgreSQL", "Redis"]
-    },
-    features: [
-      {
-        title: "Smart Matching",
-        description: "Receive a curated list of compatible matches daily, powered by our AI algorithm."
-      },
-      {
-        title: "Profile Verification",
-        description: "Our team verifies each profile to maintain a trusted community of genuine users."
-      },
-      {
-        title: "Privacy Controls",
-        description: "Control who sees your profile and when you are visible on the platform."
-      }
-    ],
-    process: [
-      { title: "Market Research", description: "Analyzed the needs and frustrations of professional singles", icon: "Search" },
-      { title: "Algorithm Development", description: "Built a matching algorithm focused on deeper compatibility metrics", icon: "Brain" },
-      { title: "Mobile App Development", description: "Created a sleek, intuitive, and secure mobile application", icon: "Code" },
-      { title: "Community Building", description: "Launched an invite-only beta to build a high-quality user base", icon: "Users" }
-    ],
-    team: [
-      { title: "Data Scientists", description: "Developing and refining the matching algorithm", icon: "Brain" },
-      { title: "Mobile Developers", description: "Building the iOS and Android applications", icon: "Code" },
-      { title: "Community & Trust Team", description: "Managing profile verification and user safety", icon: "Shield" },
-      { title: "Relationship Experts", description: "Consulting on features that foster connection", icon: "Heart" }
-    ],
-    testimonial: {
-      company: "Lawyer",
-      position: "User",
-      content: "LUV.com is a breath of fresh air. I don't have time for endless swiping. The matches are high-quality, and the conversations feel much more genuine than on other apps. I met my current partner here."
-    }
-  },
-  {
-    id: "14",
-    title: "AIrena: The Generative AI Arena",
-    subtitle: "Where AI models compete and creators collaborate.",
-    description: "AIrena is the world's first competitive arena for generative AI models. It's a platform where developers can benchmark their models against others, and creators can discover and utilize the best-performing AIs for text, image, and code generation.",
-    shortDescription: "Competitive platform for generative AI models.",
-    slug: "airena-generative-ai-arena",
-    category: "AI",
-    heroImage: airena,
-    colorVariant: 1,
-    stats: [
-      { icon: "BarChart", value: "100+", label: "Public AI model leaderboards" },
-      { icon: "Code", value: "50K+", label: "Daily AI generation tasks" },
-      { icon: "Users", value: "10K+", label: "Developers & AI creators" },
-      { icon: "Zap", value: "Unified API", label: "Access to top models" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Creating a Competitive Benchmark for AI",
-        content: "The generative AI landscape is exploding with new models daily, but it's hard to know which ones are truly best for specific tasks. We envisioned a platform that would allow for head-to-head competition, creating transparent leaderboards and a meritocracy for AI."
-      },
-      {
-        type: "challenges",
-        title: "The Fragmented AI Ecosystem",
-        content: [
-          "Difficult to objectively compare performance across different AI models",
-          "Lack of a centralized place to discover and test new AIs",
-          "High computational cost to benchmark models independently",
-          "No unified API to access the best-performing models"
-        ]
-      },
-      {
-        type: "solution",
-        title: "A Unified Platform for AI Competition and Discovery",
-        content: "AIrena provides the infrastructure for developers to compete and for creators to find the best AI tools for their needs.",
-        highlights: [
-          "Standardized benchmarking for text, image, and audio models",
-          "Real-time leaderboards based on user ratings and performance metrics",
-          "A playground environment to test and compare models side-by-side",
-          "A single, unified API that routes requests to the current top-ranked model",
-          "Community hub for sharing prompts and results"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React", "FastAPI", "Docker"],
-      languages: ["TypeScript", "Python"],
-      cloud: ["AWS", "Kubernetes", "NVIDIA Triton"],
-      database: ["PostgreSQL", "ClickHouse"]
-    },
-    features: [
-      {
-        title: "AI Leaderboards",
-        description: "View real-time rankings of generative AI models based on objective and subjective scores."
-      },
-      {
-        title: "AI Playground",
-        description: "Directly compare outputs from multiple AI models for the same prompt."
-      },
-      {
-        title: "Unified API",
-        description: "Integrate the best of AI into your own applications with a single API call."
-      }
-    ],
-    process: [
-      { title: "Platform Concept", description: "Designed the architecture for a competitive AI benchmarking system", icon: "Lightbulb" },
-      { title: "Model Integration", description: "Built a scalable backend to host and run various open-source and proprietary AI models", icon: "Server" },
-      { title: "Frontend Development", description: "Created an interactive web interface for leaderboards and the playground", icon: "Code" },
-      { title: "Community Launch", description: "Launched to the AI developer and creator community to start populating data", icon: "Rocket" }
-    ],
-    team: [
-      { title: "MLOps Engineers", description: "Managing AI model deployment and scaling", icon: "Server" },
-      { title: "Full-Stack Developers", description: "Building the web platform and APIs", icon: "Code" },
-      { title: "AI Researchers", description: "Developing novel benchmarking metrics", icon: "Brain" },
-      { title: "Community Managers", description: "Engaging with developers and creators", icon: "Users" }
-    ],
-    testimonial: {
-      company: "AI Startup",
-      position: "Founder",
-      content: "AIrena has been invaluable for us. We were able to benchmark our new language model against the best in the industry and get immediate feedback. The unified API is a brilliant idea."
-    }
-  },
-  {
-    id: "15",
-    title: "Polara: AI Content Creation Suite",
-    subtitle: "Generate marketing copy and visuals, instantly.",
-    description: "Polara is an AI-powered content creation platform designed for marketing teams. It helps generate high-quality ad copy, social media posts, blog articles, and stunning visuals from simple text prompts, streamlining the entire content workflow.",
-    shortDescription: "AI platform for generating marketing copy and visuals.",
-    slug: "polara-ai-content-creation",
-    category: "SaaS",
-    heroImage: polaraImage,
-    colorVariant: 5,
-    stats: [
-      { icon: "Clock", value: "10x", label: "Faster content creation workflow" },
-      { icon: "TrendingUp", value: "30%", label: "Increase in content engagement rates" },
-      { icon: "Users", value: "5K+", label: "Marketing teams using Polara" },
-      { icon: "Palette", value: "1M+", label: "Images generated monthly" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Automating the Creative Grind",
-        content: "Content creation is a bottleneck for most marketing teams. We wanted to build an AI co-pilot that could handle the heavy lifting of drafting copy and creating visuals, allowing marketers to focus on strategy and campaign execution."
-      },
-      {
-        type: "challenges",
-        title: "The Content Treadmill",
-        content: [
-          "Time-consuming to write copy for multiple platforms",
-          "High cost of stock photography and graphic design",
-          "Maintaining brand voice consistency across all content",
-          "Creative block and idea generation"
-        ]
-      },
-      {
-        type: "solution",
-        title: "A Centralized AI Content Engine",
-        content: "We developed Polara as an intuitive SaaS platform that combines the power of language and diffusion models into a single workflow.",
-        highlights: [
-          "Generates copy for ads, emails, social media, and blogs",
-          "Text-to-image generation for unique marketing visuals",
-          "Brand Voice library to ensure content consistency",
-          "Content templates and idea generators",
-          "Team collaboration and approval workflows"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["Next.js", "Python", "FastAPI"],
-      languages: ["TypeScript", "Python"],
-      cloud: ["Google Cloud", "Vercel"],
-      database: ["PostgreSQL", "Supabase"]
-    },
-    features: [
-      {
-        title: "AI Copywriter",
-        description: "Generate compelling marketing copy for any channel or format in seconds."
-      },
-      {
-        title: "AI Image Generator",
-        description: "Create custom, royalty-free images and ad creatives from text descriptions."
-      },
-      {
-        title: "Brand Voice",
-        description: "Train the AI on your brand's style guide to generate perfectly on-brand content every time."
-      }
-    ],
-    process: [
-      { title: "User Research", description: "Interviewed marketing teams to identify key pain points in content creation", icon: "Search" },
-      { title: "Model Fine-tuning", description: "Fine-tuned language and image models for marketing-specific use cases", icon: "Brain" },
-      { title: "SaaS Platform Development", description: "Built a scalable, multi-tenant web application", icon: "Code" },
-      { title: "Beta Program", description: "Launched with a select group of agencies to refine the product", icon: "Users" }
-    ],
-    team: [
-      { title: "AI/ML Engineers", description: "Prompt engineering and model fine-tuning", icon: "Brain" },
-      { title: "Full-Stack Developers", description: "Building the Next.js and Python backend", icon: "Code" },
-      { title: "UX/UI Designers", description: "Creating a simple and powerful user interface", icon: "Palette" },
-      { title: "Marketing Experts", description: "Guiding product features and template creation", icon: "Lightbulb" }
-    ],
-    testimonial: {
-      company: "Digital Marketing Agency",
-      position: "Head of Content",
-      content: "Polara has transformed our content workflow. We can now produce draft campaigns in a fraction of the time. The AI image generator is especially powerful for creating unique ad visuals."
-    }
-  },
-  {
-    id: "16",
-    title: "Taikonz: NFT & Web3 Platform",
-    subtitle: "Digital collectibles and immersive fan experiences.",
-    description: "Taikonz is a premier Web3 platform that partners with major brands and icons to create exclusive NFT collections and immersive metaverse experiences. It provides a seamless marketplace for fans to buy, sell, and trade digital collectibles.",
-    shortDescription: "Web3 platform for exclusive brand NFTs.",
-    slug: "taikonz-nft-web3-platform",
-    category: "Blockchain",
-    heroImage: taikonzImag,
-    colorVariant: 6,
-    stats: [
-      { icon: "Users", value: "100K+", label: "Community members" },
-      { icon: "Package", value: "50+", label: "Exclusive NFT drops" },
-      { icon: "Globe", value: "Global", label: "Partnerships with top brands" },
-      { icon: "Zap", value: "Fast & Secure", label: "Transactions on the blockchain" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "The Future of Fandom and Ownership",
-        content: "We believe the future of fan engagement lies in verifiable digital ownership. Our goal was to build a user-friendly platform that allows iconic brands to connect with their audience through exclusive digital collectibles and shared virtual experiences."
-      },
-      {
-        type: "challenges",
-        title: "Barriers to Mainstream Web3 Adoption",
-        content: [
-          "Complex and intimidating user experience for non-crypto natives",
-          "Concerns over security and asset custody",
-          "Lack of utility and real-world value for many NFTs",
-          "Difficulty for brands to navigate the Web3 space"
-        ]
-      },
-      {
-        type: "solution",
-        title: "An End-to-End Platform for Premium NFTs",
-        content: "Taikonz simplifies the entire Web3 journey for both brands and collectors, from creation to secondary market trading.",
-        highlights: [
-          "Seamless user onboarding with credit card payment options",
-          "Secure, audited smart contracts for all NFT collections",
-          "Integration with metaverse platforms for virtual events",
-          "A curated secondary marketplace for safe trading",
-          "White-glove service for brand partners"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["Next.js", "Ethers.js", "Hardhat"],
-      languages: ["TypeScript", "Solidity"],
-      cloud: ["AWS", "Vercel"],
-      database: ["PostgreSQL", "The Graph"]
-    },
-    features: [
-      {
-        title: "Exclusive NFT Drops",
-        description: "Access limited-edition digital collectibles from world-renowned brands and icons."
-      },
-      {
-        title: "Secure Marketplace",
-        description: "Buy, sell, and trade your NFTs in a secure and audited peer-to-peer marketplace."
-      },
-      {
-        title: "Metaverse Integration",
-        description: "Showcase your collectibles and attend exclusive events in partnered virtual worlds."
-      }
-    ],
-    process: [
-      { title: "Brand Partnerships", description: "Established relationships with iconic brands to secure exclusive content", icon: "Users" },
-      { title: "Smart Contract Development", description: "Wrote and audited secure, gas-efficient smart contracts for NFT minting", icon: "FileCode" },
-      { title: "Platform Build", description: "Developed the Next.js frontend and integrated with blockchain services", icon: "Code" },
-      { title: "Community Launch", description: "Executed a multi-channel marketing campaign to build a collector community", icon: "Rocket" }
-    ],
-    team: [
-      { title: "Blockchain Developers", description: "Solidity smart contract and backend development", icon: "Code" },
-      { title: "Frontend Developers", description: "Building the user-facing marketplace with Next.js", icon: "Palette" },
-      { title: "Business Development", description: "Forging partnerships with brands and creators", icon: "Briefcase" },
-      { title: "Community Managers", description: "Engaging with users on Discord and Twitter", icon: "MessageSquare" }
-    ],
-    testimonial: {
-      company: "Digital Art Collector",
-      position: "User",
-      content: "Taikonz has some of the best-curated NFT drops out there. The platform is super easy to use, even for someone who is not a crypto expert. I feel confident buying and selling here."
-    }
-  },
-  {
-    id: "17",
-    title: "Tito: ICO Landing Page",
-    subtitle: "Decentralized platform for event ticketing.",
-    description: "Tito is a conceptual blockchain-based platform designed to eliminate ticket fraud and scalping. This ICO (Initial Coin Offering) page was developed to present the project's vision, tokenomics, and roadmap to potential early investors.",
-    shortDescription: "ICO landing page for a blockchain ticketing project.",
-    slug: "tito-ico-ticketing",
-    category: "Blockchain",
-    heroImage: titoImage,
-    colorVariant: 4,
-    stats: [
-      { icon: "FileText", value: "Clear", label: "Whitepaper presentation" },
-      { icon: "BarChart", value: "Detailed", label: "Tokenomics breakdown" },
-      { icon: "Map", value: "Strategic", label: "Project roadmap" },
-      { icon: "Users", value: "Early", label: "Investor interest capture" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Bringing Transparency to Ticketing",
-        content: "The event ticketing industry is plagued by fraud, scalping, and a lack of control for artists and venues. Our concept was to use blockchain to create a transparent, secure, and fair ticketing ecosystem where every ticket is a unique, traceable digital asset (NFT)."
-      },
-      {
-        type: "challenges",
-        title: "Problems in the Ticketing Industry",
-        content: [
-          "Widespread ticket fraud with counterfeit tickets",
-          "Uncontrolled scalping on secondary markets drives up prices",
-          "Artists and venues have no control over resale",
-          "Lack of transparency in ticket distribution"
-        ]
-      },
-      {
-        type: "solution",
-        title: "A Single-Page ICO Presentation",
-        content: "We designed and developed a compelling ICO landing page to attract initial funding and build a community around the Tito concept.",
-        highlights: [
-          "Clear and concise explanation of the project's value proposition",
-          "Interactive tokenomics and fund allocation charts",
-          "A detailed, multi-phase project roadmap",
-          "Team bios to build trust and credibility",
-          "Email capture form for investor and community updates"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React", "Next.js"],
-      languages: ["TypeScript", "CSS"],
-      cloud: ["Vercel"],
-      database: ["N/A"]
-    },
-    features: [
-      {
-        title: "Project Vision",
-        description: "Clearly articulates the problem and the blockchain-based solution."
-      },
-      {
-        title: "Tokenomics",
-        description: "Details the utility of the TITO token, its distribution, and allocation of funds."
-      },
-      {
-        title: "Roadmap",
-        description: "Visually represents the planned development stages of the project."
-      }
-    ],
-    process: [
-      { title: "Conceptualization", description: "Defined the core idea, token utility, and business model", icon: "Lightbulb" },
-      { title: "Content & Design", description: "Crafted the narrative and designed a visually appealing, on-brand landing page", icon: "Palette" },
-      { title: "Frontend Development", description: "Built a fast, responsive landing page using Next.js", icon: "Code" },
-      { title: "Deployment", description: "Deployed the site globally via Vercel for high performance", icon: "Rocket" }
-    ],
-    team: [
-      { title: "Blockchain Strategists", description: "Designing the tokenomics and ecosystem", icon: "Brain" },
-      { title: "UI/UX Designers", description: "Creating a compelling and clear visual layout", icon: "Palette" },
-      { title: "Frontend Developers", description: "Implementing the design with React/Next.js", icon: "Code" }
-    ],
-    testimonial: {
-      company: "Crypto Investor",
-      position: "Early Supporter",
-      content: "The Tito ICO page was one of the clearest I've seen. It laid out the vision, the problem they're solving, and the tokenomics in a way that was easy to understand and inspired confidence in the project."
-    }
-  },
-  {
-    id: "18",
-    title: "FinTrack: Personal Finance & Budgeting App",
-    subtitle: "Your financial wellness in one place.",
-    description: "FinTrack is an intelligent personal finance app that helps users track their spending, create budgets, monitor investments, and achieve their financial goals. It uses AI to provide personalized insights and recommendations for better financial health.",
-    shortDescription: "AI-powered app for budgeting and expense tracking.",
-    slug: "fintrack-personal-finance-app",
-    category: "Fintech",
-    heroImage: fintrackImage,
-    colorVariant: 2,
-    stats: [
-      { icon: "TrendingUp", value: "15%", label: "Average monthly savings increase" },
-      { icon: "Zap", value: "Automatic", label: "Expense categorization" },
-      { icon: "BarChart", value: "360°", label: "View of your financial health" },
-      { icon: "Users", value: "1M+", label: "Users managing their finances" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Simplifying Financial Management",
-        content: "Managing personal finances can be complex and stressful. We wanted to build a simple, beautiful, and intelligent app that automates the tedious parts of budgeting and provides clear, actionable insights to help users take control of their money."
-      },
-      {
-        type: "challenges",
-        title: "Why People Fail at Budgeting",
-        content: [
-          "Manual expense tracking is time-consuming and often forgotten",
-          "Difficult to see all financial accounts in one place",
-          "Lack of personalized advice and actionable insights",
-          "Security concerns with connecting bank accounts"
-        ]
-      },
-      {
-        type: "solution",
-        title: "An Automated Financial Wellness Coach",
-        content: "FinTrack connects securely to your financial accounts and does the hard work for you, providing a complete picture of your financial life.",
-        highlights: [
-          "Securely links to thousands of banks and financial institutions",
-          "AI-powered automatic categorization of all transactions",
-          "Intuitive tools for creating and tracking custom budgets",
-          "Subscription tracking and bill payment reminders",
-          "Personalized insights to identify savings opportunities"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React Native", "Node.js", "Plaid API"],
-      languages: ["TypeScript", "JavaScript"],
-      cloud: ["AWS"],
-      database: ["PostgreSQL", "Redis"]
-    },
-    features: [
-      {
-        title: "Automated Expense Tracking",
-        description: "Securely sync your bank accounts and credit cards to see all your spending in one place."
-      },
-      {
-        title: "Smart Budgets",
-        description: "Create flexible budgets that track your spending in real-time and notify you when you're nearing your limit."
-      },
-      {
-        title: "Investment Monitoring",
-        description: "Connect your brokerage accounts to track your portfolio performance alongside your spending."
-      }
-    ],
-    process: [
-      { title: "User Research", description: "Identified the primary challenges people face with personal finance", icon: "Search" },
-      { title: "Security Architecture", description: "Designed a bank-level security infrastructure for handling sensitive data", icon: "Shield" },
-      { title: "Mobile Development", description: "Built a cross-platform app with React Native for a seamless user experience", icon: "Code" },
-      { title: "AI Insights Engine", description: "Developed algorithms to analyze spending patterns and provide useful tips", icon: "Brain" }
-    ],
-    team: [
-      { title: "Fintech Product Managers", description: "Defining financial features and user journeys", icon: "Lightbulb" },
-      { title: "Security Engineers", description: "Ensuring data protection and privacy", icon: "Shield" },
-      { title: "Full-Stack Developers", description: "Building the app, backend, and API integrations", icon: "Code" },
-      { title: "Data Analysts", description: "Analyzing anonymized data to improve insights", icon: "BarChart" }
-    ],
-    testimonial: {
-      company: "Young Professional",
-      position: "User",
-      content: "FinTrack finally helped me understand where my money is going. The automatic tracking is amazing, and the smart insights have helped me save more than I thought possible. It's a must-have app."
-    }
-  },
-  {
-    id: "19",
-    title: "TaskFlow: Agile Project Management SaaS",
-    subtitle: "The simple, visual way to manage your team's work.",
-    description: "TaskFlow is a collaborative project management tool that helps teams plan, track, and deliver projects on time. With visual boards, custom workflows, and powerful reporting, it streamlines communication and provides clarity on who is doing what, by when.",
-    shortDescription: "Visual project management tool for agile teams.",
-    slug: "taskflow-agile-project-management",
-    category: "SaaS",
-    heroImage: taskflowImage,
-    colorVariant: 1,
-    stats: [
-      { icon: "Clock", value: "25%", label: "Faster project completion rates" },
-      { icon: "Users", value: "90%", label: "Adoption rate within teams" },
-      { icon: "Zap", value: "50%", label: "Reduction in status update meetings" },
-      { icon: "TrendingUp", value: "Clear", label: "Visibility into team workload" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Bringing Clarity to Collaboration",
-        content: "Project management tools are often too complex or too simple. We wanted to create the perfect balance: a tool that is visually intuitive and easy for anyone to adopt, yet powerful enough to handle complex workflows for growing teams."
-      },
-      {
-        type: "challenges",
-        title: "Where Teamwork Breaks Down",
-        content: [
-          "Lack of clarity on task ownership and deadlines",
-          "Information gets lost in emails and chat messages",
-          "Difficulty tracking progress against goals",
-          "Wasting time in excessive status update meetings"
-        ]
-      },
-      {
-        type: "solution",
-        title: "A Flexible and Visual Workspace",
-        content: "TaskFlow provides a central source of truth for all project work, making it easy for teams to stay aligned and focused.",
-        highlights: [
-          "Kanban boards for visualizing workflows",
-          "Customizable task fields and templates",
-          "Real-time collaboration with comments, @mentions, and file attachments",
-          "Automated workflows to handle repetitive tasks",
-          "Insightful dashboards and performance reports"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React", "Ruby on Rails"],
-      languages: ["TypeScript", "Ruby"],
-      cloud: ["Heroku", "AWS"],
-      database: ["PostgreSQL", "Redis"]
-    },
-    features: [
-      {
-        title: "Visual Boards",
-        description: "Organize work on Kanban, Scrum, or custom boards that map to your team's workflow."
-      },
-      {
-        title: "Automations",
-        description: "Set up simple, code-free rules to automate actions like assigning tasks or updating statuses."
-      },
-      {
-        title: "Dashboards & Reporting",
-        description: "Get a high-level overview of project progress, team workload, and potential bottlenecks."
-      }
-    ],
-    process: [
-      { title: "Workflow Analysis", description: "Studied how high-performing teams manage their work", icon: "Search" },
-      { title: "Platform Architecture", description: "Designed a real-time, collaborative backend infrastructure", icon: "Server" },
-      { title: "Frontend Development", description: "Built a fast and interactive user interface with React", icon: "Code" },
-      { title: "Customer Feedback Loop", description: "Launched and iterated based on continuous feedback from our users", icon: "Users" }
-    ],
-    team: [
-      { title: "Product Managers", description: "Prioritizing features for team collaboration", icon: "Lightbulb" },
-      { title: "Full-Stack Developers", description: "Building and maintaining the Rails and React codebase", icon: "Code" },
-      { title: "UX/UI Designers", description: "Focusing on an intuitive and frictionless user experience", icon: "Palette" },
-      { title: "Customer Success", description: "Helping teams onboard and optimize their workflows", icon: "MessageSquare" }
-    ],
-    testimonial: {
-      company: "Marketing Team Lead",
-      position: "Manager",
-      content: "TaskFlow has been revolutionary for our team. Everyone knows exactly what they need to work on, and I have perfect visibility into our campaign progress without having to constantly ask for updates."
-    }
-  },
-  {
-    id: "20",
-    title: "LearnSphere: AI-Powered Learning Platform",
-    subtitle: "Personalized learning paths for professional growth.",
-    description: "LearnSphere is an EdTech platform that uses AI to create personalized learning paths for individuals and corporate teams. It curates content from thousands of sources and adapts to each user's learning style and career goals to accelerate skill development.",
-    shortDescription: "AI-driven EdTech platform for personalized learning.",
-    slug: "learnsphere-ai-learning-platform",
-    category: "EdTech",
-    heroImage: learnsphereImage,
-    colorVariant: 5,
-    stats: [
-      { icon: "TrendingUp", value: "2x", label: "Faster skill acquisition" },
-      { icon: "Users", value: "95%", label: "Course completion rate" },
-      { icon: "Zap", value: "Personalized", label: "Learning paths for each user" },
-      { icon: "BookOpen", value: "10K+", label: "Courses and learning resources" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Making Learning Truly Personal",
-        content: "One-size-fits-all education doesn't work. We envisioned a platform that acts as a personal learning guide, understanding each user's goals and knowledge gaps, and then curating the perfect sequence of content to help them learn most effectively."
-      },
-      {
-        type: "challenges",
-        title: "Inefficiencies in Online Learning",
-        content: [
-          "Information overload with too many course options",
-          "Low course completion rates due to lack of engagement",
-          "Generic content that doesn't match individual needs",
-          "Difficulty for companies to track team skill development"
-        ]
-      },
-      {
-        type: "solution",
-        title: "An Adaptive and Intelligent Learning Experience",
-        content: "LearnSphere uses AI to build a unique learning journey for every user, ensuring the content is always relevant, engaging, and impactful.",
-        highlights: [
-          "AI-driven skill gap analysis and learning path generation",
-          "Content curation from top universities, companies, and creators",
-          "Interactive quizzes, projects, and peer reviews",
-          "Corporate dashboards for tracking team progress and ROI",
-          "Integration with HR systems for seamless onboarding"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React", "Python", "Django"],
-      languages: ["TypeScript", "Python"],
-      cloud: ["AWS"],
-      database: ["PostgreSQL", "Elasticsearch"]
-    },
-    features: [
-      {
-        title: "Personalized Learning Paths",
-        description: "Answer a few questions and our AI will build a custom curriculum tailored to your career goals."
-      },
-      {
-        title: "Content Agnostic",
-        description: "We curate the best articles, videos, podcasts, and courses from across the web, not just one library."
-      },
-      {
-        title: "Enterprise Skill Management",
-        description: "Companies can map team skills, identify gaps, and deploy targeted learning programs at scale."
-      }
-    ],
-    process: [
-      { title: "Pedagogical Research", description: "Studied the science of learning and skill acquisition", icon: "Search" },
-      { title: "AI Engine Development", description: "Built the recommendation and personalization algorithms", icon: "Brain" },
-      { title: "Platform Build", description: "Developed the learning management system and user-facing dashboards", icon: "Code" },
-      { title: "Content Partnerships", description: "Partnered with leading content providers to build our library", icon: "Link" }
-    ],
-    team: [
-      { title: "Learning Scientists", description: "Designing effective learning experiences", icon: "BookOpen" },
-      { title: "AI/ML Engineers", description: "Powering the personalization engine", icon: "Brain" },
-      { title: "Full-Stack Developers", description: "Building the core learning platform", icon: "Code" },
-      { title: "Content Curators", description: "Vetting and tagging learning resources", icon: "FileText" }
-    ],
-    testimonial: {
-      company: "Tech Company",
-      position: "Head of L&D",
-      content: "LearnSphere has revolutionized our employee training programs. The personalized paths keep our team engaged, and the analytics dashboard gives me clear insight into our skills inventory. Completion rates have never been higher."
-    }
-  },
-  {
-    id: "21",
-    title: "Amrutam: Holistic Ayurvedic Wellness",
-    subtitle: "A global platform for authentic Ayurveda.",
-    description: "Amrutam is a comprehensive wellness platform that connects users with certified Ayurvedic experts for online consultations. It also functions as an e-commerce store offering a wide range of authentic, in-house manufactured Ayurvedic products for health, skincare, and hair care, promoting a lifestyle of holistic well-being.",
-    shortDescription: "E-commerce & consultation platform for Ayurveda.",
-    slug: "amrutam-ayurvedic-wellness",
-    category: "E-commerce",
-    heroImage: amrutamImage,
-    colorVariant: 4,
-    stats: [
-      { icon: Users, value: "50K+", label: "Community members" },
-      { icon: UserCheck, value: "100+", label: "Verified Ayurvedic experts" },
-      { icon: Package, value: "150+", label: "Unique Ayurvedic products" },
-      { icon: MessageSquare, value: "10K+", label: "Online consultations completed" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Making Ancient Wisdom Accessible",
-        content: "Authentic Ayurvedic knowledge is often fragmented and inaccessible to a global audience. Our goal was to build a trusted digital ecosystem where anyone could receive personalized guidance from real Ayurvedic doctors and purchase high-quality, authentic products directly."
-      },
-      {
-        type: "challenges",
-        title: "Building Trust in a Crowded Market",
-        content: [
-          "Difficulty in finding verified and experienced Ayurvedic doctors online",
-          "Prevalence of low-quality or counterfeit Ayurvedic products",
-          "Lack of personalized guidance for individual health concerns",
-          "Bridging the gap between traditional wisdom and modern e-commerce"
-        ]
-      },
-      {
-        type: "solution",
-        title: "An Integrated Ayurvedic Health Platform",
-        content: "We developed a multi-faceted platform combining consultations with a seamless e-commerce experience, establishing Amrutam as a one-stop-shop for holistic health.",
-        highlights: [
-          "Secure video/chat portal for one-on-one doctor consultations",
-          "A robust Shopify-based e-commerce store for their product line",
-          "In-depth product descriptions with ingredients and benefits",
-          "A rich content library with blogs and health guides",
-          "Community features to connect like-minded wellness enthusiasts"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["Shopify", "React", "Node.js"],
-      languages: ["Liquid", "JavaScript", "TypeScript"],
-      cloud: ["Shopify Plus", "AWS"],
-      database: ["N/A (Managed by Shopify)", "PostgreSQL"]
-    },
-    features: [
-      {
-        title: "Expert Consultations",
-        description: "Book confidential online consultations with experienced Ayurvedic practitioners."
-      },
-      {
-        title: "Authentic Products",
-        description: "Shop from a wide range of MALTS, skincare, and hair care products made with traditional recipes."
-      },
-      {
-        title: "Knowledge Base",
-        description: "Access a wealth of information on Ayurvedic principles, ingredients, and healthy living."
-      }
-    ],
-    process: [
-      { title: "Doctor Onboarding", description: "Created a rigorous vetting and onboarding process for Ayurvedic experts", icon: UserCheck },
-      { title: "E-commerce Development", description: "Built and customized a scalable Shopify store for a global audience", icon: ShoppingCart },
-      { title: "Content Strategy", description: "Developed an SEO-driven content plan to educate and attract users", icon: FileText },
-      { title: "Platform Integration", description: "Seamlessly connected the consultation service with the e-commerce platform", icon: Link }
-    ],
-    team: [
-      { title: "Ayurvedic Doctors", description: "Providing consultations and product knowledge", icon: UserCheck },
-      { title: "E-commerce Developers", description: "Managing and optimizing the Shopify store", icon: Code },
-      { title: "Content & Marketing Team", description: "Creating educational content and managing brand presence", icon: TrendingUp },
-      { title: "Customer Support", description: "Assisting users with orders and consultations", icon: Users }
-    ],
-    testimonial: {
-      company: "Wellness Advocate",
-      position: "User",
-      content: "Amrutam has been my guide to a healthier lifestyle. The consultation was incredibly insightful, and the products are of the highest quality. It's a brand that genuinely cares about holistic well-being."
-    }
-  },
-  {
-    id: "22",
-    title: "The Bump: Pregnancy & Baby Tracker",
-    subtitle: "Your expert guide from pregnancy to parenthood.",
-    description: "The Bump is a leading all-in-one pregnancy and parenting platform that provides expecting parents with expert-backed information, personalized content, and essential tracking tools. From a 3D baby growth visualizer to a comprehensive baby registry, it supports users through every stage of their journey.",
-    shortDescription: "All-in-one pregnancy and parenting tracker app.",
-    slug: "the-bump-pregnancy-parenting-app",
-    category: "Apps",
-    heroImage: theBumpImage,
-    colorVariant: 1,
-    stats: [
-      { icon: Star, value: "4.8", label: "Average app store rating" },
-      { icon: Users, value: "15M+", label: "Monthly users" },
-      { icon: FileText, value: "10K+", label: "Expert articles and guides" },
-      { icon: Package, value: "Top-rated", label: "Baby registry platform" }
-    ],
-    sections: [
-      {
-        type: "idea",
-        title: "Empowering Parents with Confidence",
-        content: "The journey to parenthood is filled with questions and uncertainty. Our goal was to create a single, trusted resource that replaces anxiety with empowerment, providing medically reviewed advice and practical tools in a beautiful, easy-to-use application."
-      },
-      {
-        type: "challenges",
-        title: "Navigating the Overload of Information",
-        content: [
-          "Expecting parents are often overwhelmed by conflicting online advice",
-          "Difficulty tracking important developmental milestones and appointments",
-          "The process of creating and managing a baby registry is fragmented",
-          "Lack of a supportive community and personalized content"
-        ]
-      },
-      {
-        type: "solution",
-        title: "A Personalized Companion for Pregnancy & Parenthood",
-        content: "We developed The Bump as a comprehensive mobile app that delivers personalized, stage-specific content and tools to guide and support parents.",
-        highlights: [
-          "Daily and weekly personalized content about baby's development",
-          "Interactive 3D visualization of baby's growth",
-          "A universal baby registry to add gifts from any store",
-          "Planner for doctor's appointments with question prompts",
-          "A vast library of medically reviewed articles on every topic"
-        ]
-      }
-    ],
-    techStack: {
-      frameworks: ["React Native", "Swift", "Kotlin"],
-      languages: ["JavaScript", "Swift", "Kotlin"],
-      cloud: ["AWS"],
-      database: ["PostgreSQL", "DynamoDB"]
-    },
-    features: [
-      {
-        title: "Week-by-Week Tracker",
-        description: "Get personalized updates on your pregnancy and your baby's development."
-      },
-      {
-        title: "Universal Baby Registry",
-        description: "Add any item from any online store to one easy-to-manage registry list."
-      },
-      {
-        title: "Expert Content",
-        description: "Access thousands of articles, guides, and tools reviewed by medical experts."
-      }
-    ],
-    process: [
-      { title: "User Research", description: "Conducted extensive interviews with expecting and new parents", icon: Search },
-      { title: "Content Development", description: "Partnered with medical experts to create a library of trusted content", icon: FileText },
-      { title: "Mobile App Development", description: "Built high-performance, native-like applications for iOS and Android", icon: Code },
-      { title: "Community Building", description: "Fostered a supportive user community through forums and social channels", icon: Users }
-    ],
-    team: [
-      { title: "Editorial & Medical Review Board", description: "Ensuring all content is accurate and up-to-date", icon: Shield },
-      { title: "Mobile Engineers", description: "Developing and maintaining the iOS and Android apps", icon: Code },
-      { title: "Product Managers", description: "Defining features to meet the needs of parents", icon: Lightbulb },
-      { title: "UX/UI Designers", description: "Creating an empathetic and user-friendly experience", icon: Palette }
-    ],
-    testimonial: {
-      company: "First-Time Mom",
-      position: "User",
-      content: "The Bump was my go-to app throughout my entire pregnancy. The articles were so reassuring, and I loved the weekly updates with the 3D baby model. It made the whole experience feel more connected and less stressful."
-    }
-  },
-  {
-    id: "23",
     title: "Nationwide Visas: Immigration Services",
-    subtitle: "Your trusted partner for global immigration.",
-    description: "Nationwide Visas is a leading immigration and visa consultancy firm. Their platform provides comprehensive services for individuals and families looking to migrate, specializing in skilled worker visas for countries like Canada and Australia. They offer eligibility checks, documentation assistance, and application processing.",
-    shortDescription: "Immigration and visa consultancy platform.",
+    subtitle: "Comprehensive immigration assistance platform",
+    description: "Nationwide Visas streamlines the immigration process with document management, application tracking, and expert consultation services. Our platform simplifies complex immigration procedures while ensuring compliance with current regulations and requirements.",
+    shortDescription: "Digital Immigration Services and Document Management Platform",
     slug: "nationwide-visas-immigration-services",
     category: "Services",
     heroImage: nationwideVisasImage,
     colorVariant: 2,
     stats: [
-      { icon: CheckCircle, value: "98%", label: "Visa application success rate" },
-      { icon: Users, value: "20K+", label: "Happy clients served" },
-      { icon: Globe, value: "15+", label: "Years of immigration experience" },
-      { icon: Zap, value: "24-hour", label: "Response time for inquiries" }
+      { icon: Users, value: "10K+", label: "Successful applications" },
+      { icon: Globe, value: "50+", label: "Countries supported" },
+      { icon: CheckCircle, value: "95%", label: "Application success rate" },
+      { icon: Clock, value: "60%", label: "Faster processing time" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Simplifying the Path to a New Life",
-        content: "The immigration process is notoriously complex, bureaucratic, and stressful. Our goal was to build a digital-first platform backed by human expertise that simplifies the entire journey, providing clarity, transparency, and a high chance of success for our clients."
+        title: "Simplifying Immigration Complexity",
+        content: "Immigration processes are notoriously complex, time-consuming, and stressful. Applicants often struggle with paperwork, changing regulations, and lengthy processing times. We envisioned a platform that would streamline the entire immigration journey, from initial consultation to application approval, while providing transparency and expert guidance throughout the process."
       },
       {
         type: "challenges",
-        title: "Hurdles in the Immigration Process",
+        title: "Immigration Process Obstacles",
         content: [
-          "Constantly changing and complex immigration laws",
-          "High risk of rejection due to documentation errors",
-          "Lack of a clear, step-by-step process to follow",
-          "Difficulty in assessing eligibility and choosing the right visa program"
+          "Complex and frequently changing immigration regulations",
+          "Extensive documentation requirements and deadlines",
+          "Lack of transparency in application processing status",
+          "High costs and limited access to immigration experts",
+          "Risk of application rejection due to errors or omissions"
         ]
       },
       {
         type: "solution",
-        title: "A Technology-Driven Consultancy Platform",
-        content: "We developed a client-centric web platform that streamlines every aspect of the visa application process, from initial assessment to final submission.",
+        title: "Comprehensive Immigration Platform",
+        content: "Nationwide Visas provides end-to-end immigration services with digital tools and expert support.",
         highlights: [
-          "Online eligibility assessment tool for instant feedback",
-          "A secure client portal for document uploading and tracking",
-          "Automated checklists and reminders to keep applications on track",
-          "Direct communication channels with dedicated case managers",
-          "A knowledge base with the latest immigration news and guides"
+          "Automated document checklist and requirement tracking",
+          "Real-time application status updates and notifications",
+          "Expert consultation and review services",
+          "Secure document storage and sharing capabilities",
+          "Regulatory updates and compliance monitoring",
+          "Multi-language support for international applicants"
         ]
       }
     ],
     techStack: {
-      frameworks: ["WordPress", "React"],
-      languages: ["PHP", "JavaScript"],
-      cloud: ["AWS"],
-      database: ["MySQL"]
+      frameworks: ["React", "Node.js", "Express"],
+      languages: ["TypeScript", "JavaScript", "Python"],
+      cloud: ["AWS", "Azure"],
+      database: ["PostgreSQL", "MongoDB", "Redis"]
     },
     features: [
       {
-        title: "Free Assessment",
-        description: "Use our online tool to quickly check your eligibility for various immigration programs."
-      },
-      {
         title: "Document Management",
-        description: "Securely upload and manage all your required documents through our client portal."
+        description: "Secure upload, storage, and organization of immigration documents with automated checklists"
       },
       {
         title: "Application Tracking",
-        description: "Monitor the real-time status of your visa application from start to finish."
+        description: "Real-time status updates and notifications throughout the immigration process"
+      },
+      {
+        title: "Expert Consultation",
+        description: "Access to immigration lawyers and consultants for personalized guidance and review"
       }
     ],
     process: [
-      { title: "Process Mapping", description: "Analyzed and mapped every step of the visa application lifecycle", icon: Map },
-      { title: "Platform Development", description: "Built a secure and scalable client management portal", icon: Code },
-      { title: "Consultant Training", description: "Trained case managers to leverage the platform for maximum efficiency", icon: UserCheck },
-      { title: "Continuous Updates", description: "Constantly updating the platform to reflect the latest immigration rule changes", icon: RefreshCw }
+      {
+        title: "Regulatory Research",
+        description: "Comprehensive analysis of immigration laws and requirements across countries",
+        icon: BookOpen
+      },
+      {
+        title: "Expert Network",
+        description: "Built network of qualified immigration lawyers and consultants",
+        icon: Users
+      },
+      {
+        title: "Platform Development",
+        description: "Created secure document management and application tracking system",
+        icon: Code
+      },
+      {
+        title: "Compliance Integration",
+        description: "Integrated real-time regulatory updates and compliance monitoring",
+        icon: CheckCircle
+      }
     ],
     team: [
-      { title: "Licensed Immigration Consultants", description: "Providing expert legal and procedural advice", icon: UserCheck },
-      { title: "Case Managers", description: "Guiding clients through the end-to-end process", icon: Users },
-      { title: "Web Developers", description: "Building and maintaining the client portal and website", icon: Code },
-      { title: "Compliance Team", description: "Ensuring adherence to all legal and regulatory standards", icon: Shield }
+      {
+        title: "Immigration Lawyers",
+        description: "Legal expertise, regulatory compliance",
+        icon: Briefcase
+      },
+      {
+        title: "Platform Developers",
+        description: "Secure document management, tracking systems",
+        icon: Code
+      },
+      {
+        title: "Customer Success Team",
+        description: "Client support, application guidance",
+        icon: Users
+      }
     ],
     testimonial: {
-      company: "Client from India",
-      position: "Canada Permanent Resident",
-      content: "Nationwide Visas made my dream of moving to Canada a reality. Their process was so clear and organized. The client portal was amazing for tracking my progress, and my case manager was always there to help. I couldn't have done it without them."
+      company: "Immigration Client",
+      position: "Software Engineer",
+      content: "Nationwide Visas made my visa application process so much smoother. The document checklist kept me organized, and having expert review gave me confidence that everything was correct before submission."
     }
   },
-
   {
-  id: "24",
-  title: "Bayut: UAE Real Estate Portal",
-  subtitle: "The definitive property search engine for the UAE.",
-  description: "Bayut is a leading UAE property portal that provides users with a comprehensive and data-rich platform for buying, selling, and renting properties. It features advanced search, 3D tours, detailed pricing analytics, and robust tools for real estate agents.",
-  shortDescription: "Feature-rich real estate portal with 3D tours.",
-  slug: "bayut-uae-real-estate-portal",
-  category: "Web App",
-  heroImage: bayutImage, // Replace with your image import variable
-  colorVariant: 2,
-  stats: [
-    { icon: Home, value: "1M+", label: "Active property listings" },
-    { icon: Users, value: "5M+", label: "Monthly website visitors" },
-    { icon: Video, value: "50K+", label: "Properties with 3D tours" },
-    { icon: BarChart, value: "Detailed", label: "Market trend analytics" }
-  ],
-  sections: [
-    {
-      type: "idea",
-      title: "Creating a Transparent Property Market",
-      content: "The real estate market in the UAE is fast-paced and complex. Our goal was to build a powerful web application that empowers users with all the tools and data they need to make informed decisions, from immersive 3D tours to in-depth pricing trends, all in one place."
-    },
-    {
-      type: "challenges",
-      title: "Managing Scale and Data Complexity",
-      content: [
-        "Handling a massive and constantly changing dataset of property listings",
-        "Integrating and rendering high-resolution 3D tours efficiently",
-        "Processing vast amounts of data for accurate market analytics",
-        "Building a performant and intuitive user interface for both buyers and agents"
-      ]
-    },
-    {
-      type: "solution",
-      title: "A Centralized and Data-Driven Platform",
-      content: "We developed Bayut as a high-performance web application that serves as a central hub for the UAE real estate market, providing value to all stakeholders.",
-      highlights: [
-        "A powerful search engine with dozens of advanced filters",
-        "Integration of immersive 3D and virtual property walkthroughs",
-        "A comprehensive agent portal for managing listings and leads",
-        "Data-driven insights on neighborhood trends and price history",
-        "A mobile-responsive design for seamless access on any device"
-      ]
-    }
-  ],
-  techStack: {
-    frameworks: ["React", "Node.js"],
-    languages: ["JavaScript", "TypeScript"],
-    cloud: ["AWS"],
-    database: ["MongoDB", "PostgreSQL"]
-  },
-  features: [
-    {
-      title: "Advanced Property Search",
-      description: "Filter millions of listings by location, price, property type, amenities, and more."
-    },
-    {
-      title: "3D Live & TruCheck™",
-      description: "Explore properties with immersive 3D tours and view listings validated for authenticity and availability."
-    },
-    {
-      title: "Market Intelligence",
-      description: "Access detailed reports on price trends, rental yields, and neighborhood popularity."
-    }
-  ],
-  process: [
-    { title: "Market Research", description: "Analyzed the needs of property seekers and real estate agents in the UAE", icon: Search },
-    { title: "Platform Architecture", description: "Designed a scalable system to handle high traffic and large datasets", icon: Server },
-    { title: "Feature Development", description: "Built key features like 3D tour integration and advanced search in agile sprints", icon: Code },
-    { title: "Data Analytics Engine", description: "Developed the backend service for processing and presenting market trends", icon: BarChart }
-  ],
-  team: [
-    { title: "Full-Stack Developers", description: "Building and maintaining the core web application", icon: Code },
-    { title: "Data Scientists", description: "Powering the market intelligence and analytics features", icon: BarChart },
-    { title: "UX/UI Designers", description: "Creating an intuitive and seamless property search experience", icon: Palette },
-    { title: "GIS Specialists", description: "Managing mapping data and location-based features", icon: Map }
-  ],
-  testimonial: {
-    company: "Real Estate Agent",
-    position: "Property Consultant",
-    content: "Bayut is an essential tool for my business. The platform's TruCheck™ feature gives my listings credibility, and the detailed analytics help me advise my clients effectively. It has significantly improved my lead generation."
-  }
-},
-  
-  {
-    id: "25",
-    title: "SolAlgo: AI & Blockchain Conglomerate",
-    subtitle: "Revolutionizing DeFi with an AI-driven business acquisition model.",
-    description: "Solalgo is a unique cryptocurrency project that utilizes a proprietary AI algorithm to analyze and acquire profitable real-world businesses. Profits from these businesses are then used to buy back and burn the SLGO token, creating a deflationary ecosystem that bridges traditional enterprise with decentralized finance.",
-    shortDescription: "AI-powered cryptocurrency that acquires real businesses.",
-    slug: "solalgo-ai-blockchain",
-    category: "AI",
+    id: "13",
+    title: "SolAlgo: Blockchain Trading Bot",
+    subtitle: "Automated cryptocurrency trading algorithms",
+    description: "SolAlgo provides sophisticated algorithmic trading bots for cryptocurrency markets with advanced strategy customization, backtesting capabilities, and risk management tools. Our platform enables both novice and professional traders to automate their trading strategies with institutional-grade algorithms.",
+    shortDescription: "Algorithmic Cryptocurrency Trading Bot Platform",
+    slug: "solalgo-blockchain-trading-bot",
+    category: "Blockchain",
     heroImage: solAlgoImage,
     colorVariant: 3,
     stats: [
-      { icon: Brain, value: "Proprietary", label: "AI business analysis algorithm" },
-      { icon: RefreshCw, value: "Deflationary", label: "Tokenomics model (Buy & Burn)" },
-      { icon: Briefcase, value: "Real-world", label: "Business acquisitions" },
-      { icon: Globe, value: "Global", label: "Vision for stock exchange listing" }
+      { icon: TrendingUp, value: "150%", label: "Average annual returns" },
+      { icon: Zap, value: "99.9%", label: "Uptime reliability" },
+      { icon: Users, value: "5K+", label: "Active traders" },
+      { icon: BarChart, value: "$25M+", label: "Assets under management" }
     ],
     sections: [
       {
         type: "idea",
-        title: "Creating Intrinsic Value in Crypto",
-        content: "Many cryptocurrencies lack tangible, real-world value. Our vision was to create a token whose value is directly tied to the performance of a growing portfolio of real businesses. We use AI to make smarter acquisition decisions, creating a self-sustaining and value-generating ecosystem."
+        title: "Democratizing Algorithmic Trading",
+        content: "Algorithmic trading has traditionally been available only to institutional investors with significant resources. Individual traders often lack the technical expertise and infrastructure to implement sophisticated trading strategies. We aimed to democratize access to professional-grade trading algorithms while providing the tools and education needed for successful automated trading."
       },
       {
         type: "challenges",
-        title: "Bridging DeFi and Traditional Business",
+        title: "Algorithmic Trading Barriers",
         content: [
-          "The high volatility and speculative nature of most crypto assets",
-          "Lack of clear utility and revenue models for tokens",
-          "Difficulty in performing due diligence on business acquisitions at scale",
-          "Building trust and transparency between the on-chain and off-chain worlds"
+          "High technical barriers for implementing trading algorithms",
+          "Lack of reliable backtesting and strategy validation tools",
+          "Need for 24/7 market monitoring and execution",
+          "Risk management complexity in volatile crypto markets",
+          "Integration challenges with multiple cryptocurrency exchanges"
         ]
       },
       {
         type: "solution",
-        title: "An AI-Powered, Deflationary Ecosystem",
-        content: "We developed a unique model where an AI algorithm identifies acquisition targets, and the resulting profits feed back into the cryptocurrency through a buy-and-burn mechanism.",
+        title: "Professional Trading Algorithm Platform",
+        content: "SolAlgo provides a comprehensive suite of trading algorithms with advanced customization and risk management capabilities.",
         highlights: [
-          "An AI algorithm trained to analyze financial statements and market potential",
-          "A deflationary BEP20 token (SLGO) with a decreasing supply",
-          "A transparent process for announcing and integrating acquired businesses",
-          "A long-term roadmap to list the conglomerate on a traditional stock exchange"
+          "Pre-built trading strategies with customizable parameters",
+          "Advanced backtesting engine with historical market data",
+          "Multi-exchange integration for optimal execution",
+          "Real-time risk management and position sizing",
+          "Portfolio diversification and correlation analysis",
+          "24/7 automated execution with mobile monitoring"
         ]
       }
     ],
     techStack: {
-      frameworks: ["BNB Smart Chain", "Hardhat", "React"],
-      languages: ["Solidity", "Python", "TypeScript"],
-      cloud: ["AWS"],
-      database: ["Blockchain", "PostgreSQL"]
+      frameworks: ["React", "Node.js", "WebSocket"],
+      languages: ["Python", "JavaScript", "Rust"],
+      cloud: ["AWS", "Docker"],
+      database: ["PostgreSQL", "InfluxDB", "Redis"]
     },
     features: [
       {
-        title: "AI Business Analysis",
-        description: "Our proprietary AI vets potential business acquisitions for profitability and growth."
+        title: "Strategy Marketplace",
+        description: "Access to proven trading strategies with performance metrics and customization options"
       },
       {
-        title: "Buyback & Burn",
-        description: "Profits from the business portfolio are used to buy SLGO tokens from the market and permanently burn them."
+        title: "Advanced Backtesting",
+        description: "Comprehensive backtesting engine with multiple years of historical data and performance analytics"
       },
       {
-        title: "Transparent Governance",
-        description: "Token holders are kept informed about the performance and strategy of the growing conglomerate."
+        title: "Risk Management Suite",
+        description: "Sophisticated risk controls including stop-losses, position sizing, and portfolio correlation analysis"
       }
     ],
     process: [
-      { title: "AI Algorithm Development", description: "Built and trained a machine learning model for business analysis", icon: Brain },
-      { title: "Smart Contract Deployment", description: "Launched the SLGO token and governance contracts on the BNB Chain", icon: FileCode },
-      { title: "Business Acquisition Pipeline", description: "Established a pipeline for vetting and acquiring target companies", icon: Briefcase },
-      { title: "Community Building", description: "Grew a community of investors who believe in the long-term vision", icon: Users }
+      {
+        title: "Algorithm Development",
+        description: "Developed and tested trading algorithms using quantitative analysis methods",
+        icon: Brain
+      },
+      {
+        title: "Exchange Integration",
+        description: "Integrated with major cryptocurrency exchanges for seamless execution",
+        icon: Link
+      },
+      {
+        title: "Backtesting Engine",
+        description: "Built comprehensive backtesting infrastructure with historical data",
+        icon: BarChart
+      },
+      {
+        title: "Risk Management",
+        description: "Implemented advanced risk controls and portfolio management features",
+        icon: Shield
+      }
     ],
     team: [
-      { title: "AI/ML Engineers", description: "Developing and maintaining the acquisition algorithm", icon: Brain },
-      { title: "Blockchain Developers", description: "Managing the smart contracts and tokenomics", icon: Code },
-      { title: "M&A Specialists", description: "Handling the legal and financial aspects of business acquisitions", icon: Briefcase },
-      { title: "Financial Analysts", description: "Monitoring the performance of the business portfolio", icon: BarChart }
+      {
+        title: "Quantitative Analysts",
+        description: "Trading strategy development, market analysis",
+        icon: BarChart
+      },
+      {
+        title: "Blockchain Engineers",
+        description: "Exchange APIs, smart contract integration",
+        icon: Link
+      },
+      {
+        title: "Risk Management Specialists",
+        description: "Portfolio optimization, risk modeling",
+        icon: Shield
+      }
     ],
     testimonial: {
-      company: "Early Investor",
-      position: "Community Member",
-      content: "SolAlgo is one of the most innovative projects in crypto. The idea of backing a token with real, profitable businesses is a game-changer. The team's use of AI for acquisitions gives me confidence in the long-term value."
+      company: "Crypto Trader",
+      position: "Portfolio Manager",
+      content: "SolAlgo has transformed my trading approach. The backtesting capabilities are excellent, and the automated execution allows me to capture opportunities 24/7 without constant monitoring."
+    }
+  },
+  {
+    id: "14",
+    title: "Daraz: E-commerce Marketplace",
+    subtitle: "Leading online marketplace platform",
+    description: "Daraz is a comprehensive e-commerce marketplace connecting millions of buyers and sellers across multiple categories. Our platform provides secure transactions, logistics solutions, and marketing tools to enable successful online commerce at scale.",
+    shortDescription: "Multi-vendor E-commerce Marketplace Platform",
+    slug: "daraz-ecommerce-marketplace",
+    category: "E-commerce",
+    heroImage: darazImage,
+    colorVariant: 4,
+    stats: [
+      { icon: Users, value: "10M+", label: "Active users" },
+      { icon: Package, value: "1M+", label: "Products listed" },
+      { icon: Truck, value: "100K+", label: "Daily deliveries" },
+      { icon: TrendingUp, value: "$500M+", label: "Annual GMV" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Building Digital Commerce Infrastructure",
+        content: "E-commerce adoption in emerging markets faces challenges including payment infrastructure, logistics networks, and seller onboarding. Small businesses struggle to reach customers online while consumers lack access to diverse products. We aimed to build a comprehensive marketplace that would solve these challenges while providing a seamless shopping experience for all stakeholders."
+      },
+      {
+        type: "challenges",
+        title: "Marketplace Development Challenges",
+        content: [
+          "Complex multi-vendor platform with diverse seller needs",
+          "Payment processing across multiple currencies and methods",
+          "Logistics and fulfillment network development",
+          "Trust and safety mechanisms for secure transactions",
+          "Scalable infrastructure for millions of concurrent users"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Comprehensive E-commerce Ecosystem",
+        content: "Daraz provides end-to-end e-commerce solutions for buyers, sellers, and logistics partners.",
+        highlights: [
+          "Multi-vendor marketplace with advanced seller tools",
+          "Integrated payment gateway supporting multiple methods",
+          "Comprehensive logistics network with last-mile delivery",
+          "AI-powered product recommendations and search",
+          "Seller analytics dashboard and marketing tools",
+          "Mobile-first design optimized for emerging markets"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Spring Boot", "React Native"],
+      languages: ["Java", "JavaScript", "Python"],
+      cloud: ["AWS", "Kubernetes"],
+      database: ["MySQL", "Redis", "Elasticsearch"]
+    },
+    features: [
+      {
+        title: "Seller Management System",
+        description: "Comprehensive tools for inventory management, order processing, and performance analytics"
+      },
+      {
+        title: "Payment Integration",
+        description: "Secure payment processing with multiple payment methods and fraud detection"
+      },
+      {
+        title: "Logistics Network",
+        description: "End-to-end logistics solution with warehousing, delivery, and tracking capabilities"
+      }
+    ],
+    process: [
+      {
+        title: "Market Analysis",
+        description: "Analyzed e-commerce landscape and identified key market opportunities",
+        icon: Search
+      },
+      {
+        title: "Platform Architecture",
+        description: "Designed scalable microservices architecture for marketplace operations",
+        icon: Box
+      },
+      {
+        title: "Seller Onboarding",
+        description: "Developed comprehensive seller onboarding and support systems",
+        icon: Users
+      },
+      {
+        title: "Logistics Integration",
+        description: "Built logistics network and integrated with delivery partners",
+        icon: Truck
+      }
+    ],
+    team: [
+      {
+        title: "E-commerce Engineers",
+        description: "Marketplace platform, payment systems",
+        icon: ShoppingCart
+      },
+      {
+        title: "Logistics Specialists",
+        description: "Supply chain, delivery optimization",
+        icon: Truck
+      },
+      {
+        title: "Data Scientists",
+        description: "Recommendation engines, analytics",
+        icon: BarChart
+      }
+    ],
+    testimonial: {
+      company: "Small Business Owner",
+      position: "Online Retailer",
+      content: "Daraz has been instrumental in growing our business online. The seller tools are comprehensive, and the logistics support has allowed us to reach customers we never could have served before."
+    }
+  },
+  {
+    id: "15",
+    title: "Carrefour: Retail Digital Transformation",
+    subtitle: "Omnichannel retail platform",
+    description: "Carrefour's digital transformation includes mobile commerce, inventory management, and customer loyalty programs. Our platform integrates online and offline shopping experiences while providing real-time inventory visibility and personalized customer engagement.",
+    shortDescription: "Omnichannel Retail Platform and Digital Transformation",
+    slug: "carrefour-retail-digital-transformation",
+    category: "E-commerce",
+    heroImage: carrefourImage,
+    colorVariant: 5,
+    stats: [
+      { icon: Users, value: "5M+", label: "Digital customers" },
+      { icon: LayoutGrid, value: "200+", label: "Store locations" },
+      { icon: TrendingUp, value: "300%", label: "Online sales growth" },
+      { icon: Clock, value: "30min", label: "Average pickup time" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Transforming Traditional Retail",
+        content: "Traditional retail faces disruption from e-commerce, changing consumer expectations, and the need for seamless omnichannel experiences. Customers expect to shop online, pick up in-store, and have consistent experiences across all touchpoints. We aimed to transform Carrefour's operations to meet these evolving expectations while leveraging their physical store network as a competitive advantage."
+      },
+      {
+        type: "challenges",
+        title: "Retail Transformation Obstacles",
+        content: [
+          "Integration of online and offline inventory systems",
+          "Consistent customer experience across multiple channels",
+          "Real-time inventory visibility across all locations",
+          "Staff training and change management for digital tools",
+          "Competing with pure-play e-commerce platforms"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Comprehensive Omnichannel Platform",
+        content: "Carrefour's digital transformation creates seamless shopping experiences across all customer touchpoints.",
+        highlights: [
+          "Unified inventory management across online and offline channels",
+          "Click-and-collect service with optimized pickup processes",
+          "Personalized mobile app with loyalty program integration",
+          "Real-time product availability and store locator features",
+          "Staff mobile tools for customer service and inventory management",
+          "Advanced analytics for demand forecasting and optimization"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React Native", "Spring Boot", "Angular"],
+      languages: ["Java", "TypeScript", "Python"],
+      cloud: ["Microsoft Azure", "Docker"],
+      database: ["SQL Server", "MongoDB", "Redis"]
+    },
+    features: [
+      {
+        title: "Omnichannel Shopping",
+        description: "Seamless shopping experience across mobile app, website, and physical stores"
+      },
+      {
+        title: "Inventory Integration",
+        description: "Real-time inventory visibility and management across all channels and locations"
+      },
+      {
+        title: "Customer Loyalty Platform",
+        description: "Integrated loyalty program with personalized offers and rewards tracking"
+      }
+    ],
+    process: [
+      {
+        title: "Digital Strategy",
+        description: "Developed comprehensive digital transformation roadmap",
+        icon: Map
+      },
+      {
+        title: "System Integration",
+        description: "Integrated existing systems with new digital platforms",
+        icon: Link
+      },
+      {
+        title: "Staff Training",
+        description: "Comprehensive training program for digital tools adoption",
+        icon: Users
+      },
+      {
+        title: "Gradual Rollout",
+        description: "Phased implementation across store network with continuous optimization",
+        icon: TrendingUp
+      }
+    ],
+    team: [
+      {
+        title: "Digital Transformation Specialists",
+        description: "Strategy, change management",
+        icon: RefreshCw
+      },
+      {
+        title: "Enterprise Developers",
+        description: "System integration, platform development",
+        icon: Code
+      },
+      {
+        title: "Retail Operations Experts",
+        description: "Process optimization, staff training",
+        icon: Users
+      }
+    ],
+    testimonial: {
+      company: "Carrefour Customer",
+      position: "Regular Shopper",
+      content: "The new Carrefour app has made shopping so much more convenient. I can check what's in stock, order online, and pick up at the store without any hassle. The loyalty rewards are great too!"
+    }
+  },
+  {
+    id: "16",
+    title: "Bolt: Ride-hailing Platform",
+    subtitle: "Smart urban mobility solution",
+    description: "Bolt provides on-demand transportation services with real-time matching, dynamic pricing, and multi-modal transport options. Our platform optimizes routes, ensures safety, and provides affordable mobility solutions for urban environments.",
+    shortDescription: "On-demand Transportation and Mobility Platform",
+    slug: "bolt-ride-hailing-platform",
+    category: "Apps",
+    heroImage: boltImage,
+    colorVariant: 1,
+    stats: [
+      { icon: Users, value: "50M+", label: "Registered users" },
+      { icon: MapPin, value: "200+", label: "Cities served" },
+      { icon: Clock, value: "3min", label: "Average wait time" },
+      { icon: TrendingUp, value: "1B+", label: "Rides completed" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Revolutionizing Urban Transportation",
+        content: "Urban transportation faces challenges including traffic congestion, limited parking, and inefficient public transit. Traditional taxi services often lack transparency in pricing and availability. We aimed to create a comprehensive mobility platform that would provide reliable, affordable, and efficient transportation options while optimizing urban traffic flow through smart matching algorithms."
+      },
+      {
+        type: "challenges",
+        title: "Urban Mobility Challenges",
+        content: [
+          "Real-time matching of riders and drivers at scale",
+          "Dynamic pricing algorithms balancing supply and demand",
+          "Safety and security measures for all platform users",
+          "Regulatory compliance across multiple jurisdictions",
+          "Integration with existing urban transportation infrastructure"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Comprehensive Mobility Ecosystem",
+        content: "Bolt creates an integrated platform connecting riders, drivers, and urban transportation infrastructure.",
+        highlights: [
+          "AI-powered matching algorithm optimizing for time and cost",
+          "Dynamic pricing with transparent fare calculation",
+          "Comprehensive safety features including real-time tracking",
+          "Multi-modal transport options including bikes and scooters",
+          "Driver partner support with earnings optimization tools",
+          "Integration with public transportation for seamless journeys"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React Native", "Node.js", "Kafka"],
+      languages: ["JavaScript", "Python", "Go"],
+      cloud: ["AWS", "Google Maps API"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
+    },
+    features: [
+      {
+        title: "Smart Matching Algorithm",
+        description: "AI-powered system that optimally matches riders with nearby drivers for minimal wait times"
+      },
+      {
+        title: "Safety & Security Suite",
+        description: "Comprehensive safety features including real-time tracking, emergency contacts, and driver verification"
+      },
+      {
+        title: "Multi-modal Transportation",
+        description: "Integrated platform supporting cars, bikes, scooters, and public transport connections"
+      }
+    ],
+    process: [
+      {
+        title: "Market Entry Strategy",
+        description: "Analyzed urban mobility patterns and regulatory requirements",
+        icon: Map
+      },
+      {
+        title: "Algorithm Development",
+        description: "Built matching and pricing algorithms optimized for local conditions",
+        icon: Brain
+      },
+      {
+        title: "Driver Onboarding",
+        description: "Developed comprehensive driver partner recruitment and training program",
+        icon: Users
+      },
+      {
+        title: "Safety Implementation",
+        description: "Implemented robust safety and security measures for all users",
+        icon: Shield
+      }
+    ],
+    team: [
+      {
+        title: "Algorithm Engineers",
+        description: "Matching algorithms, route optimization",
+        icon: Brain
+      },
+      {
+        title: "Mobile Developers",
+        description: "Cross-platform app development",
+        icon: Users
+      },
+      {
+        title: "Operations Specialists",
+        description: "Driver relations, city operations",
+        icon: MapPin
+      }
+    ],
+    testimonial: {
+      company: "Daily Commuter",
+      position: "Marketing Executive",
+      content: "Bolt has become my go-to transportation app. The wait times are consistently short, the pricing is fair and transparent, and I always feel safe during my rides. The app is intuitive and reliable."
+    }
+  },
+  {
+    id: "17",
+    title: "Luv: Dating & Relationships App",
+    subtitle: "Meaningful connections platform",
+    description: "Luv focuses on building meaningful relationships through personality-based matching, video profiles, and conversation starters. Our platform emphasizes authenticity and compatibility over superficial connections, helping users find genuine romantic partnerships.",
+    shortDescription: "Personality-based Dating and Relationship Platform",
+    slug: "luv-dating-relationships-app",
+    category: "Apps",
+    heroImage: luvImage,
+    colorVariant: 2,
+    stats: [
+      { icon: Users, value: "2M+", label: "Active users" },
+      { icon: Heart, value: "85%", label: "Match satisfaction rate" },
+      { icon: MessageSquare, value: "500K+", label: "Conversations started daily" },
+      { icon: UserCheck, value: "50K+", label: "Successful relationships" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Fostering Authentic Connections",
+        content: "Modern dating apps often focus on superficial attributes, leading to shallow connections and dating fatigue. Users struggle to find meaningful relationships in a swipe-based culture that prioritizes appearance over compatibility. We envisioned a platform that would prioritize personality, values, and genuine compatibility to help people form lasting romantic connections."
+      },
+      {
+        type: "challenges",
+        title: "Modern Dating Obstacles",
+        content: [
+          "Superficial matching based primarily on physical appearance",
+          "Difficulty in conveying personality through static profiles",
+          "High user churn due to dating app fatigue",
+          "Safety concerns, especially for women users",
+          "Lack of meaningful conversation starters and icebreakers"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Personality-Driven Dating Platform",
+        content: "Luv creates deeper connections through personality assessment, video profiles, and meaningful conversation tools.",
+        highlights: [
+          "Comprehensive personality assessment for compatibility matching",
+          "Video profile integration for authentic self-expression",
+          "AI-generated conversation starters based on shared interests",
+          "Safety features including photo verification and reporting",
+          "Relationship coaching and dating advice resources",
+          "Events and activities for in-person meetups"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React Native", "Django", "WebRTC"],
+      languages: ["JavaScript", "Python", "Swift"],
+      cloud: ["AWS", "Firebase"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
+    },
+    features: [
+      {
+        title: "Personality Matching",
+        description: "Advanced compatibility algorithm based on personality traits, values, and relationship goals"
+      },
+      {
+        title: "Video Profiles",
+        description: "Video-first profiles allowing users to showcase their authentic personality and interests"
+      },
+      {
+        title: "Safety & Verification",
+        description: "Comprehensive safety features including photo verification, background checks, and reporting systems"
+      }
+    ],
+    process: [
+      {
+        title: "Psychology Research",
+        description: "Collaborated with relationship experts to develop matching algorithms",
+        icon: Heart
+      },
+      {
+        title: "Safety Framework",
+        description: "Implemented comprehensive safety and verification systems",
+        icon: Shield
+      },
+      {
+        title: "App Development",
+        description: "Built intuitive mobile app with video and messaging capabilities",
+        icon: Code
+      },
+      {
+        title: "Community Building",
+        description: "Developed features and events to foster genuine connections",
+        icon: Users
+      }
+    ],
+    team: [
+      {
+        title: "Relationship Psychologists",
+        description: "Matching algorithms, user behavior analysis",
+        icon: Heart
+      },
+      {
+        title: "Mobile Developers",
+        description: "Video integration, real-time messaging",
+        icon: Users
+      },
+      {
+        title: "Safety Specialists",
+        description: "User verification, content moderation",
+        icon: Shield
+      }
+    ],
+    testimonial: {
+      company: "Luv Success Story",
+      position: "Happy Couple",
+      content: "We met on Luv and immediately connected over our shared values and interests. The personality matching really works - we've been together for two years now and couldn't be happier!"
+    }
+  },
+  {
+    id: "18",
+    title: "Airena: Event Management Platform",
+    subtitle: "Comprehensive event planning solution",
+    description: "Airena streamlines event planning and management with venue booking, vendor coordination, and attendee management tools. Our platform serves event planners, venues, and attendees with integrated solutions for seamless event experiences.",
+    shortDescription: "End-to-end Event Planning and Management Platform",
+    slug: "airena-event-management-platform",
+    category: "SaaS",
+    heroImage: airena,
+    colorVariant: 3,
+    stats: [
+      { icon: Users, value: "100K+", label: "Events managed" },
+      { icon: MapPin, value: "5K+", label: "Venues listed" },
+      { icon: TrendingUp, value: "95%", label: "Client satisfaction" },
+      { icon: Clock, value: "70%", label: "Time saved in planning" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Simplifying Event Management",
+        content: "Event planning involves coordinating multiple vendors, managing complex logistics, and ensuring seamless execution. Traditional event management relies on spreadsheets, phone calls, and manual coordination, leading to inefficiencies and errors. We aimed to create a comprehensive platform that would digitize and streamline the entire event planning process from initial concept to post-event analysis."
+      },
+      {
+        type: "challenges",
+        title: "Event Planning Complexities",
+        content: [
+          "Coordination between multiple vendors and service providers",
+          "Real-time communication and updates during events",
+          "Budget tracking and expense management across categories",
+          "Attendee registration and engagement management",
+          "Venue availability and booking coordination"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Integrated Event Management Ecosystem",
+        content: "Airena provides end-to-end event management tools for planners, vendors, venues, and attendees.",
+        highlights: [
+          "Comprehensive vendor marketplace with ratings and reviews",
+          "Real-time collaboration tools for planning teams",
+          "Automated budget tracking and expense management",
+          "Integrated attendee registration and check-in systems",
+          "Venue booking with availability calendars and virtual tours",
+          "Post-event analytics and feedback collection"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Node.js", "Socket.io"],
+      languages: ["TypeScript", "JavaScript", "Python"],
+      cloud: ["AWS", "Stripe API"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
+    },
+    features: [
+      {
+        title: "Vendor Marketplace",
+        description: "Comprehensive directory of event vendors with booking, reviews, and contract management"
+      },
+      {
+        title: "Event Timeline Management",
+        description: "Interactive timeline with task assignments, deadlines, and real-time collaboration"
+      },
+      {
+        title: "Attendee Experience Suite",
+        description: "Registration, ticketing, check-in, and engagement tools for seamless attendee experience"
+      }
+    ],
+    process: [
+      {
+        title: "Industry Analysis",
+        description: "Studied event planning workflows and identified pain points",
+        icon: Search
+      },
+      {
+        title: "Vendor Network",
+        description: "Built comprehensive network of event service providers",
+        icon: Users
+      },
+      {
+        title: "Platform Development",
+        description: "Created integrated planning and management tools",
+        icon: Code
+      },
+      {
+        title: "Market Launch",
+        description: "Launched platform with pilot events and continuous optimization",
+        icon: Rocket
+      }
+    ],
+    team: [
+      {
+        title: "Event Industry Experts",
+        description: "Workflow optimization, vendor relations",
+        icon: Users
+      },
+      {
+        title: "Platform Developers",
+        description: "Full-stack development, API integration",
+        icon: Code
+      },
+      {
+        title: "UX Designers",
+        description: "Event planning user experience",
+        icon: Palette
+      }
+    ],
+    testimonial: {
+      company: "Corporate Event Planner",
+      position: "Senior Event Manager",
+      content: "Airena has revolutionized how we plan and execute events. The vendor coordination features alone have saved us countless hours, and our clients love the seamless attendee experience."
+    }
+  },
+  {
+    id: "19",
+    title: "Polara: Social Commerce Platform",
+    subtitle: "Social shopping and discovery app",
+    description: "Polara combines social media with e-commerce, allowing users to discover products through social interactions, influencer recommendations, and peer reviews. Our platform creates engaging shopping experiences through social discovery and community-driven commerce.",
+    shortDescription: "Social Commerce and Product Discovery Platform",
+    slug: "polara-social-commerce-platform",
+    category: "E-commerce",
+    heroImage: polaraImage,
+    colorVariant: 4,
+    stats: [
+      { icon: Users, value: "1M+", label: "Social shoppers" },
+      { icon: TrendingUp, value: "200%", label: "Engagement vs traditional e-commerce" },
+      { icon: Star, value: "4.7/5", label: "User rating" },
+      { icon: ShoppingCart, value: "$50M+", label: "Social commerce GMV" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Merging Social and Commerce",
+        content: "Traditional e-commerce lacks the social validation and discovery that influences modern purchasing decisions. Consumers increasingly rely on peer recommendations, influencer content, and social proof when making buying decisions. We envisioned a platform that would seamlessly blend social interaction with commerce, making shopping a social and engaging experience."
+      },
+      {
+        type: "challenges",
+        title: "Social Commerce Integration",
+        content: [
+          "Balancing social engagement with commercial objectives",
+          "Creating authentic influencer-brand partnerships",
+          "Managing user-generated content quality and authenticity",
+          "Seamless integration of social features with e-commerce functionality",
+          "Building trust in peer recommendations and reviews"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Integrated Social Shopping Experience",
+        content: "Polara creates a native social commerce experience where discovery, engagement, and purchasing happen seamlessly.",
+        highlights: [
+          "Social product discovery through peer recommendations",
+          "Influencer marketplace with authentic brand partnerships",
+          "User-generated content integration with shopping features",
+          "Social proof through real customer photos and reviews",
+          "Group buying and social shopping experiences",
+          "Gamified shopping with rewards and social challenges"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React Native", "Django", "GraphQL"],
+      languages: ["JavaScript", "Python", "TypeScript"],
+      cloud: ["AWS", "CDN"],
+      database: ["PostgreSQL", "Redis", "Elasticsearch"]
+    },
+    features: [
+      {
+        title: "Social Product Discovery",
+        description: "Discover products through friends, influencers, and community recommendations with social validation"
+      },
+      {
+        title: "Influencer Marketplace",
+        description: "Connect brands with authentic influencers for product collaborations and sponsored content"
+      },
+      {
+        title: "Community Shopping",
+        description: "Group buying, social wishlists, and collaborative shopping experiences with friends"
+      }
+    ],
+    process: [
+      {
+        title: "Social Commerce Research",
+        description: "Analyzed social shopping behaviors and platform requirements",
+        icon: Search
+      },
+      {
+        title: "Influencer Network",
+        description: "Built network of authentic influencers and content creators",
+        icon: Users
+      },
+      {
+        title: "Platform Development",
+        description: "Created integrated social and commerce features",
+        icon: Code
+      },
+      {
+        title: "Community Building",
+        description: "Fostered engaged shopping communities and user-generated content",
+        icon: MessageSquare
+      }
+    ],
+    team: [
+      {
+        title: "Social Media Specialists",
+        description: "Community management, influencer relations",
+        icon: MessageSquare
+      },
+      {
+        title: "E-commerce Developers",
+        description: "Shopping features, payment integration",
+        icon: ShoppingCart
+      },
+      {
+        title: "Content Moderators",
+        description: "Quality control, authenticity verification",
+        icon: CheckCircle
+      }
+    ],
+    testimonial: {
+      company: "Fashion Influencer",
+      position: "Content Creator",
+      content: "Polara has made it so easy to share products I love with my followers. The integration is seamless, and I love seeing my community discover new brands through my recommendations."
+    }
+  },
+  {
+    id: "20",
+    title: "Taikonz: NFT Marketplace",
+    subtitle: "Digital collectibles trading platform",
+    description: "Taikonz is a comprehensive NFT marketplace supporting creation, trading, and collection of digital assets. Our platform provides tools for artists, collectors, and traders with advanced features for NFT discovery, authentication, and community engagement.",
+    shortDescription: "NFT Creation, Trading, and Collection Platform",
+    slug: "taikonz-nft-marketplace",
+    category: "Blockchain",
+    heroImage: taikonzImag,
+    colorVariant: 5,
+    stats: [
+      { icon: Users, value: "250K+", label: "Registered users" },
+      { icon: TrendingUp, value: "$100M+", label: "Trading volume" },
+      { icon: Package, value: "1M+", label: "NFTs minted" },
+      { icon: Star, value: "10K+", label: "Verified artists" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Democratizing Digital Art Ownership",
+        content: "The NFT space needed a user-friendly platform that would make digital art creation and trading accessible to mainstream users. Existing platforms were often complex, expensive, and lacked proper curation. We aimed to create a comprehensive marketplace that would serve both experienced crypto users and newcomers to the NFT space with intuitive tools and fair pricing."
+      },
+      {
+        type: "challenges",
+        title: "NFT Marketplace Complexities",
+        content: [
+          "High gas fees making small transactions uneconomical",
+          "Complex user experience deterring mainstream adoption",
+          "Lack of proper curation and quality control",
+          "Environmental concerns about blockchain energy consumption",
+          "Need for artist verification and authenticity guarantees"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Comprehensive NFT Ecosystem",
+        content: "Taikonz provides a complete NFT platform with creation tools, marketplace, and community features.",
+        highlights: [
+          "Low-cost minting with layer-2 blockchain integration",
+          "Intuitive creation tools for artists of all skill levels",
+          "Curated collections with verified artist profiles",
+          "Advanced search and discovery with AI recommendations",
+          "Social features including artist following and collections",
+          "Eco-friendly blockchain options with carbon offset programs"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Node.js", "Web3.js"],
+      languages: ["JavaScript", "Solidity", "Python"],
+      cloud: ["AWS", "IPFS"],
+      database: ["PostgreSQL", "MongoDB", "Redis"]
+    },
+    features: [
+      {
+        title: "NFT Creation Suite",
+        description: "Comprehensive tools for creating, minting, and listing NFTs with minimal technical knowledge required"
+      },
+      {
+        title: "Advanced Marketplace",
+        description: "Feature-rich trading platform with auctions, fixed-price sales, and collection management"
+      },
+      {
+        title: "Artist Verification System",
+        description: "Comprehensive verification process ensuring authenticity and protecting against counterfeit NFTs"
+      }
+    ],
+    process: [
+      {
+        title: "Blockchain Integration",
+        description: "Integrated with multiple blockchains for optimal user experience and cost efficiency",
+        icon: Link
+      },
+      {
+        title: "Artist Onboarding",
+        description: "Developed comprehensive artist verification and onboarding process",
+        icon: Users
+      },
+      {
+        title: "Marketplace Development",
+        description: "Built advanced trading features and discovery algorithms",
+        icon: Code
+      },
+      {
+        title: "Community Building",
+        description: "Fostered active community of artists, collectors, and traders",
+        icon: MessageSquare
+      }
+    ],
+    team: [
+      {
+        title: "Blockchain Engineers",
+        description: "Smart contracts, Web3 integration",
+        icon: Link
+      },
+      {
+        title: "Frontend Developers",
+        description: "User interface, Web3 wallet integration",
+        icon: Code
+      },
+      {
+        title: "Art Curators",
+        description: "Quality control, artist verification",
+        icon: Palette
+      }
+    ],
+    testimonial: {
+      company: "Digital Artist",
+      position: "NFT Creator",
+      content: "Taikonz has been amazing for launching my NFT career. The creation tools are intuitive, the fees are reasonable, and the community is very supportive. I've been able to build a real following here."
+    }
+  },
+  {
+    id: "21",
+    title: "Tito: Task Management Platform",
+    subtitle: "Smart productivity and collaboration tool",
+    description: "Tito enhances team productivity with intelligent task management, automated workflows, and real-time collaboration features. Our platform uses AI to optimize task allocation, predict project timelines, and improve team efficiency across organizations.",
+    shortDescription: "AI-Powered Task Management and Team Collaboration Platform",
+    slug: "tito-task-management-platform",
+    category: "SaaS",
+    heroImage: titoImage,
+    colorVariant: 1,
+    stats: [
+      { icon: Users, value: "50K+", label: "Teams using Tito" },
+      { icon: TrendingUp, value: "40%", label: "Productivity increase" },
+      { icon: Clock, value: "60%", label: "Faster project completion" },
+      { icon: CheckCircle, value: "1M+", label: "Tasks completed" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Revolutionizing Team Productivity",
+        content: "Teams struggle with fragmented communication, unclear task priorities, and inefficient project management processes. Traditional tools often create more overhead than value, leading to decreased productivity and team frustration. We envisioned an intelligent platform that would streamline task management while providing actionable insights to improve team performance and project outcomes."
+      },
+      {
+        type: "challenges",
+        title: "Team Productivity Obstacles",
+        content: [
+          "Fragmented communication across multiple tools and platforms",
+          "Difficulty in prioritizing tasks and managing workloads",
+          "Lack of visibility into project progress and bottlenecks",
+          "Manual task allocation leading to uneven workload distribution",
+          "Poor integration between planning and execution phases"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Intelligent Task Management Ecosystem",
+        content: "Tito combines AI-powered task optimization with intuitive collaboration tools to enhance team productivity.",
+        highlights: [
+          "AI-powered task prioritization and workload balancing",
+          "Real-time collaboration with integrated communication tools",
+          "Automated workflow creation and task dependencies",
+          "Predictive analytics for project timeline estimation",
+          "Integration with popular development and business tools",
+          "Customizable dashboards with team performance insights"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Node.js", "Socket.io"],
+      languages: ["TypeScript", "Python", "JavaScript"],
+      cloud: ["AWS", "Docker"],
+      database: ["PostgreSQL", "Redis", "InfluxDB"]
+    },
+    features: [
+      {
+        title: "Smart Task Allocation",
+        description: "AI algorithms automatically assign tasks based on team member skills, availability, and workload"
+      },
+      {
+        title: "Real-time Collaboration",
+        description: "Integrated chat, video calls, and document sharing within the task management interface"
+      },
+      {
+        title: "Predictive Analytics",
+        description: "Machine learning models predict project completion times and identify potential bottlenecks"
+      }
+    ],
+    process: [
+      {
+        title: "Workflow Analysis",
+        description: "Studied team productivity patterns and identified optimization opportunities",
+        icon: BarChart
+      },
+      {
+        title: "AI Development",
+        description: "Built machine learning models for task optimization and prediction",
+        icon: Brain
+      },
+      {
+        title: "Platform Development",
+        description: "Created intuitive interface with advanced collaboration features",
+        icon: Code
+      },
+      {
+        title: "Integration Testing",
+        description: "Tested integrations with popular business and development tools",
+        icon: Link
+      }
+    ],
+    team: [
+      {
+        title: "AI/ML Engineers",
+        description: "Task optimization algorithms, predictive analytics",
+        icon: Brain
+      },
+      {
+        title: "Full-stack Developers",
+        description: "Platform development, real-time features",
+        icon: Code
+      },
+      {
+        title: "UX Designers",
+        description: "Productivity-focused user experience",
+        icon: Palette
+      }
+    ],
+    testimonial: {
+      company: "Tech Startup",
+      position: "Engineering Manager",
+      content: "Tito has transformed how our team works. The AI task allocation is incredibly smart, and the predictive analytics help us plan better. Our productivity has increased significantly since we started using it."
+    }
+  },
+  {
+    id: "22",
+    title: "FinTrack: Personal Finance Tracker",
+    subtitle: "Comprehensive financial management app",
+    description: "FinTrack provides comprehensive personal finance management with expense tracking, budget planning, and investment monitoring. Our app helps users achieve financial goals through intelligent insights, automated categorization, and personalized recommendations.",
+    shortDescription: "Personal Finance Tracking and Budget Management App",
+    slug: "fintrack-personal-finance-tracker",
+    category: "Fintech",
+    heroImage: fintrackImage,
+    colorVariant: 2,
+    stats: [
+      { icon: Users, value: "200K+", label: "Active users" },
+      { icon: TrendingUp, value: "30%", label: "Average savings increase" },
+      { icon: BarChart, value: "$500M+", label: "Transactions tracked" },
+      { icon: CheckCircle, value: "85%", label: "Budget goal achievement" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Simplifying Personal Finance Management",
+        content: "Personal finance management is often overwhelming and time-consuming for most people. Traditional budgeting methods are manual, error-prone, and fail to provide actionable insights. We aimed to create an intelligent finance tracker that would automate expense categorization, provide personalized insights, and help users achieve their financial goals through data-driven recommendations."
+      },
+      {
+        type: "challenges",
+        title: "Personal Finance Tracking Issues",
+        content: [
+          "Manual expense tracking leading to incomplete financial pictures",
+          "Difficulty in categorizing and analyzing spending patterns",
+          "Lack of actionable insights from financial data",
+          "Complex investment tracking across multiple accounts",
+          "Poor integration with banking and financial institutions"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Intelligent Finance Management Platform",
+        content: "FinTrack automates financial tracking and provides personalized insights to improve financial health.",
+        highlights: [
+          "Automatic transaction categorization using machine learning",
+          "Real-time budget tracking with spending alerts and recommendations",
+          "Investment portfolio monitoring with performance analytics",
+          "Bill prediction and cash flow forecasting",
+          "Goal-based savings with automated allocation strategies",
+          "Secure bank integration with 256-bit encryption"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React Native", "Django", "TensorFlow"],
+      languages: ["JavaScript", "Python", "Swift"],
+      cloud: ["AWS", "Plaid API"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
+    },
+    features: [
+      {
+        title: "Automated Expense Tracking",
+        description: "Connect bank accounts for automatic transaction import and intelligent categorization"
+      },
+      {
+        title: "Smart Budget Management",
+        description: "Dynamic budgets that adapt to spending patterns with proactive alerts and recommendations"
+      },
+      {
+        title: "Investment Portfolio Tracking",
+        description: "Comprehensive investment monitoring with performance analytics and rebalancing suggestions"
+      }
+    ],
+    process: [
+      {
+        title: "Financial Analysis",
+        description: "Analyzed personal finance pain points and user behavior patterns",
+        icon: BarChart
+      },
+      {
+        title: "Security Implementation",
+        description: "Implemented bank-level security for financial data protection",
+        icon: Shield
+      },
+      {
+        title: "ML Model Training",
+        description: "Developed machine learning models for transaction categorization and insights",
+        icon: Brain
+      },
+      {
+        title: "Bank Integration",
+        description: "Integrated with financial institutions for seamless data synchronization",
+        icon: Link
+      }
+    ],
+    team: [
+      {
+        title: "Fintech Developers",
+        description: "Banking APIs, security implementation",
+        icon: Shield
+      },
+      {
+        title: "Data Scientists",
+        description: "Financial modeling, ML algorithms",
+        icon: BarChart
+      },
+      {
+        title: "Mobile Developers",
+        description: "Cross-platform app development",
+        icon: Users
+      }
+    ],
+    testimonial: {
+      company: "FinTrack User",
+      position: "Young Professional",
+      content: "FinTrack has completely changed how I manage my money. The automatic categorization saves me hours, and the insights have helped me identify spending patterns I never noticed before. I'm saving more than ever!"
+    }
+  },
+  {
+    id: "23",
+    title: "TaskFlow: Workflow Automation",
+    subtitle: "Business process automation platform",
+    description: "TaskFlow automates repetitive business processes with drag-and-drop workflow builder, API integrations, and intelligent automation rules. Our platform helps businesses increase efficiency by automating routine tasks and optimizing operational workflows.",
+    shortDescription: "Business Process Automation and Workflow Management Platform",
+    slug: "taskflow-workflow-automation",
+    category: "SaaS",
+    heroImage: taskflowImage,
+    colorVariant: 3,
+    stats: [
+      { icon: Users, value: "10K+", label: "Businesses automated" },
+      { icon: Zap, value: "80%", label: "Time saved on routine tasks" },
+      { icon: TrendingUp, value: "150%", label: "Productivity increase" },
+      { icon: CheckCircle, value: "1M+", label: "Workflows executed" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Eliminating Manual Business Processes",
+        content: "Businesses waste countless hours on repetitive, manual tasks that could be automated. Traditional automation solutions are often complex, expensive, and require technical expertise to implement. We envisioned a user-friendly platform that would allow any business user to create sophisticated automation workflows without coding, dramatically improving operational efficiency."
+      },
+      {
+        type: "challenges",
+        title: "Business Automation Barriers",
+        content: [
+          "Complex automation tools requiring technical expertise",
+          "Lack of integration between different business applications",
+          "Difficulty in identifying and mapping automation opportunities",
+          "High costs of traditional enterprise automation solutions",
+          "Resistance to change and adoption of new automated processes"
+        ]
+      },
+      {
+        type: "solution",
+        title: "No-Code Automation Platform",
+        content: "TaskFlow democratizes business automation with intuitive tools that anyone can use to streamline operations.",
+        highlights: [
+          "Drag-and-drop workflow builder with pre-built templates",
+          "Extensive API integrations with popular business applications",
+          "Intelligent automation suggestions based on usage patterns",
+          "Real-time monitoring and analytics for workflow performance",
+          "Collaborative workflow design with team sharing capabilities",
+          "Scalable execution engine handling millions of workflow runs"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Node.js", "Apache Airflow"],
+      languages: ["TypeScript", "Python", "JavaScript"],
+      cloud: ["AWS", "Kubernetes"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
+    },
+    features: [
+      {
+        title: "Visual Workflow Builder",
+        description: "Intuitive drag-and-drop interface for creating complex automation workflows without coding"
+      },
+      {
+        title: "API Integration Hub",
+        description: "Pre-built connectors for 500+ popular business applications and services"
+      },
+      {
+        title: "Intelligent Automation",
+        description: "AI-powered suggestions for workflow optimization and automation opportunities"
+      }
+    ],
+    process: [
+      {
+        title: "Process Analysis",
+        description: "Studied common business processes and automation patterns",
+        icon: Search
+      },
+      {
+        title: "Integration Development",
+        description: "Built extensive library of API connectors and integrations",
+        icon: Link
+      },
+      {
+        title: "Platform Development",
+        description: "Created visual workflow builder and execution engine",
+        icon: Code
+      },
+      {
+        title: "User Testing",
+        description: "Extensive testing with business users to ensure usability",
+        icon: Users
+      }
+    ],
+    team: [
+      {
+        title: "Automation Engineers",
+        description: "Workflow engine, API integrations",
+        icon: Zap
+      },
+      {
+        title: "Frontend Developers",
+        description: "Visual workflow builder, user interface",
+        icon: Code
+      },
+      {
+        title: "Business Analysts",
+        description: "Process optimization, user requirements",
+        icon: BarChart
+      }
+    ],
+    testimonial: {
+      company: "Mid-size Company",
+      position: "Operations Manager",
+      content: "TaskFlow has revolutionized our operations. We've automated dozens of manual processes that used to take hours each week. The visual builder makes it easy for anyone on our team to create workflows."
+    }
+  },
+  {
+    id: "24",
+    title: "LearnSphere: Online Learning Platform",
+    subtitle: "Interactive education and skill development",
+    description: "LearnSphere provides comprehensive online learning experiences with interactive courses, live sessions, and skill assessments. Our platform serves educators and learners with advanced features for course creation, progress tracking, and collaborative learning.",
+    shortDescription: "Interactive Online Learning and Course Management Platform",
+    slug: "learnsphere-online-learning-platform",
+    category: "EdTech",
+    heroImage: learnsphereImage,
+    colorVariant: 4,
+    stats: [
+      { icon: Users, value: "500K+", label: "Active learners" },
+      { icon: BookOpen, value: "10K+", label: "Courses available" },
+      { icon: UserCheck, value: "5K+", label: "Expert instructors" },
+      { icon: TrendingUp, value: "90%", label: "Course completion rate" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Transforming Online Education",
+        content: "Online learning often lacks the engagement and interactivity of traditional classroom experiences. Students struggle with motivation, course completion, and practical skill application. We aimed to create a comprehensive learning platform that would combine the flexibility of online education with the engagement and effectiveness of in-person instruction through innovative technology and pedagogical approaches."
+      },
+      {
+        type: "challenges",
+        title: "Online Learning Obstacles",
+        content: [
+          "Low engagement and high dropout rates in online courses",
+          "Lack of practical, hands-on learning experiences",
+          "Difficulty in assessing and validating skill acquisition",
+          "Limited interaction between students and instructors",
+          "One-size-fits-all approach not meeting individual learning needs"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Comprehensive Learning Ecosystem",
+        content: "LearnSphere creates engaging, interactive learning experiences with personalized paths and practical skill development.",
+        highlights: [
+          "Interactive course content with simulations and virtual labs",
+          "Personalized learning paths adapted to individual progress",
+          "Live virtual classrooms with real-time collaboration tools",
+          "Comprehensive skill assessments and certification programs",
+          "Peer learning communities and study groups",
+          "AI-powered learning analytics and progress insights"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Django", "WebRTC"],
+      languages: ["JavaScript", "Python", "TypeScript"],
+      cloud: ["AWS", "CloudFront"],
+      database: ["PostgreSQL", "Redis", "MongoDB"]
+    },
+    features: [
+      {
+        title: "Interactive Course Builder",
+        description: "Advanced authoring tools for creating engaging multimedia courses with assessments and simulations"
+      },
+      {
+        title: "Live Learning Sessions",
+        description: "Virtual classrooms with video conferencing, screen sharing, and collaborative whiteboards"
+      },
+      {
+        title: "Adaptive Learning Engine",
+        description: "AI-powered system that personalizes learning paths based on individual progress and preferences"
+      }
+    ],
+    process: [
+      {
+        title: "Educational Research",
+        description: "Studied learning methodologies and online education best practices",
+        icon: BookOpen
+      },
+      {
+        title: "Content Framework",
+        description: "Developed comprehensive framework for interactive course creation",
+        icon: FileCode
+      },
+      {
+        title: "Platform Development",
+        description: "Built scalable learning management system with advanced features",
+        icon: Code
+      },
+      {
+        title: "Instructor Onboarding",
+        description: "Recruited and trained expert instructors across various domains",
+        icon: Users
+      }
+    ],
+    team: [
+      {
+        title: "Educational Technologists",
+        description: "Learning design, pedagogical frameworks",
+        icon: BookOpen
+      },
+      {
+        title: "Platform Engineers",
+        description: "LMS development, video streaming",
+        icon: Code
+      },
+      {
+        title: "Content Specialists",
+        description: "Course curation, quality assurance",
+        icon: FileText
+      }
+    ],
+    testimonial: {
+      company: "Professional Learner",
+      position: "Software Developer",
+      content: "LearnSphere has been incredible for my professional development. The interactive courses are engaging, and the live sessions with experts provide real value. I've completed 5 certifications already!"
+    }
+  },
+  {
+    id: "25",
+    title: "Bayut: Real Estate Platform",
+    subtitle: "Comprehensive property marketplace",
+    description: "Bayut is a leading real estate platform connecting buyers, sellers, and renters with comprehensive property listings, virtual tours, and market analytics. Our platform provides tools for real estate professionals and consumers to make informed property decisions.",
+    shortDescription: "Real Estate Marketplace and Property Management Platform",
+    slug: "bayut-real-estate-platform",
+    category: "Web App",
+    heroImage: bayutImage,
+    colorVariant: 5,
+    stats: [
+      { icon: Home, value: "500K+", label: "Property listings" },
+      { icon: Users, value: "2M+", label: "Monthly users" },
+      { icon: MapPin, value: "100+", label: "Cities covered" },
+      { icon: TrendingUp, value: "95%", label: "User satisfaction" }
+    ],
+    sections: [
+      {
+        type: "idea",
+        title: "Revolutionizing Property Search",
+        content: "Real estate transactions are complex, time-consuming, and often lack transparency. Buyers and renters struggle to find accurate, up-to-date property information while sellers and agents need better tools to reach qualified prospects. We aimed to create a comprehensive platform that would streamline the entire real estate process from search to transaction completion."
+      },
+      {
+        type: "challenges",
+        title: "Real Estate Market Inefficiencies",
+        content: [
+          "Fragmented property information across multiple sources",
+          "Lack of standardized property data and pricing transparency",
+          "Difficulty in scheduling and conducting property viewings",
+          "Limited market insights for informed decision making",
+          "Complex transaction processes with multiple stakeholders"
+        ]
+      },
+      {
+        type: "solution",
+        title: "Comprehensive Real Estate Ecosystem",
+        content: "Bayut provides end-to-end real estate solutions for all stakeholders in the property market.",
+        highlights: [
+          "Comprehensive property database with detailed listings and photos",
+          "Advanced search filters with map-based property discovery",
+          "Virtual property tours and 360-degree viewing experiences",
+          "Market analytics and price trend insights",
+          "Agent and developer profiles with verified credentials",
+          "Integrated mortgage calculator and financing options"
+        ]
+      }
+    ],
+    techStack: {
+      frameworks: ["React", "Node.js", "React Native"],
+      languages: ["JavaScript", "TypeScript", "Python"],
+      cloud: ["AWS", "CloudFront"],
+      database: ["PostgreSQL", "Elasticsearch", "Redis"]
+    },
+    features: [
+      {
+        title: "Advanced Property Search",
+        description: "Sophisticated search engine with filters, map integration, and AI-powered recommendations"
+      },
+      {
+        title: "Virtual Property Tours",
+        description: "Immersive 360-degree virtual tours and high-quality property photography"
+      },
+      {
+        title: "Market Intelligence",
+        description: "Comprehensive market analytics, price trends, and neighborhood insights"
+      }
+    ],
+    process: [
+      {
+        title: "Market Research",
+        description: "Analyzed real estate market dynamics and user behavior patterns",
+        icon: Search
+      },
+      {
+        title: "Data Aggregation",
+        description: "Built comprehensive property database with multiple data sources",
+        icon: LayoutGrid
+      },
+      {
+        title: "Platform Development",
+        description: "Created user-friendly property search and listing management system",
+        icon: Code
+      },
+      {
+        title: "Agent Network",
+        description: "Established network of verified real estate professionals",
+        icon: Users
+      }
+    ],
+    team: [
+      {
+        title: "Real Estate Experts",
+        description: "Market analysis, industry insights",
+        icon: Home
+      },
+      {
+        title: "Platform Developers",
+        description: "Search engine, mapping integration",
+        icon: Code
+      },
+      {
+        title: "Data Engineers",
+        description: "Property data aggregation, analytics",
+        icon: BarChart
+      }
+    ],
+    testimonial: {
+      company: "Property Buyer",
+      position: "First-time Homeowner",
+      content: "Bayut made finding our dream home so much easier. The search filters are comprehensive, the virtual tours saved us time, and the market insights helped us make an informed decision."
     }
   }
-
-  
 ];
-    
 
-export const getProjectBySlug = (slug: string): Project | undefined => {
-  return projects.find(project => project.slug === slug);
-};
-
-export const getProjectsByCategory = (category?: ProjectCategory): Project[] => {
-  if (!category) return projects;
-  return projects.filter(project => project.category === category);
-};
-
-export const searchProjects = (query: string): Project[] => {
-  if (!query.trim()) return projects;
-  
-  const searchTerm = query.toLowerCase();
-  return projects.filter(project => 
-    project.title.toLowerCase().includes(searchTerm) ||
-    project.description.toLowerCase().includes(searchTerm) ||
-    project.shortDescription.toLowerCase().includes(searchTerm) ||
-    project.category.toLowerCase().includes(searchTerm)
-  );
-};
-
-export const filterProjects = (category?: ProjectCategory, search?: string): Project[] => {
-  let filtered = projects;
-  
-  if (category) {
-    filtered = getProjectsByCategory(category);
-  }
-  
-  if (search) {
-    const searchTerm = search.toLowerCase();
-    filtered = filtered.filter(project => 
-      project.title.toLowerCase().includes(searchTerm) ||
-      project.description.toLowerCase().includes(searchTerm) ||
-      project.shortDescription.toLowerCase().includes(searchTerm)
-    );
-  }
-  
-  return filtered;
+export const getProjectBySlug = (slug: string): Project | null => {
+  return projects.find(project => project.slug === slug) || null;
 };
