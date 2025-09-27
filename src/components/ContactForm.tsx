@@ -97,7 +97,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <Card className="bg-white/10 backdrop-blur-md border-white/20 max-w-2xl mx-auto">
+    <Card className="bg-white/10 backdrop-blur-md border-white max-w-2xl mx-auto">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl text-white">Get In Touch</CardTitle>
         <CardDescription className="text-white/80">
@@ -117,7 +117,7 @@ export const ContactForm = () => {
                 type="text"
                 value={formData.name}
                 onChange={(e) => handleChange('name', e.target.value)}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
                 placeholder="Your full name"
                 required
               />
@@ -133,7 +133,7 @@ export const ContactForm = () => {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleChange('email', e.target.value)}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
                 placeholder="your.email@example.com"
                 required
               />
@@ -151,7 +151,7 @@ export const ContactForm = () => {
                 type="text"
                 value={formData.company}
                 onChange={(e) => handleChange('company', e.target.value)}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
                 placeholder="Your company name"
               />
             </div>
@@ -166,7 +166,7 @@ export const ContactForm = () => {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleChange('phone', e.target.value)}
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
                 placeholder="+1 (555) 123-4567"
               />
             </div>
@@ -181,7 +181,7 @@ export const ContactForm = () => {
               type="text"
               value={formData.subject}
               onChange={(e) => handleChange('subject', e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
               placeholder="What would you like to discuss?"
             />
           </div>
@@ -194,7 +194,7 @@ export const ContactForm = () => {
               id="message"
               value={formData.message}
               onChange={(e) => handleChange('message', e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-32"
+              className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50 min-h-32"
               placeholder="Tell us about your project, goals, and how we can help you achieve them..."
               rows={6}
               required

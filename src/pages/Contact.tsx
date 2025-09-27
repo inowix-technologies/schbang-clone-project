@@ -71,7 +71,7 @@ const Contact = () => {
                 {offices.map((office, index) => (
                   <div key={index} className="p-6 bg-muted rounded-xl">
                     <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-lg font-bold text-foreground">
+                      <h3 className="text-lg font-bold text-[#1f1f1f]">
                         {office.city}
                       </h3>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -82,20 +82,20 @@ const Contact = () => {
                     
                     <div className="space-y-3 text-sm">
                       <div className="flex items-start gap-3">
-                        <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-muted-foreground">{office.address}</span>
+                        <MapPin className="w-4 h-4 text-[#1f1f1f] mt-0.5 flex-shrink-0" />
+                        <span className="text-[#1f1f1f]">{office.address}</span>
                       </div>
                       
                       <div className="flex items-center gap-3">
-                        <Phone className="w-4 h-4 text-primary" />
-                        <a href={`tel:${office.phone}`} className="text-primary hover:underline">
+                        <Phone className="w-4 h-4 text-[#1f1f1f]" />
+                        <a href={`tel:${office.phone}`} className="text-[#1f1f1f] hover:underline">
                           {office.phone}
                         </a>
                       </div>
                       
                       <div className="flex items-center gap-3">
-                        <Mail className="w-4 h-4 text-primary" />
-                        <a href={`mailto:${office.email}`} className="text-primary hover:underline">
+                        <Mail className="w-4 h-4 text-[#1f1f1f]" />
+                        <a href={`mailto:${office.email}`} className="text-[#1f1f1f] hover:underline">
                           {office.email}
                         </a>
                       </div>

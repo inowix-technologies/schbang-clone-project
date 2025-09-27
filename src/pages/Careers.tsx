@@ -2,6 +2,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Clock, Users } from "lucide-react";
+import inowixImage from "../assets/career.png"
+import { motion } from "framer-motion";
 
 const openings = [
   {
@@ -81,7 +83,21 @@ const Careers = () => {
                 ))}
               </div>
             </div>
-            <div className="aspect-square bg-muted rounded-2xl"></div>
+            <motion.div 
+            className="aspect-video bg-muted relative overflow-hidden rounded-xl shadow-2xl" // Changed aspect-square to aspect-video, added styling
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <img 
+              src={inowixImage} 
+              alt="Inowix team collaboration and growth" 
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" // Added hover effect
+            />
+            {/* Optional: Add an overlay for a subtle effect */}
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary/50 to-transparent"></div>
+          </motion.div>
           </div>
         </div>
       </section>
