@@ -1,13 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Shield, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logoinowix.png"
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Header = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const isActive = (path: string) => {
@@ -194,6 +196,14 @@ export const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4">
+            {user && isAdmin && (
+              <Button asChild variant="outline" className="hidden sm:flex rounded-full px-4 py-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200" data-testid="button-admin">
+                <Link to="/admin">
+                  <Shield className="w-4 h-4 mr-2" />
+                  Admin
+                </Link>
+              </Button>
+            )}
             <Button asChild className="hidden sm:flex rounded-full px-6 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200">
               <a href="/contact-us">Contact Us →</a>
             </Button>
@@ -319,6 +329,15 @@ export const Header = () => {
               >
                 Careers
               </a>
+
+              {user && isAdmin && (
+                <Button asChild variant="outline" className="w-full mb-3 rounded-full px-6 py-3 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200" data-testid="button-admin-mobile">
+                  <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Shield className="w-4 h-4 mr-2" />
+                    Admin Panel
+                  </Link>
+                </Button>
+              )}
               
               <Button asChild className="w-full rounded-full px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200">
                 <a href="/contact-us" onClick={() => setIsMobileMenuOpen(false)}>Contact Us →</a>

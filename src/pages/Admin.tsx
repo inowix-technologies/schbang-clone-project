@@ -55,24 +55,24 @@ const Admin = () => {
 
         <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6">
           <Tabs defaultValue="blogs" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-white/5 mb-6">
+            <TabsList className="grid w-full grid-cols-3 bg-white mb-6">
               <TabsTrigger 
                 value="blogs" 
-                className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                className="text-[#1f1f1f] data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:bg-[#1f1f1f]"
               >
                 <FileText className="w-4 h-4 mr-2" />
                 Blogs
               </TabsTrigger>
               <TabsTrigger 
                 value="leads" 
-                className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                className="text-[#1f1f1f] data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:bg-[#1f1f1f]"
               >
                 <Users className="w-4 h-4 mr-2" />
                 Leads
               </TabsTrigger>
               <TabsTrigger 
                 value="analytics" 
-                className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                className="text-[#1f1f1f] data-[state=active]:bg-white/20 data-[state=active]:text-white data-[state=active]:bg-[#1f1f1f]"
               >
                 <BarChart className="w-4 h-4 mr-2" />
                 Analytics

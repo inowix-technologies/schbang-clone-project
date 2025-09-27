@@ -220,17 +220,17 @@ export const LeadsManager = () => {
                         {lead.subject || 'No subject provided'}
                       </CardDescription>
                     </div>
-                    <div className="text-right text-sm text-white/60">
+                    <div className="text-right text-sm text-white">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         {format(new Date(lead.created_at), 'MMM d, yyyy')}
                       </div>
                     </div>
-                  </div>
+                  </div> 
                 </CardHeader>
                 <CardContent className="pt-0">
                   <div className="space-y-2">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-white/70">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-white">
                       <div className="flex items-center gap-1">
                         <Mail className="w-4 h-4" />
                         {lead.email}
@@ -249,7 +249,7 @@ export const LeadsManager = () => {
                       )}
                     </div>
                     
-                    <div className="text-white/80">
+                    <div className="text-white">
                       <div className="flex items-start gap-1">
                         <MessageSquare className="w-4 h-4 mt-1 flex-shrink-0" />
                         <p className="line-clamp-2">{lead.message}</p>
@@ -257,7 +257,7 @@ export const LeadsManager = () => {
                     </div>
                     
                     <div className="flex items-center justify-between pt-2">
-                      <div className="text-xs text-white/50">
+                      <div className="text-xs text-white">
                         Source: {lead.source}
                       </div>
                       <div className="flex items-center gap-2">
@@ -296,7 +296,7 @@ export const LeadsManager = () => {
       )}
 
       <Dialog open={isDetailDialogOpen} onOpenChange={setIsDetailDialogOpen}>
-        <DialogContent className="max-w-2xl bg-white">
+        <DialogContent className="max-w-2xl h-screen overflow-scroll bg-white">
           {selectedLead && (
             <>
               <DialogHeader>
@@ -309,41 +309,41 @@ export const LeadsManager = () => {
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label className="text-sm font-medium">Email</Label>
+                    <Label className="text-sm font-medium text-[#1f1f1f]">Email</Label>
                     <p className="text-sm text-gray-600">{selectedLead.email}</p>
                   </div>
                   {selectedLead.phone && (
                     <div>
-                      <Label className="text-sm font-medium">Phone</Label>
+                      <Label className="text-sm font-medium text-[#1f1f1f]">Phone</Label>
                       <p className="text-sm text-gray-600">{selectedLead.phone}</p>
                     </div>
                   )}
                   {selectedLead.company && (
                     <div>
-                      <Label className="text-sm font-medium">Company</Label>
+                      <Label className="text-sm font-medium text-[#1f1f1f]">Company</Label>
                       <p className="text-sm text-gray-600">{selectedLead.company}</p>
                     </div>
                   )}
                   <div>
-                    <Label className="text-sm font-medium">Source</Label>
+                    <Label className="text-sm font-medium text-[#1f1f1f]">Source</Label>
                     <p className="text-sm text-gray-600">{selectedLead.source}</p>
                   </div>
                 </div>
                 
                 {selectedLead.subject && (
                   <div>
-                    <Label className="text-sm font-medium">Subject</Label>
+                    <Label className="text-sm font-medium text-[#1f1f1f]">Subject</Label>
                     <p className="text-sm text-gray-600">{selectedLead.subject}</p>
                   </div>
                 )}
                 
                 <div>
-                  <Label className="text-sm font-medium">Message</Label>
+                  <Label className="text-sm font-medium text-[#1f1f1f]">Message</Label>
                   <p className="text-sm text-gray-600 whitespace-pre-wrap">{selectedLead.message}</p>
                 </div>
                 
                 <div>
-                  <Label htmlFor="notes" className="text-sm font-medium">Notes</Label>
+                  <Label htmlFor="notes" className="text-sm font-medium text-[#1f1f1f]">Notes</Label>
                   <Textarea
                     id="notes"
                     value={notes}

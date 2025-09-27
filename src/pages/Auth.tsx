@@ -49,7 +49,7 @@ const Auth = () => {
           title: "Success",
           description: "Signed in successfully!"
         });
-        navigate('/');
+        navigate('/admin');
       }
     } catch (error) {
       toast({
@@ -140,12 +140,12 @@ const Auth = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-white/5">
-                <TabsTrigger value="signin" className="text-white data-[state=active]:bg-white/20">
+            <Tabs defaultValue="signin" className="w-full p-2">
+              <TabsList className="grid -p-1 grid-cols-2 bg-[#1f1f1f] border-2 border-[#ffffff]">
+                <TabsTrigger value="signin" className="text-white data-[state=active]:bg-[#ffffff] data-[state=active]:text-[#1f1f1f]">
                   Sign In
                 </TabsTrigger>
-                <TabsTrigger value="signup" className="text-white data-[state=active]:bg-white/20">
+                <TabsTrigger value="signup" className="text-white data-[state=active]:bg-[#ffffff] data-[state=active]:text-[#1f1f1f]">
                   Sign Up
                 </TabsTrigger>
               </TabsList>
@@ -160,7 +160,7 @@ const Auth = () => {
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
                       required
                     />
                   </div>
@@ -172,7 +172,7 @@ const Auth = () => {
                       placeholder="Enter your password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
                       required
                     />
                   </div>

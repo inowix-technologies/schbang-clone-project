@@ -233,7 +233,7 @@ export const BlogsManager = () => {
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Title *</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="title">Title *</Label>
                 <Input
                   id="title"
                   value={formData.title}
@@ -243,7 +243,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="slug">Slug</Label>
+                <Label  className='text-[#1f1f1f]' htmlFor="slug">Slug</Label>
                 <Input
                   id="slug"
                   value={formData.slug}
@@ -253,7 +253,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="excerpt">Excerpt</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="excerpt">Excerpt</Label>
                 <Textarea
                   id="excerpt"
                   value={formData.excerpt}
@@ -263,7 +263,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="content">Content *</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="content">Content *</Label>
                 <Textarea
                   id="content"
                   value={formData.content}
@@ -274,7 +274,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="featured_image">Featured Image URL</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="featured_image">Featured Image URL</Label>
                 <Input
                   id="featured_image"
                   value={formData.featured_image_url}
@@ -284,7 +284,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="tags">Tags (comma-separated)</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="tags">Tags (comma-separated)</Label>
                 <Input
                   id="tags"
                   value={formData.tags}
@@ -294,7 +294,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="status">Status</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="status">Status</Label>
                 <Select value={formData.status} onValueChange={(value: 'draft' | 'published' | 'archived') => setFormData({...formData, status: value})}>
                   <SelectTrigger>
                     <SelectValue />
@@ -308,7 +308,7 @@ export const BlogsManager = () => {
               </div>
               
               <div className="flex gap-2 pt-4">
-                <Button type="submit" className="bg-accent hover:bg-accent/90">
+                <Button type="submit" className="bg-accent hover:bg-[#1f1f1f] hover:text-white">
                   {editingBlog ? 'Update Blog' : 'Create Blog'}
                 </Button>
                 <Button 
@@ -369,7 +369,7 @@ export const BlogsManager = () => {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-sm text-white/60">
+                    <div className="flex items-center gap-4 text-sm text-white">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         {format(new Date(blog.created_at), 'MMM d, yyyy')}
@@ -398,7 +398,7 @@ export const BlogsManager = () => {
                         size="sm"
                         variant="outline"
                         onClick={() => handleEdit(blog)}
-                        className="border-white/20 text-white hover:bg-white/10"
+                        className="border-white/20 text-white hover:bg-white"
                       >
                         <Edit className="w-4 h-4" />
                       </Button>
@@ -406,7 +406,7 @@ export const BlogsManager = () => {
                         size="sm"
                         variant="outline"
                         onClick={() => handleDelete(blog.id)}
-                        className="border-red-400/20 text-red-400 hover:bg-red-400/10"
+                        className="border-red-400/20 text-red hover:bg-red "
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>

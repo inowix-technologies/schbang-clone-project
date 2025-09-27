@@ -373,7 +373,7 @@ ${validatedData.goals || 'Not specified'}
             {services.map((service, index) => (
               <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
                 <CardHeader>
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 bg-[#1f1f1f] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     {service.value === 'brand' && <Palette className="w-8 h-8 text-primary" />}
                     {service.value === 'tech' && <Code2 className="w-8 h-8 text-primary" />}
                     {service.value === 'media' && <Megaphone className="w-8 h-8 text-primary" />}
@@ -385,7 +385,7 @@ ${validatedData.goals || 'Not specified'}
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    <p className="text-sm font-medium text-primary">Key Services:</p>
+                    <p className="text-sm font-medium text-[#1f1f1f]">Key Services:</p>
                     <div className="flex flex-wrap gap-2">
                       {service.subServices.slice(0, 3).map((subService, idx) => (
                         <Badge key={idx} variant="secondary" className="text-xs">
@@ -393,7 +393,7 @@ ${validatedData.goals || 'Not specified'}
                         </Badge>
                       ))}
                       {service.subServices.length > 3 && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className="text-xs text-[#1f1f1f]">
                           +{service.subServices.length - 3} more
                         </Badge>
                       )}
@@ -432,7 +432,7 @@ ${validatedData.goals || 'Not specified'}
             ].map((phase, index) => (
               <div key={index} className="text-center">
                 <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <phase.icon className="w-10 h-10 text-white" />
+                  <phase.icon className="w-10 h-10 text-[#1f1f1f]" />
                 </div>
                 <div className="mb-4">
                   <span className="text-sm font-medium text-primary">Step {phase.step}</span>
@@ -756,7 +756,7 @@ ${validatedData.goals || 'Not specified'}
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"
+                  className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"
                   data-testid="button-submit"
                 >
                   {isLoading && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
