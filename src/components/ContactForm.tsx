@@ -211,6 +211,6 @@ export const ContactForm = () => {
           </Button>
         </form>
       </CardContent>
-    </div>
+    </Card>
   );
 };
