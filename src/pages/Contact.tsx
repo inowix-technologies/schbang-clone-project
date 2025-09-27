@@ -1,9 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ContactForm } from "@/components/ContactForm";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const offices = [
@@ -54,73 +51,8 @@ const Contact = () => {
         <div className="max-w-container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div className="bg-card p-8 rounded-2xl border border-border">
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                Start Your Project
-              </h2>
-              
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      First Name
-                    </label>
-                    <Input placeholder="John" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Last Name
-                    </label>
-                    <Input placeholder="Doe" />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Email
-                  </label>
-                  <Input type="email" placeholder="john@company.com" />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Company
-                  </label>
-                  <Input placeholder="Your Company" />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Service Interested In
-                  </label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a service" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="brand">Brand Solutions</SelectItem>
-                      <SelectItem value="tech">Tech Solutions</SelectItem>
-                      <SelectItem value="media">Media Solutions</SelectItem>
-                      <SelectItem value="research">Research Solutions</SelectItem>
-                      <SelectItem value="film">Film & Photography</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Project Details
-                  </label>
-                  <Textarea 
-                    placeholder="Tell us about your project..."
-                    className="min-h-[120px]"
-                  />
-                </div>
-                
-                <Button className="w-full rounded-full py-3">
-                  Send Message
-                </Button>
-              </form>
+            <div>
+              <ContactForm />
             </div>
 
             {/* Contact Information */}
