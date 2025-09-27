@@ -684,13 +684,12 @@ ${validatedData.goals || 'Not specified'}
                         <SelectValue placeholder="Select budget range" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="under-10k">Under $10,000</SelectItem>
-                        <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
-                        <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                        <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                        <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-                        <SelectItem value="250k-500k">$250,000 - $500,000</SelectItem>
-                        <SelectItem value="over-500k">Over $500,000</SelectItem>
+                        <SelectItem value="under-10k">Under ₹25,000</SelectItem>
+                        <SelectItem value="25k-50k">₹25,000 - ₹50,000</SelectItem>
+                        <SelectItem value="50k-100k">₹50,000 - ₹100,000</SelectItem>
+                        <SelectItem value="100k-250k">₹100,000 - ₹250,000</SelectItem>
+                        <SelectItem value="250k-500k">₹250,000 - ₹500,000</SelectItem>
+                        <SelectItem value="over-500k">Over ₹500,000</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
