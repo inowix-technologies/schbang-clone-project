@@ -58,5 +58,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+  document.addEventListener("contextmenu", (event) => event.preventDefault());
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "i") {
+      event.preventDefault();
+      alert("Inspect is disabled!");
+    }
+  });
+</script>
+
   </body>
 </html>
