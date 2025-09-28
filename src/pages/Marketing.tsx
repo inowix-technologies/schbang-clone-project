@@ -262,195 +262,9 @@ ${validatedData.goals || 'Not specified'}
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+      <section className="relative py-10 md:py-20 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
         <div className="max-w-container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">
-                🏆 Ranked #5 in MMA SMARTIES Business Impact Index
-              </Badge>
-              
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                Transform Your Business with 
-                <span className="text-primary"> Award-Winning</span> Solutions
-              </h1>
-              
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Join 300+ global brands who've achieved remarkable growth with our integrated 
-                creative, technology, and media solutions. Get a custom strategy in 24 hours.
-              </p>
-              
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-medium">1200+ Specialists</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-medium">10+ Years Experience</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-medium">Award-Winning Work</span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col lg:flex-row md:flex-row items-center gap-4">
-                <Button 
-                  size="lg" 
-                  className="rounded-full px-8"
-                  onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Get Free Strategy Session
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                  
-                </Button>
-                <Link to="/work">
-                <Button  variant="outline" size="lg" className="rounded-full px-8">
-                  View Case Studies
-                </Button>
-                </Link>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <TrendingUp className="w-8 h-8 text-green-500" />
-                    <div>
-                      <p className="text-2xl font-bold text-green-500">300%</p>
-                      <p className="text-sm text-muted-foreground">ROI Increase</p>
-                    </div>
-                  </div>
-                </Card>
-                
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Users className="w-8 h-8 text-blue-500" />
-                    <div>
-                      <p className="text-2xl font-bold text-blue-500">300+</p>
-                      <p className="text-sm text-muted-foreground">Brands Served</p>
-                    </div>
-                  </div>
-                </Card>
-                
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Award className="w-8 h-8 text-yellow-500" />
-                    <div>
-                      <p className="text-2xl font-bold text-yellow-500">50+</p>
-                      <p className="text-sm text-muted-foreground">Awards Won</p>
-                    </div>
-                  </div>
-                </Card>
-                
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Clock className="w-8 h-8 text-purple-500" />
-                    <div>
-                      <p className="text-2xl font-bold text-purple-500">24hr</p>
-                      <p className="text-sm text-muted-foreground">Response Time</p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-section">
-        <div className="max-w-container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              Comprehensive Solutions for Modern Businesses
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From brand strategy to technology implementation, we offer end-to-end solutions 
-              that drive measurable business growth.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-                <CardHeader>
-                  <div className="w-16 h-16 bg-[#1f1f1f] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    {service.value === 'brand' && <Palette className="w-8 h-8 text-primary" />}
-                    {service.value === 'tech' && <Code2 className="w-8 h-8 text-primary" />}
-                    {service.value === 'media' && <Megaphone className="w-8 h-8 text-primary" />}
-                    {service.value === 'research' && <BarChart3 className="w-8 h-8 text-primary" />}
-                    {service.value === 'film' && <Star className="w-8 h-8 text-primary" />}
-                  </div>
-                  <CardTitle className="text-xl">{service.label}</CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <p className="text-sm font-medium text-[#1f1f1f]">Key Services:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.subServices.slice(0, 3).map((subService, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {subService}
-                        </Badge>
-                      ))}
-                      {service.subServices.length > 3 && (
-                        <Badge variant="outline" className="text-xs text-[#1f1f1f]">
-                          +{service.subServices.length - 3} more
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="pt-4 border-t">
-                      <p className="text-xs text-muted-foreground italic">
-                        "{service.caseStudy}"
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-section bg-secondary">
-        <div className="max-w-container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              Our Proven Process
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              A structured approach that has delivered success for 300+ global brands
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: 1, title: "Think", description: "Deep analysis of your business, market, and objectives", icon: Lightbulb },
-              { step: 2, title: "Plan", description: "Strategic roadmap with clear milestones and deliverables", icon: Target },
-              { step: 3, title: "Execute", description: "Fearless implementation with our expert team", icon: Zap },
-              { step: 4, title: "Measure", description: "Continuous optimization based on real data and results", icon: BarChart3 }
-            ].map((phase, index) => (
-              <div key={index} className="text-center">
-                <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <phase.icon className="w-10 h-10 text-[#1f1f1f]" />
-                </div>
-                <div className="mb-4">
-                  <span className="text-sm font-medium text-primary">Step {phase.step}</span>
-                  <h3 className="text-2xl font-bold text-foreground">{phase.title}</h3>
-                </div>
-                <p className="text-muted-foreground">{phase.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section */}
-      <section id="contact-form" className="py-section">
+          <section id="contact-form" className="py-2">
         <div className="max-w-container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
@@ -775,6 +589,193 @@ ${validatedData.goals || 'Not specified'}
           </div>
         </div>
       </section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">
+                🏆 Ranked #5 in MMA SMARTIES Business Impact Index
+              </Badge>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+                Transform Your Business with 
+                <span className="text-primary"> Award-Winning</span> Solutions
+              </h1>
+              
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                Join 300+ global brands who've achieved remarkable growth with our integrated 
+                creative, technology, and media solutions. Get a custom strategy in 24 hours.
+              </p>
+              
+              <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <span className="text-sm font-medium">1200+ Specialists</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <span className="text-sm font-medium">10+ Years Experience</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  <span className="text-sm font-medium">Award-Winning Work</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col lg:flex-row md:flex-row items-center gap-4">
+                <Button 
+                  size="lg" 
+                  className="rounded-full px-8"
+                  onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Get Free Strategy Session
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                  
+                </Button>
+                <Link to="/work">
+                <Button  variant="outline" size="lg" className="rounded-full px-8">
+                  View Case Studies
+                </Button>
+                </Link>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <TrendingUp className="w-8 h-8 text-green-500" />
+                    <div>
+                      <p className="text-2xl font-bold text-green-500">300%</p>
+                      <p className="text-sm text-muted-foreground">ROI Increase</p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Users className="w-8 h-8 text-blue-500" />
+                    <div>
+                      <p className="text-2xl font-bold text-blue-500">300+</p>
+                      <p className="text-sm text-muted-foreground">Brands Served</p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Award className="w-8 h-8 text-yellow-500" />
+                    <div>
+                      <p className="text-2xl font-bold text-yellow-500">50+</p>
+                      <p className="text-sm text-muted-foreground">Awards Won</p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Clock className="w-8 h-8 text-purple-500" />
+                    <div>
+                      <p className="text-2xl font-bold text-purple-500">24hr</p>
+                      <p className="text-sm text-muted-foreground">Response Time</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-section">
+        <div className="max-w-container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Comprehensive Solutions for Modern Businesses
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              From brand strategy to technology implementation, we offer end-to-end solutions 
+              that drive measurable business growth.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+                <CardHeader>
+                  <div className="w-16 h-16 bg-[#1f1f1f] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    {service.value === 'brand' && <Palette className="w-8 h-8 text-primary" />}
+                    {service.value === 'tech' && <Code2 className="w-8 h-8 text-primary" />}
+                    {service.value === 'media' && <Megaphone className="w-8 h-8 text-primary" />}
+                    {service.value === 'research' && <BarChart3 className="w-8 h-8 text-primary" />}
+                    {service.value === 'film' && <Star className="w-8 h-8 text-primary" />}
+                  </div>
+                  <CardTitle className="text-xl">{service.label}</CardTitle>
+                  <CardDescription>{service.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-[#1f1f1f]">Key Services:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {service.subServices.slice(0, 3).map((subService, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {subService}
+                        </Badge>
+                      ))}
+                      {service.subServices.length > 3 && (
+                        <Badge variant="outline" className="text-xs text-[#1f1f1f]">
+                          +{service.subServices.length - 3} more
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="pt-4 border-t">
+                      <p className="text-xs text-muted-foreground italic">
+                        "{service.caseStudy}"
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-section bg-secondary">
+        <div className="max-w-container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Our Proven Process
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              A structured approach that has delivered success for 300+ global brands
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { step: 1, title: "Think", description: "Deep analysis of your business, market, and objectives", icon: Lightbulb },
+              { step: 2, title: "Plan", description: "Strategic roadmap with clear milestones and deliverables", icon: Target },
+              { step: 3, title: "Execute", description: "Fearless implementation with our expert team", icon: Zap },
+              { step: 4, title: "Measure", description: "Continuous optimization based on real data and results", icon: BarChart3 }
+            ].map((phase, index) => (
+              <div key={index} className="text-center">
+                <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <phase.icon className="w-10 h-10 text-[#1f1f1f]" />
+                </div>
+                <div className="mb-4">
+                  <span className="text-sm font-medium text-primary">Step {phase.step}</span>
+                  <h3 className="text-2xl font-bold text-foreground">{phase.title}</h3>
+                </div>
+                <p className="text-muted-foreground">{phase.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      
 
       <Footer />
     </div>

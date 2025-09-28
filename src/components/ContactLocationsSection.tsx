@@ -8,8 +8,8 @@ const locations = [
     timezone: "India",
     office: "Base Creative",
     address: "OXFORD TOWER-2, Door no. 901 8th floor, 139, Kodihalli, Bengaluru, Karnataka 560008",
-    phones: ["+91 8769626027"],
-    email: "admin@inowix.in"
+    phones: ["+91 6283075131"],
+    email: "info@inowix.in"
   },
   {
     code: "DL",
@@ -17,8 +17,8 @@ const locations = [
     timezone: "India",
     office: "Base Creative",
     address: "1-A, Khasra No. 275, First Floor, Westend Marg, Saidulajab, Saket, New Delhi, Delhi 110030",
-    phones: ["+91 8769626027"],
-    email: "admin@inowix.in"
+    phones: ["+91 6283075131"],
+    email: "info@inowix.in"
   },
   {
     code: "CH",
@@ -26,8 +26,8 @@ const locations = [
     timezone: "India",
     office: "Base Creative",
     address: "SBP South City , Zirakpur , Chandigarh",
-    phones: ["+91 8769626027"],
-    email: "admin@inowix.in"
+    phones: ["+91 6283075131"],
+    email: "info@inowix.in"
   },
 ];
 
