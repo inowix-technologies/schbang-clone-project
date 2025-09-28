@@ -42,7 +42,7 @@
 }
 
 .card {
-  @apply rounded-xl border border-borderColor bg-black shadow-brand transition-transform duration-500 ease-in-out;
+  @apply rounded-xl border border-border bg-black shadow-lg transition-transform duration-500 ease-in-out;
 }
 
 .card:hover {

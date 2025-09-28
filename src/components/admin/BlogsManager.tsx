@@ -253,12 +253,14 @@ export const BlogsManager = () => {
               </div>
               
               <div className="space-y-2">
-                <Label className='text-[#1f1f1f]' htmlFor="excerpt">Excerpt</Label>
+                <Label className='text-[#1f1f1f]' htmlFor="excerpt">Excerpt *</Label>
                 <Textarea
                   id="excerpt"
                   value={formData.excerpt}
                   onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
                   rows={2}
+                  required
+                  placeholder="Brief description for SEO and preview"
                 />
               </div>
               

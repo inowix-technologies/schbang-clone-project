@@ -110,14 +110,27 @@
   --red-color: #FF6262;
   --border-color: #515151;
   --box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
-  --light-blue: #B9D9FF;
-  --light-green: #D8FCC7;
-  --light-red: #FFB9B9;
-  --light-purple: #CDC3FF;
-  --white-green: #C7EFFC;
-  --light-yellow: #FFF0BF;
-  --light-pink: #FFB9E3;
-  --light-orange: #FFC8A9;
+  
+  /* Enhanced Brand Colors for Creative Design */
+  --light-blue: 208 100% 85%;
+  --light-green: 110 89% 89%;
+  --light-red: 0 100% 86%;
+  --light-purple: 247 100% 88%;
+  --white-green: 186 100% 88%;
+  --light-yellow: 48 100% 89%;
+  --light-pink: 322 100% 86%;
+  --light-orange: 23 100% 83%;
+  
+  /* Gradient Combinations */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--light-blue)), hsl(var(--light-purple)));
+  --gradient-secondary: linear-gradient(135deg, hsl(var(--light-green)), hsl(var(--white-green)));
+  --gradient-accent: linear-gradient(135deg, hsl(var(--light-orange)), hsl(var(--light-pink)));
+  --gradient-futuristic: linear-gradient(135deg, hsl(var(--light-purple)), hsl(var(--light-blue)), hsl(var(--white-green)));
+  
+  /* Effects */
+  --glow-blue: 0 0 20px hsl(var(--light-blue) / 0.5);
+  --glow-green: 0 0 20px hsl(var(--light-green) / 0.5);
+  --glow-purple: 0 0 20px hsl(var(--light-purple) / 0.5);
   }
   @layer utilities {
   .border-border {

@@ -15,6 +15,8 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Marketing from "./pages/Marketing";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +33,9 @@ const App = () => (
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/solutions/*" element={<Solutions />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/blogs" element={<Resources />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact-us" element={<Contact />} />
