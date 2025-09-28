@@ -36,6 +36,7 @@ import {
   Loader2
 } from "lucide-react";
 import { z } from 'zod';
+import { Link } from 'react-router-dom';
 
 // Enhanced form schema
 const marketingFormSchema = z.object({
@@ -294,7 +295,7 @@ ${validatedData.goals || 'Not specified'}
                 </div>
               </div>
               
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col lg:flex-row md:flex-row items-center gap-4">
                 <Button 
                   size="lg" 
                   className="rounded-full px-8"
@@ -302,10 +303,13 @@ ${validatedData.goals || 'Not specified'}
                 >
                   Get Free Strategy Session
                   <ArrowRight className="w-5 h-5 ml-2" />
+                  
                 </Button>
-                <Button variant="outline" size="lg" className="rounded-full px-8">
+                <Link to="/work">
+                <Button  variant="outline" size="lg" className="rounded-full px-8">
                   View Case Studies
                 </Button>
+                </Link>
               </div>
             </div>
             
@@ -494,8 +498,8 @@ ${validatedData.goals || 'Not specified'}
             
             <Card className="p-8">
               <CardHeader className="px-0 pt-0">
-                <CardTitle className="text-2xl">Get Your Custom Strategy</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl text-white">Get Your Custom Strategy</CardTitle>
+                <CardDescription className='text-white'>
                   Tell us about your project and we'll create a tailored solution for your business.
                 </CardDescription>
               </CardHeader>

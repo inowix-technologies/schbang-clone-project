@@ -3,9 +3,8 @@ import { Button } from "@/components/ui/button";
 
 const locations = [
   {
-    code: "MU",
+    code: "BL",
     city: "banglore",
-    time: "12:22 PM",
     timezone: "India",
     office: "Base Creative",
     address: "OXFORD TOWER-2, Door no. 901 8th floor, 139, Kodihalli, Bengaluru, Karnataka 560008",
@@ -15,7 +14,6 @@ const locations = [
   {
     code: "DL",
     city: "Delhi", 
-    time: "12:22 PM",
     timezone: "India",
     office: "Base Creative",
     address: "1-A, Khasra No. 275, First Floor, Westend Marg, Saidulajab, Saket, New Delhi, Delhi 110030",
@@ -25,7 +23,6 @@ const locations = [
   {
     code: "CH",
     city: "Chandigarh", 
-    time: "12:22 PM",
     timezone: "India",
     office: "Base Creative",
     address: "SBP South City , Zirakpur , Chandigarh",
