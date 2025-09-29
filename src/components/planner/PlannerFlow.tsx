@@ -101,79 +101,87 @@ export const PlannerFlow = ({ isOpen, onClose }: PlannerFlowProps) => {
   };
 
   const plannerContent = (
-    <div className="bg-planner-bg min-h-full flex flex-col">
-      {/* Header with Progress */}
-      <div className="bg-planner-surface border-b border-planner-border p-4 md:p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4">
-            {currentStepIndex > 0 && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleBack}
-                className="text-planner-text-secondary hover:text-planner-text-primary p-2"
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </Button>
-            )}
-            <h2 className="text-lg font-semibold text-planner-text-primary">
-              Project Planner
-            </h2>
-          </div>
-          
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleClose}
-            className="text-planner-text-secondary hover:text-planner-text-primary p-2"
-          >
-            <X className="w-4 h-4" />
-          </Button>
+  <div className="bg-planner-bg flex flex-col h-full">
+    {/* Header with Progress */}
+    <div className="bg-planner-surface border-b border-planner-border p-4 md:p-6 sticky top-0 z-10">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-4">
+          {currentStepIndex > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleBack}
+              className="text-planner-text-secondary hover:text-planner-text-primary p-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+          )}
+          <h2 className="text-lg font-semibold text-planner-text-primary">
+            Project Planner
+          </h2>
         </div>
-        
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span className="text-planner-text-secondary">
-              Step {currentStepIndex + 1} of {steps.length}
-            </span>
-            <span className="text-planner-text-secondary">
-              {Math.round(progress)}% complete
-            </span>
-          </div>
-          <Progress 
-            value={progress} 
-            className="h-2 bg-planner-surface-elevated [&>div]:bg-planner-accent"
-          />
-        </div>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleClose}
+          className="text-planner-text-secondary hover:text-planner-text-primary p-2"
+        >
+          <X className="w-4 h-4" />
+        </Button>
       </div>
 
-      {/* Step Content */}
-      <div className="flex-1 overflow-y-auto">
-        {renderStep()}
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm">
+          <span className="text-planner-text-secondary">
+            Step {currentStepIndex + 1} of {steps.length}
+          </span>
+          <span className="text-planner-text-secondary">
+            {Math.round(progress)}% complete
+          </span>
+        </div>
+        <Progress 
+          value={progress} 
+          className="h-2 bg-planner-surface-elevated [&>div]:bg-planner-accent"
+        />
       </div>
     </div>
-  );
+
+    {/* Step Content (scrollable) */}
+    <div className="flex-1 overflow-y-auto">
+      {renderStep()}
+    </div>
+  </div>
+);
+
 
   if (isMobile) {
     return (
-      <Sheet open={isOpen} onOpenChange={handleClose}>
-        <SheetContent 
-          side="bottom" 
-          className="h-[95vh] p-0 bg-planner-bg border-planner-border"
-        >
-          {plannerContent}
-        </SheetContent>
-      </Sheet>
+     <Sheet open={isOpen} onOpenChange={handleClose}>
+  <SheetContent 
+    side="bottom" 
+    className="h-[95vh] p-0 bg-planner-bg border-planner-border overflow-hidden flex flex-col"
+  >
+    <div className="flex-1 overflow-y-auto">
+      {plannerContent}
+    </div>
+  </SheetContent>
+</Sheet>
     );
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent 
-        className="max-w-2xl max-h-[90vh] p-0 bg-planner-bg border-planner-border [&>button]:hidden"
-      >
-        {plannerContent}
-      </DialogContent>
-    </Dialog>
+  <DialogContent 
+    className="max-w-2xl max-h-[90vh] p-0 bg-planner-bg border-planner-border 
+             [&>button]:hidden overflow-hidden flex flex-col 
+             [&>[data-state=open]]:bg-white/60 [&>[data-state=open]]:backdrop-blur-sm mt-[3rem]"  >
+    <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      {plannerContent}
+    </div>
+  </DialogContent>
+</Dialog>
+
+
   );
 };
