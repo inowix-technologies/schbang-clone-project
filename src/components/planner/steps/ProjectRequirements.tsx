@@ -26,11 +26,11 @@ const projectTypes = [
 ];
 
 const budgetRanges = [
-  '$5K - $15K',
-  '$15K - $30K',
-  '$30K - $50K',
-  '$50K - $100K',
-  '$100K+',
+  '₹25K - ₹50K',
+  '₹50K - ₹100K',
+  '₹100K - ₹150K',
+  '₹150K - ₹200K',
+  '₹250K+',
   'Not sure yet'
 ];
 
