@@ -22,11 +22,11 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
   // Generate plan using mock data for now
   const generatePlanFromAPI = async (data: ProjectRequirementsData): Promise<ProjectPlan> => {
     const request: PlanGenerationRequest = {
-      projectType: data.projectType,
-      budget: data.budget,
-      timeline: data.timeline,
-      requirements: data.requirements,
-      additionalInfo: data.additionalInfo
+      projectType: data.type || 'Custom Project',
+      budget: data.budget || 'Budget to be determined',
+      timeline: data.timeline || 'Timeline to be determined',
+      requirements: data.features || [],
+      additionalInfo: data.description || ''
     };
 
     // Use mock generator for now - can be replaced with real API later
@@ -64,10 +64,10 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
     try {
       setIsDownloading(true);
       await generatePDF(plan, projectData);
-      toast.success("PDF downloaded successfully!");
+      toast.success("Project plan downloaded successfully!");
     } catch (error) {
       console.error('PDF generation error:', error);
-      toast.error("Failed to generate PDF. Please try again.");
+      toast.error("Failed to generate plan document. Please try again.");
     } finally {
       setIsDownloading(false);
     }
@@ -178,7 +178,7 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
           ) : (
             <Download className="w-4 h-4 mr-2" />
           )}
-          Download PDF
+          Download Plan
         </Button>
       </div>
 
@@ -343,7 +343,7 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
             ) : (
               <Download className="w-4 h-4 mr-2" />
             )}
-            Download PDF
+            Download Plan
           </Button>
           
           <Button

@@ -7,7 +7,7 @@ export const generateMockPlan = async (request: PlanGenerationRequest): Promise<
 
   const mockPlan: ProjectPlan = {
     title: `${request.projectType} Project`,
-    description: `A comprehensive ${request.projectType.toLowerCase()} solution tailored to your specific requirements and budget constraints. This project will deliver a modern, scalable, and user-friendly solution that meets industry standards.`,
+    description: `A comprehensive ${(request.projectType || 'custom').toLowerCase()} solution tailored to your specific requirements and budget constraints. This project will deliver a modern, scalable, and user-friendly solution that meets industry standards.`,
     phases: [
       {
         name: "Planning & Discovery",
