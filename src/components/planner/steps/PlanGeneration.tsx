@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { Loader2, Download, CheckCircle, AlertTriangle, Clock, DollarSign, Code, Shield, Zap } from "lucide-react";
-import { generateProjectPlan, type ProjectPlan } from "@/lib/openai";
+import { ProjectPlan, PlanGenerationRequest } from "@/types/plan";
+import { generateMockPlan } from "@/lib/mockPlanGenerator";
 import { generatePDF } from "@/lib/pdfGenerator";
 import { ProjectRequirementsData } from "../PlannerFlow";
 import { toast } from "sonner";
@@ -18,6 +18,20 @@ interface PlanGenerationProps {
 export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationProps) => {
   const [isGenerating, setIsGenerating] = useState(true);
   const [plan, setPlan] = useState<ProjectPlan | null>(null);
+
+  // Generate plan using mock data for now
+  const generatePlanFromAPI = async (data: ProjectRequirementsData): Promise<ProjectPlan> => {
+    const request: PlanGenerationRequest = {
+      projectType: data.projectType,
+      budget: data.budget,
+      timeline: data.timeline,
+      requirements: data.requirements,
+      additionalInfo: data.additionalInfo
+    };
+
+    // Use mock generator for now - can be replaced with real API later
+    return await generateMockPlan(request);
+  };
   const [error, setError] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -31,7 +45,7 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
         // Simulate some loading time for better UX
         await new Promise(resolve => setTimeout(resolve, 2000));
         
-        const generatedPlan = await generateProjectPlan(projectData);
+        const generatedPlan = await generatePlanFromAPI(projectData);
         setPlan(generatedPlan);
       } catch (err) {
         console.error('Plan generation error:', err);
@@ -59,23 +73,6 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
     }
   };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'High': return 'bg-planner-error text-white';
-      case 'Medium': return 'bg-planner-warning text-black';
-      case 'Low': return 'bg-planner-success text-white';
-      default: return 'bg-planner-text-muted text-white';
-    }
-  };
-
-  const getRiskColor = (level: string) => {
-    switch (level) {
-      case 'High': return 'text-planner-error';
-      case 'Medium': return 'text-planner-warning';
-      case 'Low': return 'text-planner-success';
-      default: return 'text-planner-text-muted';
-    }
-  };
 
   if (isGenerating) {
     return (
@@ -167,7 +164,7 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
             Your Custom Project Plan
           </h2>
           <p className="text-planner-text-secondary">
-            Complete roadmap for {plan.project_overview.name}
+            Complete roadmap for {plan.title}
           </p>
         </div>
         
@@ -196,11 +193,7 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
         <CardContent className="space-y-4">
           <div>
             <h4 className="font-medium text-planner-text-primary mb-1">Description</h4>
-            <p className="text-planner-text-secondary">{plan.project_overview.description}</p>
-          </div>
-          <div>
-            <h4 className="font-medium text-planner-text-primary mb-1">Target Audience</h4>
-            <p className="text-planner-text-secondary">{plan.project_overview.target_audience}</p>
+            <p className="text-planner-text-secondary">{plan.description}</p>
           </div>
         </CardContent>
       </Card>
@@ -211,15 +204,22 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
           <CardHeader>
             <CardTitle className="text-planner-text-primary flex items-center gap-2">
               <Clock className="w-5 h-5 text-planner-accent" />
-              Timeline ({plan.timeline.total_duration})
+              Timeline
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {plan.timeline.phases.map((phase, index) => (
+            <div className="border-l-2 border-planner-accent/30 pl-4">
+              <h4 className="font-medium text-planner-text-primary">Project Timeline</h4>
+              <p className="text-sm text-planner-text-secondary mb-2">{plan.timeline}</p>
+            </div>
+            {plan.phases.map((phase, index) => (
               <div key={index} className="border-l-2 border-planner-accent/30 pl-4">
                 <h4 className="font-medium text-planner-text-primary">{phase.name}</h4>
                 <p className="text-sm text-planner-text-secondary mb-2">{phase.duration}</p>
-                <p className="text-sm text-planner-text-muted">{phase.description}</p>
+                <div className="text-sm text-planner-text-muted">
+                  <div>Tasks: {phase.tasks.join(', ')}</div>
+                  <div>Deliverables: {phase.deliverables.join(', ')}</div>
+                </div>
               </div>
             ))}
           </CardContent>
@@ -235,16 +235,16 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
           <CardContent className="space-y-4">
             <div className="bg-planner-surface-elevated rounded-lg p-4">
               <div className="text-2xl font-bold text-planner-accent mb-1">
-                {plan.budget_estimation.total_estimated_cost}
+                {plan.budget.range}
               </div>
-              <div className="text-sm text-planner-text-secondary">Total Project Cost</div>
+              <div className="text-sm text-planner-text-secondary">Budget Range</div>
             </div>
             
             <div className="space-y-2">
-              {plan.budget_estimation.cost_breakdown.map((item, index) => (
+              {plan.budget.breakdown.map((item, index) => (
                 <div key={index} className="flex justify-between items-center">
                   <span className="text-sm text-planner-text-secondary">{item.category}</span>
-                  <span className="text-sm font-medium text-planner-text-primary">{item.cost}</span>
+                  <span className="text-sm font-medium text-planner-text-primary">{item.amount}</span>
                 </div>
               ))}
             </div>
@@ -252,55 +252,6 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
         </Card>
       </div>
 
-      {/* Technology Stack */}
-      <Card className="bg-planner-surface border-planner-border">
-        <CardHeader>
-          <CardTitle className="text-planner-text-primary flex items-center gap-2">
-            <Zap className="w-5 h-5 text-planner-accent" />
-            Technology Stack
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {Object.entries(plan.technology_stack).map(([category, technologies]) => (
-            <div key={category}>
-              <h4 className="font-medium text-planner-text-primary mb-2 capitalize">
-                {category.replace('_', ' ')}
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {technologies.map((tech, index) => (
-                  <Badge key={index} variant="outline" className="border-planner-border text-planner-text-secondary">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-
-      {/* Key Features */}
-      <Card className="bg-planner-surface border-planner-border">
-        <CardHeader>
-          <CardTitle className="text-planner-text-primary">Key Features</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {plan.features.map((feature, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-planner-surface-elevated rounded-lg">
-                <div className="flex-1">
-                  <h4 className="font-medium text-planner-text-primary">{feature.name}</h4>
-                  <p className="text-sm text-planner-text-secondary">
-                    {feature.complexity} complexity • ~{feature.estimated_hours}
-                  </p>
-                </div>
-                <Badge className={getPriorityColor(feature.priority)}>
-                  {feature.priority}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
 
       {/* Risk Assessment */}
       <Card className="bg-planner-surface border-planner-border">
@@ -311,21 +262,10 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {plan.risk_assessment.map((risk, index) => (
-              <div key={index} className="p-4 bg-planner-surface-elevated rounded-lg">
-                <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-medium text-planner-text-primary">{risk.risk}</h4>
-                  <div className="flex gap-2">
-                    <Badge variant="outline" className={`${getRiskColor(risk.probability)} border-current`}>
-                      {risk.probability} Probability
-                    </Badge>
-                    <Badge variant="outline" className={`${getRiskColor(risk.impact)} border-current`}>
-                      {risk.impact} Impact
-                    </Badge>
-                  </div>
-                </div>
-                <p className="text-sm text-planner-text-secondary">{risk.mitigation}</p>
+          <div className="space-y-2">
+            {plan.risks.map((risk, index) => (
+              <div key={index} className="p-3 bg-planner-surface-elevated rounded-lg">
+                <p className="text-sm text-planner-text-secondary">{risk}</p>
               </div>
             ))}
           </div>
@@ -337,13 +277,10 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
         <CardHeader>
           <CardTitle className="text-planner-text-primary">Expert Recommendations</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {Object.entries(plan.recommendations).map(([key, value]) => (
-            <div key={key}>
-              <h4 className="font-medium text-planner-text-primary mb-1 capitalize">
-                {key.replace('_', ' ')}
-              </h4>
-              <p className="text-sm text-planner-text-secondary">{value}</p>
+        <CardContent className="space-y-2">
+          {plan.recommendations.map((recommendation, index) => (
+            <div key={index} className="p-3 bg-planner-surface-elevated rounded-lg">
+              <p className="text-sm text-planner-text-secondary">{recommendation}</p>
             </div>
           ))}
         </CardContent>
@@ -356,14 +293,30 @@ export const PlanGeneration = ({ projectData, onClose, onBack }: PlanGenerationP
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            {plan.next_steps.map((step, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-planner-accent/10 rounded-full flex items-center justify-center text-xs font-medium text-planner-accent mt-0.5">
-                  {index + 1}
-                </div>
-                <p className="text-sm text-planner-text-secondary flex-1">{step}</p>
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-planner-accent/10 rounded-full flex items-center justify-center text-xs font-medium text-planner-accent mt-0.5">
+                1
               </div>
-            ))}
+              <p className="text-sm text-planner-text-secondary flex-1">Review and approve this project plan</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-planner-accent/10 rounded-full flex items-center justify-center text-xs font-medium text-planner-accent mt-0.5">
+                2
+              </div>
+              <p className="text-sm text-planner-text-secondary flex-1">Finalize project scope and requirements</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-planner-accent/10 rounded-full flex items-center justify-center text-xs font-medium text-planner-accent mt-0.5">
+                3
+              </div>
+              <p className="text-sm text-planner-text-secondary flex-1">Set up project timeline and milestones</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-planner-accent/10 rounded-full flex items-center justify-center text-xs font-medium text-planner-accent mt-0.5">
+                4
+              </div>
+              <p className="text-sm text-planner-text-secondary flex-1">Begin project kickoff phase</p>
+            </div>
           </div>
         </CardContent>
       </Card>
