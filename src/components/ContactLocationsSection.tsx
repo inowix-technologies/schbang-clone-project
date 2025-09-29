@@ -49,7 +49,7 @@ export const ContactLocationsSection = () => {
               >
                 <div>
                   <div className="font-bold text-lg mb-1">
-                    {location.timezone}: {location.time}
+                    {location.city}, {location.timezone}
                   </div>
                   <div className="text-sm opacity-80">Contact Us</div>
                 </div>
