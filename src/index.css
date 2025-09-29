@@ -131,6 +131,27 @@
   --glow-blue: 0 0 20px hsl(var(--light-blue) / 0.5);
   --glow-green: 0 0 20px hsl(var(--light-green) / 0.5);
   --glow-purple: 0 0 20px hsl(var(--light-purple) / 0.5);
+
+  /* Professional Planner Theme */
+  --planner-bg: 0 0% 4%;
+  --planner-surface: 0 0% 8%;
+  --planner-surface-elevated: 0 0% 12%;
+  --planner-border: 0 0% 16%;
+  --planner-border-focus: 207 90% 54%;
+  --planner-text-primary: 0 0% 95%;
+  --planner-text-secondary: 0 0% 70%;
+  --planner-text-muted: 0 0% 50%;
+  --planner-accent: 207 90% 54%;
+  --planner-accent-muted: 207 40% 25%;
+  --planner-success: 142 76% 36%;
+  --planner-warning: 38 92% 50%;
+  --planner-error: 0 84% 60%;
+  
+  /* Professional spacing and effects */
+  --planner-radius: 0.75rem;
+  --planner-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --planner-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --planner-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   @layer utilities {
   .border-border {

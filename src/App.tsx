@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PopupManager } from "@/components/game/PopupManager";
+import { EngagementOrchestrator } from "@/components/planner/EngagementOrchestrator";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Work from "./pages/Work";
@@ -24,7 +24,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <PopupManager>
+      <EngagementOrchestrator>
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -48,7 +48,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         </BrowserRouter> 
-      </PopupManager>
+      </EngagementOrchestrator>
     </TooltipProvider>
   </QueryClientProvider>
 );
