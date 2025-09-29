@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Lightbulb, Code2, Megaphone, BarChart3, Users, Target, Palette, Zap } from "lucide-react";
+import { ArrowRight, Lightbulb, Code2, Megaphone, BarChart3, Users, Target, Palette, Zap, Link } from "lucide-react";
 import techIllustration from "@/assets/tech-illustration.jpg";
 import creativeIllustration from "@/assets/creative-illustration.jpg";
 
@@ -192,7 +192,8 @@ const Solutions = () => {
               Get Started
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button variant="outline" className="rounded-full px-8 py-3 text-lg border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
+            
+            <Button variant="outline" className="rounded-full px-8 py-3 text-lg border-primary-foreground/20 text-white hover:bg-primary-foreground/10">
               View Case Studies
             </Button>
           </div>
