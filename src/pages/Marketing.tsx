@@ -33,10 +33,49 @@ import {
   Mail,
   Building,
   MessageSquare,
-  Loader2
+  Loader2,
+  // --- Icons for Thank You Page ---
+  MailCheck,
+  Briefcase,
+  ArrowLeft
 } from "lucide-react";
 import { z } from 'zod';
 import { Link } from 'react-router-dom';
+
+// --- NEW Thank You Page Component ---
+const ThankYouPage = ({ name, onReset }) => {
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+      <main className="flex-grow flex items-center justify-center">
+        <div className="text-center max-w-2xl mx-auto px-6 py-20">
+          <div className="w-24 h-24 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+            <MailCheck className="w-12 h-12 text-green-500" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Thank You, {name}!
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Your vision is in good hands. We've received your project details and our team is already reviewing them. We're excited to learn more about your goals and will be in touch with a custom strategy <span className="text-primary font-semibold">within 24 hours</span>.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/work">
+              <Button size="lg" variant="outline" className="rounded-full px-8 w-full sm:w-auto">
+                <Briefcase className="w-5 h-5 mr-2" />
+                Explore Our Work
+              </Button>
+            </Link>
+            <Button size="lg" className="rounded-full px-8 w-full sm:w-auto" onClick={onReset}>
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Submit Another Request
+            </Button>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 // Enhanced form schema
 const marketingFormSchema = z.object({
@@ -141,6 +180,10 @@ const Marketing = () => {
   const [projectTypes, setProjectTypes] = useState<string[]>([]);
   const { toast } = useToast();
 
+  // --- NEW state for handling form submission status ---
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedName, setSubmittedName] = useState('');
+
   // Dynamic form logic - update case studies and options based on selections
   useEffect(() => {
     if (formData.industry) {
@@ -175,10 +218,8 @@ const Marketing = () => {
     setIsLoading(true);
 
     try {
-      // Validate form data
       const validatedData = marketingFormSchema.parse(formData);
 
-      // Combine all form data into a structured format
       const leadData = {
         name: `${validatedData.firstName} ${validatedData.lastName}`,
         email: validatedData.email,
@@ -206,7 +247,6 @@ ${validatedData.goals || 'Not specified'}
         status: 'new'
       };
 
-      // Submit to Supabase
       const { error } = await supabase
         .from('contact_leads')
         .insert([leadData]);
@@ -217,6 +257,11 @@ ${validatedData.goals || 'Not specified'}
         title: "Thank you for your interest!",
         description: "Our team will review your project details and contact you within 24 hours with a customized proposal.",
       });
+
+      // --- MODIFIED: Set submission status to true and store name for personalization ---
+      setSubmittedName(validatedData.firstName);
+      setIsSubmitted(true);
+      window.scrollTo(0, 0); // Scroll to top for the new page
 
       // Reset form
       setFormData({
@@ -256,6 +301,17 @@ ${validatedData.goals || 'Not specified'}
       setIsLoading(false);
     }
   };
+  
+  // --- NEW: Function to reset the form and show the form page again ---
+  const handleResetForm = () => {
+    setIsSubmitted(false);
+    setSubmittedName('');
+  }
+
+  // --- NEW: Conditional rendering logic ---
+  if (isSubmitted) {
+    return <ThankYouPage name={submittedName} onReset={handleResetForm} />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -776,10 +832,6 @@ ${validatedData.goals || 'Not specified'}
           </div>
         </div>
       </section>
-
-      {/* Contact Form Section */}
-      
-
       <Footer />
     </div>
   );
