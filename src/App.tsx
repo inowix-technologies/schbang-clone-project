@@ -18,7 +18,7 @@ import Auth from "./pages/Auth";
 import Marketing from "./pages/Marketing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import ThankYou from './pages/ThankYou';
+import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -29,26 +29,26 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about-us" element={<About />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/solutions" element={<Solutions />} />
-          <Route path="/solutions/*" element={<Solutions />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/blogs" element={<Blog />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/project/:slug" element={<ProjectDetail />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/contact-us" element={<Contact />} />
-          <Route path="/marketing" element={<Marketing />} />
-          <Route path= "/thank-you" element= {<ThankYou />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/auth" element={<Auth />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/solutions/*" element={<Solutions />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/blogs" element={<Blog />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/project/:slug" element={<ProjectDetail />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/contact-us" element={<Contact />} />
+            <Route path="/marketing" element={<Marketing />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/auth" element={<Auth />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter> 
       </EngagementOrchestrator>
     </TooltipProvider>
