@@ -2,28 +2,51 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const testimonials = [
+export const testimonials = [
   {
-    quote: "When Inowix presented the concept and storyboard to Sony Music and us, they brought a rich visual language to our song and we knew, immediately, that they were the right partners for Roz Roz.",
-    author: "The Yellow Diary Team",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=80&fit=crop&crop=face"
+    projectSlug: "daraz-ecommerce",
+    name: "Bjarke Mikkelsen",
+    position: "Co-CEO, Daraz Group",
+    content: "When we integrated advanced analytics and streamlined seller operations, we saw platform efficiencies improve dramatically. The time to onboard new merchants went down by over 40%, and customer satisfaction rose in every major market.",
   },
   {
-    quote: "India is a key market for our growth agenda and investing in building the Date Crown brand is key to the long-term success of this agenda. Our partnership with Inowix has been a great stepping stone in building a strong Date Crown brand.",
-    author: "Paul O'Neill, Vice President Marketing, Date Crown", 
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+    projectSlug: "fintrack-financial-management",
+    name: "Farida Orujova",
+    position: "Founder, FinTrack",
+    content: "With FinTrack, we aimed to simplify money management. Once we rolled out personalized dashboards and spending alerts, users reported feeling more control in their daily finances — and our retention rates increased significantly.",
   },
   {
-    quote: "Fevicol has over the years come to epitomize strong bonds. The Friendship Day campaign with Inowix provided us with an apt opportunity to bring alive this proposition; fantastic to see such a wide array of brands interact with Fevicol through this medium!",
-    author: "Giridhar Seetharam, Chief Business Officer, Fevicol",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face"
+    projectSlug: "bigohealth-telemedicine",
+    name: "Gaurav Kumar",
+    position: "Co-Founder & CEO, BigOHealth",
+    content: "Before this collaboration, reaching patients in rural districts was a constant struggle. The improved scheduling and remote care capabilities we achieved have dramatically increased trust and accessibility. Today, patients in remote Bihar are getting consultations without traveling 50-100 km.",
   },
   {
-    quote: "The campaign #MoodHiBadalDiya for Tata Neu has received a wonderful response from our social community. This campaign has seen excellent effort from every single one of the team members involved behind the scenes. Thank you for being part of this journey Inowix!",
-    author: "Isha Shroff, Associate Director Social Media, Tata Neu",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b172?w=80&h=80&fit=crop&crop=face"
+    projectSlug: "nationwide-visas-immigration",
+    name: "Rajiv Arora",
+    position: "Founder & CEO, Nationwide Immigration Services",
+    content: "With the updated digital workflow, our applicants now face far fewer delays. Documentation, tracking, and communication have become seamless, and we’ve noticed a rise in successful visa applications and better client satisfaction across all countries we serve.",
+  },
+  {
+    projectSlug: "siya-ayurveda-ecommerce",
+    name: "Dr. Megha Chaturvedi",
+    position: "Founder, Siya Ayurveda",
+    content: "Customers tell us they’ve never felt more confident buying our herbal products online—clearer product details, faster checkout, and reliable shipping. The platform has helped us build deeper trust with our wellness community.",
+  },
+  {
+    projectSlug: "luvloop-dating",
+    name: "Suresh",
+    position: "Founder & CEO, LuvLoop",
+    content: "Building LuvLoop was always about making meaningful connections. When we added AI-backed conversation starters and safety verification, users said they felt more comfortable and engaged. The rate of repeated daily sessions rose sharply.",
+  },
+  {
+    projectSlug: "bayut-realestate",
+    name: "Haider Al Khan",
+    position: "CEO, Bayut",
+    content: "In the UAE real estate market, clarity and trust matter. Our updated UX for Bayut, with enhanced 3D tours and analytics, has helped buyers feel more confident. We've seen more qualified leads and faster decisions from agents using our platform.",
   }
 ];
+
 
 export const TestimonialsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
