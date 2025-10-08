@@ -101,6 +101,13 @@ const About = () => {
     }
   ];
 
+  const handleRedirect = () => {
+    // For external links, use window.location.href or window.open
+    window.open("https://www.inowix.in/contact-us", "_blank", "noopener,noreferrer");
+    // Or to navigate in the same tab:
+    // window.location.href = "https://www.inowix.in/contact-us";
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -280,7 +287,7 @@ const About = () => {
           <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
             Let's work together to transform your brand and create something extraordinary.
           </p>
-          <Button variant="secondary" className="rounded-full px-8 py-3 text-lg hover:scale-105 transition-transform duration-300 shadow-lg">
+          <Button onClick={handleRedirect} variant="secondary" className="rounded-full px-8 py-3 text-lg hover:scale-105 transition-transform duration-300 shadow-lg">
             Get Started
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
