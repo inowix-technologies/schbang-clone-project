@@ -114,12 +114,18 @@ export const FAQSection = ({
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <div className={`inline-flex items-center gap-2 px-6 py-3 ${colors.gradient} rounded-xl ${colors.glow} text-gray-800 font-medium hover:scale-105 transition-transform duration-300 cursor-pointer`}>
-            <Shield className="w-5 h-5" />
-            Still have questions? 
-            <Rocket className="w-4 h-4 ml-1" />
-          </div>
-        </div>
+  <a 
+    href="https://www.inowix.in/contact-us" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    // The anchor tag should be the clickable element
+    className={`inline-flex items-center gap-2 px-6 py-3 ${colors.gradient} rounded-xl ${colors.glow} text-gray-800 font-medium hover:scale-105 transition-transform duration-300 cursor-pointer`}
+  >
+    <Shield className="w-5 h-5" />
+    Still have questions? 
+    <Rocket className="w-4 h-4 ml-1" />
+  </a>
+</div>
       </div>
     </section>
   );
