@@ -92,18 +92,21 @@ export const TestimonialsSection = () => {
             <Quote className="w-12 h-12 text-primary mb-6" />
             
             <blockquote className="text-xl md:text-2xl text-foreground mb-8 leading-relaxed">
-              "{testimonials[currentSlide].quote}"
+              "{testimonials[currentSlide].content}"
             </blockquote>
             
             <div className="flex items-center gap-4">
-              <img
-                src={testimonials[currentSlide].image}
-                alt={testimonials[currentSlide].author}
-                className="w-16 h-16 rounded-full object-cover"
-              />
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-2xl font-bold text-primary">
+                  {testimonials[currentSlide].name.charAt(0)}
+                </span>
+              </div>
               <div>
                 <p className="font-semibold text-foreground">
-                  {testimonials[currentSlide].author}
+                  {testimonials[currentSlide].name}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {testimonials[currentSlide].position}
                 </p>
               </div>
             </div>

@@ -134,7 +134,7 @@ export const Header = () => {
                     <span>About Us</span>
                   </a>
                   <a 
-                    href="/schbang-network" 
+                    href="/inowix-network" 
                     className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-primary rounded-lg transition-all duration-200 group"
                   >
                     <div className="w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -287,7 +287,7 @@ export const Header = () => {
                     About Us
                   </a>
                   <a 
-                    href="/schbang-network" 
+                    href="/inowix-network" 
                     className="block py-2 text-muted-foreground hover:text-primary transition-colors duration-200" 
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

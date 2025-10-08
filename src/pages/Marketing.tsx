@@ -38,22 +38,15 @@ import {
 import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 
-// Enhanced form schema
+// Simplified form schema
 const marketingFormSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
-  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   phone: z.string().trim().min(1, "Phone number is required").max(50, "Phone number must be less than 50 characters"),
   company: z.string().trim().min(1, "Company name is required").max(255, "Company name must be less than 255 characters"),
-  industry: z.string().min(1, "Please select your industry"),
-  businessSize: z.string().min(1, "Please select your business size"),
   primaryService: z.string().min(1, "Please select a primary service"),
-  projectType: z.string().min(1, "Please select project type"),
   budget: z.string().min(1, "Please select your budget range"),
-  timeline: z.string().min(1, "Please select your timeline"),
-  projectDetails: z.string().trim().min(10, "Please provide at least 10 characters describing your project").max(1000, "Project details must be less than 1000 characters"),
-  currentChallenges: z.string().trim().max(500, "Current challenges must be less than 500 characters").optional(),
-  goals: z.string().trim().max(500, "Goals must be less than 500 characters").optional(),
+  projectDetails: z.string().trim().min(10, "Please describe your project needs").max(1000, "Project details must be less than 1000 characters"),
   source: z.string().optional()
 });
 
@@ -118,51 +111,19 @@ const services = [
 
 const Marketing = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     phone: '',
     company: '',
-    industry: '',
-    businessSize: '',
     primaryService: '',
-    projectType: '',
     budget: '',
-    timeline: '',
     projectDetails: '',
-    currentChallenges: '',
-    goals: '',
     source: 'marketing-landing'
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [currentCaseStudy, setCurrentCaseStudy] = useState('');
-  const [availableServices, setAvailableServices] = useState<string[]>([]);
-  const [projectTypes, setProjectTypes] = useState<string[]>([]);
   const { toast } = useToast();
   const navigate = useNavigate();
-
-  // Dynamic form logic - update case studies and options based on selections
-  useEffect(() => {
-    if (formData.industry) {
-      const industry = industries.find(i => i.value === formData.industry);
-      setCurrentCaseStudy(industry?.caseStudy || '');
-    }
-  }, [formData.industry]);
-
-  useEffect(() => {
-    if (formData.businessSize) {
-      const businessSize = businessSizes.find(b => b.value === formData.businessSize);
-      setAvailableServices(businessSize?.services || []);
-    }
-  }, [formData.businessSize]);
-
-  useEffect(() => {
-    if (formData.primaryService) {
-      const service = services.find(s => s.value === formData.primaryService);
-      setProjectTypes(service?.subServices || []);
-    }
-  }, [formData.primaryService]);
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -179,27 +140,17 @@ const Marketing = () => {
       const validatedData = marketingFormSchema.parse(formData);
 
       const leadData = {
-        name: `${validatedData.firstName} ${validatedData.lastName}`,
+        name: validatedData.name,
         email: validatedData.email,
         company: validatedData.company,
         phone: validatedData.phone,
-        subject: `${validatedData.primaryService} - ${validatedData.projectType}`,
+        subject: `Marketing Lead - ${validatedData.primaryService}`,
         message: `
-Industry: ${validatedData.industry}
-Business Size: ${validatedData.businessSize}
-Primary Service: ${validatedData.primaryService}
-Project Type: ${validatedData.projectType}
-Budget: ${validatedData.budget}
-Timeline: ${validatedData.timeline}
+Service Needed: ${validatedData.primaryService}
+Budget Range: ${validatedData.budget}
 
 Project Details:
 ${validatedData.projectDetails}
-
-Current Challenges:
-${validatedData.currentChallenges || 'Not specified'}
-
-Goals:
-${validatedData.goals || 'Not specified'}
         `.trim(),
         source: 'marketing-landing',
         status: 'new'
@@ -216,25 +167,18 @@ ${validatedData.goals || 'Not specified'}
         description: "Our team will review your project details and contact you within 24 hours with a customized proposal.",
       });
 
-      // Navigate to thank you page with firstName
-      navigate("/thank-you", { state: { firstName: validatedData.firstName } });
+      // Navigate to thank you page
+      navigate("/thank-you", { state: { firstName: validatedData.name.split(' ')[0] } });
 
       // Reset form
       setFormData({
-        firstName: '',
-        lastName: '',
+        name: '',
         email: '',
         phone: '',
         company: '',
-        industry: '',
-        businessSize: '',
         primaryService: '',
-        projectType: '',
         budget: '',
-        timeline: '',
         projectDetails: '',
-        currentChallenges: '',
-        goals: '',
         source: 'marketing-landing'
       });
 
@@ -369,8 +313,7 @@ ${validatedData.goals || 'Not specified'}
                 Ready to Transform Your Business?
               </h2>
               <p className="text-xl text-muted-foreground mb-8">
-                Get a personalized strategy and quote tailored to your specific industry, 
-                business size, and objectives. Our team will respond within 24 hours.
+                Quick and simple - just tell us what you need, and we'll create a tailored strategy for your business within 24 hours.
               </p>
               
               <div className="space-y-6">
@@ -385,26 +328,19 @@ ${validatedData.goals || 'Not specified'}
                 <div className="flex items-start gap-4">
                   <Clock className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Fast Response</h4>
-                    <p className="text-muted-foreground">Our team reviews every inquiry and responds with a detailed proposal within 24 hours.</p>
+                    <h4 className="font-semibold text-foreground mb-2">24 Hour Response</h4>
+                    <p className="text-muted-foreground">Quick turnaround with detailed proposal and next steps.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-4">
                   <Users className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-foreground mb-2">Expert Team</h4>
-                    <p className="text-muted-foreground">Work directly with our 1200+ specialists across all disciplines.</p>
+                    <h4 className="font-semibold text-foreground mb-2">1200+ Specialists</h4>
+                    <p className="text-muted-foreground">Work with industry experts across all disciplines.</p>
                   </div>
                 </div>
               </div>
-              
-              {currentCaseStudy && (
-                <div className="mt-8 p-6 bg-primary/5 rounded-2xl border border-primary/20">
-                  <h4 className="font-semibold text-foreground mb-2">Industry Success Story</h4>
-                  <p className="text-muted-foreground italic">"{currentCaseStudy}"</p>
-                </div>
-              )}
             </div>
             
             <Card className="p-8">
@@ -415,41 +351,30 @@ ${validatedData.goals || 'Not specified'}
                 </CardDescription>
               </CardHeader>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName" className="flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4" />
-                      First Name *
-                    </Label>
-                    <Input
-                      id="firstName"
-                      value={formData.firstName}
-                      onChange={(e) => handleChange('firstName', e.target.value)}
-                      placeholder="John"
-                      required
-                      data-testid="input-firstName"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input
-                      id="lastName"
-                      value={formData.lastName}
-                      onChange={(e) => handleChange('lastName', e.target.value)}
-                      placeholder="Smith"
-                      required
-                      data-testid="input-lastName"
-                    />
-                  </div>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Name */}
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="flex items-center gap-2 text-white">
+                    <MessageSquare className="w-4 h-4" />
+                    Full Name *
+                  </Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
+                    placeholder="John Smith"
+                    required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                    data-testid="input-name"
+                  />
                 </div>
 
+                {/* Email & Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="flex items-center gap-2">
+                    <Label htmlFor="email" className="flex items-center gap-2 text-white">
                       <Mail className="w-4 h-4" />
-                      Email Address *
+                      Email *
                     </Label>
                     <Input
                       id="email"
@@ -458,29 +383,32 @@ ${validatedData.goals || 'Not specified'}
                       onChange={(e) => handleChange('email', e.target.value)}
                       placeholder="john@company.com"
                       required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
                       data-testid="input-email"
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="flex items-center gap-2">
+                    <Label htmlFor="phone" className="flex items-center gap-2 text-white">
                       <Phone className="w-4 h-4" />
-                      Phone Number *
+                      Phone *
                     </Label>
                     <Input
                       id="phone"
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleChange('phone', e.target.value)}
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+91 98765 43210"
                       required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
                       data-testid="input-phone"
                     />
                   </div>
                 </div>
 
+                {/* Company */}
                 <div className="space-y-2">
-                  <Label htmlFor="company" className="flex items-center gap-2">
+                  <Label htmlFor="company" className="flex items-center gap-2 text-white">
                     <Building className="w-4 h-4" />
                     Company Name *
                   </Label>
@@ -490,72 +418,21 @@ ${validatedData.goals || 'Not specified'}
                     onChange={(e) => handleChange('company', e.target.value)}
                     placeholder="Your Company Name"
                     required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
                     data-testid="input-company"
                   />
                 </div>
 
+                {/* Service & Budget */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="industry">Industry *</Label>
-                    <Select 
-                      value={formData.industry} 
-                      onValueChange={(value) => handleChange('industry', value)}
-                    >
-                      <SelectTrigger data-testid="select-industry">
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {industries.map((industry) => (
-                          <SelectItem key={industry.value} value={industry.value}>
-                            {industry.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="businessSize">Business Size *</Label>
-                    <Select 
-                      value={formData.businessSize} 
-                      onValueChange={(value) => handleChange('businessSize', value)}
-                    >
-                      <SelectTrigger data-testid="select-businessSize">
-                        <SelectValue placeholder="Select business size" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {businessSizes.map((size) => (
-                          <SelectItem key={size.value} value={size.value}>
-                            {size.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {availableServices.length > 0 && (
-                  <div className="p-4 bg-primary/5 rounded-lg">
-                    <h4 className="font-medium text-foreground mb-2">Recommended Services for Your Business Size:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {availableServices.map((service, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {service}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="primaryService">Primary Service Needed *</Label>
+                    <Label htmlFor="primaryService" className="text-white">Service Needed *</Label>
                     <Select 
                       value={formData.primaryService} 
                       onValueChange={(value) => handleChange('primaryService', value)}
                     >
-                      <SelectTrigger data-testid="select-primaryService">
-                        <SelectValue placeholder="Select primary service" />
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white" data-testid="select-primaryService">
+                        <SelectValue placeholder="Choose service" />
                       </SelectTrigger>
                       <SelectContent>
                         {services.map((service) => (
@@ -568,102 +445,37 @@ ${validatedData.goals || 'Not specified'}
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="projectType">Specific Project Type *</Label>
-                    <Select 
-                      value={formData.projectType} 
-                      onValueChange={(value) => handleChange('projectType', value)}
-                      disabled={!formData.primaryService}
-                    >
-                      <SelectTrigger data-testid="select-projectType">
-                        <SelectValue placeholder="Select project type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {projectTypes.map((type) => (
-                          <SelectItem key={type} value={type}>
-                            {type}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="budget">Budget Range *</Label>
+                    <Label htmlFor="budget" className="text-white">Budget Range *</Label>
                     <Select 
                       value={formData.budget} 
                       onValueChange={(value) => handleChange('budget', value)}
                     >
-                      <SelectTrigger data-testid="select-budget">
-                        <SelectValue placeholder="Select budget range" />
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white" data-testid="select-budget">
+                        <SelectValue placeholder="Select budget" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="under-10k">Under ₹25,000</SelectItem>
+                        <SelectItem value="under-25k">Under ₹25,000</SelectItem>
                         <SelectItem value="25k-50k">₹25,000 - ₹50,000</SelectItem>
-                        <SelectItem value="50k-100k">₹50,000 - ₹100,000</SelectItem>
-                        <SelectItem value="100k-250k">₹100,000 - ₹250,000</SelectItem>
-                        <SelectItem value="250k-500k">₹250,000 - ₹500,000</SelectItem>
-                        <SelectItem value="over-500k">Over ₹500,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="timeline">Timeline *</Label>
-                    <Select 
-                      value={formData.timeline} 
-                      onValueChange={(value) => handleChange('timeline', value)}
-                    >
-                      <SelectTrigger data-testid="select-timeline">
-                        <SelectValue placeholder="Select timeline" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="asap">ASAP</SelectItem>
-                        <SelectItem value="1-month">Within 1 month</SelectItem>
-                        <SelectItem value="2-3-months">2-3 months</SelectItem>
-                        <SelectItem value="3-6-months">3-6 months</SelectItem>
-                        <SelectItem value="6-12-months">6-12 months</SelectItem>
-                        <SelectItem value="planning">Just planning ahead</SelectItem>
+                        <SelectItem value="50k-100k">₹50,000 - ₹1,00,000</SelectItem>
+                        <SelectItem value="100k-250k">₹1,00,000 - ₹2,50,000</SelectItem>
+                        <SelectItem value="250k-500k">₹2,50,000 - ₹5,00,000</SelectItem>
+                        <SelectItem value="over-500k">Over ₹5,00,000</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
 
+                {/* Project Details */}
                 <div className="space-y-2">
-                  <Label htmlFor="projectDetails">Project Details *</Label>
+                  <Label htmlFor="projectDetails" className="text-white">Tell Us About Your Project *</Label>
                   <Textarea
                     id="projectDetails"
                     value={formData.projectDetails}
                     onChange={(e) => handleChange('projectDetails', e.target.value)}
-                    placeholder="Please describe your project, objectives, and what you're looking to achieve..."
-                    className="min-h-32"
+                    placeholder="Describe what you need help with..."
+                    className="min-h-28 bg-white/10 border-white/20 text-white placeholder:text-white/50"
                     required
                     data-testid="textarea-projectDetails"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="currentChallenges">Current Challenges (Optional)</Label>
-                  <Textarea
-                    id="currentChallenges"
-                    value={formData.currentChallenges}
-                    onChange={(e) => handleChange('currentChallenges', e.target.value)}
-                    placeholder="What challenges are you currently facing in your business?"
-                    className="min-h-24"
-                    data-testid="textarea-currentChallenges"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="goals">Specific Goals (Optional)</Label>
-                  <Textarea
-                    id="goals"
-                    value={formData.goals}
-                    onChange={(e) => handleChange('goals', e.target.value)}
-                    placeholder="What specific goals do you want to achieve with this project?"
-                    className="min-h-24"
-                    data-testid="textarea-goals"
                   />
                 </div>
 

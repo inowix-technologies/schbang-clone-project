@@ -152,9 +152,11 @@ const Solutions = () => {
                     </div>
                   </div>
                   
-                  <Button className="rounded-full px-8 py-3">
-                    Learn More
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                  <Button asChild className="rounded-full px-8 py-3">
+                    <a href={solution.href}>
+                      Learn More
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </a>
                   </Button>
                 </div>
                 
@@ -188,13 +190,17 @@ const Solutions = () => {
             and create lasting impact in your industry.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" className="rounded-full px-8 py-3 text-lg">
-              Get Started
-              <ArrowRight className="w-5 h-5 ml-2" />
+            <Button asChild variant="secondary" className="rounded-full px-8 py-3 text-lg">
+              <a href="/contact-us">
+                Get Started
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </a>
             </Button>
             
-            <Button variant="outline" className="rounded-full px-8 py-3 text-lg border-primary-foreground/20 text-white hover:bg-primary-foreground/10">
-              View Case Studies
+            <Button asChild variant="outline" className="rounded-full px-8 py-3 text-lg border-primary-foreground/20 text-white hover:bg-primary-foreground/10">
+              <a href="/work">
+                View Case Studies
+              </a>
             </Button>
           </div>
         </div>
