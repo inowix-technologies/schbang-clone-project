@@ -4,63 +4,12 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, Star, Users, Target, Zap, Lightbulb, Palette, Code2, Megaphone, BarChart3,
   CheckCircle, TrendingUp, Shield, Clock, Award, Phone, Mail, Building, MessageSquare,
-  Loader2, MailCheck, Briefcase, ArrowLeft
+  Loader2, MailCheck, Briefcase, ArrowLeft, Send
 } from "lucide-react";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
-// --- MOCKED/PLACEHOLDER COMPONENTS & HOOKS ---
-
-// Placeholder for Header component
-const Header = () => (
-  <header className="bg-background/80 backdrop-blur-sm border-b sticky top-0 z-50">
-    <div className="max-w-container mx-auto px-6 h-20 flex items-center justify-between">
-      <Link to="/" className="text-xl font-bold text-foreground">YourBrand</Link>
-      <nav className="hidden md:flex items-center gap-6">
-        <Link to="/services" className="text-sm font-medium text-muted-foreground hover:text-primary">Services</Link>
-        <Link to="/work" className="text-sm font-medium text-muted-foreground hover:text-primary">Our Work</Link>
-        <Link to="/about" className="text-sm font-medium text-muted-foreground hover:text-primary">About</Link>
-        <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary">Contact</Link>
-      </nav>
-      <Button variant="outline" className="hidden md:inline-flex">Get a Quote</Button>
-    </div>
-  </header>
-);
-
-// Placeholder for Footer component
-const Footer = () => (
-  <footer className="bg-secondary">
-    <div className="max-w-container mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-4">YourBrand</h3>
-          <p className="text-muted-foreground text-sm">Award-winning solutions to grow your business.</p>
-        </div>
-        <div>
-          <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
-          <ul className="space-y-2">
-            <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary">About Us</Link></li>
-            <li><Link to="/work" className="text-sm text-muted-foreground hover:text-primary">Case Studies</Link></li>
-            <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold text-foreground mb-4">Services</h4>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-sm text-muted-foreground hover:text-primary">Brand Solutions</a></li>
-            <li><a href="#" className="text-sm text-muted-foreground hover:text-primary">Tech Solutions</a></li>
-            <li><a href="#" className="text-sm text-muted-foreground hover:text-primary">Media Solutions</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold text-foreground mb-4">Connect</h4>
-          <p className="text-sm text-muted-foreground">contact@yourbrand.com</p>
-        </div>
-      </div>
-      <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} YourBrand. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-);
+// --- MOCKED/PLACEHOLDER UI COMPONENTS & HOOKS ---
 
 // Placeholders for UI components from "@/components/ui/*"
 const Button = ({ children, className, ...props }) => <button className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ${className}`} {...props}>{children}</button>;
@@ -73,11 +22,11 @@ const CardTitle = ({ children, className, ...props }) => <h3 className={`text-2x
 const CardDescription = ({ children, className, ...props }) => <p className={`text-sm text-muted-foreground ${className}`} {...props}>{children}</p>;
 const CardContent = ({ children, className, ...props }) => <div className={`p-6 pt-0 ${className}`} {...props}>{children}</div>;
 const Badge = ({ children, className, ...props }) => <div className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`} {...props}>{children}</div>;
-const Select = ({ children }) => <div>{children}</div>;
-const SelectTrigger = ({ children }) => <button className="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full">{children}</button>;
+const Select = ({ children, onValueChange, name, required }) => <div onChange={(e) => onValueChange(e.target.value)} name={name} required={required}>{children}</div>;
+const SelectTrigger = ({ children, className }) => <button className={`flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full ${className}`}>{children}</button>;
 const SelectValue = ({ placeholder }) => <span>{placeholder}</span>;
 const SelectContent = ({ children }) => <div className="relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80">{children}</div>;
-const SelectItem = ({ children, value }) => <div className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">{children}</div>;
+const SelectItem = ({ children, value }) => <option value={value} className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">{children}</option>;
 
 
 // Mock for useToast hook
@@ -141,44 +90,15 @@ const ThankYouPage = ({ name, onReset }) => {
   );
 };
 
-// --- Form Schema and Data Constants ---
-const marketingFormSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
-  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().trim().min(1, "Phone number is required").max(50, "Phone number must be less than 50 characters"),
-  company: z.string().trim().min(1, "Company name is required").max(255, "Company name must be less than 255 characters"),
-  industry: z.string().min(1, "Please select your industry"),
-  businessSize: z.string().min(1, "Please select your business size"),
-  primaryService: z.string().min(1, "Please select a primary service"),
-  projectType: z.string().min(1, "Please select project type"),
-  budget: z.string().min(1, "Please select your budget range"),
-  timeline: z.string().min(1, "Please select your timeline"),
-  projectDetails: z.string().trim().min(10, "Please provide at least 10 characters describing your project").max(1000, "Project details must be less than 1000 characters"),
-  currentChallenges: z.string().trim().max(500, "Current challenges must be less than 500 characters").optional(),
-  goals: z.string().trim().max(500, "Goals must be less than 500 characters").optional(),
-  source: z.string().optional()
+// --- Form Schema for the new form ---
+const newFormSchema = z.object({
+  name: z.string().trim().min(1, "Full name is required"),
+  email: z.string().trim().email("Invalid email address"),
+  company: z.string().trim().optional(),
+  projectType: z.string().min(1, "Please select a project type"),
+  budget: z.string().optional(),
+  message: z.string().trim().min(10, "Project details must be at least 10 characters")
 });
-
-const industries = [
-  { value: "technology", label: "Technology & Software", caseStudy: "Helped 50+ tech startups scale from MVP to market leader" },
-  { value: "ecommerce", label: "E-commerce & Retail", caseStudy: "Increased online sales by 300% for retail brands" },
-  { value: "healthcare", label: "Healthcare & Medical", caseStudy: "Streamlined patient engagement for 20+ medical practices" },
-  { value: "finance", label: "Finance & Banking", caseStudy: "Enhanced digital banking experience for 1M+ users" },
-  { value: "education", label: "Education & E-learning", caseStudy: "Built learning platforms serving 100K+ students" },
-  { value: "realestate", label: "Real Estate", caseStudy: "Digitized property management for major real estate firms" },
-  { value: "hospitality", label: "Hospitality & Travel", caseStudy: "Boosted booking conversions by 250% for hotel chains" },
-  { value: "manufacturing", label: "Manufacturing & Industrial", caseStudy: "Optimized supply chain operations for global manufacturers" },
-  { value: "nonprofits", label: "Non-profits & NGOs", caseStudy: "Amplified social impact reach by 400% for NGOs" },
-  { value: "other", label: "Other", caseStudy: "Custom solutions for unique business challenges" }
-];
-
-const businessSizes = [
-  { value: "startup", label: "Startup (1-10 employees)", services: ["MVP Development", "Brand Identity", "Digital Marketing Launch"] },
-  { value: "small", label: "Small Business (11-50 employees)", services: ["Website Redesign", "Marketing Automation", "Brand Expansion"] },
-  { value: "medium", label: "Medium Business (51-200 employees)", services: ["Digital Transformation", "Advanced Analytics", "Multi-channel Marketing"] },
-  { value: "large", label: "Large Enterprise (200+ employees)", services: ["Enterprise Solutions", "Global Brand Management", "Complex Integrations"] }
-];
 
 const services = [
   { value: "brand", label: "Brand Solutions", description: "Strategic brand development and positioning", subServices: ["Brand Strategy", "Brand Identity", "Brand Positioning", "Brand Guidelines", "Rebranding"], caseStudy: "Transformed 300+ brands with strategic positioning that increased market share by 45%" },
@@ -188,77 +108,66 @@ const services = [
   { value: "film", label: "Film & Photography", description: "Visual content and production", subServices: ["Ad Films", "Product Photography", "Brand Videos", "Social Content", "Animation"], caseStudy: "Created viral content with 100M+ total views across campaigns" }
 ];
 
+
 const Marketing = () => {
   // --- STATE MANAGEMENT ---
-  const [activeTab, setActiveTab] = useState('whatsapp'); // Default tab is now 'whatsapp'
-  const [formData, setFormData] = useState({
-    firstName: '', lastName: '', email: '', phone: '', company: '', industry: '',
-    businessSize: '', primaryService: '', projectType: '', budget: '', timeline: '',
-    projectDetails: '', currentChallenges: '', goals: '', source: 'marketing-landing'
+  const [activeTab, setActiveTab] = useState('whatsapp'); // Default tab is 'whatsapp'
+  
+  // State for the new form
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    message: ''
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentCaseStudy, setCurrentCaseStudy] = useState('');
-  const [availableServices, setAvailableServices] = useState([]);
-  const [projectTypes, setProjectTypes] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
 
-  // --- DYNAMIC FORM LOGIC ---
-  useEffect(() => {
-    if (formData.industry) {
-      const industry = industries.find(i => i.value === formData.industry);
-      setCurrentCaseStudy(industry?.caseStudy || '');
-    }
-  }, [formData.industry]);
-
-  useEffect(() => {
-    if (formData.businessSize) {
-      const businessSize = businessSizes.find(b => b.value === formData.businessSize);
-      setAvailableServices(businessSize?.services || []);
-    }
-  }, [formData.businessSize]);
-
-  useEffect(() => {
-    if (formData.primaryService) {
-      const service = services.find(s => s.value === formData.primaryService);
-      setProjectTypes(service?.subServices || []);
-    }
-  }, [formData.primaryService]);
-
-  const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormState(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleSelectChange = (name, value) => {
+     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
   // --- FORM SUBMISSION LOGIC ---
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsSubmitting(true);
     try {
-      const validatedData = marketingFormSchema.parse(formData);
+      const validatedData = newFormSchema.parse(formState);
       const leadData = {
-        name: `${validatedData.firstName} ${validatedData.lastName}`,
+        name: validatedData.name,
         email: validatedData.email,
-        company: validatedData.company,
-        phone: validatedData.phone,
-        subject: `${validatedData.primaryService} - ${validatedData.projectType}`,
-        message: `...`, // Message content same as before
-        source: 'marketing-landing',
+        company: validatedData.company || 'Not provided',
+        subject: `New Project Inquiry: ${validatedData.projectType}`,
+        message: `
+Project Type: ${validatedData.projectType}
+Budget: ${validatedData.budget || 'Not specified'}
+
+Project Details:
+${validatedData.message}
+        `.trim(),
+        source: 'marketing-landing-new',
         status: 'new'
       };
+      
       const { error } = await supabase.from('contact_leads').insert([leadData]);
       if (error) throw error;
 
-      toast({ title: "Thank you for your interest!", description: "Our team will review your project details and contact you within 24 hours." });
-      setSubmittedName(validatedData.firstName);
+      toast({ title: "Thank you for your message!", description: "We've received your project details and will be in touch shortly." });
+      setSubmittedName(validatedData.name.split(' ')[0]);
       setIsSubmitted(true);
       window.scrollTo(0, 0);
-      setFormData({
-        firstName: '', lastName: '', email: '', phone: '', company: '', industry: '',
-        businessSize: '', primaryService: '', projectType: '', budget: '', timeline: '',
-        projectDetails: '', currentChallenges: '', goals: '', source: 'marketing-landing'
-      });
+      setFormState({ name: '', email: '', company: '', projectType: '', budget: '', message: '' });
+
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({ title: "Validation Error", description: error.errors[0].message, variant: "destructive" });
@@ -266,7 +175,7 @@ const Marketing = () => {
         toast({ title: "Error", description: "Failed to submit. Please try again.", variant: "destructive" });
       }
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -331,7 +240,6 @@ const Marketing = () => {
                     <div className="flex items-start gap-4"><Clock className="w-6 h-6 text-primary mt-1 flex-shrink-0" /><div><h4 className="font-semibold text-foreground mb-2">Fast Response</h4><p className="text-muted-foreground">Our team reviews every inquiry and responds with a detailed proposal within 24 hours.</p></div></div>
                     <div className="flex items-start gap-4"><Users className="w-6 h-6 text-primary mt-1 flex-shrink-0" /><div><h4 className="font-semibold text-foreground mb-2">Expert Team</h4><p className="text-muted-foreground">Work directly with our 1200+ specialists across all disciplines.</p></div></div>
                   </div>
-                  {currentCaseStudy && (<div className="mt-8 p-6 bg-primary/5 rounded-2xl border border-primary/20"><h4 className="font-semibold text-foreground mb-2">Industry Success Story</h4><p className="text-muted-foreground italic">"{currentCaseStudy}"</p></div>)}
                 </div>
                 
                 <Card className="p-8">
@@ -346,155 +254,55 @@ const Marketing = () => {
                   </div>
 
                   {activeTab === 'form' && (
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name */}
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="flex items-center gap-2 text-white">
-                    <MessageSquare className="w-4 h-4" />
-                    Full Name *
-                  </Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => handleChange('name', e.target.value)}
-                    placeholder="John Smith"
-                    required
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                    data-testid="input-name"
-                  />
-                </div>
-
-                {/* Email & Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="flex items-center gap-2 text-white">
-                      <Mail className="w-4 h-4" />
-                      Email *
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleChange('email', e.target.value)}
-                      placeholder="john@company.com"
-                      required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                      data-testid="input-email"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="flex items-center gap-2 text-white">
-                      <Phone className="w-4 h-4" />
-                      Phone *
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleChange('phone', e.target.value)}
-                      placeholder="+91 98765 43210"
-                      required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                      data-testid="input-phone"
-                    />
-                  </div>
-                </div>
-
-                {/* Company */}
-                <div className="space-y-2">
-                  <Label htmlFor="company" className="flex items-center gap-2 text-white">
-                    <Building className="w-4 h-4" />
-                    Company Name *
-                  </Label>
-                  <Input
-                    id="company"
-                    value={formData.company}
-                    onChange={(e) => handleChange('company', e.target.value)}
-                    placeholder="Your Company Name"
-                    required
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                    data-testid="input-company"
-                  />
-                </div>
-
-                {/* Service & Budget */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="primaryService" className="text-white">Service Needed *</Label>
-                    <Select 
-                      value={formData.primaryService} 
-                      onValueChange={(value) => handleChange('primaryService', value)}
-                    >
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white" data-testid="select-primaryService">
-                        <SelectValue placeholder="Choose service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {services.map((service) => (
-                          <SelectItem key={service.value} value={service.value}>
-                            {service.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="budget" className="text-white">Budget Range *</Label>
-                    <Select 
-                      value={formData.budget} 
-                      onValueChange={(value) => handleChange('budget', value)}
-                    >
-                      <SelectTrigger className="bg-white/10 border-white/20 text-white" data-testid="select-budget">
-                        <SelectValue placeholder="Select budget" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-25k">Under ₹25,000</SelectItem>
-                        <SelectItem value="25k-50k">₹25,000 - ₹50,000</SelectItem>
-                        <SelectItem value="50k-100k">₹50,000 - ₹1,00,000</SelectItem>
-                        <SelectItem value="100k-250k">₹1,00,000 - ₹2,50,000</SelectItem>
-                        <SelectItem value="250k-500k">₹2,50,000 - ₹5,00,000</SelectItem>
-                        <SelectItem value="over-500k">Over ₹5,00,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {/* Project Details */}
-                <div className="space-y-2">
-                  <Label htmlFor="projectDetails" className="text-white">Tell Us About Your Project *</Label>
-                  <Textarea
-                    id="projectDetails"
-                    value={formData.projectDetails}
-                    onChange={(e) => handleChange('projectDetails', e.target.value)}
-                    placeholder="Describe what you need help with..."
-                    className="min-h-28 bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                    required
-                    data-testid="textarea-projectDetails"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"
-                  data-testid="button-submit"
-                >
-                  {isLoading && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
-                  {isLoading ? 'Submitting Your Request...' : 'Get My Custom Strategy Now'}
-                </Button>
-                
-                <p className="text-xs text-muted-foreground text-center">
-                  By submitting this form, you agree to our privacy policy. 
-                  We'll contact you within 24 hours with a customized proposal.
-                </p>
-              </form>
+                    <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-8 space-y-6 animate-in fade-in duration-300">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Full Name *</Label>
+                          <Input id="name" name="name" placeholder="John Doe" required className="bg-background/50" value={formState.name} onChange={handleFormChange}/>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email *</Label>
+                          <Input id="email" name="email" type="email" placeholder="john@company.com" required className="bg-background/50" value={formState.email} onChange={handleFormChange}/>
+                        </div>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="company">Company Name</Label>
+                          <Input id="company" name="company" placeholder="Your Company" className="bg-background/50" value={formState.company} onChange={handleFormChange}/>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="projectType">Project Type *</Label>
+                          <Select name="projectType" required onValueChange={(value) => handleSelectChange('projectType', value)}>
+                            <SelectTrigger className="bg-background/50"><SelectValue placeholder="Select project type" /></SelectTrigger>
+                            <SelectContent><SelectItem value="app">Custom Application</SelectItem><SelectItem value="ecommerce">Ecommerce Platform</SelectItem><SelectItem value="ai">AI Solutions</SelectItem><SelectItem value="automation">Business Automation</SelectItem><SelectItem value="other">Other</SelectItem></SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="budget">Budget Range</Label>
+                        <Select name="budget" onValueChange={(value) => handleSelectChange('budget', value)}>
+                          <SelectTrigger className="bg-background/50"><SelectValue placeholder="Select budget range" /></SelectTrigger>
+                          <SelectContent><SelectItem value="small">$5K - $20K</SelectItem><SelectItem value="medium">$20K - $50K</SelectItem><SelectItem value="large">$50K - $100K</SelectItem><SelectItem value="enterprise">$100K+</SelectItem></SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Project Details *</Label>
+                        <Textarea id="message" name="message" placeholder="Tell us about your project, goals, and timeline..." required rows={4} className="bg-background/50 resize-none" value={formState.message} onChange={handleFormChange}/>
+                      </div>
+                      <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 glow-effect" disabled={isSubmitting}>
+                        {isSubmitting ? "Sending..." : "Get Started"}
+                        <Send className="ml-2 h-5 w-5" />
+                      </Button>
+                      <p className="text-xs text-center text-muted-foreground">
+                        We respect your privacy. Your information will never be shared.
+                      </p>
+                    </form>
                   )}
                   {activeTab === 'whatsapp' && (
                     <div className="text-center animate-in fade-in duration-300">
                       <h3 className="text-lg font-semibold text-foreground mb-2">Have a Quick Question?</h3>
                       <p className="text-muted-foreground mb-6">Tap the button below to start a chat with our team directly on WhatsApp. We're here to help!</p>
-                      <a href="https://wa.me/916283075131" target="_blank" rel="noopener noreferrer" className="w-full inline-block"><Button className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"><MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp</Button></a>
+                      <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="w-full inline-block"><Button className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"><MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp</Button></a>
                     </div>
                   )}
                 </Card>
