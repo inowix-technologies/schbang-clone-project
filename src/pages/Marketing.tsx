@@ -364,7 +364,7 @@ const Marketing = () => {
           </div>
 
           {/* Contact Form Section */}
-          <section id="contact-form" className="py-2 mt-[4rem]">
+          <section id="contact-form" className="py-2 mt-[4rem] bg-[##1F1E1F]">
             <div className="max-w-container mx-auto px-6 py-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div>
@@ -523,7 +523,7 @@ const Marketing = () => {
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={index} className="card-glass p-8 hover:scale-105 transition-transform duration-300 group cursor-pointer">
+                <Card key={index} className="card-glass p-8 hover:scale-105 transition-transform duration-300 group bg-[#1F1E1F] cursor-pointer">
                   <div className="mb-6">
                     <div className="inline-flex p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Icon className="h-8 w-8 text-primary" />
@@ -565,7 +565,7 @@ const Marketing = () => {
             {segments.map((segment, index) => {
               const Icon = segment.icon;
               return (
-                <Card key={index} className="card-glass p-8 flex flex-col h-full hover:shadow-elevated transition-all duration-300">
+                <Card key={index} className="card-glass p-8 flex flex-col h-full bg-[#1F1E1F] hover:shadow-elevated transition-all duration-300">
                   <div className="mb-6">
                     <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-4">
                       <Icon className="h-10 w-10 text-primary" />
@@ -615,7 +615,7 @@ const Marketing = () => {
             {aiFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="card-glass p-8 relative overflow-hidden group hover:shadow-elevated transition-all duration-300">
+                <Card key={index} className="card-glass p-8 relative overflow-hidden bg-[#1F1E1F] group hover:shadow-elevated transition-all duration-300">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-4">
@@ -641,7 +641,7 @@ const Marketing = () => {
               <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Business with AI?</h3>
               <p className="text-lg text-muted-foreground mb-8">Schedule a free consultation to discover how AI can revolutionize your operations</p>
               <a href="#contact" className="inline-flex">
-                <button className="px-8 py-4 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold glow-effect transition-all">
+                <button className="px-8 py-4 rounded-lg bg-[#1F1E1F] hover:bg-primary/90 text-white font-semibold glow-effect transition-all">
                   Schedule Free Consultation
                 </button>
               </a>
