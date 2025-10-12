@@ -346,42 +346,155 @@ const Marketing = () => {
                   </div>
 
                   {activeTab === 'form' && (
-                    <form onSubmit={handleSubmit} className="space-y-6 animate-in fade-in duration-300">
-                      {/* Full form content */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2"><Label htmlFor="firstName" className="flex items-center gap-2"><MessageSquare className="w-4 h-4" /> First Name *</Label><Input id="firstName" value={formData.firstName} onChange={(e) => handleChange('firstName', e.target.value)} placeholder="John" required /></div>
-                        <div className="space-y-2"><Label htmlFor="lastName">Last Name *</Label><Input id="lastName" value={formData.lastName} onChange={(e) => handleChange('lastName', e.target.value)} placeholder="Smith" required /></div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2"><Label htmlFor="email" className="flex items-center gap-2"><Mail className="w-4 h-4" /> Email Address *</Label><Input id="email" type="email" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} placeholder="john@company.com" required /></div>
-                        <div className="space-y-2"><Label htmlFor="phone" className="flex items-center gap-2"><Phone className="w-4 h-4" /> Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => handleChange('phone', e.target.value)} placeholder="+1 (555) 123-4567" required /></div>
-                      </div>
-                      <div className="space-y-2"><Label htmlFor="company" className="flex items-center gap-2"><Building className="w-4 h-4" /> Company Name *</Label><Input id="company" value={formData.company} onChange={(e) => handleChange('company', e.target.value)} placeholder="Your Company Name" required /></div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2"><Label htmlFor="industry">Industry *</Label><Select value={formData.industry} onValueChange={(value) => handleChange('industry', value)}><SelectTrigger><SelectValue placeholder="Select your industry" /></SelectTrigger><SelectContent>{industries.map((i) => (<SelectItem key={i.value} value={i.value}>{i.label}</SelectItem>))}</SelectContent></Select></div>
-                          <div className="space-y-2"><Label htmlFor="businessSize">Business Size *</Label><Select value={formData.businessSize} onValueChange={(value) => handleChange('businessSize', value)}><SelectTrigger><SelectValue placeholder="Select business size" /></SelectTrigger><SelectContent>{businessSizes.map((s) => (<SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>))}</SelectContent></Select></div>
-                      </div>
-                      {availableServices.length > 0 && (<div className="p-4 bg-primary/5 rounded-lg"><h4 className="font-medium text-foreground mb-2">Recommended Services:</h4><div className="flex flex-wrap gap-2">{availableServices.map((s, idx) => (<Badge key={idx} variant="secondary" className="text-xs">{s}</Badge>))}</div></div>)}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2"><Label htmlFor="primaryService">Primary Service Needed *</Label><Select value={formData.primaryService} onValueChange={(value) => handleChange('primaryService', value)}><SelectTrigger><SelectValue placeholder="Select primary service" /></SelectTrigger><SelectContent>{services.map((s) => (<SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>))}</SelectContent></Select></div>
-                        <div className="space-y-2"><Label htmlFor="projectType">Specific Project Type *</Label><Select value={formData.projectType} onValueChange={(value) => handleChange('projectType', value)} disabled={!formData.primaryService}><SelectTrigger><SelectValue placeholder="Select project type" /></SelectTrigger><SelectContent>{projectTypes.map((t) => (<SelectItem key={t} value={t}>{t}</SelectItem>))}</SelectContent></Select></div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2"><Label htmlFor="budget">Budget Range *</Label><Select value={formData.budget} onValueChange={(value) => handleChange('budget', value)}><SelectTrigger><SelectValue placeholder="Select budget range" /></SelectTrigger><SelectContent><SelectItem value="under-10k">Under ₹25,000</SelectItem><SelectItem value="25k-50k">₹25,000 - ₹50,000</SelectItem><SelectItem value="50k-100k">₹50,000 - ₹100,000</SelectItem><SelectItem value="100k-250k">₹100,000 - ₹250,000</SelectItem><SelectItem value="250k-500k">₹250,000 - ₹500,000</SelectItem><SelectItem value="over-500k">Over ₹500,000</SelectItem></SelectContent></Select></div>
-                        <div className="space-y-2"><Label htmlFor="timeline">Timeline *</Label><Select value={formData.timeline} onValueChange={(value) => handleChange('timeline', value)}><SelectTrigger><SelectValue placeholder="Select timeline" /></SelectTrigger><SelectContent><SelectItem value="asap">ASAP</SelectItem><SelectItem value="1-month">Within 1 month</SelectItem><SelectItem value="2-3-months">2-3 months</SelectItem><SelectItem value="3-6-months">3-6 months</SelectItem><SelectItem value="6-12-months">6-12 months</SelectItem><SelectItem value="planning">Just planning ahead</SelectItem></SelectContent></Select></div>
-                      </div>
-                      <div className="space-y-2"><Label htmlFor="projectDetails">Project Details *</Label><Textarea id="projectDetails" value={formData.projectDetails} onChange={(e) => handleChange('projectDetails', e.target.value)} placeholder="Please describe your project..." className="min-h-32" required /></div>
-                      <div className="space-y-2"><Label htmlFor="currentChallenges">Current Challenges (Optional)</Label><Textarea id="currentChallenges" value={formData.currentChallenges} onChange={(e) => handleChange('currentChallenges', e.target.value)} placeholder="What challenges are you currently facing?" className="min-h-24" /></div>
-                      <div className="space-y-2"><Label htmlFor="goals">Specific Goals (Optional)</Label><Textarea id="goals" value={formData.goals} onChange={(e) => handleChange('goals', e.target.value)} placeholder="What specific goals do you want to achieve?" className="min-h-24" /></div>
-                      <Button type="submit" disabled={isLoading} className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105">{isLoading && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}{isLoading ? 'Submitting...' : 'Get My Custom Strategy Now'}</Button>
-                      <p className="text-xs text-muted-foreground text-center">By submitting this form, you agree to our privacy policy.</p>
-                    </form>
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Name */}
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="flex items-center gap-2 text-white">
+                    <MessageSquare className="w-4 h-4" />
+                    Full Name *
+                  </Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
+                    placeholder="John Smith"
+                    required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                    data-testid="input-name"
+                  />
+                </div>
+
+                {/* Email & Phone */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="flex items-center gap-2 text-white">
+                      <Mail className="w-4 h-4" />
+                      Email *
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      placeholder="john@company.com"
+                      required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      data-testid="input-email"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="flex items-center gap-2 text-white">
+                      <Phone className="w-4 h-4" />
+                      Phone *
+                    </Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      placeholder="+91 98765 43210"
+                      required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      data-testid="input-phone"
+                    />
+                  </div>
+                </div>
+
+                {/* Company */}
+                <div className="space-y-2">
+                  <Label htmlFor="company" className="flex items-center gap-2 text-white">
+                    <Building className="w-4 h-4" />
+                    Company Name *
+                  </Label>
+                  <Input
+                    id="company"
+                    value={formData.company}
+                    onChange={(e) => handleChange('company', e.target.value)}
+                    placeholder="Your Company Name"
+                    required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                    data-testid="input-company"
+                  />
+                </div>
+
+                {/* Service & Budget */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="primaryService" className="text-white">Service Needed *</Label>
+                    <Select 
+                      value={formData.primaryService} 
+                      onValueChange={(value) => handleChange('primaryService', value)}
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white" data-testid="select-primaryService">
+                        <SelectValue placeholder="Choose service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {services.map((service) => (
+                          <SelectItem key={service.value} value={service.value}>
+                            {service.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="budget" className="text-white">Budget Range *</Label>
+                    <Select 
+                      value={formData.budget} 
+                      onValueChange={(value) => handleChange('budget', value)}
+                    >
+                      <SelectTrigger className="bg-white/10 border-white/20 text-white" data-testid="select-budget">
+                        <SelectValue placeholder="Select budget" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under-25k">Under ₹25,000</SelectItem>
+                        <SelectItem value="25k-50k">₹25,000 - ₹50,000</SelectItem>
+                        <SelectItem value="50k-100k">₹50,000 - ₹1,00,000</SelectItem>
+                        <SelectItem value="100k-250k">₹1,00,000 - ₹2,50,000</SelectItem>
+                        <SelectItem value="250k-500k">₹2,50,000 - ₹5,00,000</SelectItem>
+                        <SelectItem value="over-500k">Over ₹5,00,000</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                {/* Project Details */}
+                <div className="space-y-2">
+                  <Label htmlFor="projectDetails" className="text-white">Tell Us About Your Project *</Label>
+                  <Textarea
+                    id="projectDetails"
+                    value={formData.projectDetails}
+                    onChange={(e) => handleChange('projectDetails', e.target.value)}
+                    placeholder="Describe what you need help with..."
+                    className="min-h-28 bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                    required
+                    data-testid="textarea-projectDetails"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"
+                  data-testid="button-submit"
+                >
+                  {isLoading && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
+                  {isLoading ? 'Submitting Your Request...' : 'Get My Custom Strategy Now'}
+                </Button>
+                
+                <p className="text-xs text-muted-foreground text-center">
+                  By submitting this form, you agree to our privacy policy. 
+                  We'll contact you within 24 hours with a customized proposal.
+                </p>
+              </form>
                   )}
                   {activeTab === 'whatsapp' && (
                     <div className="text-center animate-in fade-in duration-300">
                       <h3 className="text-lg font-semibold text-foreground mb-2">Have a Quick Question?</h3>
                       <p className="text-muted-foreground mb-6">Tap the button below to start a chat with our team directly on WhatsApp. We're here to help!</p>
-                      <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="w-full inline-block"><Button className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"><MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp</Button></a>
+                      <a href="https://wa.me/916283075131" target="_blank" rel="noopener noreferrer" className="w-full inline-block"><Button className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"><MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp</Button></a>
                     </div>
                   )}
                 </Card>
