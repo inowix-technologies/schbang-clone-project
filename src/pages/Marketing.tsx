@@ -6,59 +6,11 @@ import {
   CheckCircle, TrendingUp, Shield, Clock, Award, Phone, Mail, Building, MessageSquare,
   Loader2, MailCheck, Briefcase, ArrowLeft, Send
 } from "lucide-react";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 // --- PLACEHOLDER COMPONENTS & HOOKS ---
 
-// Placeholder for Header component to resolve import error
-const Header = () => (
-  <header className="bg-background/80 backdrop-blur-sm border-b sticky top-0 z-50">
-    <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <Link to="/" className="text-xl font-bold text-foreground">YourBrand</Link>
-      <nav className="hidden md:flex items-center gap-6">
-        <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-primary">Services</Link>
-        <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-primary">Our Work</Link>
-        <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-primary">About</Link>
-      </nav>
-      <Button variant="outline" className="hidden md:inline-flex">Contact Us</Button>
-    </div>
-  </header>
-);
-
-// Placeholder for Footer component to resolve import error
-const Footer = () => (
-  <footer className="bg-secondary">
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-4">YourBrand</h3>
-          <p className="text-muted-foreground text-sm">Award-winning solutions to grow your business.</p>
-        </div>
-        <div>
-          <h4 className="font-semibold text-foreground mb-4">Links</h4>
-          <ul className="space-y-2">
-            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">About</Link></li>
-            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
-            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold text-foreground mb-4">Legal</h4>
-           <ul className="space-y-2">
-            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Privacy Policy</Link></li>
-            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Terms of Service</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold text-foreground mb-4">Connect</h4>
-          <p className="text-sm text-muted-foreground">contact@yourbrand.com</p>
-        </div>
-      </div>
-      <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} YourBrand. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-);
 
 
 // Placeholders for UI components from "@/components/ui/*"
