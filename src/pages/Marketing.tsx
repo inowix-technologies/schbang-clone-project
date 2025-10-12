@@ -46,6 +46,17 @@ const Button = ({ children, className = '', ...props }) => (
   </button>
 );
 
+const Input = ({ className = '', ...props }) => <input className={`flex h-10 w-full rounded-md px-3 py-2 text-sm ${className}`} {...props} />;
+const Label = ({ children, className = '', ...props }) => <label className={`text-sm font-medium ${className}`} {...props}>{children}</label>;
+const Textarea = ({ className = '', ...props }) => <textarea className={`min-h-[80px] w-full rounded-md px-3 py-2 text-sm ${className}`} {...props} />;
+const Card = ({ children, className = '', ...props }) => <div className={`rounded-lg border bg-[#1F1E1F] p-4 ${className}`} {...props}>{children}</div>;
+const CardHeader = ({ children, className = '', ...props }) => <div className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props}>{children}</div>;
+const CardTitle = ({ children, className = '', ...props }) => <h3 className={`text-2xl font-semibold ${className}`} {...props}>{children}</h3>;
+const CardDescription = ({ children, className = '', ...props }) => <p className={`text-sm text-muted-foreground ${className}`} {...props}>{children}</p>;
+const CardContent = ({ children, className = '', ...props }) => <div className={`p-6 pt-0 ${className}`} {...props}>{children}</div>;
+const Badge = ({ children, className = '', ...props }) => <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${className}`} {...props}>{children}</div>;
+
+
 /* ---------------------------
    Simple custom Select
    --------------------------- */
@@ -355,7 +366,7 @@ const Marketing = () => {
           </div>
 
           {/* Contact Form Section */}
-          <section id="contact-form" className="py-2 mt-[4rem] bg-[##1F1E1F]">
+          <section id="contact-form" className="py-2 mt-[4rem] bg-[#1F1E1F]">
             <div className="max-w-container mx-auto px-6 py-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div>
