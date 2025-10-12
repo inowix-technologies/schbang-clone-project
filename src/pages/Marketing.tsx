@@ -1,11 +1,37 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { z } from 'zod';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight, Star, Users, Target, Zap, Lightbulb, Palette, Code2, Megaphone, BarChart3,
-  CheckCircle, TrendingUp, Shield, Clock, Award, Phone, Mail, Building, MessageSquare,
-  Loader2, MailCheck, Briefcase, ArrowLeft, Send
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "@/hooks/use-toast";
+import { 
+  ArrowRight, 
+  Play, 
+  Send,
+  Code2,
+  ShoppingCart,
+  Building2,
+  Zap,
+  MessageSquare,
+  Sparkles,
+  Rocket,
+  Users,
+  Briefcase,
+  Bot,
+  Brain,
+  Wand2,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Twitter,
+  Github
 } from "lucide-react";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
