@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { z } from 'zod';
 import { Link } from 'react-router-dom';
 import {
@@ -6,10 +6,60 @@ import {
   CheckCircle, TrendingUp, Shield, Clock, Award, Phone, Mail, Building, MessageSquare,
   Loader2, MailCheck, Briefcase, ArrowLeft, Send
 } from "lucide-react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 
-// --- MOCKED/PLACEHOLDER UI COMPONENTS & HOOKS ---
+// --- PLACEHOLDER COMPONENTS & HOOKS ---
+
+// Placeholder for Header component to resolve import error
+const Header = () => (
+  <header className="bg-background/80 backdrop-blur-sm border-b sticky top-0 z-50">
+    <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <Link to="/" className="text-xl font-bold text-foreground">YourBrand</Link>
+      <nav className="hidden md:flex items-center gap-6">
+        <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-primary">Services</Link>
+        <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-primary">Our Work</Link>
+        <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-primary">About</Link>
+      </nav>
+      <Button variant="outline" className="hidden md:inline-flex">Contact Us</Button>
+    </div>
+  </header>
+);
+
+// Placeholder for Footer component to resolve import error
+const Footer = () => (
+  <footer className="bg-secondary">
+    <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground mb-4">YourBrand</h3>
+          <p className="text-muted-foreground text-sm">Award-winning solutions to grow your business.</p>
+        </div>
+        <div>
+          <h4 className="font-semibold text-foreground mb-4">Links</h4>
+          <ul className="space-y-2">
+            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">About</Link></li>
+            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
+            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-semibold text-foreground mb-4">Legal</h4>
+           <ul className="space-y-2">
+            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Privacy Policy</Link></li>
+            <li><Link to="#" className="text-sm text-muted-foreground hover:text-primary">Terms of Service</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-semibold text-foreground mb-4">Connect</h4>
+          <p className="text-sm text-muted-foreground">contact@yourbrand.com</p>
+        </div>
+      </div>
+      <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+        <p>&copy; {new Date().getFullYear()} YourBrand. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+);
+
 
 // Placeholders for UI components from "@/components/ui/*"
 const Button = ({ children, className, ...props }) => <button className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ${className}`} {...props}>{children}</button>;
@@ -22,11 +72,81 @@ const CardTitle = ({ children, className, ...props }) => <h3 className={`text-2x
 const CardDescription = ({ children, className, ...props }) => <p className={`text-sm text-muted-foreground ${className}`} {...props}>{children}</p>;
 const CardContent = ({ children, className, ...props }) => <div className={`p-6 pt-0 ${className}`} {...props}>{children}</div>;
 const Badge = ({ children, className, ...props }) => <div className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`} {...props}>{children}</div>;
-const Select = ({ children, onValueChange, name, required }) => <div onChange={(e) => onValueChange(e.target.value)} name={name} required={required}>{children}</div>;
-const SelectTrigger = ({ children, className }) => <button className={`flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full ${className}`}>{children}</button>;
-const SelectValue = ({ placeholder }) => <span>{placeholder}</span>;
-const SelectContent = ({ children }) => <div className="relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80">{children}</div>;
-const SelectItem = ({ children, value }) => <option value={value} className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">{children}</option>;
+
+// --- REVISED DROPDOWN (SELECT) COMPONENT IMPLEMENTATION ---
+
+const SelectContext = createContext();
+
+const Select = ({ children, onValueChange, name, required, value }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState({ value: null, label: null });
+    
+    // This effect synchronizes the internal state with the external `value` prop
+    useEffect(() => {
+        let currentLabel = null;
+        // Find the label corresponding to the current value from the SelectItem children
+        React.Children.forEach(children, child => {
+            if (child && child.type === SelectContent) {
+                React.Children.forEach(child.props.children, item => {
+                    if (item && item.props.value === value) {
+                        currentLabel = item.props.children;
+                    }
+                });
+            }
+        });
+        setSelectedOption({ value, label: currentLabel });
+    }, [value, children]);
+
+    const handleSelect = (val, label) => {
+        setSelectedOption({ value: val, label: label });
+        if (onValueChange) {
+            onValueChange(val); // Pass only the value up, as expected by the handler
+        }
+        setIsOpen(false);
+    };
+    
+    const contextValue = { isOpen, setIsOpen, selectedOption, handleSelect };
+
+    return (
+        <SelectContext.Provider value={contextValue}>
+            <div className="relative">
+                 {/* Hidden input to hold the form value for native form submission if needed */}
+                <input type="hidden" name={name} value={selectedOption.value || ''} required={required} />
+                {children}
+            </div>
+        </SelectContext.Provider>
+    );
+};
+
+const SelectTrigger = ({ children, className }) => {
+    const { isOpen, setIsOpen } = useContext(SelectContext);
+    return (
+        <button type="button" onClick={() => setIsOpen(!isOpen)} className={`flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full ${className}`}>
+            {children}
+        </button>
+    );
+};
+
+const SelectValue = ({ placeholder }) => {
+    const { selectedOption } = useContext(SelectContext);
+    // Display the label of the selected option, or the placeholder
+    return <span>{selectedOption?.label || placeholder}</span>;
+};
+
+const SelectContent = ({ children }) => {
+    const { isOpen } = useContext(SelectContext);
+    if (!isOpen) return null;
+    return <div className="absolute z-50 min-w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80 w-full mt-1">{children}</div>;
+};
+
+const SelectItem = ({ children, value }) => {
+    const { handleSelect } = useContext(SelectContext);
+    return (
+        <div onClick={() => handleSelect(value, children)} className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 px-3 text-sm outline-none hover:bg-accent focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+            {children}
+        </div>
+    );
+};
 
 
 // Mock for useToast hook
@@ -34,8 +154,6 @@ const useToast = () => {
   return {
     toast: ({ title, description }) => {
       console.log(`Toast: ${title} - ${description}`);
-      // A simple window alert can also work for debugging if needed, but console is cleaner.
-      // window.alert(`${title}\n${description}`);
     }
   };
 };
@@ -43,8 +161,8 @@ const useToast = () => {
 // Mock for Supabase client
 const supabase = {
   from: () => ({
-    insert: () => {
-      console.log("Attempting to insert data into mock Supabase...");
+    insert: (data) => {
+      console.log("Attempting to insert data into mock Supabase:", data);
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve({ error: null });
@@ -69,7 +187,7 @@ const ThankYouPage = ({ name, onReset }) => {
             Thank You, {name}!
           </h1>
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Your vision is in good hands. We've received your project details and our team is already reviewing them. We're excited to learn more about your goals and will be in touch with a custom strategy <span className="text-primary font-semibold">within 24 hours</span>.
+            Your vision is in good hands. We've received your project details and will be in touch shortly.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/work">
@@ -163,7 +281,7 @@ ${validatedData.message}
       if (error) throw error;
 
       toast({ title: "Thank you for your message!", description: "We've received your project details and will be in touch shortly." });
-      setSubmittedName(validatedData.name.split(' ')[0]);
+      setSubmittedName(validatedData.name.split(' ')[0] || 'Friend');
       setIsSubmitted(true);
       window.scrollTo(0, 0);
       setFormState({ name: '', email: '', company: '', projectType: '', budget: '', message: '' });
@@ -272,7 +390,7 @@ ${validatedData.message}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="projectType">Project Type *</Label>
-                          <Select name="projectType" required onValueChange={(value) => handleSelectChange('projectType', value)}>
+                          <Select name="projectType" required value={formState.projectType} onValueChange={(value) => handleSelectChange('projectType', value)}>
                             <SelectTrigger className="bg-background/50"><SelectValue placeholder="Select project type" /></SelectTrigger>
                             <SelectContent><SelectItem value="app">Custom Application</SelectItem><SelectItem value="ecommerce">Ecommerce Platform</SelectItem><SelectItem value="ai">AI Solutions</SelectItem><SelectItem value="automation">Business Automation</SelectItem><SelectItem value="other">Other</SelectItem></SelectContent>
                           </Select>
@@ -280,7 +398,7 @@ ${validatedData.message}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="budget">Budget Range</Label>
-                        <Select name="budget" onValueChange={(value) => handleSelectChange('budget', value)}>
+                        <Select name="budget" value={formState.budget} onValueChange={(value) => handleSelectChange('budget', value)}>
                           <SelectTrigger className="bg-background/50"><SelectValue placeholder="Select budget range" /></SelectTrigger>
                           <SelectContent><SelectItem value="small">$5K - $20K</SelectItem><SelectItem value="medium">$20K - $50K</SelectItem><SelectItem value="large">$50K - $100K</SelectItem><SelectItem value="enterprise">$100K+</SelectItem></SelectContent>
                         </Select>
