@@ -319,8 +319,8 @@ ${validatedData.message}
                   </CardHeader>
                   
                   <div className="flex w-full bg-muted/50 p-1 rounded-lg mb-6">
-                    <button onClick={() => setActiveTab('form')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'form' ? 'bg-primary text-[#1F1E1F]' : 'text-muted-foreground hover:bg-muted'}`}>Get a Full Strategy</button>
-                    <button onClick={() => setActiveTab('whatsapp')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'whatsapp' ? 'bg-primary text-[#1F1E1F]' : 'text-muted-foreground hover:bg-muted'}`}>Connect on WhatsApp</button>
+                    <button onClick={() => setActiveTab('form')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'form' ? 'bg-primary text-[#1F1E1F]' : 'text-[#1F1E1F] hover:bg-muted'}`}>Get a Full Strategy</button>
+                    <button onClick={() => setActiveTab('whatsapp')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'whatsapp' ? 'bg-primary text-[#1F1E1F]' : 'text-[#1F1E1F] hover:bg-muted'}`}>Connect on WhatsApp</button>
                   </div>
 
                   {activeTab === 'form' && (
@@ -435,31 +435,184 @@ ${validatedData.message}
       </section>
 
       {/* Services Section */}
-      <section className="py-section">
-        <div className="max-w-container mx-auto px-6">
+      <section className="py-24 relative">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Comprehensive Solutions for Modern Businesses</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">From brand strategy to technology implementation, we offer end-to-end solutions that drive measurable business growth.</p>
+            <h2 className="text-5xl md:text-6xl font-bold mb-4">
+              Our <span className="text-gradient">Solutions</span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              From startups to enterprises, we deliver technology that drives growth
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (<Card key={service.value} className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"><CardHeader><div className="w-16 h-16 bg-[#1f1f1f] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">{service.value === 'brand' && <Palette className="w-8 h-8 text-primary" />}{service.value === 'tech' && <Code2 className="w-8 h-8 text-primary" />}{service.value === 'media' && <Megaphone className="w-8 h-8 text-primary" />}{service.value === 'research' && <BarChart3 className="w-8 h-8 text-primary" />}{service.value === 'film' && <Star className="w-8 h-8 text-primary" />}</div><CardTitle className="text-xl">{service.label}</CardTitle><CardDescription>{service.description}</CardDescription></CardHeader><CardContent><div className="space-y-3"><p className="text-sm font-medium text-[#1f1f1f]">Key Services:</p><div className="flex flex-wrap gap-2">{service.subServices.slice(0, 3).map((sub, idx) => (<Badge key={idx} variant="secondary" className="text-xs">{sub}</Badge>))}{service.subServices.length > 3 && (<Badge variant="outline" className="text-xs text-[#1f1f1f]">+{service.subServices.length - 3} more</Badge>)}</div><div className="pt-4 border-t"><p className="text-xs text-muted-foreground italic">"{service.caseStudy}"</p></div></div></CardContent></Card>))}
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <Card 
+                  key={index}
+                  className="card-glass p-8 hover:scale-105 transition-transform duration-300 group cursor-pointer"
+                >
+                  <div className="mb-6">
+                    <div className="inline-flex p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-8 w-8 text-primary" />
+                    </div>
+                  </div>
+
+                  <div className="mb-2 text-sm font-medium text-primary">
+                    {service.category}
+                  </div>
+
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-gradient transition-colors">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-muted-foreground mb-6">
+                    {service.description}
+                  </p>
+
+                  <ul className="space-y-2">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-center text-sm">
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Decorative gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
+      </section>
+
+      {/* Client Segments Section */}
+      <section className="py-24 bg-gradient-to-b from-background to-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-4">
+              Built for <span className="text-gradient">Every Scale</span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Whether you're just starting or scaling to millions, we have the right solution
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {segments.map((segment, index) => {
+              const Icon = segment.icon;
+              return (
+                <Card 
+                  key={index}
+                  className="card-glass p-8 flex flex-col h-full hover:shadow-elevated transition-all duration-300"
+                >
+                  <div className="mb-6">
+                    <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-4">
+                      <Icon className="h-10 w-10 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">{segment.title}</h3>
+                    <p className="text-sm text-primary font-medium">{segment.subtitle}</p>
+                  </div>
+
+                  <p className="text-muted-foreground mb-6">
+                    {segment.description}
+                  </p>
+
+                  <div className="mb-8 flex-grow">
+                    <ul className="space-y-3">
+                      {segment.benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-start">
+                          <ArrowRight className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 group"
+                    size="lg"
+                  >
+                    {segment.cta}
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-section bg-secondary">
-        <div className="max-w-container mx-auto px-6">
+      {/* AI Showcase Section */}
+      <section className="py-24 relative overflow-hidden bg-background">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Our Proven Process</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">A structured approach that has delivered success for 300+ global brands</p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">AI-Powered Technology</span>
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl font-bold mb-4">
+              Empower Your Business with <span className="text-gradient">Artificial Intelligence</span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+              Transform operations, enhance customer experience, and unlock new revenue streams with enterprise-grade AI solutions
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[{ step: 1, title: "Think", description: "Deep analysis of your business, market, and objectives", icon: Lightbulb },{ step: 2, title: "Plan", description: "Strategic roadmap with clear milestones and deliverables", icon: Target },{ step: 3, title: "Execute", description: "Fearless implementation with our expert team", icon: Zap },{ step: 4, title: "Measure", description: "Continuous optimization based on real data and results", icon: BarChart3 }].map((phase) => (<div key={phase.step} className="text-center"><div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6"><phase.icon className="w-10 h-10 text-[#1f1f1f]" /></div><div className="mb-4"><span className="text-sm font-medium text-primary">Step {phase.step}</span><h3 className="text-2xl font-bold text-foreground">{phase.title}</h3></div><p className="text-muted-foreground">{phase.description}</p></div>))}
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            {aiFeatures.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card 
+                  key={index}
+                  className="card-glass p-8 relative overflow-hidden group hover:shadow-elevated transition-all duration-300"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="inline-flex p-3 rounded-xl bg-primary/10">
+                        <Icon className="h-8 w-8 text-primary" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-primary">{feature.stats}</div>
+                        <div className="text-xs text-muted-foreground">Average Impact</div>
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="mt-16 text-center">
+            <div className="card-glass rounded-2xl p-12 max-w-4xl mx-auto">
+              <h3 className="text-3xl font-bold mb-4">
+                Ready to Transform Your Business with AI?
+              </h3>
+              <p className="text-lg text-muted-foreground mb-8">
+                Schedule a free consultation to discover how AI can revolutionize your operations
+              </p>
+              <a href="#contact" className="inline-flex">
+                <button className="px-8 py-4 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-semibold glow-effect transition-all">
+                  Schedule Free Consultation
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
-      <Footer />
+
+      {/* Footer Section */}
+      <Footer/>
     </div>
   );
 };
