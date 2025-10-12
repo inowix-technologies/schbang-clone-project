@@ -372,49 +372,101 @@ ${validatedData.message}
                   </div>
 
                   {activeTab === 'form' && (
-                    <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-8 space-y-6 animate-in fade-in duration-300">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Full Name *</Label>
-                          <Input id="name" name="name" placeholder="John Doe" required className="bg-background/50" value={formState.name} onChange={handleFormChange}/>
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email *</Label>
-                          <Input id="email" name="email" type="email" placeholder="john@company.com" required className="bg-background/50" value={formState.email} onChange={handleFormChange}/>
-                        </div>
-                      </div>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="company">Company Name</Label>
-                          <Input id="company" name="company" placeholder="Your Company" className="bg-background/50" value={formState.company} onChange={handleFormChange}/>
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="projectType">Project Type *</Label>
-                          <Select name="projectType" required value={formState.projectType} onValueChange={(value) => handleSelectChange('projectType', value)}>
-                            <SelectTrigger className="bg-background/50"><SelectValue placeholder="Select project type" /></SelectTrigger>
-                            <SelectContent><SelectItem value="app">Custom Application</SelectItem><SelectItem value="ecommerce">Ecommerce Platform</SelectItem><SelectItem value="ai">AI Solutions</SelectItem><SelectItem value="automation">Business Automation</SelectItem><SelectItem value="other">Other</SelectItem></SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="budget">Budget Range</Label>
-                        <Select name="budget" value={formState.budget} onValueChange={(value) => handleSelectChange('budget', value)}>
-                          <SelectTrigger className="bg-background/50"><SelectValue placeholder="Select budget range" /></SelectTrigger>
-                          <SelectContent><SelectItem value="small">$5K - $20K</SelectItem><SelectItem value="medium">$20K - $50K</SelectItem><SelectItem value="large">$50K - $100K</SelectItem><SelectItem value="enterprise">$100K+</SelectItem></SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Project Details *</Label>
-                        <Textarea id="message" name="message" placeholder="Tell us about your project, goals, and timeline..." required rows={4} className="bg-background/50 resize-none" value={formState.message} onChange={handleFormChange}/>
-                      </div>
-                      <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 glow-effect" disabled={isSubmitting}>
-                        {isSubmitting ? "Sending..." : "Get Started"}
-                        <Send className="ml-2 h-5 w-5" />
-                      </Button>
-                      <p className="text-xs text-center text-muted-foreground">
-                        We respect your privacy. Your information will never be shared.
-                      </p>
-                    </form>
+                    <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-8 space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name *</Label>
+                  <Input 
+                    id="name" 
+                    name="name"
+                    placeholder="John Doe" 
+                    required 
+                    className="bg-background/50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email *</Label>
+                  <Input 
+                    id="email" 
+                    name="email"
+                    type="email" 
+                    placeholder="john@company.com" 
+                    required 
+                    className="bg-background/50"
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="company">Company Name</Label>
+                  <Input 
+                    id="company" 
+                    name="company"
+                    placeholder="Your Company" 
+                    className="bg-background/50"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="projectType">Project Type *</Label>
+                  <Select name="projectType" required>
+                    <SelectTrigger className="bg-background/50">
+                      <SelectValue placeholder="Select project type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="app">Custom Application</SelectItem>
+                      <SelectItem value="ecommerce">Ecommerce Platform</SelectItem>
+                      <SelectItem value="ai">AI Solutions</SelectItem>
+                      <SelectItem value="automation">Business Automation</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="budget">Budget Range</Label>
+                <Select name="budget">
+                  <SelectTrigger className="bg-background/50">
+                    <SelectValue placeholder="Select budget range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="small">$5K - $20K</SelectItem>
+                    <SelectItem value="medium">$20K - $50K</SelectItem>
+                    <SelectItem value="large">$50K - $100K</SelectItem>
+                    <SelectItem value="enterprise">$100K+</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">Project Details *</Label>
+                <Textarea 
+                  id="message" 
+                  name="message"
+                  placeholder="Tell us about your project, goals, and timeline..." 
+                  required 
+                  rows={4}
+                  className="bg-background/50 resize-none"
+                />
+              </div>
+
+              <Button 
+                type="submit" 
+                size="lg" 
+                className="w-full bg-primary hover:bg-primary/90 glow-effect"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending..." : "Get Started"}
+                <Send className="ml-2 h-5 w-5" />
+              </Button>
+
+              <p className="text-xs text-center text-muted-foreground">
+                We respect your privacy. Your information will never be shared.
+              </p>
+            </form>
                   )}
                   {activeTab === 'whatsapp' && (
                     <div className="text-center animate-in fade-in duration-300">
