@@ -367,8 +367,8 @@ ${validatedData.message}
                   </CardHeader>
                   
                   <div className="flex w-full bg-muted/50 p-1 rounded-lg mb-6">
-                    <button onClick={() => setActiveTab('form')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'form' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}>Get a Full Strategy</button>
-                    <button onClick={() => setActiveTab('whatsapp')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'whatsapp' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}>Connect on WhatsApp</button>
+                    <button onClick={() => setActiveTab('form')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'form' ? 'bg-primary text-[#1F1E1F]' : 'text-muted-foreground hover:bg-muted'}`}>Get a Full Strategy</button>
+                    <button onClick={() => setActiveTab('whatsapp')} className={`w-1/2 p-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'whatsapp' ? 'bg-primary text-[#1F1E1F]' : 'text-muted-foreground hover:bg-muted'}`}>Connect on WhatsApp</button>
                   </div>
 
                   {activeTab === 'form' && (
@@ -472,7 +472,7 @@ ${validatedData.message}
                     <div className="text-center animate-in fade-in duration-300">
                       <h3 className="text-lg font-semibold text-foreground mb-2">Have a Quick Question?</h3>
                       <p className="text-muted-foreground mb-6">Tap the button below to start a chat with our team directly on WhatsApp. We're here to help!</p>
-                      <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="w-full inline-block"><Button className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"><MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp</Button></a>
+                      <a href="https://wa.me/916283075131" target="_blank" rel="noopener noreferrer" className="w-full inline-block"><Button className="w-full bg-primary hover:bg-primary/90 text-[#1f1f1f] font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105"><MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp</Button></a>
                     </div>
                   )}
                 </Card>
