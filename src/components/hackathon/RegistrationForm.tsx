@@ -64,7 +64,7 @@ const RegistrationForm = () => {
             Register Your <span className="text-gradient">Elite Team</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-2">
-            Secure your spot now. Only <span className="text-primary font-bold">10 team slots</span> are available.
+            Secure your spot now. Only <span className="text-gradient font-bold">10 team slots</span> are available.
           </p>
           <p className="text-lg text-muted-foreground">
             A one-time registration fee of <span className="text-[hsl(var(--accent-green))] font-bold">₹500 per team</span> is required upon submission.
@@ -78,7 +78,7 @@ const RegistrationForm = () => {
               <div 
                 className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-300 ${
                   currentStep === step 
-                    ? 'border-primary bg-primary text-primary-foreground scale-110' 
+                    ? 'border-[#FFF0BF] bg-[#FFF0BF] text-[#202224] scale-110' 
                     : currentStep > step 
                       ? 'border-[hsl(var(--accent-green))] bg-[hsl(var(--accent-green))] text-[hsl(var(--accent-green-foreground))]'
                       : 'border-border bg-card text-muted-foreground'
@@ -88,7 +88,7 @@ const RegistrationForm = () => {
               </div>
               {step < 3 && (
                 <div className={`w-12 h-1 mx-1 transition-all duration-300 ${
-                  currentStep > step ? 'bg-[hsl(var(--accent-green))]' : 'bg-border'
+                  currentStep > step ? 'bg-[hsl(var(--accent-green))]' : 'bg-[#CDC3FF]'
                 }`}></div>
               )}
             </div>
@@ -114,14 +114,14 @@ const RegistrationForm = () => {
                     value={formData.teamName}
                     onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
                     required
-                    className="bg-input border-border focus:border-primary"
+                    className="bg-[#202224] border-border text-bg focus:border-[#CDC3FF]"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="track" className="text-lg">Select Your Track</Label>
                   <Select value={formData.track} onValueChange={(value) => setFormData({ ...formData, track: value })}>
-                    <SelectTrigger className="bg-input border-border">
+                    <SelectTrigger className="bg-[#202224] border-border focus:border-[#CDC3FF]">
                       <SelectValue placeholder="Choose a tech track" />
                     </SelectTrigger>
                     <SelectContent>
@@ -136,7 +136,7 @@ const RegistrationForm = () => {
                 <div className="space-y-2">
                   <Label htmlFor="teamSize" className="text-lg">Team Size</Label>
                   <Select value={teamSize.toString()} onValueChange={(value) => setTeamSize(parseInt(value))}>
-                    <SelectTrigger className="bg-input border-border">
+                    <SelectTrigger className="bg-[#202224] border-border focus:border-[#CDC3FF]">
                       <SelectValue placeholder="Select team size" />
                     </SelectTrigger>
                     <SelectContent>
@@ -148,7 +148,7 @@ const RegistrationForm = () => {
                 </div>
 
                 <Button 
-                  type="button" 
+                  type="default" 
                   onClick={nextStep} 
                   disabled={!canProceedStep1}
                   size="lg" 
@@ -170,8 +170,8 @@ const RegistrationForm = () => {
 
                 <div className="space-y-6">
                   {Array.from({ length: teamSize }).map((_, index) => (
-                    <Card key={index} className="p-6 bg-input border-border space-y-4">
-                      <h4 className="font-semibold text-primary flex items-center gap-2">
+                    <Card key={index} className="p-6 bg-[#202224] border-border space-y-4">
+                      <h4 className="font-semibold text-gradient flex items-center gap-2">
                         Member {index + 1} 
                         {index === 0 && <span className="text-[hsl(var(--accent-green))] text-sm">(Team Lead)</span>}
                       </h4>
@@ -284,7 +284,7 @@ const RegistrationForm = () => {
                     value={formData.teamPortfolio}
                     onChange={(e) => setFormData({ ...formData, teamPortfolio: e.target.value })}
                     required
-                    className="bg-input border-border focus:border-primary"
+                    className="bg-[#202224] border-border focus:border-primary"
                   />
                 </div>
 
@@ -295,7 +295,7 @@ const RegistrationForm = () => {
                     placeholder="Tell us about your team's past projects or achievements..."
                     value={formData.achievements}
                     onChange={(e) => setFormData({ ...formData, achievements: e.target.value })}
-                    className="bg-input border-border focus:border-primary min-h-[100px]"
+                    className="bg-[#202224] border-border focus:border-primary min-h-[100px]"
                   />
                 </div>
 
@@ -307,7 +307,7 @@ const RegistrationForm = () => {
                     value={formData.superpower}
                     onChange={(e) => setFormData({ ...formData, superpower: e.target.value })}
                     required
-                    className="bg-input border-border focus:border-primary min-h-[80px]"
+                    className="bg-[#202224] border-border focus:border-primary min-h-[80px]"
                   />
                 </div>
 

@@ -19,6 +19,7 @@ import Marketing from "./pages/Marketing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Growth from "./pages/growth";
+import Hackathon from "./pages/Hackathon";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/marketing" element={<Marketing />} />
           <Route path="/build-with-inwoix" element={<Growth />} />
+          <Route path="/CodetoCareer" element={<Hackathon />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

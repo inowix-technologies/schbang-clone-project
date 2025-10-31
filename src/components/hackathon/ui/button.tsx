@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 glow-effect",
+        default: "bg-[#CDC3FF] text-gradient-foreground hover:bg-[#CDC3FF]/90 hover:scale-105 glow-effect",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-gradient underline-offset-4 hover:underline",
         blue: "bg-[hsl(var(--accent-blue))] text-[hsl(var(--accent-blue-foreground))] hover:bg-[hsl(var(--accent-blue))]/90 hover:scale-105",
-        green: "bg-[hsl(var(--accent-green))] text-[hsl(var(--accent-green-foreground))] hover:bg-[hsl(var(--accent-green))]/90 hover:scale-105",
+        green: "border border bg-[hsl(var(--accent-green))] text-[hsl(var(--accent-green-foreground))] hover:bg-[hsl(var(--accent-green))]/90 hover:scale-105",
         yellow: "bg-[hsl(var(--accent-yellow))] text-[hsl(var(--accent-yellow-foreground))] hover:bg-[hsl(var(--accent-yellow))]/90 hover:scale-105",
         orange: "bg-[hsl(var(--accent-orange))] text-[hsl(var(--accent-orange-foreground))] hover:bg-[hsl(var(--accent-orange))]/90 hover:scale-105",
       },
