@@ -47,7 +47,7 @@ export const Footer = () => {
         
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="text-center text-primary-foreground/80">
-            <p>&copy; 2022 Inowix.in All rights reserved.</p>
+            <p>&copy; 2025 Inowix.in All rights reserved.</p>
           </div>
         </div>
       </div>

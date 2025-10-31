@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2 } from "lucide-react";
-import heroImage from "@/assets/hero-illustration.png";
+import heroImage from "@/assets/hackathon.png";
 
 const HeroSection = () => {
   const scrollToRegistration = () => {
@@ -72,7 +72,7 @@ const HeroSection = () => {
             </div>
 
             {/* Key stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 max-w-md mx-auto lg:mx-0">
+            <div className="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-6 pt-8 max-w-md mx-auto lg:mx-0">
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-gradient">₹5,000</div>
                 <div className="text-sm text-muted-foreground">Prize Pool</div>
