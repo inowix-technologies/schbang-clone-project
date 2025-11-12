@@ -14,7 +14,6 @@ const Hackathon = () => {
       <ValueProposition />
       <ProcessSteps />
       <TechTracks />
-      <RegistrationForm />
       <FAQSection />
       <Footer />
     </div>

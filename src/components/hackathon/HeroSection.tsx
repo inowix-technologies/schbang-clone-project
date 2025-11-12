@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2 } from "lucide-react";
 import heroImage from "@/assets/hackathon.png";
 
+// Define the external registration link
+const REGISTRATION_LINK = "https://unstop.com/p/code-to-career-the-ncr-tech-gateway-unlock-your-elite-future-delhi-gurgaon-hackathon-2025-inowix-technologies-1594046";
+
 const HeroSection = () => {
-  const scrollToRegistration = () => {
-    document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // We can remove scrollToRegistration as it's no longer needed for the register button
 
   const scrollToTracks = () => {
     document.getElementById('tracks')?.scrollIntoView({ behavior: 'smooth' });
@@ -13,7 +14,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
-      {/* Animated particle background */}
+      {/* Animated particle background (Omitted for brevity) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-[hsl(var(--accent-blue))]/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
@@ -51,15 +52,19 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              {/* MODIFICATION HERE: Use 'asChild' and wrap with 'a' tag */}
               <Button 
                 size="lg" 
                 variant="default"
-                onClick={scrollToRegistration}
+                asChild
                 className="group glow-effect hover:shadow-primary/40"
               >
-                Register Your Team
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
+                  Register Your Team
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
               </Button>
+              {/* END MODIFICATION */}
               <Button 
                 size="lg" 
                 variant="outline" 
@@ -71,7 +76,7 @@ const HeroSection = () => {
               </Button>
             </div>
 
-            {/* Key stats */}
+            {/* Key stats (Omitted for brevity) */}
             <div className="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-6 pt-8 max-w-md mx-auto lg:mx-0">
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-gradient">₹5,000</div>
@@ -88,7 +93,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right image with glowing orb effect */}
+          {/* Right image with glowing orb effect (Omitted for brevity) */}
           <div className="relative flex items-center justify-center">
             <div className="relative w-full max-w-2xl animate-float">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-[hsl(var(--accent-blue))]/20 to-[hsl(var(--accent-green))]/20 rounded-2xl blur-3xl animate-pulse-slow"></div>
