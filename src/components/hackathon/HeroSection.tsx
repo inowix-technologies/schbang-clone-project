@@ -79,11 +79,11 @@ const HeroSection = () => {
             {/* Key stats (Omitted for brevity) */}
             <div className="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-6 pt-8 max-w-md mx-auto lg:mx-0">
               <div className="text-center lg:text-left">
-                <div className="text-3xl font-bold text-gradient">₹5,000</div>
+                <div className="text-3xl font-bold text-gradient">₹15,000</div>
                 <div className="text-sm text-muted-foreground">Prize Pool</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-3xl font-bold text-gradient">10</div>
+                <div className="text-3xl font-bold text-gradient">15</div>
                 <div className="text-sm text-muted-foreground">Team Slots</div>
               </div>
               <div className="text-center lg:text-left">
