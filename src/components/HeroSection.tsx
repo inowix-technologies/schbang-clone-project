@@ -1,26 +1,19 @@
+import { Spotlight } from "@/components/ui/spotlight";
+import { Button } from "@/components/ui/moving-border";
+
 export const HeroSection = () => {
   return (
-    <section className="py-section">
-      <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 rounded-full opacity-30"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              backgroundColor: ['#B9D9FF', '#D8FCC7', '#FFB9B9', '#CDC3FF', '#C7EFFC'][i % 5],
-              animation: `float 6s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
-      </div>
-      <div className="max-w-container mx-auto px-6">
+    <section className="h-[40rem] w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
+      
+      <div className="max-w-container mx-auto px-6 relative z-10 w-full pt-20 md:pt-0">
         <div className="text-center max-w-5xl mx-auto">
-          {/* Animated service tags */}
-          <div className="mb-12 overflow-hidden">
-            <div className="animate-marquee flex items-center gap-8 text-sm text-muted-foreground uppercase tracking-wider whitespace-nowrap">
+          {/* Animated service tags - kept but styled for dark mode */}
+          <div className="mb-12 overflow-hidden opacity-70">
+            <div className="animate-marquee flex items-center gap-8 text-sm text-neutral-300 uppercase tracking-wider whitespace-nowrap">
               <span>content creation</span>
               <span>•</span>
               <span>seo</span>
@@ -52,14 +45,23 @@ export const HeroSection = () => {
           </div>
 
           {/* Main headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 text-balance leading-tight">
-            Your <span className="text-[#646cffaa]">Creative </span>, Media &<span className="text-[#61dafbaa]"> Technology </span> Transformation Partner
+          <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 mb-8 leading-tight">
+            Your <span className="text-blue-400">Creative</span>, Media & <span className="text-purple-400">Technology</span> Transformation Partner
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-balance">
-            We're a team of 1200+ Specialists delivering award-winning work for 300+ brands worldwide, 10 years and counting!
+          <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg mx-auto">
+             We're a team of 1200+ Specialists delivering award-winning work for 300+ brands worldwide, 10 years and counting!
           </p>
+          
+          <div className="mt-8 flex justify-center">
+            <Button
+              borderRadius="1.75rem"
+              className="bg-black text-white border-neutral-200 dark:border-slate-800"
+            >
+              Book a Call
+            </Button>
+          </div>
         </div>
       </div>
     </section>

@@ -37,7 +37,7 @@ export const VideoSection = () => {
     // Navbar transition
     if (headerEl) headerEl.style.transition = "opacity 0.7s";
 
-    // IntersectionObserver to hide/show Navbar
+    // IntersectionObserver to hide/show Navbar  
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (headerEl) {

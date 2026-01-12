@@ -10,6 +10,7 @@ import { ClientsSection } from "@/components/ClientsSection";
 import { TrendingSection } from "@/components/TrendingSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { ContactLocationsSection } from "@/components/ContactLocationsSection";
+import { BannerSection } from "@/components/BannerSection";
 import { FAQSection } from "@/components/FAQSection";
 import { Footer } from "@/components/Footer";
 
@@ -44,12 +45,12 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground bg-black">
       <NotificationBanner />
       <Header />
       <HeroSection />
       <MarqueeSection />
-      <VideoSection />
+      {/* <VideoSection />  */}
       <AboutSection />
       <WorkSection />
       <ServicesSection />
@@ -57,7 +58,8 @@ const Index = () => {
       <TrendingSection />
       <TestimonialsSection />
       <ContactLocationsSection />
-      <FAQSection 
+      <BannerSection />
+      <FAQSection
         title="Frequently Asked Questions"
         subtitle="Everything you need to know about working with our digital agency"
         faqs={homeFAQs}
@@ -69,3 +71,4 @@ const Index = () => {
 };
 
 export default Index;
+

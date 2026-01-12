@@ -15,7 +15,7 @@ interface ProjectFilterProps {
 }
 
 const categories: Array<{ label: string; value: ProjectCategory | undefined }> = [
-{ label: 'All', value: undefined },
+  { label: 'All', value: undefined },
   { label: 'Apps', value: 'Apps' },
   { label: 'AI', value: 'AI' },
   { label: 'SaaS', value: 'SaaS' },
@@ -23,7 +23,7 @@ const categories: Array<{ label: string; value: ProjectCategory | undefined }> =
   { label: 'Healthcare', value: 'Healthcare' },
   { label: 'E-commerce', value: 'E-commerce' },
   { label: 'Services', value: 'Services' },
-   { label: 'Blockchain', value: 'Blockchain' },
+  { label: 'Blockchain', value: 'Blockchain' },
   { label: 'Fintech', value: 'Fintech' },
   { label: 'EdTech', value: 'EdTech' },
 ];
@@ -40,58 +40,48 @@ const ProjectFilter = ({
   return (
     <div className="space-y-6" data-testid="project-filter">
       {/* Search */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-        <Input
-          placeholder="Search projects..."
-          value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10 bg-background/50 border-border/50 focus:bg-background transition-all"
-          data-testid="input-search"
-        />
-        {searchQuery && (
-          <button
-            onClick={() => onSearchChange('')}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-            data-testid="button-clear-search"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        )}
+      <div className="space-y-2">
+        <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-600">Search Workspace</h3>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-600 h-3 w-3" />
+          <Input
+            placeholder="Type to find..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            className="pl-9 h-10 bg-white/5 border-white/5 text-xs text-white placeholder:text-neutral-700 focus:ring-blue-500/30 rounded-lg transition-all"
+            data-testid="input-search"
+          />
+        </div>
       </div>
 
-      {/* Category Filters */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-foreground">Categories</h3>
-        <div className="flex flex-wrap gap-2">
+      {/* Category Filters - Two column grid to save space */}
+      <div className="space-y-2">
+        <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-600">Expertise</h3>
+        <div className="grid grid-cols-2 gap-2">
           {categories.map((category) => {
             const isSelected = selectedCategory === category.value;
             const count = categoryStats[category.label] || 0;
-            
+
             return (
-              <Button
+              <button
                 key={category.label}
-                variant={isSelected ? "default" : "outline"}
-                size="sm"
                 onClick={() => onCategoryChange(category.value)}
                 className={cn(
-                  "transition-all duration-200 text-xs",
-                  isSelected 
-                    ? "bg-accent text-accent-foreground shadow-md" 
-                    : "bg-background/50 hover:bg-accent/10 border-border/50"
+                  "flex items-center justify-between px-2.5 py-1.5 rounded-lg transition-all duration-300 text-[10px] font-bold border",
+                  isSelected
+                    ? "bg-blue-600 border-blue-600 text-white"
+                    : "bg-transparent border-white/5 text-neutral-500 hover:border-white/20 hover:text-neutral-300"
                 )}
                 data-testid={`filter-${category.label.toLowerCase().replace(' ', '-')}`}
               >
-                {category.label}
+                <span className="truncate">{category.label}</span>
                 <span className={cn(
-                  "ml-1.5 px-1.5 py-0.5 rounded-full text-xs",
-                  isSelected 
-                    ? "bg-accent-foreground/20 text-accent-foreground" 
-                    : "bg-muted text-muted-foreground"
+                  "ml-1 opacity-60",
+                  isSelected ? "text-white" : "text-neutral-700"
                 )}>
                   {count}
                 </span>
-              </Button>
+              </button>
             );
           })}
         </div>
@@ -99,16 +89,13 @@ const ProjectFilter = ({
 
       {/* Clear Filters */}
       {hasActiveFilters && (
-        <Button
-          variant="ghost"
-          size="sm"
+        <button
           onClick={onClearFilters}
-          className="text-muted-foreground hover:text-foreground transition-colors"
+          className="w-full py-2 text-[10px] font-bold text-neutral-600 hover:text-white border border-dashed border-white/10 rounded-lg transition-all"
           data-testid="button-clear-filters"
         >
-          <X className="h-3 w-3 mr-1" />
-          Clear filters
-        </Button>
+          RESET FILTERS
+        </button>
       )}
     </div>
   );

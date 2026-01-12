@@ -1,9 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import Navigation from "@/components/portfolio/Navigation";
+import { ArrowLeft, ChevronRight, Share2, ExternalLink } from "lucide-react";
 import { getProjectBySlug } from "@/data/projects";
-import { NotificationBanner } from "@/components/NotificationBanner";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -11,10 +12,11 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-gradient-hero flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Project not found</h1>
-          <Link to="/work" className="text-accent hover:underline">
+          <h1 className="text-4xl font-bold mb-6 text-white">Project not found</h1>
+          <Link to="/work" className="inline-flex items-center text-primary hover:underline gap-2">
+            <ArrowLeft className="w-4 h-4" />
             Return to portfolio
           </Link>
         </div>
@@ -22,311 +24,229 @@ const ProjectDetail = () => {
     );
   }
 
-  const getBackgroundColor = (variant: number) => {
-     const colors = {
-      1: "bg-[#FFF0BF] text-[#202224]",
-      2: "bg-[#B9D9FF] text-[#202224]", 
-      3: "bg-[#D8FCC7] text-[#202224]",
-      4: "bg-[#FFB9E3] text-[#202224]",
-      5: "bg-[#FFC8A9] text-[#202224]",
-      6: "bg-[#FFB9E3] text-[#202224]",
-    };
-    return colors[variant as keyof typeof colors];
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-hero">
-     <NotificationBanner />
-           <Header />
-      
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <Link 
-            to="/work" 
-            className="inline-flex items-center text-accent hover:text-accent/80 transition-colors mb-8 group"
+    <div className="min-h-screen bg-[#030303] text-white selection:bg-primary/30">
+      <Header />
+
+      <main className="pt-32 pb-20">
+        {/* Header / Hero Section */}
+        <section className="px-6 lg:px-12 max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"
           >
-            <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Back to Portfolio
-          </Link>
-          
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-8">
-              <div>
-                <h1 className="font-hero font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6 animate-fade-in">
-                  {project.title}
-                </h1>
-                <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: '150ms' }}>
-                  {project.subtitle}
-                </p>
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/20">
+                  {project.category}
+                </span>
+                <div className="h-px w-8 bg-zinc-800" />
+                <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">
+                  Case Study {project.id.padStart(2, '0')}
+                </span>
               </div>
-              
-              <p className="text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '300ms' }}>
-                {project.description}
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-8">
+                {project.title}
+              </h1>
+              <p className="text-xl text-zinc-400 leading-relaxed max-w-2xl">
+                {project.subtitle}
               </p>
-              
-              <button 
-                className="inline-flex items-center px-8 py-4 bg-accent text-accent-foreground rounded-2xl font-semibold hover:bg-accent/90 transition-all duration-300 hover:scale-105 animate-fade-in" 
-                style={{ animationDelay: '450ms' }}
-                data-testid="button-request-demo"
-              >
-                Request a Demo
-                <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
+            </div>
+
+            <div className="flex items-center gap-4">
+              <button className="p-3 rounded-full bg-zinc-900 border border-white/5 hover:bg-zinc-800 transition-colors">
+                <Share2 className="w-5 h-5" />
+              </button>
+              <button className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-zinc-200 transition-all shadow-xl">
+                View Live <ExternalLink className="w-4 h-4" />
               </button>
             </div>
-            
-            <div className="relative animate-scale-in" style={{ animationDelay: '300ms' }}>
-              <div className={`rounded-3xl p-2 ${getBackgroundColor(project.colorVariant)}`}>
-                <img
-                  src={project.heroImage}
-                  alt={project.title}
-                  className="w-full h-80 lg:h-96 object-cover rounded-2xl shadow-card"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
 
-      {/* Stats Section */}
-      <section className="py-16 px-4 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">Results & Impact</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="relative aspect-[16/9] lg:aspect-[21/9] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl"
+          >
+            <img
+              src={project.heroImage}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          </motion.div>
+        </section>
+
+        {/* Stats Grid */}
+        <section className="px-6 lg:px-12 max-w-7xl mx-auto mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {project.stats.map((stat, index) => (
-              <div 
+              <motion.div
                 key={index}
-                className="text-center animate-slide-up"
-                style={{ animationDelay: `${index * 150}ms` }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-8 rounded-[2rem] bg-zinc-900/50 border border-white/5 backdrop-blur-sm group hover:border-primary/20 transition-all"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 rounded-2xl mb-4">
-                  <stat.icon className="w-8 h-8 text-accent" />
+                <div className="p-3 rounded-xl bg-primary/5 border border-primary/10 w-fit mb-6 group-hover:scale-110 transition-transform">
+                  <stat.icon className="w-6 h-6 text-primary" />
                 </div>
-                <div className="text-4xl lg:text-5xl font-bold mb-2">{stat.value}</div>
-                <p className="text-muted-foreground">{stat.label}</p>
-              </div>
+                <div className="text-4xl font-bold mb-2 tabular-nums">{stat.value}</div>
+                <div className="text-xs text-zinc-500 font-medium uppercase tracking-wider">{stat.label}</div>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Content Sections */}
-      <section className="py-16 px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto space-y-24">
-          {project.sections.map((section, index) => (
-            <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-              <div className="flex items-center mb-8">
-                <div className="w-8 h-8 bg-accent rounded-lg mr-4"></div>
-                <h3 className="text-sm uppercase tracking-wider text-accent font-semibold">
-                  {section.type}
-                </h3>
-              </div>
-              
-              <h2 className="text-3xl lg:text-4xl font-bold mb-8">{section.title}</h2>
-              
-              {typeof section.content === 'string' ? (
-                <p className="text-lg leading-relaxed text-muted-foreground mb-8">
-                  {section.content}
-                </p>
-              ) : (
-                <ul className="space-y-4 mb-8">
-                  {section.content.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start">
-                      <div className="w-2 h-2 bg-accent rounded-full mt-3 mr-4 flex-shrink-0"></div>
-                      <span className="text-lg text-muted-foreground">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              
-              {section.highlights && (
-                <div className="space-y-4">
-                  <h4 className="text-xl font-semibold mb-4">Key Highlights:</h4>
-                  <ul className="space-y-3">
-                    {section.highlights.map((highlight, highlightIndex) => (
-                      <li key={highlightIndex} className="flex items-start">
-                        <div className="w-2 h-2 bg-accent rounded-full mt-3 mr-4 flex-shrink-0"></div>
-                        <span className="text-lg">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="py-16 px-4 lg:px-8 bg-card/20">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">Tech Stack</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div>
-              <h3 className="text-xl font-semibold mb-6">Frameworks</h3>
-              <div className="space-y-4">
-                {project.techStack.frameworks.map((tech, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/10 rounded-lg mr-3"></div>
-                    <span>{tech}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-6">Languages</h3>
-              <div className="space-y-4">
-                {project.techStack.languages.map((tech, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/10 rounded-lg mr-3"></div>
-                    <span>{tech}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-6">Cloud & Hosting</h3>
-              <div className="space-y-4">
-                {project.techStack.cloud.map((tech, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/10 rounded-lg mr-3"></div>
-                    <span>{tech}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-6">Database</h3>
-              <div className="space-y-4">
-                {project.techStack.database.map((tech, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-10 h-10 bg-accent/10 rounded-lg mr-3"></div>
-                    <span>{tech}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">App Features</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {project.features.map((feature, index) => (
-              <div 
-                key={index}
-                className="bg-card/40 rounded-2xl p-8 animate-slide-up"
-                style={{ animationDelay: `${index * 150}ms` }}
-                data-testid={`feature-${index}`}
-              >
-                <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Timeline */}
-      <section className="py-16 px-4 lg:px-8 bg-card/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">The Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {project.process.map((step, index) => (
-              <div 
-                key={index}
-                className="text-center animate-slide-up"
-                style={{ animationDelay: `${index * 150}ms` }}
-                data-testid={`process-step-${index}`}
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 rounded-2xl mb-6">
-                  <step.icon className="w-8 h-8 text-accent" />
-                </div>
-                <h3 className="text-lg font-semibold mb-4">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="py-16 px-4 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16">The Experts Behind {project.title.split(':')[0]}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {project.team.map((member, index) => (
-              <div 
-                key={index}
-                className="text-center animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-                data-testid={`team-member-${index}`}
-              >
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-accent/10 rounded-xl mb-4">
-                  <member.icon className="w-7 h-7 text-accent" />
-                </div>
-                <h3 className="text-base font-semibold mb-2">{member.title}</h3>
-                <p className="text-sm text-muted-foreground">{member.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      {project.testimonial && (
-        <section className="py-16 px-4 lg:px-8 bg-card/10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-16">What Our Clients Say Matters Most to Us</h2>
-            <div className="animate-fade-in">
-              <blockquote className="text-xl lg:text-2xl leading-relaxed mb-8 italic">
-                "{project.testimonial.content}"
-              </blockquote>
-              <div className="text-lg">
-                <p className="font-semibold">{project.testimonial.company}</p>
-                <p className="text-muted-foreground">{project.testimonial.position}</p>
-              </div>
-            </div>
           </div>
         </section>
-      )}
 
-      {/* Call to Action */}
-      <section className="py-16 px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-8">Ready to Build Your Next Project?</h2>
-          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Let's build something that helps your clients explore, decide, and act without needing to be there.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="relative animate-scale-in">
-              <div className={`rounded-3xl p-2 ${getBackgroundColor(project.colorVariant)}`}>
-                <img
-                  src={project.heroImage}
-                  alt="Ready to build"
-                  className="w-full h-64 object-cover rounded-2xl shadow-card"
-                />
+        {/* Content Section */}
+        <section className="px-6 lg:px-12 max-w-7xl mx-auto mt-32 grid lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-8 space-y-24">
+            {project.sections.map((section, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <div className="inline-flex items-center gap-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
+                    {section.type}
+                  </h3>
+                </div>
+
+                <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">{section.title}</h2>
+
+                <div className="text-lg text-zinc-400 leading-relaxed space-y-6">
+                  {typeof section.content === 'string' ? (
+                    <p>{section.content}</p>
+                  ) : (
+                    <ul className="space-y-4">
+                      {section.content.map((item, i) => (
+                        <li key={i} className="flex gap-4">
+                          <ChevronRight className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                {section.highlights && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                    {section.highlights.map((h, i) => (
+                      <div key={i} className="p-5 rounded-2xl bg-zinc-900/30 border border-white/5 text-sm font-medium">
+                        {h}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+
+            {/* Testimonial */}
+            {project.testimonial && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="p-12 rounded-[3rem] bg-zinc-900 border border-white/5 relative overflow-hidden"
+              >
+                <div className="relative z-10">
+                  <div className="text-primary text-6xl font-serif mb-8 opacity-50">“</div>
+                  <blockquote className="text-2xl lg:text-3xl font-medium leading-tight text-white mb-10">
+                    {project.testimonial.content}
+                  </blockquote>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary">
+                      {project.testimonial.company[0]}
+                    </div>
+                    <div>
+                      <div className="font-bold">{project.testimonial.company}</div>
+                      <div className="text-sm text-zinc-500 uppercase tracking-widest">{project.testimonial.position}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute top-0 right-0 p-12 opacity-10">
+                  <div className="text-[120px] font-bold text-white select-none leading-none tracking-tighter">QUOTE</div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          <aside className="lg:col-span-4 space-y-8">
+            {/* Tech Stack Card */}
+            <div className="p-8 rounded-[2rem] bg-zinc-900 border border-white/5 sticky top-32">
+              <h3 className="text-sm font-bold uppercase tracking-widest mb-8 flex items-center gap-2">
+                Tech Stack <span className="h-px flex-1 bg-zinc-800" />
+              </h3>
+
+              <div className="space-y-8">
+                {Object.entries(project.techStack).map(([category, techs]) => (
+                  (techs as string[]).length > 0 && (
+                    <div key={category}>
+                      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-3">{category}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {(techs as string[]).map((tech, i) => (
+                          <span key={i} className="px-3 py-1.5 rounded-lg bg-zinc-800 border border-white/5 text-xs font-medium">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                ))}
+              </div>
+
+              <div className="mt-12 pt-8 border-t border-zinc-800">
+                <h3 className="text-sm font-bold uppercase tracking-widest mb-6">Process</h3>
+                <div className="space-y-6">
+                  {project.process.map((step, i) => (
+                    <div key={i} className="flex gap-4">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                        <step.icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white mb-1">{step.title}</div>
+                        <div className="text-[10px] text-zinc-500">Step {(i + 1).toString().padStart(2, '0')}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="text-left space-y-6">
-              <h3 className="text-2xl font-bold">Accelerate decision-making with scalable intelligence built for real-world outcomes.</h3>
-              <button 
-                className="inline-flex items-center px-8 py-4 bg-accent text-accent-foreground rounded-2xl font-semibold hover:bg-accent/90 transition-all duration-300 hover:scale-105"
-                data-testid="button-connect"
+          </aside>
+        </section>
+
+        {/* CTA Section */}
+        <section className="px-6 lg:px-12 max-w-7xl mx-auto mt-40">
+          <div className="p-16 rounded-[4rem] bg-gradient-to-br from-primary/20 to-transparent border border-primary/10 text-center relative overflow-hidden group">
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <h2 className="text-4xl lg:text-6xl font-bold mb-8 tracking-tight">Ready to build your masterpiece?</h2>
+              <p className="text-xl text-zinc-400 mb-12">
+                Join the league of industry leaders who chose Inowix to redefine their digital future.
+              </p>
+              <Link
+                to="/contact-us"
+                className="inline-flex items-center px-10 py-5 bg-white text-black rounded-full text-lg font-bold hover:bg-zinc-200 transition-all hover:scale-105"
               >
-                Connect with us
-                <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
-              </button>
+                Start a Project
+                <ChevronRight className="ml-2 w-5 h-5" />
+              </Link>
             </div>
+
+            {/* Animated decorative elements */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-[100px] rounded-full group-hover:bg-primary/30 transition-colors" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-colors" />
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
+
+      <Footer />
     </div>
   );
 };

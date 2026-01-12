@@ -1,28 +1,59 @@
 import type { Config } from "tailwindcss";
-
-// --- PLUGINS ---
-// Import plugins from BOTH projects.
-// I've included the one from the file you sent.
 const animatePlugin = require("tailwindcss-animate");
-// const otherPlugin = require("...add-plugins-from-file-1-here...");
+const svgToDataUri = require("mini-svg-data-uri");
+const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: any) {
+  const allColors = theme("colors");
+  const newVars = Object.fromEntries(
+    Object.entries(allColors).flatMap(([color, val]) => {
+      if (typeof val === "string") {
+        return [[`--${color}`, val]];
+      }
+      return Object.entries(val as Record<string, string>).map(([key, value]) => [
+        `--${color}-${key}`,
+        value,
+      ]);
+    })
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
+
+function addSvgPatterns({ matchUtilities, theme }: any) {
+  matchUtilities(
+    {
+      "bg-grid": (value: any) => ({
+        backgroundImage: `url("${svgToDataUri(
+          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+        )}")`,
+      }),
+      "bg-grid-small": (value: any) => ({
+        backgroundImage: `url("${svgToDataUri(
+          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H7.5V8"/></svg>`
+        )}")`,
+      }),
+      "bg-dot": (value: any) => ({
+        backgroundImage: `url("${svgToDataUri(
+          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+        )}")`,
+      }),
+    },
+    { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+  );
+}
 
 export default {
   darkMode: ["class"],
-  
-  // --- CONTENT ---
-  // You MUST merge the content arrays from both projects
-  // to ensure Tailwind scans all your files.
   content: [
-    // Paths from your SECOND project (the one you sent)
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    
-    // !!! ADD PATHS FROM YOUR FIRST PROJECT HERE !!!
-    // e.g., "../project-1/app/**/*.{ts,tsx}",
   ],
-  
   prefix: "",
   theme: {
     container: {
@@ -33,32 +64,19 @@ export default {
       },
     },
     extend: {
-      // --- FONTS ---
-      // Merged fonts from BOTH projects
       fontFamily: {
-        // From File 2 (Schbang theme)
-        heading: ["var(--font-heading)"], // Likely 'Inter'
-        body: ["var(--font-body)"],       // Likely 'Inter'
+        heading: ["var(--font-heading)"],
+        body: ["var(--font-body)"],
         sans: ["Inter", "system-ui", "sans-serif"],
-        
-        // From File 1 (Purple/Blue theme)
         sora: ["Sora", "sans-serif"],
         manrope: ["Manrope", "sans-serif"],
       },
-
-      // --- COLORS ---
-      // These are all from your SECOND project's config.
-      // Your first project's colors were also defined with CSS variables
-      // (e.g., --accent-blue), so you don't need to add them here
-      // unless you had custom Tailwind names for them.
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        
-        // Colors from File 2 CSS
         lightBlue: "var(--light-blue)",
         lightGreen: "var(--light-green)",
         lightRed: "var(--light-red)",
@@ -66,7 +84,8 @@ export default {
         whiteGreen: "var(--white-green)",
         lightYellow: "var(--light-yellow)",
         lightPink: "var(--light-pink)",
-        lightOrenge: "var(--light-orenge)", // Note: 'orange' is likely misspelled
+        lightOrenge: "var(--light-orenge)",
+        lightOrange: "var(--light-orange)",
         
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -96,8 +115,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        
-        // Planner theme from File 2
         planner: {
           bg: "hsl(var(--planner-bg))",
           surface: "hsl(var(--planner-surface))",
@@ -113,8 +130,6 @@ export default {
           warning: "hsl(var(--planner-warning))",
           error: "hsl(var(--planner-error))",
         },
-        
-        // Other colors from File 2
         black: "var(--black)",
         darkBlack: "var(--dark-black)",
         blueBlack: "var(--blue-black)",
@@ -122,26 +137,19 @@ export default {
         lightWhite: "var(--light-white)",
         red: "var(--red-color)",
         borderColor: "var(--border-color)",
-        lightOrange: "var(--light-orange)", // Correct spelling
       },
-      
       spacing: {
         'section': 'var(--section-padding)',
       },
       maxWidth: {
         'container': 'var(--container-max)',
       },
-      
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      
-      // --- KEYFRAMES ---
-      // Merged keyframes from BOTH projects
       keyframes: {
-        // From File 2
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -150,7 +158,6 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        // From File 1
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
@@ -159,29 +166,39 @@ export default {
           from: { opacity: "0", transform: "translateY(30px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        spotlight: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
-
-      // --- ANIMATIONS ---
-      // Merged animations from BOTH projects
       animation: {
-        // From File 2
         'marquee': 'marquee var(--marquee-duration) linear infinite',
         'marquee-reverse': 'marquee-reverse var(--marquee-duration) linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        
-        // From File 1
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+        spotlight: "spotlight 2s ease .75s 1 forwards",
+        scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
+
     },
   },
-  
-  // --- PLUGINS ---
-  // Merge plugins from both configs
   plugins: [
     animatePlugin,
-    // require("...add-plugins-from-file-1-here..."),
+    addVariablesForColors,
+    addSvgPatterns,
   ],
 } satisfies Config;

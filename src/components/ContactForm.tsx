@@ -3,19 +3,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Mail, Phone, Building, MessageSquare } from 'lucide-react';
+import { Loader2, Send } from 'lucide-react';
 import { z } from 'zod';
+import { motion } from 'framer-motion';
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  company: z.string().trim().max(255, "Company name must be less than 255 characters").optional(),
-  phone: z.string().trim().max(50, "Phone number must be less than 50 characters").optional(),
-  subject: z.string().trim().max(255, "Subject must be less than 255 characters").optional(),
-  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters")
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Invalid email address").max(255),
+  company: z.string().trim().max(255).optional(),
+  phone: z.string().trim().max(50).optional(),
+  subject: z.string().trim().max(255).optional(),
+  message: z.string().trim().min(1, "Message is required").max(1000)
 });
 
 export const ContactForm = () => {
@@ -35,19 +35,16 @@ export const ContactForm = () => {
     setIsLoading(true);
 
     try {
-      // Validate form data
       const validatedData = contactSchema.parse(formData);
-
-      // Submit to Supabase
       const { error } = await supabase
         .from('contact_leads')
         .insert([{
           name: validatedData.name,
           email: validatedData.email,
+          message: validatedData.message,
           company: validatedData.company || null,
           phone: validatedData.phone || null,
           subject: validatedData.subject || null,
-          message: validatedData.message,
           source: 'website',
           status: 'new'
         }]);
@@ -55,162 +52,120 @@ export const ContactForm = () => {
       if (error) throw error;
 
       toast({
-        title: "Message sent successfully!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
+        title: "Message received",
+        description: "We'll get back to you within 24 hours.",
       });
 
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
 
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        const firstError = error.errors[0];
-        toast({
-          title: "Validation Error",
-          description: firstError.message,
-          variant: "destructive"
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: "Failed to send message. Please try again.",
-          variant: "destructive"
-        });
-      }
+      toast({
+        title: "Entry Error",
+        description: error instanceof z.ZodError ? error.errors[0].message : "Failed to send message.",
+        variant: "destructive"
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
+  const inputClasses = "bg-transparent border-zinc-800 focus:border-primary focus:ring-primary/20 transition-all duration-300 rounded-xl h-12 text-white placeholder:text-zinc-600";
 
   return (
-    <Card className="bg-white/10 backdrop-blur-md border-white max-w-2xl mx-auto">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl text-white">Get In Touch</CardTitle>
-        <CardDescription className="text-white/80">
-          Ready to transform your business? Let's discuss your next project.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="text-white flex items-center gap-2">
-                <MessageSquare className="w-4 h-4" />
-                Full Name *
-              </Label>
-              <Input
-                id="name"
-                type="text"
-                value={formData.name}
-                onChange={(e) => handleChange('name', e.target.value)}
-                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
-                placeholder="Your full name"
-                required
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-white flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                Email Address *
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => handleChange('email', e.target.value)}
-                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
-                placeholder="your.email@example.com"
-                required
-              />
-            </div>
-          </div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <Label htmlFor="name" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 ml-1">
+            Full Name *
+          </Label>
+          <Input
+            id="name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className={inputClasses}
+            placeholder="John Doe"
+            required
+          />
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="company" className="text-white flex items-center gap-2">
-                <Building className="w-4 h-4" />
-                Company
-              </Label>
-              <Input
-                id="company"
-                type="text"
-                value={formData.company}
-                onChange={(e) => handleChange('company', e.target.value)}
-                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
-                placeholder="Your company name"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="text-white flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                Phone Number
-              </Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => handleChange('phone', e.target.value)}
-                className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
-                placeholder="+1 (555) 123-4567"
-              />
-            </div>
-          </div>
+        <div className="space-y-2">
+          <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 ml-1">
+            Email Address *
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className={inputClasses}
+            placeholder="john@company.com"
+            required
+          />
+        </div>
+      </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="subject" className="text-white">
-              Subject
-            </Label>
-            <Input
-              id="subject"
-              type="text"
-              value={formData.subject}
-              onChange={(e) => handleChange('subject', e.target.value)}
-              className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50"
-              placeholder="What would you like to discuss?"
-            />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <Label htmlFor="company" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 ml-1">
+            Company
+          </Label>
+          <Input
+            id="company"
+            value={formData.company}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+            className={inputClasses}
+            placeholder="Company Ltd."
+          />
+        </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="message" className="text-white">
-              Message *
-            </Label>
-            <Textarea
-              id="message"
-              value={formData.message}
-              onChange={(e) => handleChange('message', e.target.value)}
-              className="bg-white/10 border-white/20 text-[#1f1f1f] placeholder:text-white/50 min-h-32"
-              placeholder="Tell us about your project, goals, and how we can help you achieve them..."
-              rows={6}
-              required
-            />
-          </div>
+        <div className="space-y-2">
+          <Label htmlFor="phone" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 ml-1">
+            Phone Number
+          </Label>
+          <Input
+            id="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            className={inputClasses}
+            placeholder="+1 (555) 000-0000"
+          />
+        </div>
+      </div>
 
-          <Button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105"
-          >
-            {isLoading && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
-            {isLoading ? 'Sending Message...' : 'Send Message'}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+      <div className="space-y-2">
+        <Label htmlFor="message" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 ml-1">
+          Message *
+        </Label>
+        <Textarea
+          id="message"
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          className={`${inputClasses} min-h-[160px] py-4 resize-none`}
+          placeholder="Tell us about your project..."
+          required
+        />
+      </div>
+
+      <motion.div
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+      >
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 overflow-hidden relative group"
+        >
+          {isLoading ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <span className="flex items-center gap-2">
+              Send Proposal
+              <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </span>
+          )}
+        </Button>
+      </motion.div>
+    </form>
   );
 };

@@ -2,177 +2,174 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
 import { FAQSection } from "@/components/FAQSection";
-import { MapPin, Phone, Mail, Clock, MessageCircle, Headphones, Globe, Zap } from "lucide-react";
+import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, Clock, MessageSquare, Globe, ArrowRight } from "lucide-react";
 
 const offices = [
   {
-    city: "Bangalore", 
+    city: "Bangalore",
     address: "OXFORD TOWER-2, Door no. 901 8th floor, 139, Kodihalli, Bengaluru, Karnataka 560008",
     phone: "+91 8769626027",
     email: "admin@inowix.in",
-    time: "12:22 PM"
+    timezone: "IST (UTC +5:30)"
   },
   {
     city: "Delhi",
-    address: "1-A, Khasra No. 275, First Floor, Westend Marg, Saidulajab, Saket, New Delhi, Delhi 110030", 
+    address: "1-A, Khasra No. 275, First Floor, Westend Marg, Saidulajab, Saket, New Delhi, Delhi 110030",
     phone: "+91 8769626027",
     email: "admin@inowix.in",
-    time: "12:22 PM"
+    timezone: "IST (UTC +5:30)"
   },
   {
     city: "Chandigarh",
     address: "SBP South city , Zirakpur , Chandigarh",
-    phone: "+91 8769626027", 
+    phone: "+91 8769626027",
     email: "admin@inowix.in",
-    time: "07:52 AM"
+    timezone: "IST (UTC +5:30)"
   }
 ];
 
 const Contact = () => {
-  // Contact FAQ data
   const contactFAQs = [
     {
       id: 'response-time',
       question: 'How quickly do you respond to inquiries?',
-      answer: 'We typically respond to all inquiries within 2-4 hours during business hours (9 AM - 7 PM IST). For urgent matters, you can call us directly for immediate assistance.'
+      answer: 'We typically respond to all inquiries within 2-4 hours during business hours (9 AM - 7 PM IST).'
     },
     {
       id: 'consultation',
       question: 'Do you offer free consultations?',
-      answer: 'Yes, we offer complimentary 30-minute consultation calls to discuss your project requirements, understand your goals, and provide initial recommendations. No obligations attached!'
+      answer: 'Yes, we offer complimentary 30-minute consultation calls to discuss your project requirements.'
     },
     {
       id: 'project-start',
       question: 'How soon can we start working on our project?',
-      answer: 'Project start times depend on our current capacity and project complexity. Typically, we can begin new projects within 1-2 weeks after contract signing and initial payment.'
-    },
-    {
-      id: 'communication',
-      question: 'How do you handle communication during projects?',
-      answer: 'We maintain transparent communication through regular updates, scheduled calls, project management tools, and dedicated account managers. You\'ll always know the project status and next steps.'
-    },
-    {
-      id: 'meeting-options',
-      question: 'Can we meet in person or only online?',
-      answer: 'We offer both in-person meetings at our offices in Bangalore, Delhi, and Chandigarh, as well as virtual meetings via video calls. We adapt to your preferred communication style.'
+      answer: 'Typically, we can begin new projects within 1-2 weeks after contract signing and initial deposit.'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#030303] text-white selection:bg-primary/30">
       <Header />
-      
-      {/* Enhanced Hero Section */}
-      <section className="py-section relative overflow-hidden">
-        <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] rounded-full blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-br from-[hsl(var(--light-green))] to-[hsl(var(--white-green))] rounded-full blur-2xl opacity-20 animate-pulse delay-1000"></div>
-        
-        <div className="max-w-container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] rounded-2xl shadow-[var(--glow-blue)] mb-8">
-              <MessageCircle className="w-8 h-8 text-blue-600" />
-              <Headphones className="w-6 h-6 text-purple-600 animate-pulse" />
+
+      <main className="pt-32">
+        {/* Modern Hero Section */}
+        <section className="px-6 lg:px-12 max-w-7xl mx-auto mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-8">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Available for new projects
             </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white via-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] bg-clip-text text-transparent">
-              Let's Create Something Amazing
+
+            <h1 className="text-5xl md:text-8xl font-bold tracking-tight leading-[1.05] mb-8">
+              Let's build the <span className="text-zinc-500">future</span> together.
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Ready to transform your brand? Get in touch with our team to discuss your next project
+            <p className="text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+              Have an idea? Let's turn it into a reality. Our team of experts is ready to help you scale your digital presence.
             </p>
-            
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-[hsl(var(--light-green))]">
-                <Globe className="w-4 h-4 text-[hsl(var(--light-green))]" />
-                <span className="text-sm text-white/80">3 Office Locations</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-[hsl(var(--light-orange))]">
-                <Zap className="w-4 h-4 text-[hsl(var(--light-orange))]" />
-                <span className="text-sm text-white/80">24/7 Support</span>
-              </div>
+          </motion.div>
+        </section>
+
+        {/* Contact Grid */}
+        <section className="px-6 lg:px-12 max-w-7xl mx-auto mb-40">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+
+            {/* Left Column: Form */}
+            <div className="lg:col-span-7">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="p-8 md:p-12 rounded-[2.5rem] bg-zinc-900/50 border border-white/5 backdrop-blur-xl shadow-2xl"
+              >
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="p-3 rounded-2xl bg-primary/10 border border-primary/20">
+                    <MessageSquare className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold">Send us a message</h2>
+                    <p className="text-sm text-zinc-500">We usually respond within 24 hours.</p>
+                  </div>
+                </div>
+                <ContactForm />
+              </motion.div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Contact Form & Info */}
-      <section className="py-section">
-        <div className="max-w-container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <div>
-              <ContactForm />
-            </div>
-
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-6">
-                  Get In Touch
-                </h2>
-                <p className="text-muted-foreground mb-8">
-                  We have offices across India and internationally. Reach out to the office nearest to you.
-                </p>
-              </div>
-
-              {/* Enhanced Office Locations */}
-              <div className="space-y-6">
-                {offices.map((office, index) => {
-                  const colorSchemes = [
-                    { bg: 'from-[hsl(var(--light-blue))] to-[hsl(var(--white-green))]', border: 'border-[hsl(var(--light-blue))]' },
-                    { bg: 'from-[hsl(var(--light-green))] to-[hsl(var(--light-yellow))]', border: 'border-[hsl(var(--light-green))]' },
-                    { bg: 'from-[hsl(var(--light-purple))] to-[hsl(var(--light-pink))]', border: 'border-[hsl(var(--light-purple))]' }
-                  ];
-                  const scheme = colorSchemes[index % colorSchemes.length];
-                  
-                  return (
-                    <div key={index} className={`p-6 bg-gradient-to-br ${scheme.bg} rounded-xl border ${scheme.border} hover:shadow-lg transition-all duration-300 group`}>
-                      <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-lg font-bold text-gray-800 group-hover:scale-105 transition-transform duration-300">
-                          {office.city}
-                        </h3>
-                        <div className="flex items-center gap-1 text-sm text-gray-600">
-                          <Clock className="w-4 h-4" />
-                          <span>{office.time}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-3 text-sm">
-                        <div className="flex items-start gap-3">
-                          <MapPin className="w-4 h-4 text-gray-700 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700">{office.address}</span>
-                        </div>
-                        
-                        <div className="flex items-center gap-3">
-                          <Phone className="w-4 h-4 text-gray-700" />
-                          <a href={`tel:${office.phone}`} className="text-gray-700 hover:text-gray-900 transition-colors">
-                            {office.phone}
-                          </a>
-                        </div>
-                        
-                        <div className="flex items-center gap-3">
-                          <Mail className="w-4 h-4 text-gray-700" />
-                          <a href={`mailto:${office.email}`} className="text-gray-700 hover:text-gray-900 transition-colors">
-                            {office.email}
-                          </a>
-                        </div>
-                      </div>
+            {/* Right Column: Info & Offices */}
+            <div className="lg:col-span-5 space-y-12">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="space-y-12"
+              >
+                {/* Contact Highlights */}
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="flex items-center gap-6 p-6 rounded-3xl bg-zinc-900 border border-white/5 group hover:border-primary/20 transition-all">
+                    <div className="p-4 rounded-2xl bg-primary/5 group-hover:bg-primary/10 transition-colors">
+                      <Mail className="w-6 h-6 text-primary" />
                     </div>
-                  );
-                })}
-              </div>
+                    <div>
+                      <div className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">Email us at</div>
+                      <div className="text-lg font-bold">admin@inowix.in</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-6 p-6 rounded-3xl bg-zinc-900 border border-white/5 group hover:border-primary/20 transition-all">
+                    <div className="p-4 rounded-2xl bg-primary/5 group-hover:bg-primary/10 transition-colors">
+                      <Phone className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-1">Call us at</div>
+                      <div className="text-lg font-bold">+91 8769626027</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Office Locations */}
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-500">Our Studios</h3>
+                    <div className="h-px flex-1 bg-zinc-800" />
+                  </div>
+
+                  <div className="space-y-6">
+                    {offices.map((office, index) => (
+                      <div key={index} className="group">
+                        <h4 className="text-xl font-bold mb-3 flex items-center gap-2 group-hover:text-primary transition-colors">
+                          {office.city}
+                          <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                        </h4>
+                        <p className="text-sm text-zinc-500 leading-relaxed mb-4 max-w-sm">
+                          {office.address}
+                        </p>
+                        <div className="flex items-center gap-3 text-[10px] font-bold text-zinc-600 uppercase tracking-widest">
+                          <Clock className="w-3 h-3" />
+                          {office.timezone}
+                        </div>
+                        {index !== offices.length - 1 && <div className="h-px w-12 bg-zinc-800 mt-8" />}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ Section */}
-      <FAQSection 
-        title="Contact & Support FAQ"
-        subtitle="Quick answers to common questions about getting in touch and working with us"
-        faqs={contactFAQs}
-        colorScheme="orange"
-      />
+        {/* FAQ Preview */}
+        <FAQSection
+          title="Common Questions"
+          subtitle="Everything you need to know about starting a project with us."
+          faqs={contactFAQs}
+        />
+      </main>
 
       <Footer />
     </div>

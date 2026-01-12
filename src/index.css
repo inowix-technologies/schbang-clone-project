@@ -2,212 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Schbang Design System - Clean, Modern Agency Aesthetic */
-
 @layer base {
-  
   :root {
-     /* Dark portfolio theme */
-    --background: 0 0% 8%;
+    /* Default to Dark Mode (Aceternity Style) */
+    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --light-blue: #B9D9FF;
-  --light-green: #D8FCC7;
-  --light-red: #FFB9B9;
-  --light-purple: #CDC3FF;
-  --white-green: #C7EFFC;
-  --light-yellow: #FFF0BF;
-  --light-pink: #FFB9E3;
-  --light-orenge: #FFC8A9;
-
-    --card: 0 0% 12%;
+    --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 8%;
+    --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 8%;
+    --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 0 0% 15%;
+    --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 207 90% 54%;
+    --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 207 90% 54%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
 
-    --radius: 1rem;
+    --radius: 0.5rem;
 
-    /* Project card colors */
-    --project-card-1: 51 100% 84%;
-    --project-card-1-foreground: 0 0% 8%;
-    --project-card-2: 207 75% 82%;
-    --project-card-2-foreground: 0 0% 8%;
-    --project-card-3: 339 100% 85%;
-    --project-card-3-foreground: 0 0% 8%;
-    --project-card-4: 142 76% 73%;
-    --project-card-4-foreground: 0 0% 8%;
-    --project-card-5: 26 100% 80%;
-    --project-card-5-foreground: 0 0% 8%;
-    --project-card-6: 271 91% 85%;
-    --project-card-6-foreground: 0 0% 8%;
+    /* Original Custom Colors (Preserved for compatibility) */
+    --light-blue: #B9D9FF;
+    --light-green: #D8FCC7;
+    --light-red: #FFB9B9;
+    --light-purple: #CDC3FF;
+    --white-green: #C7EFFC;
+    --light-yellow: #FFF0BF;
+    --light-pink: #FFB9E3;
+    --light-orenge: #FFC8A9;
+    --light-orange: #FFC8A9;
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(0 0% 12%));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 8%));
+     /* Planner Theme (Dark Default) */
+    --planner-bg: 240 10% 3.9%;
+    --planner-surface: 240 10% 5.9%;
+    --planner-surface-elevated: 240 10% 8%;
+    --planner-border: 240 3.7% 15.9%;
+    --planner-border-focus: 217 91% 60%;
+    --planner-text-primary: 0 0% 98%;
+    --planner-text-secondary: 240 5% 64.9%;
+    --planner-text-muted: 240 5% 50%;
+    --planner-accent: 217 91% 60%;
+    --planner-accent-muted: 217 50% 20%;
+    --planner-success: 142 70% 50%;
+    --planner-warning: 48 96% 53%;
+    --planner-error: 0 84% 60%;
+  }
 
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-spring: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-    /* Typography */
-    --font-hero: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-    /* Shadows */
-    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
-    --shadow-card-hover: 0 16px 64px hsl(0 0% 0% / 0.6);
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-    /* Utility Colors */
-    --muted: 36 25% 94%;
-    --muted-foreground: 0 0% 45%;
-    
-    --accent: 36 25% 94%;
-    --accent-foreground: 0 0% 0%;
-    
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-    
-    /* Interactive Elements */
-    --border: 36 15% 90%;
-    --input: 36 15% 90%;
-    --ring: 0 0% 0%;
-    
-    /* Design Tokens */
-    --radius: 0.75rem;
-    
-    /* Typography Scale */
-    --font-heading: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    
-    /* Animations */
-    --marquee-duration: 30s;
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* Spacing */
-    --section-padding: 5rem;
-    --container-max: 1440px;
-    
-    /* Effects */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --destructive-foreground: 0 0% 98%;
 
-    /* Brand Colors */
-  --black: #1F1E1F;
-  --dark-black: #000000;
-  --blue-black: #202224;
-  --white: #ffffff;
-  --light-white: #D9D9D9;
-  --red-color: #FF6262;
-  --border-color: #515151;
-  --box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
-  
-  /* Enhanced Brand Colors for Creative Design */
-  --light-blue: 208 100% 85%;
-  --light-green: 110 89% 89%;
-  --light-red: 0 100% 86%;
-  --light-purple: 247 100% 88%;
-  --white-green: 186 100% 88%;
-  --light-yellow: 48 100% 89%;
-  --light-pink: 322 100% 86%;
-  --light-orange: 23 100% 83%;
-  
-  /* Gradient Combinations */
-  --gradient-primary: linear-gradient(135deg, hsl(var(--light-blue)), hsl(var(--light-purple)));
-  --gradient-secondary: linear-gradient(135deg, hsl(var(--light-green)), hsl(var(--white-green)));
-  --gradient-accent: linear-gradient(135deg, hsl(var(--light-orange)), hsl(var(--light-pink)));
-  --gradient-futuristic: linear-gradient(135deg, hsl(var(--light-purple)), hsl(var(--light-blue)), hsl(var(--white-green)));
-  
-  /* Effects */
-  --glow-blue: 0 0 20px hsl(var(--light-blue) / 0.5);
-  --glow-green: 0 0 20px hsl(var(--light-green) / 0.5);
-  --glow-purple: 0 0 20px hsl(var(--light-purple) / 0.5);
-
-  /* Professional Planner Theme */
-  --planner-bg: 0 0% 4%;
-  --planner-surface: 0 0% 8%;
-  --planner-surface-elevated: 0 0% 12%;
-  --planner-border: 0 0% 16%;
-  --planner-border-focus: 207 90% 54%;
-  --planner-text-primary: 0 0% 95%;
-  --planner-text-secondary: 0 0% 70%;
-  --planner-text-muted: 0 0% 50%;
-  --planner-accent: 207 90% 54%;
-  --planner-accent-muted: 207 40% 25%;
-  --planner-success: 142 76% 36%;
-  --planner-warning: 38 92% 50%;
-  --planner-error: 0 84% 60%;
-  
-  /* Professional spacing and effects */
-  --planner-radius: 0.75rem;
-  --planner-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --planner-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --planner-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  @layer utilities {
-  .border-border {
-    border-color: hsl(var(--border));
-  }
-}
-
-
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
   }
 }
 
@@ -215,18 +97,12 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground font-body antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply bg-background text-foreground;
   }
 }
 
-/* Custom Animations */
+/* Animations */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-100%); }
@@ -243,25 +119,4 @@
 
 .animate-marquee-reverse {
   animation: marquee-reverse var(--marquee-duration) linear infinite;
-}
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom Utilities */
-.text-balance {
-  text-wrap: balance;
-}
-
-.marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.marquee-content {
-  display: inline-block;
-  padding-left: 100%;
-  will-change: transform;
 }
