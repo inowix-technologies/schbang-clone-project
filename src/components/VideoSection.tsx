@@ -154,7 +154,7 @@ export const VideoSection = () => {
       className="relative h-[500vh]" // large enough for scroll range
     >
       {/* Fixed fullscreen video */}
-      <div className="sticky top-0 h-screen w-screen z-[50]">
+      <div className="sticky top-0 h-screen w-screen max-w-full overflow-x-hidden z-[50]">
         <video
           ref={videoRef}
           src={video}

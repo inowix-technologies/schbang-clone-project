@@ -8,6 +8,10 @@ import { ArrowLeft, Calendar, Eye, Share2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { GradientMesh } from '@/components/ui/gradient-mesh';
+import { FloatingShapes } from '@/components/ui/floating-shapes';
+import { Particles } from '@/components/ui/particles';
+import { CreativeBackground } from '@/components/ui/creative-background';
 
 interface BlogPost {
   id: string;
@@ -91,10 +95,12 @@ const BlogPost = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-hero">
+      <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+        <GradientMesh className="opacity-20" />
+        <FloatingShapes count={8} className="opacity-10" />
         <NotificationBanner />
         <Header />
-        <div className="container mx-auto px-4 py-16 text-center">
+        <div className="container mx-auto px-4 py-16 text-center relative z-10">
           <div className="text-white/80 text-lg">Loading article...</div>
         </div>
       </div>
@@ -103,17 +109,19 @@ const BlogPost = () => {
 
   if (notFound || !blog) {
     return (
-      <div className="min-h-screen bg-gradient-hero">
+      <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+        <GradientMesh className="opacity-20" />
+        <FloatingShapes count={8} className="opacity-10" />
         <NotificationBanner />
         <Header />
-        <div className="container mx-auto px-4 py-16 text-center">
+        <div className="container mx-auto px-4 py-16 text-center relative z-10">
           <div className="max-w-md mx-auto">
             <h1 className="text-3xl font-bold text-white mb-4">Article Not Found</h1>
             <p className="text-white/80 mb-8">
               The article you're looking for doesn't exist or has been moved.
             </p>
             <Link to="/blog">
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Button variant="outline" className="border-border text-foreground hover:bg-card">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog
               </Button>
@@ -125,11 +133,15 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+      <GradientMesh className="opacity-25" />
+      <FloatingShapes count={10} className="opacity-10" />
+      <Particles count={30} color="#ffffff" className="opacity-12" />
+      <CreativeBackground variant="gradient" className="opacity-15" />
       <NotificationBanner />
       <Header />
       
-      <article className="container mx-auto px-4 py-16">
+      <article className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Back to Blog */}
           <Link 
@@ -179,7 +191,7 @@ const BlogPost = () => {
                 onClick={handleShare}
                 variant="outline"
                 size="sm"
-                className="border-white/20 text-white hover:bg-white/10 self-start sm:self-auto"
+                className="border-border text-foreground hover:bg-card self-start sm:self-auto"
               >
                 <Share2 className="w-4 h-4 mr-2" />
                 Share
@@ -217,7 +229,7 @@ const BlogPost = () => {
                   onClick={handleShare}
                   variant="outline"
                   size="sm"
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-border text-foreground hover:bg-card"
                 >
                   <Share2 className="w-4 h-4 mr-2" />
                   Share Article

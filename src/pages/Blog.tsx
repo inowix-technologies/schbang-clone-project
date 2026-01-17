@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -7,21 +8,21 @@ import { Header } from '@/components/Header';
 import { NotificationBanner } from '@/components/NotificationBanner';
 import { FAQSection } from '@/components/FAQSection';
 import { Footer } from '@/components/Footer';
+import { GradientMesh } from '@/components/ui/gradient-mesh';
+import { FloatingShapes } from '@/components/ui/floating-shapes';
+import { Particles } from '@/components/ui/particles';
+import { CreativeBackground } from '@/components/ui/creative-background';
 import { useBlogs } from '@/hooks/useBlogs';
-import { Search, Calendar, Eye, ArrowRight, Sparkles, BookOpen, TrendingUp } from 'lucide-react';
+import { Search, Calendar, Eye, ArrowRight, Sparkles, BookOpen, TrendingUp, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('');
   
-  // Use the custom hook to fetch blogs
   const { blogs, isLoading, allTags, filterBlogs } = useBlogs(false, 'published');
-  
-  // Filter blogs based on search and tag
   const filteredBlogs = filterBlogs(searchQuery, selectedTag);
 
-  // Blog FAQ data
   const blogFAQs = [
     {
       id: 'blog-freq',
@@ -37,205 +38,183 @@ const Blog = () => {
       id: 'blog-authors',
       question: 'Who writes your blog content?',
       answer: 'Our blog content is written by our experienced team of developers, designers, and technology experts. Each author brings real-world experience and deep expertise in their respective fields.'
-    },
-    {
-      id: 'blog-suggest',
-      question: 'Can I suggest topics for future blog posts?',
-      answer: 'Absolutely! We welcome topic suggestions from our community. Reach out to us through our contact form or social media channels with your ideas, and we\'ll consider them for future content.'
-    },
-    {
-      id: 'blog-guest',
-      question: 'Do you accept guest posts?',
-      answer: 'Yes, we accept high-quality guest posts from industry experts. Guest posts should provide value to our audience and align with our content standards. Contact us with your proposal and writing samples.'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-[#0F172A] text-white selection:bg-blue-500/30 relative overflow-hidden">
+      <GradientMesh className="opacity-30" />
+      <FloatingShapes count={12} className="opacity-12" />
+      <Particles count={40} color="#ffffff" className="opacity-15" />
+      <CreativeBackground variant="gradient" className="opacity-20" />
       <NotificationBanner />
       <Header />
       
-      <div className="container mx-auto px-4 py-16">
-        {/* Hero Section with Brand Colors */}
-        <div className="text-center mb-12 relative">
-          <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] rounded-full blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-10 left-10 w-24 h-24 bg-gradient-to-br from-[hsl(var(--light-green))] to-[hsl(var(--white-green))] rounded-full blur-2xl opacity-20 animate-pulse delay-1000"></div>
+      <main className="pt-32 pb-20 relative z-10">
+        {/* Hero Section */}
+        <div className="container mx-auto px-6 mb-20 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent blur-3xl pointer-events-none" />
           
-          <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] rounded-2xl shadow-[var(--glow-blue)] mb-6">
-            <BookOpen className="w-8 h-8 text-blue-600" />
-            <Sparkles className="w-6 h-6 text-purple-600 animate-pulse" />
-          </div>
-          
-          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 bg-gradient-to-r from-white via-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] bg-clip-text text-transparent">
-            Knowledge Hub
-          </h1>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Insights, tutorials, and stories from our team about technology, development, and innovation.
-          </p>
-          
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-[hsl(var(--light-green))]">
-              <TrendingUp className="w-4 h-4 text-green-400" />
-              <span className="text-sm text-white/80">{blogs.length} Articles</span>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-4xl mx-auto relative z-10"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
+              <Sparkles className="w-4 h-4 text-blue-400" />
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-200">Insights & Perspectives</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-[hsl(var(--light-orange))]">
-              <Eye className="w-4 h-4 text-orange-400" />
-              <span className="text-sm text-white/80">Weekly Updates</span>
+            
+            <h1 className="hero-title mb-6 sm:mb-8 px-2 sm:px-0">
+              Knowledge <span className="italic text-[#9CA3AF]">Hub.</span>
+            </h1>
+            <p className="lead mb-8 sm:mb-10 md:mb-12 px-4 sm:px-0">
+              Deep dives into technology, design, and the future of digital experiences from the team at Inowix.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <div className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white/5 border border-white/10">
+                <TrendingUp className="w-4 h-4 text-blue-400" />
+                <span className="text-sm font-medium">{blogs.length} Articles</span>
+              </div>
+              <div className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white/5 border border-white/10">
+                <Clock className="w-4 h-4 text-[#9CA3AF]" />
+                <span className="text-sm font-medium text-[#D1D5DB]">Weekly Updates</span>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Enhanced Search and Filter with Brand Colors */}
-        <div className="flex flex-col lg:flex-row gap-4 mb-8 max-w-4xl mx-auto">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[hsl(var(--light-blue))] w-5 h-5" />
-            <Input
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 bg-white/10 border-[hsl(var(--light-blue))] text-white placeholder:text-white/50 h-12 focus:border-[hsl(var(--light-purple))] focus:shadow-[var(--glow-blue)] transition-all duration-300"
-            />
-          </div>
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            <Badge
-              variant={selectedTag === '' ? 'default' : 'outline'}
-              className={`cursor-pointer whitespace-nowrap transition-all duration-300 ${
-                selectedTag === '' 
-                  ? 'bg-gradient-to-r from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] text-gray-800 font-semibold shadow-[var(--glow-blue)]' 
-                  : 'border-[hsl(var(--light-blue))] text-white/70 hover:bg-[hsl(var(--light-blue))]/20 hover:border-[hsl(var(--light-purple))]'
-              }`}
-              onClick={() => setSelectedTag('')}
-            >
-              All Topics
-            </Badge>
-            {allTags.map((tag, index) => {
-              const colorClasses = [
-                'border-[hsl(var(--light-green))] hover:bg-[hsl(var(--light-green))]/20',
-                'border-[hsl(var(--light-orange))] hover:bg-[hsl(var(--light-orange))]/20',
-                'border-[hsl(var(--light-pink))] hover:bg-[hsl(var(--light-pink))]/20',
-                'border-[hsl(var(--light-yellow))] hover:bg-[hsl(var(--light-yellow))]/20'
-              ];
-              const activeColorClasses = [
-                'bg-gradient-to-r from-[hsl(var(--light-green))] to-[hsl(var(--white-green))] text-gray-800',
-                'bg-gradient-to-r from-[hsl(var(--light-orange))] to-[hsl(var(--light-yellow))] text-gray-800',
-                'bg-gradient-to-r from-[hsl(var(--light-pink))] to-[hsl(var(--light-purple))] text-gray-800',
-                'bg-gradient-to-r from-[hsl(var(--light-yellow))] to-[hsl(var(--light-orange))] text-gray-800'
-              ];
-              
-              return (
-                <Badge
+        {/* Search & Filters */}
+        <div className="container mx-auto px-6 mb-16 relative z-10">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <div className="relative group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9CA3AF] group-focus-within:text-blue-400 transition-colors" />
+              <Input
+                placeholder="Search articles, topics, keywords..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-16 pl-12 pr-6 bg-zinc-900/50 border-white/5 rounded-2xl focus:border-blue-500/50 focus:ring-blue-500/20 text-lg transition-all"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedTag('')}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedTag === '' 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-white/5 border border-white/10 text-[#D1D5DB] hover:border-white/20'
+                }`}
+              >
+                All Topics
+              </button>
+              {allTags.map((tag) => (
+                <button
                   key={tag}
-                  variant={selectedTag === tag ? 'default' : 'outline'}
-                  className={`cursor-pointer whitespace-nowrap transition-all duration-300 ${
-                    selectedTag === tag 
-                      ? `${activeColorClasses[index % activeColorClasses.length]} font-semibold shadow-lg` 
-                      : `${colorClasses[index % colorClasses.length]} text-white/70`
-                  }`}
                   onClick={() => setSelectedTag(tag)}
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                    selectedTag === tag 
+                      ? 'bg-blue-500 text-white' 
+                      : 'bg-white/5 border border-white/10 text-[#D1D5DB] hover:border-blue-500/30 hover:text-blue-300'
+                  }`}
                 >
                   {tag}
-                </Badge>
-              );
-            })}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Blog Grid */}
-        {isLoading ? (
-          <div className="text-center py-16">
-            <div className="text-white/80 text-lg">Loading articles...</div>
-          </div>
-        ) : filteredBlogs.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="text-white/80 text-lg">
-              {searchQuery || selectedTag ? 'No articles found matching your criteria.' : 'No published articles yet.'}
+        <div className="container mx-auto px-6 relative z-10">
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="aspect-[4/5] rounded-3xl bg-zinc-900/50 animate-pulse border border-white/5" />
+              ))}
             </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {filteredBlogs.map((blog, index) => {
-              // Rotate colors for each card
-              const cardColors = [
-                'border-[hsl(var(--light-blue))] hover:shadow-[var(--glow-blue)]',
-                'border-[hsl(var(--light-green))] hover:shadow-[var(--glow-green)]',
-                'border-[hsl(var(--light-purple))] hover:shadow-[var(--glow-purple)]',
-                'border-[hsl(var(--light-orange))] hover:shadow-[0_0_20px_hsl(var(--light-orange)_/_0.5)]'
-              ];
-              
-              return (
-                <Link key={blog.id} to={`/blog/${blog.slug}`}>
-                  <Card className={`bg-white/5 backdrop-blur-sm ${cardColors[index % cardColors.length]} hover:bg-white/15 transition-all duration-500 hover:scale-105 h-full group relative overflow-hidden`}>
-                    {/* Gradient overlay effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {blog.featured_image_url && (
-                      <div className="aspect-video overflow-hidden rounded-t-lg relative">
-                        <img
-                          src={blog.featured_image_url}
-                          alt={blog.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                    )}
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="text-white text-xl line-clamp-2 group-hover:bg-gradient-to-r group-hover:from-[hsl(var(--light-blue))] group-hover:to-[hsl(var(--light-purple))] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                        {blog.title}
-                      </CardTitle>
-                      <CardDescription className="text-white/70 line-clamp-3">
-                        {blog.excerpt}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0 relative z-10">
-                      <div className="flex items-center justify-between text-sm text-white/60 mb-4">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1 text-[hsl(var(--light-blue))]">
-                            <Calendar className="w-4 h-4" />
-                            {format(new Date(blog.published_at), 'MMM d, yyyy')}
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              <AnimatePresence mode="popLayout">
+                {filteredBlogs.map((blog, index) => (
+                  <motion.div
+                    key={blog.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                  >
+                    <Link to={`/blog/${blog.slug}`} className="group block h-full">
+                      <div className="relative h-full p-6 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden flex flex-col">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        {blog.featured_image_url && (
+                          <div className="relative aspect-video rounded-2xl overflow-hidden mb-8 border border-white/5">
+                            <img
+                              src={blog.featured_image_url}
+                              alt={blog.title}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-[#0F172A]/20 group-hover:bg-transparent transition-colors duration-500" />
                           </div>
-                          <div className="flex items-center gap-1 text-[hsl(var(--light-green))]">
-                            <Eye className="w-4 h-4" />
-                            {blog.views}
+                        )}
+
+                        <div className="flex-1 flex flex-col">
+                          <div className="flex items-center gap-4 mb-4 text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">
+                             <div className="flex items-center gap-1.5">
+                               <Calendar className="w-3.5 h-3.5" />
+                               {format(new Date(blog.published_at), 'MMM d, yyyy')}
+                             </div>
+                             <div className="w-1 h-1 bg-zinc-700 rounded-full" />
+                             <div className="flex items-center gap-1.5">
+                               <Eye className="w-3.5 h-3.5" />
+                               {blog.views}
+                             </div>
+                          </div>
+
+                          <h3 className="h3 mb-4 group-hover:text-blue-400 transition-colors">
+                            {blog.title}
+                          </h3>
+                          <p className="text-[#9CA3AF] text-base line-clamp-3 mb-8 flex-1 leading-relaxed">
+                            {blog.excerpt}
+                          </p>
+
+                          <div className="flex items-center justify-between">
+                            <div className="flex flex-wrap gap-1.5">
+                               {blog.tags?.slice(0, 2).map((tag, i) => (
+                                 <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] uppercase font-bold text-[#D1D5DB]">
+                                   {tag}
+                                 </span>
+                               ))}
+                            </div>
+                            <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                              <ArrowRight className="w-5 h-5 text-white" />
+                            </div>
                           </div>
                         </div>
                       </div>
-                      
-                      {blog.tags && blog.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mb-4">
-                          {blog.tags.slice(0, 3).map((tag, tagIndex) => {
-                            const tagColors = [
-                              'border-[hsl(var(--light-green))] text-[hsl(var(--light-green))]',
-                              'border-[hsl(var(--light-orange))] text-[hsl(var(--light-orange))]',
-                              'border-[hsl(var(--light-pink))] text-[hsl(var(--light-pink))]'
-                            ];
-                            return (
-                              <Badge key={tagIndex} variant="outline" className={`text-xs ${tagColors[tagIndex % tagColors.length]}`}>
-                                {tag}
-                              </Badge>
-                            );
-                          })}
-                        </div>
-                      )}
-                      
-                      <div className="flex items-center text-white font-medium group-hover:gap-2 transition-all group-hover:text-[hsl(var(--light-blue))]">
-                        Read More
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        )}
-      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
+
+          {!isLoading && filteredBlogs.length === 0 && (
+            <div className="text-center py-40">
+              <h3 className="text-3xl font-bold mb-4 text-[#9CA3AF]">No stories found.</h3>
+              <p className="text-zinc-600">Try adjusting your filters or search terms.</p>
+            </div>
+          )}
+        </div>
+      </main>
       
-      {/* FAQ Section */}
       <FAQSection 
         title="Blog & Content FAQ"
         subtitle="Everything you need to know about our blog and content strategy"
         faqs={blogFAQs}
-        colorScheme="blue"
       />
       
       <Footer />

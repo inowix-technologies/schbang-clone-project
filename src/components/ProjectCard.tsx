@@ -48,7 +48,7 @@ const ProjectCard = ({
       <div className="relative z-10">
         {category && (
           <div className="mb-3">
-            <span className="inline-block px-2 py-1 text-xs font-medium bg-white/20 rounded-full backdrop-blur-sm">
+            <span className="inline-block px-3 py-1.5 text-sm font-medium bg-white/20 rounded-full backdrop-blur-sm">
               {category}
             </span>
           </div>

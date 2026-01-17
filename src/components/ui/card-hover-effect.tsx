@@ -11,6 +11,8 @@ export const HoverEffect = ({
     title: string;
     description: string;
     link: string;
+    icon?: React.ReactNode;
+    gradient?: string;
   }[];
   className?: string;
 }) => {
@@ -24,8 +26,8 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => (
-        <a
-          href={item.link}
+        <Link
+          to={item.link}
           key={item.link}
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
@@ -48,11 +50,16 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
-          <Card>
+          <Card gradient={item.gradient}>
+            {item.icon && (
+              <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                {item.icon}
+              </div>
+            )}
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </Card>
-        </a>
+        </Link>
       ))}
     </div>
   );
@@ -61,9 +68,11 @@ export const HoverEffect = ({
 export const Card = ({
   className,
   children,
+  gradient,
 }: {
   className?: string;
   children: React.ReactNode;
+  gradient?: string;
 }) => {
   return (
     <div
@@ -72,6 +81,9 @@ export const Card = ({
         className
       )}
     >
+      {gradient && (
+        <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl", gradient)} />
+      )}
       <div className="relative z-50">
         <div className="p-4">{children}</div>
       </div>

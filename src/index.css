@@ -4,36 +4,57 @@
 
 @layer base {
   :root {
-    /* Default to Dark Mode (Aceternity Style) */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Modern Dark Developer Theme - Inspired by dhravya.dev */
+    /* Deep navy background: #0F172A */
+    --background: 222 47% 11%;
+    /* Primary text: #FFFFFF */
+    --foreground: 0 0% 100%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    /* Card surface: #111827 */
+    --card: 222 44% 13%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    /* Popover: #1F2937 */
+    --popover: 215 28% 17%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    /* Primary accent (blue): #2563EB */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    /* Secondary surface: #1F2937 */
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    /* Muted: #1F2937 */
+    --muted: 215 28% 17%;
+    /* Muted text: #9CA3AF */
+    --muted-foreground: 216 12% 66%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    /* Accent: #111827 */
+    --accent: 222 44% 13%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    /* Border: #374151 */
+    --border: 215 16% 22%;
+    --input: 215 16% 22%;
+    --ring: 217 91% 60%;
 
     --radius: 0.5rem;
+
+    /* Theme Color Variables */
+    --theme-bg-primary: 222 47% 11%; /* #0F172A */
+    --theme-bg-secondary: 222 44% 13%; /* #111827 */
+    --theme-bg-tertiary: 215 28% 17%; /* #1F2937 */
+    --theme-text-primary: 0 0% 100%; /* #FFFFFF */
+    --theme-text-secondary: 210 20% 82%; /* #D1D5DB */
+    --theme-text-muted: 216 12% 66%; /* #9CA3AF */
+    --theme-accent-blue: 217 91% 60%; /* #2563EB */
+    --theme-accent-green: 142 71% 45%; /* #22C55E */
+    --theme-border: 215 16% 22%; /* #374151 */
 
     /* Original Custom Colors (Preserved for compatibility) */
     --light-blue: #B9D9FF;
@@ -46,18 +67,18 @@
     --light-orenge: #FFC8A9;
     --light-orange: #FFC8A9;
 
-     /* Planner Theme (Dark Default) */
-    --planner-bg: 240 10% 3.9%;
-    --planner-surface: 240 10% 5.9%;
-    --planner-surface-elevated: 240 10% 8%;
-    --planner-border: 240 3.7% 15.9%;
+     /* Planner Theme (Updated to match new theme) */
+    --planner-bg: 222 47% 11%;
+    --planner-surface: 222 44% 13%;
+    --planner-surface-elevated: 215 28% 17%;
+    --planner-border: 215 16% 22%;
     --planner-border-focus: 217 91% 60%;
-    --planner-text-primary: 0 0% 98%;
-    --planner-text-secondary: 240 5% 64.9%;
-    --planner-text-muted: 240 5% 50%;
+    --planner-text-primary: 0 0% 100%;
+    --planner-text-secondary: 210 20% 82%;
+    --planner-text-muted: 216 12% 66%;
     --planner-accent: 217 91% 60%;
     --planner-accent-muted: 217 50% 20%;
-    --planner-success: 142 70% 50%;
+    --planner-success: 142 71% 45%;
     --planner-warning: 48 96% 53%;
     --planner-error: 0 84% 60%;
   }
@@ -97,8 +118,129 @@
   * {
     @apply border-border;
   }
+  html {
+    font-size: 16px; /* Base font size for better readability */
+  }
+  html,
+  body {
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    position: relative;
+  }
+  #root {
+    min-height: 100%;
+    overflow-x: clip;
+    width: 100%;
+    position: relative;
+  }
+  /* Prevent horizontal scroll on mobile */
+  * {
+    max-width: 100%;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
   body {
     @apply bg-background text-foreground;
+    font-size: 1rem; /* 16px base */
+    line-height: 1.6; /* Professional line height for readability */
+  }
+  
+  /* Professional Typography Scale */
+  h1, .h1 {
+    font-size: clamp(2rem, 5vw, 3rem); /* Responsive: 32px - 48px */
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  h2, .h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem); /* Responsive: 28px - 40px */
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  
+  h3, .h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem); /* Responsive: 24px - 32px */
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  h4, .h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* Responsive: 20px - 24px */
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  h5, .h5 {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  
+  h6, .h6 {
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  
+  p, .text-base {
+    font-size: 1rem; /* 16px */
+    line-height: 1.6;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+  }
+  
+  .text-xs {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.4;
+  }
+  
+  .text-lg {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.6;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.6;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem; /* 24px */
+    line-height: 1.5;
+  }
+  
+  /* Hero headings - slightly larger but still professional */
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive: 40px - 64px */
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  
+  /* Section headings */
+  .section-title {
+    font-size: clamp(2rem, 4.5vw, 3rem); /* Responsive: 32px - 48px */
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Subtitle/lead text */
+  .lead {
+    font-size: clamp(1.125rem, 2vw, 1.25rem); /* Responsive: 18px - 20px */
+    line-height: 1.6;
+    color: hsl(var(--muted-foreground));
   }
 }
 
@@ -119,4 +261,9 @@
 
 .animate-marquee-reverse {
   animation: marquee-reverse var(--marquee-duration) linear infinite;
+}
+
+@keyframes grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
 }

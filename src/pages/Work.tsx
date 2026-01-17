@@ -3,9 +3,10 @@ import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
 import HeroSection from "@/components/portfolio/HeroSection";
 import ProjectsGrid from "@/components/portfolio/ProjectsGrid";
+import { useMemo } from "react";
 
 const Work = () => {
-  const workFAQs = [
+  const workFAQs = useMemo(() => [
     {
       id: 'portfolio-scope',
       question: 'What types of projects do you showcase in your portfolio?',
@@ -21,15 +22,25 @@ const Work = () => {
       question: 'What kind of results do your projects typically achieve?',
       answer: 'Our projects consistently deliver measurable results: 200-500% increase in engagement, 50-300% boost in conversions, award recognition, and significant brand awareness growth. Results vary by industry and project scope.'
     }
-  ];
+  ], []);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#0F172A] text-white relative overflow-hidden">
+      {/* Optimized subtle background */}
+      <div 
+        className="fixed inset-0 bg-gradient-to-br from-[#0F172A] via-[#0A0F1C] to-[#0F172A] pointer-events-none"
+        style={{ willChange: 'auto' }}
+      />
+      <div 
+        className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.03),transparent_50%)] pointer-events-none"
+        style={{ willChange: 'auto' }}
+      />
+      
       <Header />
 
-      <main>
+      <main className="relative z-10">
         <HeroSection />
-        <div className="relative z-10 bg-black">
+        <div className="relative z-10 bg-[#0F172A]">
           <ProjectsGrid />
         </div>
       </main>
@@ -40,7 +51,9 @@ const Work = () => {
         faqs={workFAQs}
       />
 
-      <Footer />
+      <div className="relative z-20">
+        <Footer />
+      </div>
     </div>
   );
 };

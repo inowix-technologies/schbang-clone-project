@@ -1,5 +1,4 @@
-// Marketing.jsx
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState } from 'react';
 import { z } from 'zod';
 import { Link } from 'react-router-dom';
 import {
@@ -18,12 +17,6 @@ import {
   Bot,
   Brain,
   Wand2,
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Twitter,
-  Github,
   ArrowLeft,
   MailCheck,
   TrendingUp,
@@ -35,141 +28,45 @@ import {
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-
-/* ---------------------------
-   Lightweight UI placeholders
-   (replace with your real components)
-   --------------------------- */
-const Button = ({ children, className = '', ...props }) => (
-  <button className={`inline-flex items-center justify-center rounded-md text-sm font-medium px-4 py-2 ${className}`} {...props}>
-    {children}
-  </button>
-);
-
-const Input = ({ className = '', ...props }) => <input className={`flex h-10 w-full rounded-md px-3 py-2 text-sm ${className}`} {...props} />;
-const Label = ({ children, className = '', ...props }) => <label className={`text-sm font-medium ${className}`} {...props}>{children}</label>;
-const Textarea = ({ className = '', ...props }) => <textarea className={`min-h-[80px] w-full rounded-md px-3 py-2 text-sm ${className}`} {...props} />;
-const Card = ({ children, className = '', ...props }) => <div className={`rounded-lg border bg-[#1F1E1F] p-4 ${className}`} {...props}>{children}</div>;
-const CardHeader = ({ children, className = '', ...props }) => <div className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props}>{children}</div>;
-const CardTitle = ({ children, className = '', ...props }) => <h3 className={`text-2xl font-semibold ${className}`} {...props}>{children}</h3>;
-const CardDescription = ({ children, className = '', ...props }) => <p className={`text-sm text-muted-foreground ${className}`} {...props}>{children}</p>;
-const CardContent = ({ children, className = '', ...props }) => <div className={`p-6 pt-0 ${className}`} {...props}>{children}</div>;
-const Badge = ({ children, className = '', ...props }) => <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${className}`} {...props}>{children}</div>;
-
-
-/* ---------------------------
-   Simple custom Select
-   --------------------------- */
-const SelectContext = createContext();
-
-const Select = ({ children, onValueChange, name, required, value }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState({ value: value || '', label: null });
-
-  // Sync external value if provided (uncontrolled is also supported)
-  useEffect(() => {
-    if (value !== undefined) {
-      // find label from children (simple search)
-      let currentLabel = null;
-      React.Children.forEach(children, child => {
-        if (!child) return;
-        // child might be SelectContent
-        if (child.props && child.props.children) {
-          React.Children.forEach(child.props.children, item => {
-            if (!item || !item.props) return;
-            if (item.props.value === value) {
-              currentLabel = item.props.children;
-            }
-          });
-        }
-      });
-      setSelectedOption({ value: value || '', label: currentLabel });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, children]);
-
-  const handleSelect = (val, label) => {
-    setSelectedOption({ value: val, label });
-    if (onValueChange) onValueChange(val);
-    setIsOpen(false);
-  };
-
-  return (
-    <SelectContext.Provider value={{ isOpen, setIsOpen, selectedOption, handleSelect }}>
-      <div className="relative">
-        <input type="hidden" name={name} value={selectedOption.value || ''} required={required} />
-        {children}
-      </div>
-    </SelectContext.Provider>
-  );
-};
-
-const SelectTrigger = ({ children, className = '' }) => {
-  const { isOpen, setIsOpen } = useContext(SelectContext);
-  return (
-    <button type="button" onClick={() => setIsOpen(!isOpen)} className={`flex h-10 items-center justify-between rounded-md px-3 py-2 text-sm w-full ${className}`}>
-      {children}
-    </button>
-  );
-};
-
-const SelectValue = ({ placeholder }) => {
-  const { selectedOption } = useContext(SelectContext);
-  return <span>{selectedOption?.label || placeholder}</span>;
-};
-
-const SelectContent = ({ children }) => {
-  const { isOpen } = useContext(SelectContext);
-  if (!isOpen) return null;
-  return <div className="absolute z-50 min-w-full rounded-md border bg-white shadow-md mt-1">{children}</div>;
-};
-
-const SelectItem = ({ children, value }) => {
-  const { handleSelect } = useContext(SelectContext);
-  return (
-    <div onClick={() => handleSelect(value, children)} className="py-2 px-3 cursor-pointer hover:bg-gray-100">
-      {children}
-    </div>
-  );
-};
-
-/* ---------------------------
-   Small mocks (replace with real toast/supabase)
-   --------------------------- */
-const useToast = () => ({
-  toast: ({ title, description }) => console.log('Toast:', title, description)
-});
-
-const supabase = {
-  from: () => ({
-    insert: async (data) => {
-      console.log('Mock insert to supabase:', data);
-      return { error: null };
-    }
-  })
-};
+import { Button } from "@/components/ui/button";
+import { GradientMesh } from "@/components/ui/gradient-mesh";
+import { FloatingShapes } from "@/components/ui/floating-shapes";
+import { Particles } from "@/components/ui/particles";
+import { CreativeBackground } from "@/components/ui/creative-background";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "@/hooks/use-toast";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ---------------------------
    Thank you page
    --------------------------- */
-const ThankYouPage = ({ name, onReset }) => (
-  <div className="min-h-screen bg-background flex flex-col">
+const ThankYouPage = ({ name, onReset }: { name: string, onReset: () => void }) => (
+  <div className="min-h-screen bg-[#0F172A] text-white flex flex-col">
     <Header />
-    <main className="flex-grow flex items-center justify-center">
+    <main className="flex-grow flex items-center justify-center pt-32">
       <div className="text-center max-w-2xl mx-auto px-6 py-20">
-        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+        <motion.div 
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-8"
+        >
           <MailCheck className="w-12 h-12 text-green-500" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Thank You, {name}!</h1>
-        <p className="text-xl text-muted-foreground mb-8">Your vision is in good hands. We've received your project details and will be in touch shortly.</p>
+        </motion.div>
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Thank You, {name}!</h1>
+        <p className="text-xl text-[#D1D5DB] mb-12">Your vision is in good hands. We've received your project details and will be in touch shortly.</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link to="/work">
-            <Button className="rounded-full px-8">
+            <Button className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
               <Briefcase className="w-5 h-5 mr-2" />
               Explore Our Work
             </Button>
           </Link>
-          <Button className="rounded-full px-8" onClick={onReset}>
+          <Button variant="outline" className="h-14 px-8 rounded-full border-border text-foreground hover:bg-card" onClick={onReset}>
             <ArrowLeft className="w-5 h-5 mr-2" />
             Submit Another Request
           </Button>
@@ -192,10 +89,6 @@ const newFormSchema = z.object({
   message: z.string().trim().min(10, "Project details must be at least 10 characters")
 });
 
-/* ---------------------------
-   Example data for services/segments/aiFeatures
-   (Replace/extend with real data)
-   --------------------------- */
 const services = [
   {
     icon: Rocket,
@@ -203,7 +96,9 @@ const services = [
     title: 'Brand Solutions',
     description: 'Strategic brand development and positioning.',
     features: ['Brand Strategy', 'Identity', 'Positioning'],
-    cta: 'Learn More'
+    cta: 'Learn More',
+    color: 'text-orange-400',
+    bgColor: 'bg-orange-500/10'
   },
   {
     icon: Zap,
@@ -211,7 +106,9 @@ const services = [
     title: 'Tech Solutions',
     description: 'Web, mobile and platform engineering.',
     features: ['Web Apps', 'Mobile Apps', 'E-commerce'],
-    cta: 'Explore'
+    cta: 'Explore',
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-500/10'
   },
   {
     icon: Sparkles,
@@ -219,7 +116,9 @@ const services = [
     title: 'Media & Growth',
     description: 'Performance marketing and creative.',
     features: ['Paid Media', 'Content', 'Analytics'],
-    cta: 'Get Started'
+    cta: 'Get Started',
+    color: 'text-purple-400',
+    bgColor: 'bg-purple-500/10'
   }
 ];
 
@@ -255,11 +154,8 @@ const aiFeatures = [
   { icon: Brain, stats: '3x', title: 'Personalization', description: 'Deliver tailored experiences at scale.' }
 ];
 
-/* ---------------------------
-   Marketing component
-   --------------------------- */
 const Marketing = () => {
-  const [activeTab, setActiveTab] = useState('whatsapp');
+  const [activeTab, setActiveTab] = useState<'form' | 'whatsapp'>('whatsapp');
 
   const [formState, setFormState] = useState({
     name: '',
@@ -271,38 +167,32 @@ const Marketing = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: string, value: string) => {
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
       const validatedData = newFormSchema.parse(formState);
-      const leadData = {
-        name: validatedData.name,
-        email: validatedData.email,
-        company: validatedData.company || 'Not provided',
-        subject: `New Project Inquiry: ${validatedData.projectType}`,
-        message: `Project Type: ${validatedData.projectType}\nBudget: ${validatedData.budget || 'Not specified'}\n\nProject Details:\n${validatedData.message}`,
-        source: 'marketing-landing-new',
-        status: 'new'
-      };
+      
+      // Simulate submission
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const { error } = await supabase.from('contact_leads').insert([leadData]);
-      if (error) throw error;
-
-      toast({ title: "Thank you for your message!", description: "We've received your project details and will be in touch shortly." });
+      toast({ 
+        title: "Thank you for your message!", 
+        description: "We've received your project details and will be in touch shortly." 
+      });
+      
       setSubmittedName(validatedData.name.split(' ')[0] || 'Friend');
       setIsSubmitted(true);
       window.scrollTo(0, 0);
@@ -310,10 +200,17 @@ const Marketing = () => {
 
     } catch (err) {
       if (err instanceof z.ZodError) {
-        toast({ title: "Validation Error", description: err.errors[0].message });
+        toast({ 
+          title: "Validation Error", 
+          description: err.errors[0].message,
+          variant: "destructive"
+        });
       } else {
-        toast({ title: "Error", description: "Failed to submit. Please try again." });
-        console.error(err);
+        toast({ 
+          title: "Error", 
+          description: "Failed to submit. Please try again.",
+          variant: "destructive"
+        });
       }
     } finally {
       setIsSubmitting(false);
@@ -328,329 +225,352 @@ const Marketing = () => {
   if (isSubmitted) return <ThankYouPage name={submittedName} onReset={handleResetForm} />;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0F172A] text-white selection:bg-orange-500/30 relative overflow-hidden">
+      <GradientMesh className="opacity-30" />
+      <FloatingShapes count={12} className="opacity-12" />
+      <Particles count={40} color="#ffffff" className="opacity-15" />
+      <CreativeBackground variant="gradient" className="opacity-20" />
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative py-10 md:py-20 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-        <div className="max-w-container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">🏆 Ranked #5 in MMA SMARTIES Business Impact Index</Badge>
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                Transform Your Business with <span className="text-primary"> Award-Winning</span> Solutions
+      <main className="pt-32 relative z-10">
+        {/* Hero Section */}
+        <section className="container mx-auto px-6 mb-32 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/10 via-transparent to-transparent blur-3xl pointer-events-none" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <motion.div 
+               initial={{ opacity: 0, x: -30 }}
+               animate={{ opacity: 1, x: 0 }}
+               className="relative z-10"
+            >
+              <Badge className="mb-8 h-8 px-4 bg-orange-500/10 text-orange-400 border-orange-500/20 text-[10px] font-bold uppercase tracking-widest">🏆 Ranked #5 in MMA SMARTIES Business Impact Index</Badge>
+              <h1 className="hero-title mb-6 sm:mb-8 px-2 sm:px-0">
+                Award-Winning <span className="italic text-[#9CA3AF]">Excellence.</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Join 300+ global brands who've achieved remarkable growth with our integrated creative, technology, and media solutions. Get a custom strategy in 24 hours.
+              <p className="lead mb-8 sm:mb-10 max-w-2xl px-4 sm:px-0">
+                Join 300+ global brands who've achieved remarkable growth with our integrated creative, technology, and media solutions.
               </p>
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /><span className="text-sm font-medium">1200+ Specialists</span></div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /><span className="text-sm font-medium">10+ Years Experience</span></div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /><span className="text-sm font-medium">Award-Winning Work</span></div>
+              
+              <div className="flex flex-wrap gap-6 mb-12">
+                <div className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-[#22C55E]" /><span className="text-sm font-bold text-[#D1D5DB]">1200+ Specialists</span></div>
+                <div className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-[#22C55E]" /><span className="text-sm font-bold text-[#D1D5DB]">10+ Years Experience</span></div>
+                <div className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-[#22C55E]" /><span className="text-sm font-bold text-[#D1D5DB]">Global Presence</span></div>
               </div>
-              <div className="flex flex-col lg:flex-row md:flex-row items-center gap-4">
-                <Button className="rounded-full px-8" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
-                  Get Free Strategy Session <ArrowRight className="w-5 h-5 ml-2" />
+
+              <div className="flex flex-col sm:flex-row gap-6">
+                <Button className="h-16 px-10 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-all font-bold text-lg" onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Get Free Strategy <ArrowRight className="w-5 h-5 ml-4" />
                 </Button>
-                <Link to="/work"><Button className="rounded-full px-8">View Case Studies</Button></Link>
+                <Link to="/work">
+                  <Button variant="outline" className="h-16 px-10 rounded-full border-border text-foreground hover:bg-card transition-all font-bold text-lg">
+                    View Case Studies
+                  </Button>
+                </Link>
               </div>
-            </div>
-            <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="p-6"><div className="flex items-center gap-3 mb-3"><TrendingUp className="w-8 h-8 text-green-500" /><div><p className="text-2xl font-bold text-green-500">300%</p><p className="text-sm text-muted-foreground">ROI Increase</p></div></div></Card>
-                <Card className="p-6"><div className="flex items-center gap-3 mb-3"><Users className="w-8 h-8 text-blue-500" /><div><p className="text-2xl font-bold text-blue-500">300+</p><p className="text-sm text-muted-foreground">Brands Served</p></div></div></Card>
-                <Card className="p-6"><div className="flex items-center gap-3 mb-3"><Award className="w-8 h-8 text-yellow-500" /><div><p className="text-2xl font-bold text-yellow-500">50+</p><p className="text-sm text-muted-foreground">Awards Won</p></div></div></Card>
-                <Card className="p-6"><div className="flex items-center gap-3 mb-3"><Clock className="w-8 h-8 text-purple-500" /><div><p className="text-2xl font-bold text-purple-500">24hr</p><p className="text-sm text-muted-foreground">Response Time</p></div></div></Card>
+            </motion.div>
+
+            <motion.div 
+               initial={{ opacity: 0, scale: 0.9 }}
+               animate={{ opacity: 1, scale: 1 }}
+               className="grid grid-cols-2 gap-4"
+            >
+              <Card className="p-8 bg-zinc-900/50 border-white/5 rounded-[2.5rem] hover:border-white/10 transition-all">
+                <TrendingUp className="w-10 h-10 text-green-500 mb-6" />
+                <div className="text-4xl font-bold mb-1">300%</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">ROI Increase</div>
+              </Card>
+              <Card className="p-8 bg-zinc-900/50 border-white/5 rounded-[2.5rem] hover:border-white/10 transition-all">
+                <Users className="w-10 h-10 text-blue-500 mb-6" />
+                <div className="text-4xl font-bold mb-1">300+</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Brands Served</div>
+              </Card>
+              <Card className="p-8 bg-zinc-900/50 border-white/5 rounded-[2.5rem] hover:border-white/10 transition-all">
+                <Award className="w-10 h-10 text-yellow-500 mb-6" />
+                <div className="text-4xl font-bold mb-1">50+</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Awards Won</div>
+              </Card>
+              <Card className="p-8 bg-zinc-900/50 border-white/5 rounded-[2.5rem] hover:border-white/10 transition-all">
+                <Clock className="w-10 h-10 text-purple-500 mb-6" />
+                <div className="text-4xl font-bold mb-1">24hr</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">Response Time</div>
+              </Card>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section id="contact-form" className="py-32 bg-zinc-950/50 border-y border-white/5 overflow-hidden relative">
+          <GradientMesh className="opacity-15" />
+          <FloatingShapes count={8} className="opacity-8" />
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+              <div>
+                <h2 className="section-title mb-6 sm:mb-8 md:mb-10 px-2 sm:px-0">Ready to Transform?</h2>
+                <p className="lead mb-8 sm:mb-10 md:mb-12 px-4 sm:px-0">Get a personalized strategy and quote tailored to your business goals. Our team will respond within 24 hours.</p>
+                
+                <div className="space-y-10">
+                   {[
+                     { icon: Shield, title: "Risk-Free Consultation", desc: "No commitment required. Get expert insights at no cost." },
+                     { icon: Clock, title: "Fast Response", desc: "Detailed proposal within 24 hours of your inquiry." },
+                     { icon: Users, title: "Expert Team", desc: "Work directly with our 1200+ global specialists." }
+                   ].map((item, i) => (
+                      <div key={i} className="flex gap-6 group">
+                         <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/10 group-hover:bg-orange-500/20 transition-all duration-500">
+                           <item.icon className="w-7 h-7 text-orange-400" />
+                         </div>
+                         <div>
+                            <h4 className="text-xl font-bold mb-2 group-hover:text-orange-300 transition-colors">{item.title}</h4>
+                            <p className="text-[#9CA3AF] leading-relaxed text-sm">{item.desc}</p>
+                         </div>
+                      </div>
+                   ))}
+                </div>
               </div>
+
+              <motion.div 
+                 initial={{ opacity: 0, y: 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 viewport={{ once: true }}
+                 className="relative"
+              >
+                <div className="absolute inset-0 bg-orange-500/10 blur-[120px] -z-10" />
+                <Card className="p-8 md:p-12 bg-zinc-900 border-white/10 rounded-[3rem] shadow-2xl overflow-hidden">
+                  <div className="mb-10">
+                    <h3 className="text-3xl font-bold mb-2">Let's Connect</h3>
+                    <p className="text-zinc-500">Choose your preferred way to reach us.</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 p-1.5 bg-card/60 rounded-2xl mb-10 border border-border">
+                    <button 
+                       onClick={() => setActiveTab('form')} 
+                       className={`flex items-center justify-center h-12 rounded-xl text-sm font-bold transition-all ${activeTab === 'form' ? 'bg-primary text-primary-foreground shadow-lg' : 'text-muted-foreground hover:text-foreground'}`}
+                    >
+                      Strategy Form
+                    </button>
+                    <button 
+                       onClick={() => setActiveTab('whatsapp')} 
+                       className={`flex items-center justify-center h-12 rounded-xl text-sm font-bold transition-all ${activeTab === 'whatsapp' ? 'bg-primary text-primary-foreground shadow-lg' : 'text-muted-foreground hover:text-foreground'}`}
+                    >
+                      WhatsApp
+                    </button>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    {activeTab === 'form' ? (
+                      <motion.form 
+                        key="form"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        onSubmit={handleSubmit} 
+                        className="space-y-6"
+                      >
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label htmlFor="marketing-name" className="text-[#9CA3AF] ml-1">Full Name *</Label>
+                            <Input id="marketing-name" name="name" placeholder="John Doe" required className="h-14 bg-white/5 border-white/10 rounded-2xl focus:border-orange-500/50" value={formState.name} onChange={handleFormChange} />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="marketing-email" className="text-zinc-400 ml-1">Email *</Label>
+                            <Input id="marketing-email" name="email" type="email" placeholder="john@company.com" required className="h-14 bg-white/5 border-white/10 rounded-2xl focus:border-orange-500/50" value={formState.email} onChange={handleFormChange} />
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label htmlFor="marketing-company" className="text-zinc-400 ml-1">Company</Label>
+                            <Input id="marketing-company" name="company" placeholder="Acme Inc." className="h-14 bg-white/5 border-white/10 rounded-2xl focus:border-orange-500/50" value={formState.company} onChange={handleFormChange} />
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-zinc-400 ml-1">Project Type *</Label>
+                            <Select name="projectType" required onValueChange={(val) => handleSelectChange('projectType', val)} value={formState.projectType}>
+                              <SelectTrigger className="h-14 bg-white/5 border-white/10 rounded-2xl">
+                                <SelectValue placeholder="Select type" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-zinc-900 border-white/10 text-white">
+                                <SelectItem value="brand">Brand Strategy</SelectItem>
+                                <SelectItem value="tech">Tech Solutions</SelectItem>
+                                <SelectItem value="media">Media & Growth</SelectItem>
+                                <SelectItem value="research">Market Research</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="marketing-message" className="text-zinc-400 ml-1">Details *</Label>
+                          <Textarea id="marketing-message" name="message" placeholder="What are your goals?" required rows={4} className="bg-white/5 border-white/10 rounded-2xl focus:border-orange-500/50 resize-none p-4" value={formState.message} onChange={handleFormChange} />
+                        </div>
+
+                        <Button type="submit" className="w-full h-16 rounded-2xl bg-orange-500 text-white hover:bg-orange-600 transition-all font-bold text-lg" disabled={isSubmitting}>
+                          {isSubmitting ? "Sending..." : "Request Full Strategy"}
+                          <Send className="ml-4 h-5 w-5" />
+                        </Button>
+                      </motion.form>
+                    ) : (
+                      <motion.div 
+                        key="whatsapp"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        className="text-center py-10"
+                      >
+                        <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-green-500/20">
+                           <MessageSquare className="w-10 h-10 text-green-500" />
+                        </div>
+                        <h3 className="text-2xl font-bold mb-4">Quick Chat?</h3>
+                        <p className="text-[#9CA3AF] mb-10 leading-relaxed">Connect with our team directly on WhatsApp for immediate assistance and quick answers.</p>
+                        <a href="https://wa.me/916283075131" target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full h-16 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-bold text-lg">
+                            Connect on WhatsApp
+                          </Button>
+                        </a>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </Card>
+              </motion.div>
             </div>
           </div>
+        </section>
 
-          {/* Contact Form Section */}
-          <section id="contact-form" className="py-2 mt-[4rem] bg-[#1F1E1F]">
-            <div className="max-w-container mx-auto px-6 py-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Ready to Transform Your Business?</h2>
-                  <p className="text-xl text-muted-foreground mb-8">Get a personalized strategy and quote tailored to your specific industry, business size, and objectives. Our team will respond within 24 hours.</p>
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4"><Shield className="w-6 h-6 text-primary mt-1 flex-shrink-0" /><div><h4 className="font-semibold text-foreground mb-2">Risk-Free Consultation</h4><p className="text-muted-foreground">No commitment required. Get expert insights and recommendations at no cost.</p></div></div>
-                    <div className="flex items-start gap-4"><Clock className="w-6 h-6 text-primary mt-1 flex-shrink-0" /><div><h4 className="font-semibold text-foreground mb-2">Fast Response</h4><p className="text-muted-foreground">Our team reviews every inquiry and responds with a detailed proposal within 24 hours.</p></div></div>
-                    <div className="flex items-start gap-4"><Users className="w-6 h-6 text-primary mt-1 flex-shrink-0" /><div><h4 className="font-semibold text-foreground mb-2">Expert Team</h4><p className="text-muted-foreground">Work directly with our 1200+ specialists across all disciplines.</p></div></div>
-                  </div>
-                </div>
-
-                <Card className="p-8">
-                  <CardHeader className="px-0 pt-0">
-                    <CardTitle className="text-2xl text-white">Let's Connect</CardTitle>
-                    <CardDescription className='text-white'>Choose your preferred way to get in touch with us.</CardDescription>
-                  </CardHeader>
-
-                  <div className="flex w-full bg-muted/50 p-1 rounded-lg mb-6">
-                    <button onClick={() => setActiveTab('form')} className={`w-1/2 p-2 rounded-md text-sm font-medium ${activeTab === 'form' ? 'bg-primary text-black' : 'text-black hover:bg-muted'}`}>Get a Full Strategy</button>
-                    <button onClick={() => setActiveTab('whatsapp')} className={`w-1/2 p-2 rounded-md text-sm font-medium ${activeTab === 'whatsapp' ? 'bg-primary text-black' : 'text-black hover:bg-muted'}`}>Connect on WhatsApp</button>
-                  </div>
-
-                  {activeTab === 'form' && (
-                    <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-8 space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Full Name *</Label>
-                          <Input
-                            id="name"
-                            name="name"
-                            placeholder="John Doe"
-                            required
-                            className="bg-background/50"
-                            value={formState.name}
-                            onChange={handleFormChange}
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email *</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="john@company.com"
-                            required
-                            className="bg-background/50"
-                            value={formState.email}
-                            onChange={handleFormChange}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="company">Company Name</Label>
-                          <Input
-                            id="company"
-                            name="company"
-                            placeholder="Your Company"
-                            className="bg-background/50"
-                            value={formState.company}
-                            onChange={handleFormChange}
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="projectType">Project Type *</Label>
-                          <Select name="projectType" required onValueChange={(val) => handleSelectChange('projectType', val)} value={formState.projectType}>
-                            <SelectTrigger className="bg-background/50">
-                              <SelectValue placeholder="Select project type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="app">Custom Application</SelectItem>
-                              <SelectItem value="ecommerce">Ecommerce Platform</SelectItem>
-                              <SelectItem value="ai">AI Solutions</SelectItem>
-                              <SelectItem value="automation">Business Automation</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="budget">Budget Range</Label>
-                        <Select name="budget" onValueChange={(val) => handleSelectChange('budget', val)} value={formState.budget}>
-                          <SelectTrigger className="bg-background/50">
-                            <SelectValue placeholder="Select budget range" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="small">$5K - $20K</SelectItem>
-                            <SelectItem value="medium">$20K - $50K</SelectItem>
-                            <SelectItem value="large">$50K - $100K</SelectItem>
-                            <SelectItem value="enterprise">$100K+</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Project Details *</Label>
-                        <Textarea
-                          id="message"
-                          name="message"
-                          placeholder="Tell us about your project, goals, and timeline..."
-                          required
-                          rows={4}
-                          className="bg-background/50 resize-none"
-                          value={formState.message}
-                          onChange={handleFormChange}
-                        />
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-primary hover:bg-primary/90 glow-effect"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Sending..." : "Get Started"}
-                        <Send className="ml-2 h-5 w-5" />
-                      </Button>
-
-                      <p className="text-xs text-center text-muted-foreground">
-                        We respect your privacy. Your information will never be shared.
-                      </p>
-                    </form>
-                  )}
-
-                  {activeTab === 'whatsapp' && (
-                    <div className="text-center animate-in fade-in duration-300">
-                      <h3 className="text-lg font-semibold text-foreground mb-2">Have a Quick Question?</h3>
-                      <p className="text-muted-foreground mb-6">Tap the button below to start a chat with our team directly on WhatsApp. We're here to help!</p>
-                      <a href="https://wa.me/916283075131" target="_blank" rel="noopener noreferrer" className="w-full inline-block">
-                        <Button className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-105">
-                          <MessageSquare className="w-5 h-5 mr-2" />Connect on WhatsApp
-                        </Button>
-                      </a>
-                    </div>
-                  )}
-                </Card>
-              </div>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-24 relative">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4">Our <span className="text-gradient">Solutions</span></h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">From startups to enterprises, we deliver technology that drives growth</p>
+        {/* Solutions Grid */}
+        <section className="py-32 container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="section-title mb-4 sm:mb-6 px-2 sm:px-0">Integrated Solutions</h2>
+            <p className="lead max-w-2xl mx-auto px-4 sm:px-0">Scalable technology and creative strategies for modern brands.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={index} className="card-glass p-8 hover:scale-105 transition-transform duration-300 group bg-[#1F1E1F] cursor-pointer">
-                  <div className="mb-6">
-                    <div className="inline-flex p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-8 w-8 text-primary" />
-                    </div>
+                <motion.div 
+                   key={index}
+                   initial={{ opacity: 0, y: 20 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   transition={{ delay: index * 0.1 }}
+                   className="p-8 md:p-10 rounded-[2.5rem] bg-zinc-900/30 border border-white/5 hover:border-white/10 hover:bg-zinc-900/50 transition-all group"
+                >
+                  <div className={`w-16 h-16 ${service.bgColor} rounded-[1.25rem] flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform duration-500`}>
+                    <Icon className={`h-8 w-8 ${service.color}`} />
                   </div>
-
-                  <div className="mb-2 text-sm font-medium text-primary">{service.category}</div>
-
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-gradient transition-colors">{service.title}</h3>
-
-                  <p className="text-muted-foreground mb-6">{service.description}</p>
-
-                  <ul className="space-y-2">
+                  <div className={`text-[10px] font-bold uppercase tracking-widest ${service.color} mb-4`}>{service.category}</div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-white transition-colors">{service.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-8">{service.description}</p>
+                  <ul className="space-y-4">
                     {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center text-sm">
-                        <div className="h-1.5 w-1.5 rounded-full bg-primary mr-2" />
+                      <li key={i} className="flex items-center text-xs font-bold text-[#9CA3AF] group-hover:text-[#D1D5DB] transition-colors uppercase tracking-widest">
+                        <Sparkles className="h-3 w-3 text-[#374151] mr-3" />
                         {feature}
                       </li>
                     ))}
                   </ul>
-                </Card>
+                </motion.div>
               );
             })}
           </div>
-        </div>
+        </section>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
-      </section>
-
-      {/* Client Segments Section */}
-      <section className="py-24 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4">Built for <span className="text-gradient">Every Scale</span></h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">Whether you're just starting or scaling to millions, we have the right solution</p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {segments.map((segment, index) => {
-              const Icon = segment.icon;
-              return (
-                <Card key={index} className="card-glass p-8 flex flex-col h-full bg-[#1F1E1F] hover:shadow-elevated transition-all duration-300">
-                  <div className="mb-6">
-                    <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-4">
-                      <Icon className="h-10 w-10 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-2">{segment.title}</h3>
-                    <p className="text-sm text-primary font-medium">{segment.subtitle}</p>
-                  </div>
-
-                  <p className="text-muted-foreground mb-6">{segment.description}</p>
-
-                  <div className="mb-8 flex-grow">
-                    <ul className="space-y-3">
-                      {segment.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start">
-                          <ArrowRight className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button className="w-full bg-primary hover:bg-primary/90 group" size="lg">
-                    {segment.cta}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* AI Showcase Section */}
-      <section className="py-24 relative overflow-hidden bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">AI-Powered Technology</span>
+        {/* Client Segments */}
+        <section className="py-32 bg-zinc-950/50 border-y border-white/5">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="section-title mb-4 sm:mb-6 px-2 sm:px-0">Tailored for You</h2>
+              <p className="lead px-4 sm:px-0">Solutions designed for your specific business scale.</p>
             </div>
 
-            <h2 className="text-5xl md:text-6xl font-bold mb-4">Empower Your Business with <span className="text-gradient">Artificial Intelligence</span></h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">Transform operations, enhance customer experience, and unlock new revenue streams with enterprise-grade AI solutions</p>
-          </div>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {segments.map((segment, index) => {
+                const Icon = segment.icon;
+                return (
+                  <motion.div 
+                     key={index}
+                     initial={{ opacity: 0, scale: 0.95 }}
+                     whileInView={{ opacity: 1, scale: 1 }}
+                     viewport={{ once: true }}
+                     className="p-10 rounded-[3rem] bg-white/5 border border-white/10 flex flex-col h-full hover:border-orange-500/30 transition-all group"
+                  >
+                    <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:bg-orange-500/20 transition-all">
+                      <Icon className="h-8 w-8 text-orange-400" />
+                    </div>
+                    <h3 className="text-3xl font-bold mb-2">{segment.title}</h3>
+                    <p className="text-xs font-bold uppercase tracking-widest text-orange-500 mb-6">{segment.subtitle}</p>
+                    <p className="text-[#9CA3AF] leading-relaxed mb-10">{segment.description}</p>
+                    
+                    <div className="space-y-4 mb-12 flex-grow">
+                      {segment.benefits.map((benefit, i) => (
+                        <div key={i} className="flex items-center gap-4">
+                          <div className="w-2 h-2 rounded-full bg-orange-500" />
+                          <span className="text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                    <Link to="/contact-us" className="w-full">
+                      <Button className="w-full h-14 rounded-2xl bg-card/60 border border-border text-foreground hover:bg-card transition-all group">
+                        {segment.cta} <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* AI Showcase */}
+        <section className="py-32 container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {aiFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="card-glass p-8 relative overflow-hidden bg-[#1F1E1F] group hover:shadow-elevated transition-all duration-300">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
+                <Card 
+                  key={index}
+                  className="p-10 bg-zinc-900/50 border-white/5 rounded-[2.5rem] relative overflow-hidden group hover:border-white/10 transition-all"
+                >
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl group-hover:bg-orange-500/10 transition-colors" />
                   <div className="relative z-10">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="inline-flex p-3 rounded-xl bg-primary/10">
-                        <Icon className="h-8 w-8 text-primary" />
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
+                        <Icon className="h-7 w-7 text-orange-400" />
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-primary">{feature.stats}</div>
-                        <div className="text-xs text-muted-foreground">Average Impact</div>
+                        <div className="text-3xl font-bold text-white mb-1">{feature.stats} Impact</div>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Average Performance Boost</div>
                       </div>
                     </div>
-
-                    <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+                    <p className="text-zinc-500 text-sm leading-relaxed">{feature.description}</p>
                   </div>
                 </Card>
               );
             })}
           </div>
+        </section>
 
-          <div className="mt-16 text-center">
-            <div className="card-glass rounded-2xl p-12 max-w-4xl mx-auto">
-              <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Business with AI?</h3>
-              <p className="text-lg text-muted-foreground mb-8">Schedule a free consultation to discover how AI can revolutionize your operations</p>
-              <a href="#contact" className="inline-flex">
-                <button className="px-8 py-4 rounded-lg bg-[#1F1E1F] hover:bg-primary/90 text-white font-semibold glow-effect transition-all">
-                  Schedule Free Consultation
-                </button>
-              </a>
-            </div>
+        {/* CTA */}
+        <section className="py-40 relative">
+          <GradientMesh className="opacity-25" />
+          <FloatingShapes count={10} className="opacity-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent pointer-events-none" />
+          <div className="container mx-auto px-6 text-center relative z-10">
+            <h2 className="hero-title mb-6 sm:mb-8 md:mb-10 px-2 sm:px-0">
+              Ready to <br />
+              <span className="text-zinc-600 italic">Work?</span>
+            </h2>
+            <p className="lead mb-8 sm:mb-10 md:mb-12 max-w-2xl mx-auto px-4 sm:px-0">
+              Join the hundreds of brands that trust us with their growth. Let's create something extraordinary.
+            </p>
+            <Link to="/contact-us">
+              <Button className="h-16 sm:h-20 px-8 sm:px-16 rounded-full text-xl sm:text-2xl bg-orange-500 text-white hover:bg-orange-600 transition-all hover:scale-105 shadow-[0_0_30px_rgba(249,115,22,0.3)]">
+                Get Started Now
+              </Button>
+            </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

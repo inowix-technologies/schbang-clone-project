@@ -204,7 +204,7 @@ export const BlogsManager = () => {
             />
           </div>
           <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-            <SelectTrigger className="w-[180px] bg-white/10 border-white/20 text-white">
+            <SelectTrigger className="w-full sm:w-[180px] bg-white/10 border-white/20 text-white">
               <SelectValue placeholder="Filter by status" />
             </SelectTrigger>
             <SelectContent>
@@ -400,7 +400,7 @@ export const BlogsManager = () => {
                         size="sm"
                         variant="outline"
                         onClick={() => handleEdit(blog)}
-                        className="border-white/20 text-white hover:bg-white"
+                        className="border-border text-foreground hover:bg-card"
                       >
                         <Edit className="w-4 h-4" />
                       </Button>

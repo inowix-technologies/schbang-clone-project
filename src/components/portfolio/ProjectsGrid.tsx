@@ -31,7 +31,7 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
   } = useProjectFilter();
 
   const [showFilters, setShowFilters] = useState(true);
-  const [viewMode, setViewMode] = useState<'swipe' | 'grid'>('swipe');
+  const [viewMode, setViewMode] = useState<'swipe' | 'grid'>('grid');
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -47,32 +47,29 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
   }, [api]);
 
   return (
-    <section className={`py-12 px-4 lg:px-8 bg-black relative overflow-hidden ${className}`} data-testid="projects-grid">
-      {/* Background patterns */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-
+    <section className={`py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#0F172A] relative overflow-hidden ${className}`} data-testid="projects-grid">
       <div className="max-w-[1600px] mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-6 border-b border-white/5 pb-8">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 sm:mb-10 gap-6 border-b border-zinc-800/50 pb-6 sm:pb-8">
           <div className="max-w-xl">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <h2 className="text-3xl lg:text-5xl font-bold mb-3 tracking-tight text-white leading-tight">
-                Selected <span className="text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.15)]">Works</span>
+              <h2 className="section-title mb-3 text-white">
+                Selected <span className="font-normal bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Works</span>
               </h2>
-              <div className="flex items-center gap-4">
-                <p className="text-neutral-500 text-sm md:text-base leading-relaxed">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed font-light">
                   Strategic solutions and creative executions that drive impact.
                 </p>
-                <div className="h-4 w-px bg-white/10 hidden md:block" />
+                <div className="h-4 w-px bg-zinc-800/50 hidden sm:block" />
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-white tracking-tight">
+                  <span className="text-base sm:text-lg font-medium text-white tracking-tight">
                     {filteredProjects.length}
                   </span>
-                  <span className="text-neutral-600 font-bold uppercase tracking-widest text-[9px]">
+                  <span className="text-[#6B7280] font-medium uppercase tracking-widest text-xs sm:text-sm">
                     Projects
                   </span>
                 </div>
@@ -81,26 +78,26 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="bg-neutral-900 border border-white/5 p-1 rounded-xl flex shadow-2xl">
+            <div className="bg-zinc-900/50 border border-zinc-800/50 p-1 rounded-xl flex">
               <button
                 onClick={() => setViewMode('swipe')}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all ${viewMode === 'swipe' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-neutral-500 hover:text-white'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors duration-200 ${viewMode === 'swipe' ? 'bg-primary text-primary-foreground' : 'text-[#9CA3AF] hover:text-white'}`}
               >
-                <GalleryHorizontal className="w-3 h-3" /> SWIPE
+                <GalleryHorizontal className="w-4 h-4" /> SWIPE
               </button>
               <button
                 onClick={() => setViewMode('grid')}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all ${viewMode === 'grid' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-neutral-500 hover:text-white'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors duration-200 ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'text-[#9CA3AF] hover:text-white'}`}
               >
-                <LayoutGrid className="w-3 h-3" /> GRID
+                <LayoutGrid className="w-4 h-4" /> GRID
               </button>
             </div>
 
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] uppercase font-bold transition-all border shadow-2xl",
-                showFilters ? "bg-white text-black border-white" : "bg-neutral-900 text-white border-white/5 hover:border-white/20"
+                "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm uppercase font-medium transition-colors duration-200 border",
+                showFilters ? "bg-primary text-primary-foreground border-primary/30" : "bg-zinc-900/50 text-[#D1D5DB] border-zinc-800/50 hover:border-primary/40"
               )}
             >
               {showFilters ? 'Hide Filters' : 'Filters'}
@@ -108,17 +105,18 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
           {/* Sidebar Filter */}
           <AnimatePresence>
             {showFilters && (
               <motion.aside
-                initial={{ opacity: 0, width: 0, x: -20 }}
-                animate={{ opacity: 1, width: 280, x: 0 }}
-                exit={{ opacity: 0, width: 0, x: -20 }}
-                className="overflow-hidden sticky top-24 self-start"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="overflow-hidden sticky top-24 self-start w-full lg:w-[280px]"
               >
-                <div className="w-[280px] pr-4">
+                <div className="w-full pr-0 lg:pr-4">
                   <ProjectFilter
                     selectedCategory={selectedCategory}
                     onCategoryChange={setSelectedCategory}
@@ -132,7 +130,7 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
                   {hasActiveFilters && (
                     <button
                       onClick={clearFilters}
-                      className="mt-6 w-full py-3 text-[9px] font-bold text-blue-500 border border-blue-500/20 rounded-lg hover:bg-blue-500/5 transition-all uppercase tracking-widest"
+                      className="mt-6 w-full py-3 text-sm font-medium text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors duration-200 uppercase tracking-wider"
                     >
                       Clear Selection
                     </button>
@@ -182,22 +180,23 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
                         ))}
                       </CarouselContent>
 
-                      <div className="mt-8 flex items-center justify-between gap-6">
-                        <div className="flex-1 flex items-center gap-4">
-                          <div className="h-0.5 flex-1 bg-white/5 rounded-full overflow-hidden">
+                      <div className="mt-6 sm:mt-8 flex items-center justify-between gap-4 sm:gap-6">
+                        <div className="flex-1 flex items-center gap-3 sm:gap-4">
+                          <div className="h-0.5 flex-1 bg-zinc-800/50 rounded-full overflow-hidden">
                             <motion.div
-                              className="h-full bg-blue-500"
+                              className="h-full bg-primary"
                               initial={false}
                               animate={{ width: `${(current / count) * 100}%` }}
+                              transition={{ duration: 0.3 }}
                             />
                           </div>
-                          <p className="text-[10px] font-mono text-neutral-600 tabular-nums">
+                          <p className="text-xs sm:text-sm font-mono text-[#6B7280] tabular-nums">
                             {current.toString().padStart(2, '0')} / {count.toString().padStart(2, '0')}
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <CarouselPrevious className="static translate-y-0 w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border-white/10 text-white" />
-                          <CarouselNext className="static translate-y-0 w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 border-white/10 text-white" />
+                          <CarouselPrevious className="static translate-y-0 w-8 h-8 rounded-lg bg-zinc-900/50 hover:bg-zinc-800/50 border-zinc-800/50 text-white transition-colors duration-200" />
+                          <CarouselNext className="static translate-y-0 w-8 h-8 rounded-lg bg-zinc-900/50 hover:bg-zinc-800/50 border-zinc-800/50 text-white transition-colors duration-200" />
                         </div>
                       </div>
                     </Carousel>
@@ -232,19 +231,19 @@ const ProjectsGrid = ({ className }: ProjectsGridProps) => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-center py-20 border border-dashed border-white/10 rounded-2xl bg-neutral-900/10"
+                  className="text-center py-16 sm:py-20 border border-dashed border-zinc-800/50 rounded-2xl bg-zinc-900/20"
                 >
-                  <div className="mb-6 inline-flex w-16 h-16 bg-neutral-900 rounded-full items-center justify-center border border-white/10">
-                    <svg className="w-8 h-8 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="mb-6 inline-flex w-16 h-16 bg-zinc-900/50 rounded-full items-center justify-center border border-zinc-800/50">
+                    <svg className="w-8 h-8 text-[#6B7280]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
-                  <p className="text-neutral-500 text-sm mb-4">No matching cases discovered.</p>
+                  <p className="text-[#9CA3AF] text-base mb-4 font-light">No matching cases discovered.</p>
                   <button
                     onClick={clearFilters}
-                    className="px-6 py-2 bg-white text-black rounded-lg text-xs font-bold hover:scale-105 transition-transform"
+                    className="px-6 py-3 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors duration-200"
                   >
-                    Reset Galaxy
+                    Reset Filters
                   </button>
                 </motion.div>
               )}

@@ -364,7 +364,7 @@ export const Analytics = () => {
           <Button 
             onClick={exportToCSV}
             disabled={exportingData}
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            className="bg-card/60 border-border text-foreground hover:bg-card"
             data-testid="button-export-data"
           >
             <Download className="w-4 h-4 mr-2" />

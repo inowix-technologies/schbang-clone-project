@@ -181,6 +181,14 @@ export default {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+        gradient: {
+          "0%, 100%": {
+            "background-position": "0% 50%",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+          },
+        },
       },
       animation: {
         'marquee': 'marquee var(--marquee-duration) linear infinite',
@@ -192,6 +200,7 @@ export default {
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
         spotlight: "spotlight 2s ease .75s 1 forwards",
         scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        gradient: "gradient 3s ease infinite",
       },
 
     },

@@ -46,7 +46,7 @@ const Admin = () => {
           <Button 
             onClick={handleSignOut}
             variant="outline" 
-            className="border-white/20 text-white hover:bg-white/10"
+            className="border-border text-foreground hover:bg-card"
           >
             <LogOut className="w-4 h-4 mr-2" />
             Sign Out

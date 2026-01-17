@@ -19,9 +19,9 @@ const clients = [
 
 export const ClientsSection = () => {
   return (
-    <section className="py-20 bg-black overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-12">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-neutral-500 uppercase tracking-widest">
+    <section className="py-12 sm:py-16 md:py-20 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-neutral-500 uppercase tracking-widest px-2 sm:px-0">
           Trusted by Industry Leaders
         </h2>
       </div>

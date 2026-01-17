@@ -2,45 +2,70 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FAQSection } from "@/components/FAQSection";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code, Palette, Zap, Camera, Layers, Users, Target, Globe, Sparkles, Shield, Rocket, Brain } from "lucide-react";
+import { Button as MovingButton } from "@/components/ui/moving-border";
+import { motion } from "framer-motion";
+import { ArrowRight, Code, Palette, Zap, Camera, Layers, Users, Target, Globe, Sparkles, Shield, Rocket, Brain, Play, Award, TrendingUp, Clock, Search, Lightbulb, GitBranch, CheckCircle2, Monitor, Repeat } from "lucide-react";
+import { Link } from "react-router-dom";
 import techIllustration from "@/assets/tech-illustration.jpg";
 import creativeIllustration from "@/assets/creative-illustration.jpg";
+import { GradientMesh } from "@/components/ui/gradient-mesh";
+import { FloatingShapes } from "@/components/ui/floating-shapes";
+import { Particles } from "@/components/ui/particles";
+import { Spotlight } from "@/components/ui/spotlight";
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 
 const principles = [
   {
     icon: Target,
     title: "Client's Business Wins, We Win.",
-    description: "Fundamentally, we will always be a services-first company that ensures our clients' businesses fit their definition of success. As Inowix, we must deliver the whole Inowix by pushing ourselves and those around us to work in the best interests of our partners."
+    description: "Fundamentally, we will always be a services-first company that ensures our clients' businesses fit their definition of success.",
+    gradient: "from-orange-500/20 via-red-500/10 to-pink-500/10",
+    iconColor: "text-orange-400"
   },
   {
     icon: Users,
     title: "Our Word is our Bond.",
-    description: "We work in fast and complex environments where we deal with multiple stakeholders to deliver speed, agility and results to our clients. It is integral to hold ourselves accountable for our promises and strive to deliver on those promises without fail."
+    description: "We work in fast and complex environments where we deal with multiple stakeholders to deliver speed, agility and results.",
+    gradient: "from-blue-500/20 via-cyan-500/10 to-teal-500/10",
+    iconColor: "text-blue-400"
   },
   {
     icon: Palette,
     title: "Creativity is Sacred, Aesthetics are God.",
-    description: "We create path-breaking work that challenges the status quo and positively impacts our clients' businesses. We make sure how we communicate, and design helps our brand stand out."
+    description: "We create path-breaking work that challenges the status quo and positively impacts our clients' businesses.",
+    gradient: "from-purple-500/20 via-pink-500/10 to-rose-500/10",
+    iconColor: "text-purple-400"
   },
   {
     icon: Globe,
     title: "Partnerships with Win-Win Attitude.",
-    description: "We view all our stakeholders as equal partners and approach all partnerships with a win-win attitude to ensure both parties succeed."
+    description: "We view all our stakeholders as equal partners and approach all partnerships with a win-win attitude.",
+    gradient: "from-green-500/20 via-emerald-500/10 to-teal-500/10",
+    iconColor: "text-green-400"
   },
   {
     icon: Zap,
     title: "Be Culturally Relevant, Always.",
-    description: "We exist to make brands culturally relevant by being consumer-centric, ensuring seamless communication, and providing top-notch consumer experiences."
+    description: "We exist to make brands culturally relevant by being consumer-centric and providing top-notch consumer experiences.",
+    gradient: "from-yellow-500/20 via-orange-500/10 to-red-500/10",
+    iconColor: "text-yellow-400"
   },
   {
     icon: Code,
     title: "Technology to Simplify.",
-    description: "We believe any technology's governing principle is to simplify the consumer's life and provide immersive user experiences. Therefore, technology to simplify is our guiding light to create effortless and effective outputs for our clients."
+    description: "We believe any technology's governing principle is to simplify the consumer's life and provide immersive user experiences.",
+    gradient: "from-indigo-500/20 via-blue-500/10 to-purple-500/10",
+    iconColor: "text-indigo-400"
   },
   {
     icon: Layers,
     title: "Think. Plan. And then execute fearlessly.",
-    description: "Raw energy is powerful, but raw energy channeled correctly is advantageous. We internalize this to think deeply, plan purposefully, and execute fearlessly."
+    description: "Raw energy channeled correctly is advantageous. We internalize this to think deeply, plan purposefully, and execute fearlessly.",
+    gradient: "from-cyan-500/20 via-blue-500/10 to-indigo-500/10",
+    iconColor: "text-cyan-400",
+    featured: true
   }
 ];
 
@@ -49,30 +74,39 @@ const whatDefinesUs = [
     title: "We're Technology-Focused.",
     description: "We believe in embracing new possibilities, whether it's some of the sites we've created on Magento where a completely customised checkout process linked with deep remarketing tools prevails or the customisations on WordPress where we've built front ends on react.js to deliver the fastest load times possible.",
     image: techIllustration,
-    reverse: false
+    reverse: false,
+    gradient: "from-blue-500/30 via-purple-500/20 to-indigo-500/20"
   },
   {
     title: "We're Not Just Advertisers. We're Creators.",
     description: "Advertising, we believe, is all about creating culture. And we can't be calling ourselves creators of culture if we aren't making attempts to shape some of it ourselves. For example, look up our work with Humans of Bombay, Our work on Mental Health Awareness, and our project on Kindness Unlimited.",
     image: creativeIllustration,
-    reverse: true
+    reverse: true,
+    gradient: "from-purple-500/30 via-pink-500/20 to-rose-500/20"
   },
   {
     title: "We're Design and Digital.",
-    description: "Inowix is derived from a UNIX code operative which is a testament to our digital DNA. Every piece of work we create is created built to elevate customer experience which we believe comes with finesse in design. You'll see it in the work we deliver across brands for their creative or experiential work.",
+    description: "Inowix is derived from a UNIX code operative which is a testament to our digital DNA. Every piece of work we create is created built to elevate customer experience which we believe comes with finesse in design.",
     image: techIllustration,
-    reverse: false
+    reverse: false,
+    gradient: "from-cyan-500/30 via-blue-500/20 to-purple-500/20"
   },
   {
     title: "We're Your Personal Production House.",
     description: "Inowix Motion Pictures, Inowix 808 and Global Content Hub, our in-house production teams deliver blazing-fast turnarounds with the least possible iterations, resulting in not just a high-quality product but workflows that are sustainable in the long term.",
     image: creativeIllustration,
-    reverse: true
+    reverse: true,
+    gradient: "from-orange-500/30 via-red-500/20 to-pink-500/20"
   }
 ];
 
+const stats = [
+  { icon: Users, value: "1200+", label: "Specialists", gradient: "from-blue-500 to-cyan-500" },
+  { icon: Globe, value: "300+", label: "Global Brands", gradient: "from-purple-500 to-pink-500" },
+  { icon: Clock, value: "10+", label: "Years Excellence", gradient: "from-green-500 to-emerald-500" }
+];
+
 const About = () => {
-  // About FAQ data
   const aboutFAQs = [
     {
       id: 'company-story',
@@ -102,188 +136,307 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0F172A] text-white selection:bg-purple-500/30 relative overflow-hidden">
+      <GradientMesh className="opacity-10" />
       <Header />
       
-      {/* Enhanced Hero Section with Brand Colors */}
-      <section className="py-section relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute top-10 right-10 w-40 h-40 bg-gradient-to-br from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] rounded-full blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-32 h-32 bg-gradient-to-br from-[hsl(var(--light-green))] to-[hsl(var(--white-green))] rounded-full blur-2xl opacity-20 animate-pulse delay-1000"></div>
+      {/* Hero Section */}
+      <section className="min-h-[70vh] sm:h-[80vh] md:h-[90vh] w-full flex md:items-center md:justify-center bg-[#0F172A] relative overflow-hidden py-12 sm:py-16 md:py-0">
         
-        <div className="max-w-container mx-auto px-6 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-[hsl(var(--light-purple))] to-[hsl(var(--light-blue))] rounded-2xl shadow-[var(--glow-purple)] mb-8">
-              <Brain className="w-8 h-8 text-purple-600" />
-              <Sparkles className="w-6 h-6 text-blue-600 animate-pulse" />
-              <Rocket className="w-6 h-6 text-indigo-600" />
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full pt-20 md:pt-0">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6 sm:mb-8"
+            >
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-purple-200">The Whole Inowix</span>
+            </motion.div>
             
-            <h1 className="text-4xl md:text-7xl font-bold mb-8 text-balance leading-tight bg-gradient-to-r from-white via-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))] bg-clip-text text-transparent">
-              We Bring The Whole Inowix!
-            </h1>
-            <div className="text-xl md:text-2xl text-foreground mb-6">
-              <strong className="bg-gradient-to-r from-[hsl(var(--light-green))] to-[hsl(var(--white-green))] bg-clip-text text-transparent">
-                Our mission - taking the best of Indian Creative Talent to the World!
-              </strong>
-            </div>
-            <p className="text-lg text-muted-foreground max-w-4xl mx-auto text-balance leading-relaxed">
-              Inowix originally spelt as Shebang is a word created in the 17th Century and added to the lexicon of the English language, 
-              and usually used as the phrase "the whole Inowix." At Inowix, we strive to deliver fully integrated and holistic marketing 
-              solutions to our clients and unite interrelated services like creative, media and technology under one roof.
-            </p>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="hero-title mb-6 sm:mb-8 px-2 sm:px-0"
+            >
+              We Bring The <br />
+              <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent italic">Whole Inowix!</span>
+            </motion.h1>
             
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-[hsl(var(--light-blue))]">
-                <Users className="w-4 h-4 text-[hsl(var(--light-blue))]" />
-                <span className="text-sm text-white/80">1200+ Specialists</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-[hsl(var(--light-green))]">
-                <Globe className="w-4 h-4 text-[hsl(var(--light-green))]" />
-                <span className="text-sm text-white/80">300+ Brands</span>
-              </div>
-            </div>
-          </div>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="lead max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16 px-4 sm:px-0"
+            >
+              Taking the best of Indian Creative Talent to the World stage with integrated and holistic solutions.
+            </motion.p>
+
+            {/* Stats Grid with 3D Cards */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-wrap items-center justify-center gap-6 mb-16"
+            >
+              {stats.map((stat, index) => (
+                <CardContainer key={index} containerClassName="py-0">
+                  <CardBody className="w-full h-full bg-[#111827] border border-[#374151] rounded-2xl p-8 backdrop-blur-xl group/card min-w-[180px]">
+                    <CardItem translateZ="50" className="w-full">
+                      <div className="flex flex-col items-center text-center">
+                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center mb-4 group-hover/card:scale-110 transition-transform`}>
+                          <stat.icon className="w-7 h-7 text-white" />
+                        </div>
+                        <div className="text-4xl font-bold mb-2 bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">
+                          {stat.value}
+                        </div>
+                        <div className="text-xs uppercase tracking-widest text-[#9CA3AF] font-medium">
+                          {stat.label}
+                        </div>
+                      </div>
+                    </CardItem>
+                  </CardBody>
+                </CardContainer>
+              ))}
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex justify-center"
+            >
+              <a href="#process">
+                <MovingButton
+                  borderRadius="1.75rem"
+                  className="bg-[#111827] text-white border-[#374151] text-lg font-bold px-10 py-6"
+                >
+                  Explore Our Story
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </MovingButton>
+              </a>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Video Section */}
-      <section className="py-section">
-        <div className="max-w-container mx-auto px-6">
-          <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-primary/40 rounded-2xl overflow-hidden group cursor-pointer">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-background/10 backdrop-blur-sm rounded-full p-8 group-hover:scale-110 transition-transform duration-300">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                  <div className="w-0 h-0 border-l-[12px] border-l-background border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
-                </div>
+      <section className="py-20 relative px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-[#374151] bg-[#111827] group cursor-pointer">
+            <img 
+              src={creativeIllustration} 
+              alt="Agency Reel" 
+              className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-0 h-0 border-l-[15px] border-l-white border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-2" />
               </div>
             </div>
-            <div className="absolute bottom-6 left-6 text-background">
-              <p className="text-sm opacity-80">Meet Inowix | Agency Reel</p>
+            <div className="absolute bottom-8 left-8 z-20">
+              <div className="text-sm font-bold uppercase tracking-widest text-white/60 mb-2">Watch Now</div>
+              <div className="text-2xl font-bold text-white">Inowix | Agency Reel 2024</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What Defines Us Sections */}
-      <section className="py-section">
-        <div className="max-w-container mx-auto px-6">
-          <div className="space-y-32">
-            {whatDefinesUs.map((item, index) => (
-              <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
-                item.reverse ? 'lg:grid-flow-col-dense' : ''
-              }`}>
-                <div className={item.reverse ? 'lg:col-start-2' : ''}>
-                  <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8">
-                    {item.title}
-                  </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {item.description}
+      {/* Our Identity - Development Process */}
+      <section id="process" className="py-24 bg-[#0F172A] relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Rocket className="w-4 h-4 text-blue-400" />
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-200">Our Process</span>
+            </div>
+            <h2 className="section-title mb-4 px-2 sm:px-0">
+              Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Identity</span>
+            </h2>
+            <p className="lead max-w-2xl mx-auto px-4 sm:px-0">
+              How we build digital products that drive results
+            </p>
+          </motion.div>
+
+          {/* Process Steps - Clean Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {[
+              {
+                step: "01",
+                title: "Discovery",
+                description: "We understand your business goals, audience, and market to create a strategic foundation.",
+                icon: Search,
+                color: "text-blue-400"
+              },
+              {
+                step: "02",
+                title: "Design",
+                description: "Our team creates intuitive interfaces and prototypes to validate concepts early.",
+                icon: Palette,
+                color: "text-purple-400"
+              },
+              {
+                step: "03",
+                title: "Development",
+                description: "We build scalable solutions using cutting-edge tech and agile methodology.",
+                icon: Code,
+                color: "text-indigo-400"
+              },
+              {
+                step: "04",
+                title: "Quality",
+                description: "Rigorous testing ensures flawless functionality across all devices and scenarios.",
+                icon: CheckCircle2,
+                color: "text-green-400"
+              },
+              {
+                step: "05",
+                title: "Launch",
+                description: "Deployment with zero-downtime strategies, monitoring, and comprehensive documentation.",
+                icon: Rocket,
+                color: "text-orange-400"
+              },
+              {
+                step: "06",
+                title: "Growth",
+                description: "Continuous iteration based on analytics, feedback, and performance optimization.",
+                icon: Repeat,
+                color: "text-cyan-400"
+              }
+            ].map((process, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="h-full p-8 rounded-2xl bg-[#111827] border border-[#374151] hover:border-[#4B5563] transition-all duration-300">
+                  {/* Step Number */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors`}>
+                      <process.icon className={`w-6 h-6 ${process.color}`} />
+                    </div>
+                    <span className="text-sm font-mono text-[#9CA3AF]">{process.step}</span>
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-white mb-3">{process.title}</h3>
+                  <p className="text-base text-[#D1D5DB] leading-relaxed">
+                    {process.description}
                   </p>
                 </div>
-                <div className={item.reverse ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
+
+          {/* Simple CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center p-12 rounded-2xl bg-[#111827] border border-[#374151]"
+          >
+            <h3 className="h3 text-white mb-4">
+              End-to-End Solutions That Drive Growth
+            </h3>
+            <p className="text-base text-[#D1D5DB] max-w-2xl mx-auto mb-8">
+              Our integrated approach ensures every project is delivered with precision, from concept to optimization.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {["Technology-Focused", "Design-Driven", "Results-Oriented"].map((tag, i) => (
+                <span key={i} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-[#D1D5DB]">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Enhanced Our Principles with Brand Colors */}
-      <section className="py-section bg-secondary relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-[hsl(var(--light-blue))]/5 to-[hsl(var(--light-purple))]/5"></div>
-        
-        <div className="max-w-container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-[hsl(var(--light-orange))] to-[hsl(var(--light-yellow))] rounded-2xl shadow-lg mb-6">
-              <Shield className="w-8 h-8 text-orange-600" />
-              <Target className="w-6 h-6 text-yellow-600" />
+      {/* Our Principles - BentoGrid */}
+      <section className="py-24 bg-zinc-950/50 border-y border-white/5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Target className="w-4 h-4 text-purple-400" />
+              <span className="text-xs font-bold uppercase tracking-widest text-purple-200">Our Principles</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white via-[hsl(var(--light-orange))] to-[hsl(var(--light-yellow))] bg-clip-text text-transparent">
-              Our Principles
+            <h2 className="section-title mb-4 sm:mb-6 px-2 sm:px-0">
+              Guided by <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent">Values</span>
             </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {principles.map((principle, index) => {
-              const colorSchemes = [
-                { bg: 'from-[hsl(var(--light-blue))] to-[hsl(var(--white-green))]', icon: 'text-blue-600', border: 'border-[hsl(var(--light-blue))]' },
-                { bg: 'from-[hsl(var(--light-green))] to-[hsl(var(--light-yellow))]', icon: 'text-green-600', border: 'border-[hsl(var(--light-green))]' },
-                { bg: 'from-[hsl(var(--light-purple))] to-[hsl(var(--light-pink))]', icon: 'text-purple-600', border: 'border-[hsl(var(--light-purple))]' },
-                { bg: 'from-[hsl(var(--light-orange))] to-[hsl(var(--light-yellow))]', icon: 'text-orange-600', border: 'border-[hsl(var(--light-orange))]' },
-                { bg: 'from-[hsl(var(--light-pink))] to-[hsl(var(--light-purple))]', icon: 'text-pink-600', border: 'border-[hsl(var(--light-pink))]' },
-                { bg: 'from-[hsl(var(--light-blue))] to-[hsl(var(--light-purple))]', icon: 'text-indigo-600', border: 'border-[hsl(var(--light-blue))]' },
-                { bg: 'from-[hsl(var(--white-green))] to-[hsl(var(--light-green))]', icon: 'text-teal-600', border: 'border-[hsl(var(--white-green))]' }
-              ];
-              const scheme = colorSchemes[index % colorSchemes.length];
-              
-              return (
-                <div 
-                  key={index} 
-                  className={`bg-background/80 backdrop-blur-sm rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105 border ${scheme.border} group`}
-                >
-                  <div className={`w-16 h-16 bg-gradient-to-br ${scheme.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <principle.icon className={`w-8 h-8 ${scheme.icon}`} />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-4 group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/80 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                    {principle.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {principle.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-section">
-        <div className="max-w-container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="p-8">
-              <div className="text-5xl md:text-7xl font-bold text-primary mb-4">1200+</div>
-              <p className="text-xl text-muted-foreground">Specialists</p>
-            </div>
-            <div className="p-8">  
-              <div className="text-5xl md:text-7xl font-bold text-primary mb-4">300+</div>
-              <p className="text-xl text-muted-foreground">Brands Worldwide</p>
-            </div>
-            <div className="p-8">
-              <div className="text-5xl md:text-7xl font-bold text-primary mb-4">10+</div>
-              <p className="text-xl text-muted-foreground">Years</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Enhanced CTA Section */}
-      <section className="py-section bg-gradient-to-br from-primary via-primary to-accent relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--light-blue))]/20 via-transparent to-[hsl(var(--light-purple))]/20"></div>
-        
-        <div className="max-w-container mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-3 p-4 bg-white/20 backdrop-blur-sm rounded-2xl mb-8">
-            <Rocket className="w-8 h-8 text-white" />
-            <Sparkles className="w-6 h-6 text-white animate-pulse" />
-          </div>
+            <p className="text-[#9CA3AF] text-base px-4 sm:px-0">Principles that drive excellence and impact.</p>
+          </motion.div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-8">
-            Ready to Create a Inowix?
-          </h2>
-          <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Let's work together to transform your brand and create something extraordinary.
-          </p>
-          <Button variant="secondary" className="rounded-full px-8 py-3 text-lg hover:scale-105 transition-transform duration-300 shadow-lg">
-            Get Started
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[20rem] gap-6">
+            {principles.map((principle, index) => (
+              <BentoGridItem
+                key={index}
+                title={principle.title}
+                description={principle.description}
+                header={
+                  <div className={`flex flex-1 w-full h-full min-h-[10rem] rounded-xl bg-gradient-to-br ${principle.gradient} relative overflow-hidden group`}>
+                    <div className="absolute inset-0 bg-[#0F172A]/20 group-hover:bg-[#0F172A]/10 transition-colors" />
+                    <principle.icon className={`absolute top-4 right-4 w-16 h-16 ${principle.iconColor} opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all`} />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-2xl font-bold text-white mb-2 line-clamp-2">{principle.title}</h3>
+                    </div>
+                  </div>
+                }
+                icon={
+                  <principle.icon className={`w-6 h-6 ${principle.iconColor}`} />
+                }
+                className={principle.featured ? "md:col-span-2" : "md:col-span-1"}
+              />
+            ))}
+          </BentoGrid>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="hero-title mb-6 sm:mb-8 md:mb-10 px-2 sm:px-0">
+              Ready to Create <br />
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent">Something New?</span>
+            </h2>
+            <p className="lead mb-10 sm:mb-12 md:mb-16 max-w-3xl mx-auto px-4 sm:px-0">
+              Let's work together to transform your brand and create something extraordinary.
+            </p>
+            <Link to="/contact-us">
+              <MovingButton
+                borderRadius="1.75rem"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent text-lg font-bold px-8 sm:px-12 py-6"
+              >
+                Get Started
+                <ArrowRight className="w-6 h-6 ml-3" />
+              </MovingButton>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -292,7 +445,6 @@ const About = () => {
         title="About Inowix FAQ"
         subtitle="Learn more about our company, culture, and approach to delivering exceptional results"
         faqs={aboutFAQs}
-        colorScheme="green"
       />
 
       <Footer />

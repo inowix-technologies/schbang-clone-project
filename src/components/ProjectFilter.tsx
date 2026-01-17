@@ -62,7 +62,7 @@ const ProjectFilter = ({
 
       {/* Category Filters */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-foreground">Categories</h3>
+        <h3 className="text-base font-semibold text-foreground">Categories</h3>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => {
             const isSelected = selectedCategory === category.value;
@@ -75,7 +75,7 @@ const ProjectFilter = ({
                 size="sm"
                 onClick={() => onCategoryChange(category.value)}
                 className={cn(
-                  "transition-all duration-200 text-xs",
+                  "transition-all duration-200 text-sm",
                   isSelected 
                     ? "bg-accent text-accent-foreground shadow-md" 
                     : "bg-background/50 hover:bg-accent/10 border-border/50"
@@ -103,10 +103,10 @@ const ProjectFilter = ({
           variant="ghost"
           size="sm"
           onClick={onClearFilters}
-          className="text-muted-foreground hover:text-foreground transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           data-testid="button-clear-filters"
         >
-          <X className="h-3 w-3 mr-1" />
+          <X className="h-4 w-4 mr-1.5" />
           Clear filters
         </Button>
       )}

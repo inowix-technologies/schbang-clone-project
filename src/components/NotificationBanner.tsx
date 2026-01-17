@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
+
 export const NotificationBanner = () => {
   return (
     <div className="bg-primary text-primary-foreground py-3 px-6 text-center text-sm relative overflow-hidden">
       <div className="relative z-10">
         <p>
           🏆 <strong>Inowix ranked #5 in MMA SMARTIES Business Impact Index.</strong>{" "}
-          <a href="#" className="underline hover:no-underline font-medium">
+          <Link to="/about-us" className="underline hover:no-underline font-medium">
             Read More Here.
-          </a>
+          </Link>
         </p>
       </div>
       {/* Subtle background pattern */}
