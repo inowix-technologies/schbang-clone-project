@@ -195,7 +195,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     logo: babylandLogo,
     image: bumpImage,
     hasAppScreenshot: true,
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   babylox: {
@@ -209,7 +209,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React Native", "Node.js", "Stripe"],
     logo: babyloxLogo,
     image: babyloxLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   bebroot: {
     slug: "bebroot",
@@ -222,7 +222,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["Next.js", "Node.js", "PostgreSQL"],
     logo: bebrootLogo,
     image: bebrootLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   swiftgo: {
     slug: "swiftgo",
@@ -236,7 +236,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React Native", "Node.js", "Redis", "GCP"],
     image: nextstopImage,
     hasAppScreenshot: true,
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   "srl-logistics": {
@@ -251,7 +251,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Python", "PostgreSQL", "Docker"],
     image: retailxImage,
     hasAppScreenshot: true,
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   instadham: {
@@ -265,7 +265,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     capabilities: ["MOBILE", "COMMUNITY", "CONTENT", "BACKEND"],
     technologies: ["Flutter", "Firebase", "Node.js"],
     image: "",
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   "siya-ayurveda": {
@@ -280,7 +280,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Node.js", "MongoDB"],
     logo: siyaAyurvedaImage,
     image: siyaAyurvedaImage,
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   amrutam: {
@@ -294,7 +294,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["Shopify", "React", "Node.js"],
     logo: amrutamLogo,
     image: amrutamLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   "moon-derma": {
     slug: "moon-derma",
@@ -308,7 +308,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["Next.js", "Node.js", "PostgreSQL"],
     logo: moonDermaLogo,
     image: moonDermaLogo,
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   triplecare: {
@@ -322,7 +322,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Node.js", "PostgreSQL"],
     logo: triplecareLogo,
     image: triplecareLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   exhale: {
     slug: "exhale",
@@ -335,7 +335,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Node.js", "CMS"],
     logo: exhaleLogo,
     image: exhaleLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   "green-gainz": {
     slug: "green-gainz",
@@ -348,7 +348,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React Native", "Node.js", "Firebase"],
     logo: greenGainzLogo,
     image: greenGainzLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   "palatial-farms": {
     slug: "palatial-farms",
@@ -361,7 +361,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Node.js", "PostgreSQL"],
     logo: palatialFarmsLogo,
     image: palatialFarmsLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   "sanch-farms": {
     slug: "sanch-farms",
@@ -374,7 +374,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Python", "PostgreSQL"],
     logo: sanchFarmsLogo,
     image: sanchFarmsLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   melas: {
     slug: "melas",
@@ -387,7 +387,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["Next.js", "Shopify", "Node.js"],
     logo: melasLogo,
     image: melasLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   aim: {
     slug: "aim",
@@ -400,7 +400,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     technologies: ["React", "Node.js", "PostgreSQL"],
     logo: aimLogo,
     image: aimLogo,
-    link: `/project/${slug}`,
+    link: "",
   },
   "linkedin-automation": {
     slug: "linkedin-automation",
@@ -413,7 +413,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     capabilities: ["AUTOMATION", "OUTREACH", "ENRICHMENT", "ANALYTICS"],
     technologies: ["Python", "React", "PostgreSQL", "Redis"],
     image: "",
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
   "enterprise-chatbot": {
@@ -427,7 +427,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     capabilities: ["AI CHATBOT", "KNOWLEDGE BASE", "TICKETING", "ADMIN"],
     technologies: ["Python", "React", "LLM", "PostgreSQL"],
     image: "",
-    link: `/project/${slug}`,
+    link: "",
     featured: true,
   },
 };
