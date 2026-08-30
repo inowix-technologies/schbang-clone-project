@@ -1,60 +1,67 @@
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { FAQSection } from "@/components/FAQSection";
-import HeroSection from "@/components/portfolio/HeroSection";
-import ProjectsGrid from "@/components/portfolio/ProjectsGrid";
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
+import { PageShell } from "@/components/layout/PageShell";
+import { PageHero } from "@/components/layout/PageHero";
+import { EditorialCTA } from "@/components/layout/EditorialCTA";
+import { CaseStudyRow } from "@/components/work/CaseStudyRow";
+import { ClientLogoStrip } from "@/components/work/SystemsEngineeredSection";
+import { INOWIX_PROJECTS } from "@/data/inowix-content";
+import { cn } from "@/lib/utils";
+
+const ALL_PROJECTS = Object.values(INOWIX_PROJECTS);
+const CATEGORIES = ["All", ...Array.from(new Set(ALL_PROJECTS.map((p) => p.category)))];
 
 const Work = () => {
-  const workFAQs = useMemo(() => [
-    {
-      id: 'portfolio-scope',
-      question: 'What types of projects do you showcase in your portfolio?',
-      answer: 'Our portfolio spans brand strategy, digital marketing campaigns, web development, mobile apps, film & photography, and creative campaigns. We showcase work across various industries from startups to Fortune 500 companies.'
-    },
-    {
-      id: 'case-studies',
-      question: 'Can I see detailed case studies of your work?',
-      answer: 'Yes! Each project includes comprehensive case studies with challenges faced, solutions implemented, results achieved, and client testimonials. Contact us for detailed project breakdowns.'
-    },
-    {
-      id: 'project-results',
-      question: 'What kind of results do your projects typically achieve?',
-      answer: 'Our projects consistently deliver measurable results: 200-500% increase in engagement, 50-300% boost in conversions, award recognition, and significant brand awareness growth. Results vary by industry and project scope.'
-    }
-  ], []);
+  const [filter, setFilter] = useState("All");
+
+  const filtered = useMemo(
+    () => (filter === "All" ? ALL_PROJECTS : ALL_PROJECTS.filter((p) => p.category === filter)),
+    [filter]
+  );
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-white relative overflow-hidden">
-      {/* Optimized subtle background */}
-      <div 
-        className="fixed inset-0 bg-gradient-to-br from-[#0F172A] via-[#0A0F1C] to-[#0F172A] pointer-events-none"
-        style={{ willChange: 'auto' }}
+    <PageShell>
+      <PageHero
+        label="Work"
+        title={
+          <>
+            <span className="block">Built for production.</span>
+            <span className="block text-primary">Not for presentations.</span>
+          </>
+        }
+        subtitle="Real systems engineered for Babyland, SwiftGo, SRL Logistics, and 15+ brands — from architecture to deployment."
       />
-      <div 
-        className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.03),transparent_50%)] pointer-events-none"
-        style={{ willChange: 'auto' }}
-      />
-      
-      <Header />
 
-      <main className="relative z-10">
-        <HeroSection />
-        <div className="relative z-10 bg-[#0F172A]">
-          <ProjectsGrid />
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 pb-8">
+        <div className="flex flex-wrap gap-2">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={cn(
+                "font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 border rounded-sm transition-all",
+                filter === cat
+                  ? "border-primary/50 bg-primary/10 text-primary"
+                  : "border-border/40 text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
-      </main>
-
-      <FAQSection
-        title="Portfolio FAQ"
-        subtitle="Learn more about our work and project approach"
-        faqs={workFAQs}
-      />
-
-      <div className="relative z-20">
-        <Footer />
       </div>
-    </div>
+
+      <div>
+        {filtered.map((project, i) => (
+          <CaseStudyRow key={project.slug} project={project} reversed={i % 2 === 1} index={i} />
+        ))}
+      </div>
+
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
+        <ClientLogoStrip />
+      </div>
+
+      <EditorialCTA />
+    </PageShell>
   );
 };
 

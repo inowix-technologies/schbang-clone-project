@@ -17,10 +17,14 @@ const links = {
     { name: "Cybersecurity", href: "/services/cybersecurity" },
   ],
   products: [
-    { name: "Inowix Labs", href: "#inowix-labs" },
+    { name: "Inowix Labs", href: "/#inowix-labs" },
     { name: "COM AI", href: "/products/com-ai" },
     { name: "Beacon", href: "/products/beacon" },
     { name: "RED CLI", href: "/products/red-cli" },
+  ],
+  more: [
+    { name: "Blog", href: "/blogs" },
+    { name: "Industries", href: "/industries" },
   ],
 };
 
@@ -64,9 +68,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">Services</h4>
+            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">Products</h4>
             <ul className="space-y-2.5">
-              {links.services.map((link) => (
+              {links.products.map((link) => (
                 <li key={link.name}>
                   <Link to={link.href} className="text-foreground/70 hover:text-foreground text-sm transition-colors">
                     {link.name}
@@ -77,9 +81,18 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">Products</h4>
+            <h4 className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">Services</h4>
+            <ul className="space-y-2.5 mb-6">
+              {links.services.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.href} className="text-foreground/70 hover:text-foreground text-sm transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <ul className="space-y-2.5">
-              {links.products.map((link) => (
+              {links.more.map((link) => (
                 <li key={link.name}>
                   <Link to={link.href} className="text-foreground/70 hover:text-foreground text-sm transition-colors">
                     {link.name}

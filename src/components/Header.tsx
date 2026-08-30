@@ -21,12 +21,6 @@ const productLinks = [
   { to: "/products", label: "View all products →" },
 ];
 
-const companyLinks = [
-  { to: "/about-us", label: "About Us" },
-  { to: "/careers", label: "Careers" },
-  { to: "/blogs", label: "Blog" },
-];
-
 export const Header = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -78,23 +72,6 @@ export const Header = () => {
 
           <nav className="hidden lg:flex items-center gap-0.5">
             <NavLink to="/work" active={isActive("/work")}>Work</NavLink>
-            <NavLink to="#inowix-labs" active={false}>Labs</NavLink>
-
-            <NavDropdown
-              label="Services"
-              isOpen={activeDropdown === "services"}
-              onMouseEnter={() => setActiveDropdown("services")}
-              onMouseLeave={() => setActiveDropdown(null)}
-              active={isActive("/services")}
-            >
-              <div className="p-2 w-64">
-                {serviceLinks.map((link) => (
-                  <DropdownItem key={link.to} to={link.to}>{link.label}</DropdownItem>
-                ))}
-              </div>
-            </NavDropdown>
-
-            <NavLink to="/industries" active={isActive("/industries")}>Industries</NavLink>
 
             <NavDropdown
               label="Products"
@@ -111,23 +88,26 @@ export const Header = () => {
             </NavDropdown>
 
             <NavDropdown
-              label="Company"
-              isOpen={activeDropdown === "company"}
-              onMouseEnter={() => setActiveDropdown("company")}
+              label="Services"
+              isOpen={activeDropdown === "services"}
+              onMouseEnter={() => setActiveDropdown("services")}
               onMouseLeave={() => setActiveDropdown(null)}
-              active={isActive("/about-us") || isActive("/careers") || isActive("/blogs")}
+              active={isActive("/services")}
             >
-              <div className="p-2 w-48">
-                {companyLinks.map((link) => (
+              <div className="p-2 w-64">
+                {serviceLinks.map((link) => (
                   <DropdownItem key={link.to} to={link.to}>{link.label}</DropdownItem>
                 ))}
               </div>
             </NavDropdown>
+
+            <NavLink to="/about-us" active={isActive("/about-us")}>About</NavLink>
+            <NavLink to="/contact-us" active={isActive("/contact-us")}>Contact</NavLink>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
             {user && isAdmin && (
-              <Button asChild variant="ghost" size="sm" className="hidden xl:flex rounded-full">
+              <Button asChild variant="ghost" size="sm" className="hidden xl:flex rounded-sm">
                 <Link to="/admin"><Shield className="w-4 h-4 mr-2" />Admin</Link>
               </Button>
             )}
@@ -141,7 +121,7 @@ export const Header = () => {
               </Link>
             </Button>
             <button
-              className="lg:hidden p-2 text-foreground hover:text-primary transition-colors rounded-full hover:bg-inowix-surface"
+              className="lg:hidden p-2 text-foreground hover:text-primary transition-colors rounded-sm hover:bg-inowix-surface"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -159,17 +139,8 @@ export const Header = () => {
             exit={{ opacity: 0, y: -10 }}
             className="lg:hidden fixed top-[72px] sm:top-[80px] left-0 right-0 p-3 z-[110] max-h-[calc(100vh-80px)] overflow-y-auto"
           >
-            <div className="bg-inowix-surface/95 backdrop-blur-2xl border border-border/40 rounded-2xl p-6 shadow-2xl space-y-6">
+            <div className="bg-inowix-surface/95 backdrop-blur-2xl border border-border/40 rounded-sm p-6 shadow-2xl space-y-6">
               <MobileNavLink to="/work">Work</MobileNavLink>
-              <MobileNavLink to="#inowix-labs">Inowix Labs</MobileNavLink>
-
-              <MobileSection title="Services">
-                {serviceLinks.map((l) => (
-                  <MobileSubLink key={l.to} to={l.to}>{l.label}</MobileSubLink>
-                ))}
-              </MobileSection>
-
-              <MobileNavLink to="/industries">Industries</MobileNavLink>
 
               <MobileSection title="Products">
                 {productLinks.map((l) => (
@@ -177,11 +148,14 @@ export const Header = () => {
                 ))}
               </MobileSection>
 
-              <MobileSection title="Company">
-                {companyLinks.map((l) => (
+              <MobileSection title="Services">
+                {serviceLinks.map((l) => (
                   <MobileSubLink key={l.to} to={l.to}>{l.label}</MobileSubLink>
                 ))}
               </MobileSection>
+
+              <MobileNavLink to="/about-us">About</MobileNavLink>
+              <MobileNavLink to="/contact-us">Contact</MobileNavLink>
 
               <Button asChild className="w-full rounded-sm py-6">
                 <Link to="/contact-us">Start a Project →</Link>
@@ -226,7 +200,7 @@ const NavDropdown = ({ label, children, isOpen, onMouseEnter, onMouseLeave, acti
           exit={{ opacity: 0, y: 8 }}
           className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-[110]"
         >
-          <div className="bg-inowix-surface/95 border border-border/40 rounded-xl shadow-2xl backdrop-blur-xl overflow-hidden">
+          <div className="bg-inowix-surface/95 border border-border/40 rounded-sm shadow-2xl backdrop-blur-xl overflow-hidden">
             {children}
           </div>
         </motion.div>
@@ -238,7 +212,7 @@ const NavDropdown = ({ label, children, isOpen, onMouseEnter, onMouseLeave, acti
 const DropdownItem = ({ to, children }: { to: string; children: React.ReactNode }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 px-4 py-2.5 text-sm rounded-lg transition-colors hover:bg-primary/5 hover:text-primary font-medium"
+    className="flex items-center gap-2 px-4 py-2.5 text-sm rounded-sm transition-colors hover:bg-primary/5 hover:text-primary font-medium"
   >
     {children}
   </Link>

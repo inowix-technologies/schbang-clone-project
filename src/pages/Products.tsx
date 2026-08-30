@@ -1,72 +1,80 @@
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { useProducts } from "@/hooks/useProducts";
 import { Link } from "react-router-dom";
-import { ArrowRight, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { PageShell } from "@/components/layout/PageShell";
+import { PageHero } from "@/components/layout/PageHero";
+import { EditorialCTA } from "@/components/layout/EditorialCTA";
+import { INOWIX_PRODUCTS, type ProductSlug } from "@/data/inowix-content";
+import { BuiltByInowixBadge } from "@/components/labs/BuiltByInowixBadge";
 
-const accentMap: Record<string, string> = {
-  'com-ai': 'border-inowix-com-ai/40 hover:shadow-[0_0_30px_hsl(var(--accent-com-ai)/0.1)]',
-  'beacon': 'border-inowix-beacon/40 hover:shadow-[0_0_30px_hsl(var(--accent-beacon)/0.1)]',
-  'red-cli': 'border-inowix-red-cli/40 hover:shadow-[0_0_30px_hsl(var(--accent-red-cli)/0.1)]',
-};
+const productOrder: ProductSlug[] = ["com-ai", "beacon", "red-cli"];
 
 const Products = () => {
-  const { products, isLoading } = useProducts({ status: 'published' });
-
   return (
-    <div className="min-h-screen bg-inowix-bg text-foreground">
-      <Header />
-      <main className="pt-28 sm:pt-32 pb-16 sm:pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="mb-12 sm:mb-16">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">Products</p>
-            <h1 className="section-title mb-4">Technology we build</h1>
-            <p className="lead max-w-2xl">
-              Flagship products engineered by Inowix — AI-native platforms built for production.
-            </p>
-          </div>
+    <PageShell>
+      <PageHero
+        label="Inowix Labs"
+        title={
+          <>
+            <span className="block">Technology we</span>
+            <span className="block text-primary">built ourselves.</span>
+          </>
+        }
+        subtitle="Flagship products engineered by Inowix — AI-native platforms built for production, not demos."
+      />
 
-          {isLoading ? (
-            <div className="flex justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
+      <div>
+        {productOrder.map((slug, i) => {
+          const product = INOWIX_PRODUCTS[slug];
+          const reversed = i % 2 === 1;
+          return (
+            <div
+              key={slug}
+              className={`relative flex flex-col lg:flex-row min-h-[50vh] border-b border-border/30 ${reversed ? "lg:flex-row-reverse" : ""}`}
+              style={{ borderLeftColor: `${product.accent}25`, borderLeftWidth: 3 }}
+            >
+              <div className="flex-1 p-8 sm:p-12 lg:p-16 flex flex-col justify-center max-w-xl">
+                <BuiltByInowixBadge className="mb-6 w-fit" />
+                <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: product.accent }}>
+                  {product.tagline}
+                </p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-5">{product.name}</h2>
+                <p className="text-muted-foreground mb-8 leading-relaxed">{product.description}</p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {product.features.slice(0, 4).map((f) => (
+                    <span
+                      key={f}
+                      className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 border rounded-sm"
+                      style={{ borderColor: `${product.accent}35`, color: product.accent }}
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
                 <Link
-                  key={product.id}
-                  to={`/products/${product.slug}`}
-                  className={cn(
-                    "group block rounded-2xl border border-border/40 bg-inowix-surface/30 p-6 sm:p-8 transition-all duration-300 hover:bg-inowix-elevated/50",
-                    accentMap[product.slug]
-                  )}
+                  to={product.link}
+                  className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all w-fit"
+                  style={{ color: product.accent }}
                 >
-                  <div
-                    className="w-3 h-3 rounded-full mb-6"
-                    style={{ backgroundColor: product.accent_color || 'hsl(var(--primary))' }}
-                  />
-                  <h2 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {product.name}
-                  </h2>
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-4">
-                    {product.tagline}
-                  </p>
-                  <p className="text-sm text-muted-foreground mb-6 line-clamp-3">
-                    {product.description}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-primary">
-                    Explore product
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </span>
+                  Explore {product.name} <ArrowRight className="w-4 h-4" />
                 </Link>
-              ))}
+              </div>
+              {product.screenshot && (
+                <div className="flex-1 min-h-[240px] flex items-center justify-center p-8">
+                  <div
+                    className="w-full max-w-md aspect-video rounded-sm overflow-hidden border"
+                    style={{ borderColor: `${product.accent}30`, boxShadow: `0 0 40px ${product.glow}` }}
+                  >
+                    <img src={product.screenshot} alt={product.name} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+          );
+        })}
+      </div>
+
+      <EditorialCTA />
+    </PageShell>
   );
 };
 

@@ -1,19 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
-import { Header } from '@/components/Header';
-import { NotificationBanner } from '@/components/NotificationBanner';
-import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Calendar, Eye, Share2 } from 'lucide-react';
-import { format } from 'date-fns';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
-import { GradientMesh } from '@/components/ui/gradient-mesh';
-import { FloatingShapes } from '@/components/ui/floating-shapes';
-import { Particles } from '@/components/ui/particles';
-import { CreativeBackground } from '@/components/ui/creative-background';
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { PageShell } from "@/components/layout/PageShell";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Calendar, Eye, Share2 } from "lucide-react";
+import { format } from "date-fns";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
-interface BlogPost {
+interface BlogPostData {
   id: string;
   title: string;
   slug: string;
@@ -27,7 +22,7 @@ interface BlogPost {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [blog, setBlog] = useState<BlogPost | null>(null);
+  const [blog, setBlog] = useState<BlogPostData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const { toast } = useToast();
@@ -36,16 +31,15 @@ const BlogPost = () => {
     if (!slug) return;
 
     try {
-      // Fetch the blog post
       const { data, error } = await supabase
-        .from('blogs')
-        .select('*')
-        .eq('slug', slug)
-        .eq('status', 'published')
+        .from("blogs")
+        .select("*")
+        .eq("slug", slug)
+        .eq("status", "published")
         .single();
 
       if (error) {
-        if (error.code === 'PGRST116') {
+        if (error.code === "PGRST116") {
           setNotFound(true);
         } else {
           throw error;
@@ -55,14 +49,12 @@ const BlogPost = () => {
 
       setBlog(data);
 
-      // Increment view count
       await supabase
-        .from('blogs')
+        .from("blogs")
         .update({ views: (data.views || 0) + 1 })
-        .eq('id', data.id);
-
+        .eq("id", data.id);
     } catch (error) {
-      console.error('Error fetching blog:', error);
+      console.error("Error fetching blog:", error);
       setNotFound(true);
     } finally {
       setIsLoading(false);
@@ -84,162 +76,112 @@ const BlogPost = () => {
       } else {
         await navigator.clipboard.writeText(window.location.href);
         toast({
-          title: "Link copied!",
-          description: "The blog post link has been copied to your clipboard.",
+          title: "Link copied",
+          description: "The article link has been copied to your clipboard.",
         });
       }
     } catch (error) {
-      console.error('Error sharing:', error);
+      console.error("Error sharing:", error);
     }
   };
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
-        <GradientMesh className="opacity-20" />
-        <FloatingShapes count={8} className="opacity-10" />
-        <NotificationBanner />
-        <Header />
-        <div className="container mx-auto px-4 py-16 text-center relative z-10">
-          <div className="text-white/80 text-lg">Loading article...</div>
+      <PageShell>
+        <div className="max-w-[1600px] mx-auto px-4 pt-32 pb-20 text-center text-muted-foreground">
+          Loading article...
         </div>
-      </div>
+      </PageShell>
     );
   }
 
   if (notFound || !blog) {
     return (
-      <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
-        <GradientMesh className="opacity-20" />
-        <FloatingShapes count={8} className="opacity-10" />
-        <NotificationBanner />
-        <Header />
-        <div className="container mx-auto px-4 py-16 text-center relative z-10">
-          <div className="max-w-md mx-auto">
-            <h1 className="text-3xl font-bold text-white mb-4">Article Not Found</h1>
-            <p className="text-white/80 mb-8">
-              The article you're looking for doesn't exist or has been moved.
-            </p>
-            <Link to="/blog">
-              <Button variant="outline" className="border-border text-foreground hover:bg-card">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Blog
-              </Button>
+      <PageShell>
+        <div className="max-w-[1600px] mx-auto px-4 pt-32 pb-20 text-center">
+          <h1 className="text-2xl font-bold mb-4">Article not found</h1>
+          <p className="text-muted-foreground mb-8">
+            The article you're looking for doesn't exist or has been moved.
+          </p>
+          <Button asChild variant="outline" className="rounded-sm">
+            <Link to="/blogs">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Blog
             </Link>
-          </div>
+          </Button>
         </div>
-      </div>
+      </PageShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
-      <GradientMesh className="opacity-25" />
-      <FloatingShapes count={10} className="opacity-10" />
-      <Particles count={30} color="#ffffff" className="opacity-12" />
-      <CreativeBackground variant="gradient" className="opacity-15" />
-      <NotificationBanner />
-      <Header />
-      
-      <article className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Back to Blog */}
-          <Link 
-            to="/blog"
-            className="inline-flex items-center text-white/80 hover:text-white transition-colors mb-8 group"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Back to Blog
-          </Link>
+    <PageShell>
+      <article className="max-w-3xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-20">
+        <Link
+          to="/blogs"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Blog
+        </Link>
 
-          {/* Featured Image */}
-          {blog.featured_image_url && (
-            <div className="aspect-video mb-8 rounded-2xl overflow-hidden">
-              <img
-                src={blog.featured_image_url}
-                alt={blog.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+        {blog.featured_image_url && (
+          <div className="aspect-video mb-8 rounded-sm overflow-hidden border border-border/40">
+            <img src={blog.featured_image_url} alt={blog.title} className="w-full h-full object-cover" />
+          </div>
+        )}
 
-          {/* Article Header */}
-          <header className="mb-8">
-            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-tight">
-              {blog.title}
-            </h1>
-            
-            {blog.excerpt && (
-              <p className="text-xl text-white/80 mb-6 leading-relaxed">
-                {blog.excerpt}
-              </p>
-            )}
+        <header className="mb-10">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight">
+            {blog.title}
+          </h1>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-              <div className="flex items-center gap-6 text-white/60">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  {format(new Date(blog.published_at), 'MMMM d, yyyy')}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Eye className="w-5 h-5" />
-                  {blog.views} views
-                </div>
-              </div>
-              
-              <Button
-                onClick={handleShare}
-                variant="outline"
-                size="sm"
-                className="border-border text-foreground hover:bg-card self-start sm:self-auto"
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share
-              </Button>
+          {blog.excerpt && <p className="lead mb-6">{blog.excerpt}</p>}
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+            <div className="flex items-center gap-5 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                {format(new Date(blog.published_at), "MMMM d, yyyy")}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                {blog.views} views
+              </span>
             </div>
 
-            {/* Tags */}
-            {blog.tags && blog.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-6">
-                {blog.tags.map((tag, index) => (
-                  <Badge key={index} variant="outline" className="border-white/20 text-white/70">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            )}
-          </header>
-
-          {/* Article Content */}
-          <div className="prose prose-lg prose-invert max-w-none">
-            <div className="text-white/90 leading-relaxed whitespace-pre-wrap">
-              {blog.content}
-            </div>
+            <Button onClick={handleShare} variant="outline" size="sm" className="rounded-sm self-start sm:self-auto">
+              <Share2 className="w-4 h-4 mr-2" />
+              Share
+            </Button>
           </div>
 
-          {/* Article Footer */}
-          <footer className="mt-12 pt-8 border-t border-white/20">
-            <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-              <div className="text-white/60">
-                <p>Published on {format(new Date(blog.published_at), 'MMMM d, yyyy')}</p>
-              </div>
-              
-              <div className="flex gap-2">
-                <Button
-                  onClick={handleShare}
-                  variant="outline"
-                  size="sm"
-                  className="border-border text-foreground hover:bg-card"
-                >
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Share Article
-                </Button>
-              </div>
+          {blog.tags && blog.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-6">
+              {blog.tags.map((tag) => (
+                <Badge key={tag} variant="outline" className="rounded-sm font-mono text-[10px] uppercase tracking-wider">
+                  {tag}
+                </Badge>
+              ))}
             </div>
-          </footer>
+          )}
+        </header>
+
+        <div className="prose prose-invert prose-lg max-w-none">
+          <div className="text-foreground/90 leading-relaxed whitespace-pre-wrap">{blog.content}</div>
         </div>
+
+        <footer className="mt-12 pt-8 border-t border-border/40 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+          <p className="text-sm text-muted-foreground">
+            Published {format(new Date(blog.published_at), "MMMM d, yyyy")}
+          </p>
+          <Button onClick={handleShare} variant="outline" size="sm" className="rounded-sm">
+            <Share2 className="w-4 h-4 mr-2" />
+            Share article
+          </Button>
+        </footer>
       </article>
-    </div>
+    </PageShell>
   );
 };
 
