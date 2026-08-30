@@ -78,6 +78,7 @@ export const Header = () => {
 
           <nav className="hidden lg:flex items-center gap-0.5">
             <NavLink to="/work" active={isActive("/work")}>Work</NavLink>
+            <NavLink to="#inowix-labs" active={false}>Labs</NavLink>
 
             <NavDropdown
               label="Services"
@@ -131,7 +132,7 @@ export const Header = () => {
               </Button>
             )}
             <Button asChild size="sm" className={cn(
-              "hidden sm:flex rounded-full font-semibold group",
+              "hidden sm:flex rounded-sm font-semibold group",
               isScrolled ? "h-9 px-5" : "h-10 px-6"
             )}>
               <Link to="/contact-us">
@@ -160,6 +161,7 @@ export const Header = () => {
           >
             <div className="bg-inowix-surface/95 backdrop-blur-2xl border border-border/40 rounded-2xl p-6 shadow-2xl space-y-6">
               <MobileNavLink to="/work">Work</MobileNavLink>
+              <MobileNavLink to="#inowix-labs">Inowix Labs</MobileNavLink>
 
               <MobileSection title="Services">
                 {serviceLinks.map((l) => (
@@ -181,7 +183,7 @@ export const Header = () => {
                 ))}
               </MobileSection>
 
-              <Button asChild className="w-full rounded-xl py-6">
+              <Button asChild className="w-full rounded-sm py-6">
                 <Link to="/contact-us">Start a Project →</Link>
               </Button>
             </div>

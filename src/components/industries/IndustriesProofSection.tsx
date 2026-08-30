@@ -1,0 +1,87 @@
+import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { INDUSTRY_PROOF, INOWIX_PROJECTS, HOMEPAGE_COPY } from "@/data/inowix-content";
+
+export const IndustryTile = ({
+  industry,
+  index,
+}: {
+  industry: (typeof INDUSTRY_PROOF)[0];
+  index: number;
+}) => {
+  const reduced = useReducedMotion();
+  const project = INOWIX_PROJECTS[industry.projectSlug];
+
+  return (
+    <motion.div
+      initial={reduced ? false : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-5%" }}
+      transition={{ duration: 0.45, delay: index * 0.05 }}
+    >
+      <Link
+        to="/industries"
+        className="group block relative p-5 sm:p-6 border border-border/40 rounded-sm bg-inowix-bg/50 hover:bg-inowix-surface/30 transition-all duration-300 overflow-hidden h-full"
+        style={{ borderLeftColor: `${industry.accent}40`, borderLeftWidth: 3 }}
+      >
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse at 100% 0%, ${industry.accent}12, transparent 60%)` }}
+        />
+        <h3 className="font-semibold text-base sm:text-lg mb-2 group-hover:text-foreground transition-colors relative z-10">
+          {industry.name}
+        </h3>
+        <p className="text-sm text-muted-foreground mb-4 leading-relaxed relative z-10">{industry.proof}</p>
+        <div className="flex items-center gap-2 relative z-10">
+          <span className="w-2 h-2 rounded-full shrink-0" style={{ background: industry.accent }} />
+          <span className="font-mono text-[10px] uppercase tracking-wider" style={{ color: industry.accent }}>
+            {project.name}
+          </span>
+        </div>
+        <div className="absolute top-4 right-4 w-10 h-10 rounded-sm border border-border/30 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity">
+          <img src={project.logo || project.image} alt="" className="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
+
+export const IndustriesProofSection = () => {
+  const reduced = useReducedMotion();
+  const copy = HOMEPAGE_COPY.industries;
+
+  return (
+    <section id="industries" className="relative bg-inowix-bg border-t border-border/40" aria-label="Industries">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16"
+        >
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">{copy.label}</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]">
+              <span className="block">{copy.line1}</span>
+              <span className="block text-primary">{copy.line2}</span>
+            </h2>
+          </div>
+          <Link
+            to="/industries"
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all shrink-0"
+          >
+            All industries <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {INDUSTRY_PROOF.map((industry, i) => (
+            <IndustryTile key={industry.slug} industry={industry} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

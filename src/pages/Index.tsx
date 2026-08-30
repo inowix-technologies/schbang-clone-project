@@ -2,10 +2,10 @@ import { NotificationBanner } from "@/components/NotificationBanner";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { InowixLabsSection } from "@/components/labs/InowixLabsSection";
-import { AboutSection } from "@/components/AboutSection";
-import { WorkSection } from "@/components/WorkSection";
-import { ServicesSection } from "@/components/ServicesSection";
-import { IndustriesSection } from "@/components/IndustriesSection";
+import { ThreeWorldsSection } from "@/components/worlds/ThreeWorldsSection";
+import { SystemsEngineeredSection } from "@/components/work/SystemsEngineeredSection";
+import { EngineeringStackSection } from "@/components/services/EngineeringStackSection";
+import { IndustriesProofSection } from "@/components/industries/IndustriesProofSection";
 import { ContactLocationsSection } from "@/components/ContactLocationsSection";
 import { BannerSection } from "@/components/BannerSection";
 import { FAQSection } from "@/components/FAQSection";
@@ -36,7 +36,7 @@ const Index = () => {
     {
       id: 'products',
       question: 'Does Inowix build its own products?',
-      answer: 'Yes. We build and operate COM AI (AI Commerce Infrastructure), Beacon (Revenue Intelligence Platform), and RED CLI (AI-Native Cybersecurity) — alongside client engineering work for platforms like Babyland, SwiftGo, and SRL Logistics.'
+      answer: 'Yes. We build and operate COM AI (AI Commerce Infrastructure), Beacon (Revenue Intelligence Platform), and RED CLI (AI-Native Cybersecurity) — alongside client engineering work for platforms like Babyland, SwiftGo, SRL Logistics, and 15+ other brands.'
     }
   ];
 
@@ -46,10 +46,10 @@ const Index = () => {
       <Header />
       <HeroSection />
       <InowixLabsSection />
-      <AboutSection />
-      <WorkSection />
-      <ServicesSection />
-      <IndustriesSection />
+      <ThreeWorldsSection />
+      <SystemsEngineeredSection />
+      <EngineeringStackSection />
+      <IndustriesProofSection />
       <ContactLocationsSection />
       <BannerSection />
       <FAQSection
