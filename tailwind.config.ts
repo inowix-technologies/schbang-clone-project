@@ -65,9 +65,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["var(--font-heading)"],
-        body: ["var(--font-body)"],
+        heading: ["Inter", "system-ui", "sans-serif"],
+        body: ["Inter", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
         sora: ["Sora", "sans-serif"],
         manrope: ["Manrope", "sans-serif"],
       },
@@ -137,6 +138,14 @@ export default {
         lightWhite: "var(--light-white)",
         red: "var(--red-color)",
         borderColor: "var(--border-color)",
+        inowix: {
+          bg: "hsl(var(--theme-bg-primary))",
+          surface: "hsl(var(--theme-bg-secondary))",
+          elevated: "hsl(var(--theme-bg-elevated))",
+          "com-ai": "hsl(var(--accent-com-ai))",
+          beacon: "hsl(var(--accent-beacon))",
+          "red-cli": "hsl(var(--accent-red-cli))",
+        },
       },
       spacing: {
         'section': 'var(--section-padding)',

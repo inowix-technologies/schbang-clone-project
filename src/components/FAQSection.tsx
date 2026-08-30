@@ -18,7 +18,7 @@ interface FAQSectionProps {
 
 export const FAQSection = ({
   title = "Frequently Asked Questions",
-  subtitle = "Everything you need to know about working with our digital agency",
+  subtitle = "Everything you need to know about working with Inowix",
   faqs,
 }: FAQSectionProps) => {
   return (

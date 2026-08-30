@@ -1,28 +1,30 @@
-import { BackgroundBeams } from "./ui/background-beams";
-import { GradientMesh } from "./ui/gradient-mesh";
-import { DecorativeElements } from "./ui/decorative-elements";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const BannerSection = () => {
-    return (
-        <section className="min-h-[50vh] sm:min-h-[35rem] md:h-[40rem] w-full rounded-md bg-black relative flex flex-col items-center justify-center antialiased overflow-hidden py-10 sm:py-12 md:py-16 lg:py-0">
-            <GradientMesh className="opacity-30" />
-            <DecorativeElements />
-            <div className="max-w-4xl mx-auto p-4 sm:p-6 relative z-10">
-                <h1 className="relative z-10 text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 via-blue-200 to-purple-200 text-center font-sans font-bold px-2 sm:px-0 leading-tight">
-                    Ready to Transform Your <br className="sm:hidden" /><span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Digital Presence</span>?
-                </h1>
-                <p className="text-neutral-500 max-w-lg mx-auto my-4 sm:my-5 md:my-6 text-xs sm:text-sm md:text-base text-center relative z-10 px-4 sm:px-0 leading-relaxed">
-                    Join 300+ global brands and start your journey towards excellence with Inowix.
-                    Our specialists are ready to turn your vision into reality.
-                </p>
-                <div className="flex justify-center mt-5 sm:mt-6 md:mt-8 lg:mt-10">
-                    <Link to="/contact-us" className="px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-blue-600 text-white rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:bg-blue-700 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
-                        Start a Project
-                    </Link>
-                </div>
-            </div>
-            <BackgroundBeams />
-        </section>
-    );
+  return (
+    <section className="py-16 sm:py-20 md:py-24 bg-inowix-surface/50 border-t border-border/40 relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:40px_40px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
+          Let's build
+        </p>
+        <h2 className="section-title mb-4">
+          Ready to engineer your next system?
+        </h2>
+        <p className="lead mb-8 max-w-xl mx-auto">
+          From complex problems to production systems. Tell us what you're building.
+        </p>
+        <Button asChild size="lg" className="rounded-full px-8 group">
+          <Link to="/contact-us">
+            Start a Project
+            <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Button>
+      </div>
+    </section>
+  );
 };

@@ -4,57 +4,61 @@
 
 @layer base {
   :root {
-    /* Modern Dark Developer Theme - Inspired by dhravya.dev */
-    /* Deep navy background: #0F172A */
-    --background: 222 47% 11%;
-    /* Primary text: #FFFFFF */
-    --foreground: 0 0% 100%;
+    /* Inowix Premium Dark Theme */
+    /* Base background: #070809 */
+    --background: 210 9% 3%;
+    /* Primary text: #F4F6F8 */
+    --foreground: 210 20% 96%;
 
-    /* Card surface: #111827 */
-    --card: 222 44% 13%;
-    --card-foreground: 0 0% 100%;
+    /* Secondary surface: #0D0F12 */
+    --card: 220 15% 6%;
+    --card-foreground: 210 20% 96%;
 
-    /* Popover: #1F2937 */
-    --popover: 215 28% 17%;
-    --popover-foreground: 0 0% 100%;
+    /* Elevated surface: #12151A */
+    --popover: 220 14% 8%;
+    --popover-foreground: 210 20% 96%;
 
-    /* Primary accent (blue): #2563EB */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary Inowix accent: cool blue #60A5FA */
+    --primary: 213 94% 68%;
+    --primary-foreground: 210 9% 3%;
 
-    /* Secondary surface: #1F2937 */
-    --secondary: 215 28% 17%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary surface: #0D0F12 */
+    --secondary: 220 15% 6%;
+    --secondary-foreground: 210 20% 96%;
 
-    /* Muted: #1F2937 */
-    --muted: 215 28% 17%;
-    /* Muted text: #9CA3AF */
-    --muted-foreground: 216 12% 66%;
+    /* Muted surface: #12151A */
+    --muted: 220 14% 8%;
+    /* Muted text: #8F96A3 */
+    --muted-foreground: 218 10% 60%;
 
-    /* Accent: #111827 */
-    --accent: 222 44% 13%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent elevated: #12151A */
+    --accent: 220 14% 8%;
+    --accent-foreground: 210 20% 96%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 20% 96%;
 
-    /* Border: #374151 */
-    --border: 215 16% 22%;
-    --input: 215 16% 22%;
-    --ring: 217 91% 60%;
+    /* Subtle borders: low-opacity white/gray */
+    --border: 220 10% 18%;
+    --input: 220 10% 18%;
+    --ring: 213 94% 68%;
 
     --radius: 0.5rem;
 
     /* Theme Color Variables */
-    --theme-bg-primary: 222 47% 11%; /* #0F172A */
-    --theme-bg-secondary: 222 44% 13%; /* #111827 */
-    --theme-bg-tertiary: 215 28% 17%; /* #1F2937 */
-    --theme-text-primary: 0 0% 100%; /* #FFFFFF */
-    --theme-text-secondary: 210 20% 82%; /* #D1D5DB */
-    --theme-text-muted: 216 12% 66%; /* #9CA3AF */
-    --theme-accent-blue: 217 91% 60%; /* #2563EB */
-    --theme-accent-green: 142 71% 45%; /* #22C55E */
-    --theme-border: 215 16% 22%; /* #374151 */
+    --theme-bg-primary: 210 9% 3%; /* #070809 */
+    --theme-bg-secondary: 220 15% 6%; /* #0D0F12 */
+    --theme-bg-elevated: 220 14% 8%; /* #12151A */
+    --theme-text-primary: 210 20% 96%; /* #F4F6F8 */
+    --theme-text-secondary: 218 10% 72%;
+    --theme-text-muted: 218 10% 60%; /* #8F96A3 */
+    --theme-accent: 213 94% 68%;
+    --theme-border: 220 10% 18%;
+
+    /* Product accent colors (used sparingly) */
+    --accent-com-ai: 152 100% 50%; /* electric green */
+    --accent-beacon: 199 100% 50%; /* electric blue */
+    --accent-red-cli: 0 72% 51%; /* controlled crimson */
 
     /* Original Custom Colors (Preserved for compatibility) */
     --light-blue: #B9D9FF;
@@ -67,20 +71,20 @@
     --light-orenge: #FFC8A9;
     --light-orange: #FFC8A9;
 
-     /* Planner Theme (Updated to match new theme) */
-    --planner-bg: 222 47% 11%;
-    --planner-surface: 222 44% 13%;
-    --planner-surface-elevated: 215 28% 17%;
-    --planner-border: 215 16% 22%;
-    --planner-border-focus: 217 91% 60%;
-    --planner-text-primary: 0 0% 100%;
-    --planner-text-secondary: 210 20% 82%;
-    --planner-text-muted: 216 12% 66%;
-    --planner-accent: 217 91% 60%;
-    --planner-accent-muted: 217 50% 20%;
-    --planner-success: 142 71% 45%;
+    /* Planner Theme */
+    --planner-bg: 210 9% 3%;
+    --planner-surface: 220 15% 6%;
+    --planner-surface-elevated: 220 14% 8%;
+    --planner-border: 220 10% 18%;
+    --planner-border-focus: 213 94% 68%;
+    --planner-text-primary: 210 20% 96%;
+    --planner-text-secondary: 218 10% 72%;
+    --planner-text-muted: 218 10% 60%;
+    --planner-accent: 213 94% 68%;
+    --planner-accent-muted: 213 50% 15%;
+    --planner-success: 152 100% 50%;
     --planner-warning: 48 96% 53%;
-    --planner-error: 0 84% 60%;
+    --planner-error: 0 72% 51%;
   }
 
   .light {
@@ -130,6 +134,9 @@
     -moz-osx-font-smoothing: grayscale;
     width: 100%;
     position: relative;
+  }
+  .font-mono, code, pre, .technical-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
   #root {
     min-height: 100%;
@@ -220,7 +227,19 @@
     line-height: 1.5;
   }
   
-  /* Hero headings - slightly larger but still professional */
+  /* Hero headings - editorial stack */
+  .hero-headline-stack {
+    font-size: clamp(2.75rem, 7.5vw, 5.5rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-headline-line {
+    overflow: hidden;
+  }
+
+  /* Legacy hero title */
   .hero-title {
     font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive: 40px - 64px */
     font-weight: 700;
@@ -266,4 +285,20 @@
 @keyframes grid-move {
   0% { transform: translate(0, 0); }
   100% { transform: translate(50px, 50px); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none !important;
+  }
 }
