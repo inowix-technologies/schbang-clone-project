@@ -11,7 +11,19 @@ import finnovaImage from "@/assets/finnova-app.jpg";
 import bigoImage from "@/assets/bigo.webp";
 import siyaAyurvedaImage from "@/assets/siyaayurveda.webp";
 import amrutamLogo from "@/assets/only_text_Amrutam_Logo_in_Green-09.webp";
-import techIllustration from "@/assets/tech-illustration.jpg";
+
+// Client brand logos (Google Drive — one file per brand, do not cross-assign)
+import babylandLogo from "@/assets/projects/clients/Baby_logo.webp";
+import babyloxLogo from "@/assets/projects/clients/babylox_logo-removebg-preview.webp";
+import bebrootLogo from "@/assets/projects/clients/bebroot_PNg_-_Copy.webp";
+import triplecareLogo from "@/assets/projects/clients/Triplecare.webp";
+import exhaleLogo from "@/assets/projects/clients/Exhale-Logo-New-1_4559d167-5609-45d7-89ef-c2024fc43bfe.avif";
+import greenGainzLogo from "@/assets/projects/clients/GreenGainz_logo_png.avif";
+import palatialFarmsLogo from "@/assets/projects/clients/palatialfarmslogo.webp";
+import sanchFarmsLogo from "@/assets/projects/clients/SANCH_FARMS_-_registered_FINAL_LOGO.avif";
+import melasLogo from "@/assets/projects/clients/Melas_Logo.avif";
+import aimLogo from "@/assets/projects/clients/aim_new_logo.png";
+import moonDermaLogo from "@/assets/projects/clients/Moon Derma.webp";
 
 export type ProductSlug = "com-ai" | "beacon" | "red-cli";
 
@@ -61,6 +73,7 @@ export interface InowixProject {
   logo?: string;
   link: string;
   featured?: boolean;
+  hasAppScreenshot?: boolean;
 }
 
 export interface EngineeringWorld {
@@ -179,7 +192,9 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(244,114,182,0.35)",
     capabilities: ["MOBILE", "BACKEND", "REALTIME", "INFRASTRUCTURE"],
     technologies: ["Flutter", "Node.js", "PostgreSQL", "AWS"],
+    logo: babylandLogo,
     image: bumpImage,
+    hasAppScreenshot: true,
     link: "/work",
     featured: true,
   },
@@ -192,7 +207,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(236,72,153,0.35)",
     capabilities: ["ECOMMERCE", "MOBILE", "CATALOG", "CHECKOUT"],
     technologies: ["React Native", "Node.js", "Stripe"],
-    image: techIllustration,
+    logo: babyloxLogo,
+    image: babyloxLogo,
     link: "/work",
   },
   bebroot: {
@@ -204,7 +220,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(168,85,247,0.35)",
     capabilities: ["D2C", "ECOMMERCE", "CMS", "ANALYTICS"],
     technologies: ["Next.js", "Node.js", "PostgreSQL"],
-    image: techIllustration,
+    logo: bebrootLogo,
+    image: bebrootLogo,
     link: "/work",
   },
   swiftgo: {
@@ -218,6 +235,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     capabilities: ["MOBILITY", "TRACKING", "LOGISTICS", "REALTIME"],
     technologies: ["React Native", "Node.js", "Redis", "GCP"],
     image: nextstopImage,
+    hasAppScreenshot: true,
     link: "/work",
     featured: true,
   },
@@ -232,6 +250,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     capabilities: ["LOGISTICS", "INVENTORY", "OPERATIONS", "DASHBOARDS"],
     technologies: ["React", "Python", "PostgreSQL", "Docker"],
     image: retailxImage,
+    hasAppScreenshot: true,
     link: "/work",
     featured: true,
   },
@@ -245,7 +264,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(192,132,252,0.35)",
     capabilities: ["MOBILE", "COMMUNITY", "CONTENT", "BACKEND"],
     technologies: ["Flutter", "Firebase", "Node.js"],
-    image: techIllustration,
+    image: "",
     link: "/work",
     featured: true,
   },
@@ -259,8 +278,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(74,222,128,0.35)",
     capabilities: ["HEALTH", "BOOKING", "CONTENT", "MOBILE"],
     technologies: ["React", "Node.js", "MongoDB"],
-    image: siyaAyurvedaImage,
     logo: siyaAyurvedaImage,
+    image: siyaAyurvedaImage,
     link: "/work",
     featured: true,
   },
@@ -273,8 +292,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(34,197,94,0.35)",
     capabilities: ["ECOMMERCE", "SUBSCRIPTIONS", "PAYMENTS", "CMS"],
     technologies: ["Shopify", "React", "Node.js"],
-    image: amrutamLogo,
     logo: amrutamLogo,
+    image: amrutamLogo,
     link: "/work",
   },
   "moon-derma": {
@@ -287,7 +306,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(129,140,248,0.35)",
     capabilities: ["SKINCARE", "ECOMMERCE", "BOOKING", "CONTENT"],
     technologies: ["Next.js", "Node.js", "PostgreSQL"],
-    image: techIllustration,
+    logo: moonDermaLogo,
+    image: moonDermaLogo,
     link: "/work",
     featured: true,
   },
@@ -300,7 +320,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(45,212,191,0.35)",
     capabilities: ["HEALTHCARE", "SCHEDULING", "PATIENT MGMT", "PORTAL"],
     technologies: ["React", "Node.js", "PostgreSQL"],
-    image: techIllustration,
+    logo: triplecareLogo,
+    image: triplecareLogo,
     link: "/work",
   },
   exhale: {
@@ -312,7 +333,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(251,146,60,0.35)",
     capabilities: ["WELLNESS", "CONTENT", "ECOMMERCE", "COMMUNITY"],
     technologies: ["React", "Node.js", "CMS"],
-    image: techIllustration,
+    logo: exhaleLogo,
+    image: exhaleLogo,
     link: "/work",
   },
   "green-gainz": {
@@ -324,7 +346,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(132,204,22,0.35)",
     capabilities: ["FITNESS", "NUTRITION", "SUBSCRIPTIONS", "MOBILE"],
     technologies: ["React Native", "Node.js", "Firebase"],
-    image: techIllustration,
+    logo: greenGainzLogo,
+    image: greenGainzLogo,
     link: "/work",
   },
   "palatial-farms": {
@@ -336,7 +359,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(101,163,13,0.35)",
     capabilities: ["AGRICULTURE", "TRACEABILITY", "ECOMMERCE", "SUPPLY CHAIN"],
     technologies: ["React", "Node.js", "PostgreSQL"],
-    image: techIllustration,
+    logo: palatialFarmsLogo,
+    image: palatialFarmsLogo,
     link: "/work",
   },
   "sanch-farms": {
@@ -348,7 +372,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(202,138,4,0.35)",
     capabilities: ["AGRICULTURE", "ORDERS", "INVENTORY", "DELIVERY"],
     technologies: ["React", "Python", "PostgreSQL"],
-    image: techIllustration,
+    logo: sanchFarmsLogo,
+    image: sanchFarmsLogo,
     link: "/work",
   },
   melas: {
@@ -360,7 +385,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(232,121,249,0.35)",
     capabilities: ["BRAND", "ECOMMERCE", "CMS", "ANALYTICS"],
     technologies: ["Next.js", "Shopify", "Node.js"],
-    image: techIllustration,
+    logo: melasLogo,
+    image: melasLogo,
     link: "/work",
   },
   aim: {
@@ -372,7 +398,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(96,165,250,0.35)",
     capabilities: ["B2B", "WORKFLOWS", "DASHBOARDS", "AUTOMATION"],
     technologies: ["React", "Node.js", "PostgreSQL"],
-    image: techIllustration,
+    logo: aimLogo,
+    image: aimLogo,
     link: "/work",
   },
   "linkedin-automation": {
@@ -385,7 +412,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(14,165,233,0.35)",
     capabilities: ["AUTOMATION", "OUTREACH", "ENRICHMENT", "ANALYTICS"],
     technologies: ["Python", "React", "PostgreSQL", "Redis"],
-    image: finnovaImage,
+    image: "",
     link: "/work",
     featured: true,
   },
@@ -399,7 +426,7 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(0,255,136,0.35)",
     capabilities: ["AI CHATBOT", "KNOWLEDGE BASE", "TICKETING", "ADMIN"],
     technologies: ["Python", "React", "LLM", "PostgreSQL"],
-    image: carzentraImage,
+    image: "",
     link: "/work",
     featured: true,
   },

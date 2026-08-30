@@ -8,6 +8,7 @@ import {
   HOMEPAGE_COPY,
 } from "@/data/inowix-content";
 import { CaseStudyRow } from "./CaseStudyRow";
+import { ProjectVisual } from "./ProjectVisual";
 
 export const ClientLogoStrip = () => {
   const reduced = useReducedMotion();
@@ -29,15 +30,10 @@ export const ClientLogoStrip = () => {
             className="group flex flex-col items-center gap-2"
           >
             <div
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-sm border border-border/40 bg-inowix-surface/30 flex items-center justify-center overflow-hidden p-2 transition-all group-hover:border-border/70"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-sm border border-border/40 bg-white flex items-center justify-center overflow-hidden p-2 transition-all group-hover:border-border/70"
               style={{ boxShadow: `0 0 20px ${project.glow}` }}
             >
-              <img
-                src={project.logo || project.image}
-                alt={project.name}
-                className="max-w-full max-h-full object-contain"
-                loading="lazy"
-              />
+              <ProjectVisual project={project} variant="strip" className="w-full h-full" />
             </div>
             <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/70 group-hover:text-foreground/80 transition-colors">
               {project.name}

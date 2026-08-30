@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { InowixProject } from "@/data/inowix-content";
 import { BuiltByInowix } from "@/components/hero/BuiltByInowix";
+import { ProjectVisual } from "./ProjectVisual";
 import { cn } from "@/lib/utils";
 
 interface CaseStudyRowProps {
@@ -73,12 +74,7 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
           className="relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden border"
           style={{ borderColor: `${project.accent}30`, boxShadow: `0 0 60px ${project.glow}` }}
         >
-          <img
-            src={project.logo || project.image}
-            alt={project.name}
-            className="w-full h-full object-cover object-center"
-            loading="lazy"
-          />
+          <ProjectVisual project={project} variant="case-study" className="min-h-[240px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-inowix-bg/80 via-transparent to-transparent pointer-events-none" />
           <div className="absolute bottom-4 left-4 right-4 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">
             ARCHITECTURE → ENGINEERING → PRODUCTION
