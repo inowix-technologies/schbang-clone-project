@@ -1,20 +1,20 @@
-import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { HeroHeadline } from "@/components/hero/HeroHeadline";
-import { InowixCore } from "@/components/hero/InowixCore";
+import { HeroVisualStage } from "@/components/hero/HeroVisualStage";
+import { HeroMicroMarquee } from "@/components/home/HeroMicroMarquee";
 import { HERO_CAPABILITIES } from "@/data/inowix-content";
-import type { CoreNodeId } from "@/components/hero/CoreNodePanel";
 
 export const HeroSection = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [activeNode, setActiveNode] = useState<CoreNodeId | null>(null);
 
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden bg-inowix-bg" aria-label="Inowix hero">
+    <section
+      className="relative min-h-[100svh] w-full overflow-hidden bg-inowix-bg"
+      aria-label="Inowix hero"
+    >
       {/* Structural grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
@@ -29,9 +29,9 @@ export const HeroSection = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_40%,hsl(var(--primary)/0.06),transparent)] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 min-h-[100svh] flex flex-col">
-        <div className="flex-1 grid lg:grid-cols-[42fr_58fr] gap-6 lg:gap-4 xl:gap-8 items-center pt-24 sm:pt-28 lg:pt-32 pb-8 lg:pb-12 min-h-0">
-          {/* LEFT */}
-          <div className="flex flex-col justify-center text-center lg:text-left lg:pr-6 xl:pr-10 order-2 lg:order-1">
+        <div className="flex-1 grid lg:grid-cols-[42fr_58fr] gap-6 lg:gap-8 items-center pt-24 sm:pt-28 lg:pt-32 pb-8 lg:pb-12 min-h-0">
+          {/* LEFT — copy */}
+          <div className="flex flex-col justify-center text-center lg:text-left lg:pr-6 xl:pr-10">
             <motion.div
               initial={prefersReducedMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -99,34 +99,13 @@ export const HeroSection = () => {
                 <Link to="#inowix-labs">Explore Inowix Labs</Link>
               </Button>
             </motion.div>
+            <HeroMicroMarquee />
           </div>
 
-          {/* RIGHT — INOWIX CORE v2 full bleed */}
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className={cn(
-              "relative order-1 lg:order-2 w-full h-[min(52vh,520px)] lg:h-[min(78vh,720px)]",
-              "lg:-mr-6 xl:-mr-10"
-            )}
-          >
-            <div className="absolute inset-0 lg:rounded-none border border-border/30 bg-inowix-surface/10 overflow-hidden">
-              <div className="absolute top-0 inset-x-0 flex items-center justify-between px-4 py-2 border-b border-border/20 bg-inowix-bg/50 backdrop-blur-sm z-20">
-                <div className="flex gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-inowix-com-ai" />
-                  <span className="w-2 h-2 rounded-full bg-inowix-beacon" />
-                  <span className="w-2 h-2 rounded-full bg-inowix-red-cli" />
-                </div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground/50">
-                  Inowix Core · Live System Map
-                </span>
-              </div>
-              <div className="absolute inset-0 top-9 p-2 sm:p-4">
-                <InowixCore activeId={activeNode} onActivate={setActiveNode} className="h-full" />
-              </div>
-            </div>
-          </motion.div>
+          {/* RIGHT — visual stage with hero film */}
+          <div className="w-full">
+            <HeroVisualStage />
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
 
 const lines = ["WE BUILD", "TECHNOLOGY", "THAT BUSINESSES", "RUN ON."];
 
@@ -24,11 +25,17 @@ export const HeroHeadline = ({ className }: HeroHeadlineProps) => {
           }}
           className={cn(
             "hero-headline-line block",
-            line === "TECHNOLOGY" && "text-primary",
+            line === "TECHNOLOGY" && "",
             line === "RUN ON." && "text-foreground/90"
           )}
         >
-          {line}
+          {line === "TECHNOLOGY" ? (
+            <AnimatedGradientText className="from-primary via-inowix-beacon to-inowix-com-ai">
+              {line}
+            </AnimatedGradientText>
+          ) : (
+            line
+          )}
         </motion.span>
       ))}
     </h1>

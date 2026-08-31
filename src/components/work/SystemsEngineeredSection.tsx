@@ -8,39 +8,22 @@ import {
   HOMEPAGE_COPY,
 } from "@/data/inowix-content";
 import { CaseStudyRow } from "./CaseStudyRow";
-import { ProjectVisual } from "./ProjectVisual";
+import { ClientLogoMarquee } from "@/components/home/ClientLogoMarquee";
 
 export const ClientLogoStrip = () => {
-  const reduced = useReducedMotion();
   const logos = CLIENT_LOGO_SLUGS.map((slug) => INOWIX_PROJECTS[slug]);
+  const logoItems = logos.map((project) => ({
+    name: project.name,
+    image: project.logo || project.image,
+  }));
 
   return (
-    <div className="border-t border-border/30 py-12 sm:py-16">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-center mb-8">
+    <div className="border-t border-border/30 py-12 sm:py-16 space-y-4">
+      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-center mb-4">
         {HOMEPAGE_COPY.clientStrip.label}
       </p>
-      <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 px-4">
-        {logos.map((project, i) => (
-          <motion.div
-            key={project.slug}
-            initial={reduced ? false : { opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.04 }}
-            className="group flex flex-col items-center gap-2"
-          >
-            <div
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-sm border border-border/40 bg-white flex items-center justify-center overflow-hidden p-2 transition-all group-hover:border-border/70"
-              style={{ boxShadow: `0 0 20px ${project.glow}` }}
-            >
-              <ProjectVisual project={project} variant="strip" className="w-full h-full" />
-            </div>
-            <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground/70 group-hover:text-foreground/80 transition-colors">
-              {project.name}
-            </span>
-          </motion.div>
-        ))}
-      </div>
+      <ClientLogoMarquee items={logoItems} direction="left" speed="slow" />
+      <ClientLogoMarquee items={[...logoItems].reverse()} direction="right" speed="slow" />
     </div>
   );
 };

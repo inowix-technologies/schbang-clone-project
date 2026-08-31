@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { GlobalMapVisual, getLocalTime } from "@/components/home/GlobalMapVisual";
 
 const locations = [
   {
@@ -13,6 +16,7 @@ const locations = [
     phones: ["+91 6283075131"],
     email: "info@inowix.in",
     coordinates: "12.9634° N, 77.6433° E",
+    tz: "Asia/Kolkata",
   },
   {
     code: "DL",
@@ -23,6 +27,7 @@ const locations = [
     phones: ["+91 6283075131"],
     email: "info@inowix.in",
     coordinates: "28.5204° N, 77.2016° E",
+    tz: "Asia/Kolkata",
   },
   {
     code: "CH",
@@ -33,6 +38,7 @@ const locations = [
     phones: ["+91 6283075131"],
     email: "info@inowix.in",
     coordinates: "30.6425° N, 76.8173° E",
+    tz: "Asia/Kolkata",
   },
 ];
 
@@ -74,53 +80,68 @@ export const ContactLocationsSection = () => {
           </div>
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeLocation}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.35 }}
-            className="grid lg:grid-cols-12 gap-8 border border-border/40 rounded-sm bg-inowix-surface/20 overflow-hidden"
-            style={{ borderLeftColor: "rgba(37,99,235,0.4)", borderLeftWidth: 3 }}
-          >
-            <div className="lg:col-span-5 p-8 sm:p-10 border-b lg:border-b-0 lg:border-r border-border/30">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-2">{loc.coordinates}</p>
-              <h3 className="text-2xl sm:text-3xl font-bold mb-1">{loc.city}</h3>
-              <p className="text-sm text-muted-foreground mb-6">{loc.office} · {loc.country}</p>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <p className="text-foreground/90 leading-relaxed">{loc.address}</p>
-              </div>
-            </div>
+        <div className="grid lg:grid-cols-12 gap-8 mb-8">
+          <div className="lg:col-span-5 rounded-sm border border-border/40 bg-inowix-surface/20 p-6">
+            <GlobalMapVisual activeIndex={activeLocation} />
+          </div>
 
-            <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center gap-8">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">Phone</p>
-                {loc.phones.map((phone) => (
-                  <a
-                    key={phone}
-                    href={`tel:${phone}`}
-                    className="flex items-center gap-3 text-lg text-foreground hover:text-primary transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    {phone}
-                  </a>
-                ))}
-              </div>
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">Email</p>
-                <a
-                  href={`mailto:${loc.email}`}
-                  className="flex items-center gap-3 text-lg text-foreground hover:text-primary transition-colors"
-                >
-                  <Mail className="w-4 h-4" />
-                  {loc.email}
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+          <div className="lg:col-span-7">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeLocation}
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                transition={{ duration: 0.35 }}
+                className="grid gap-8 border border-border/40 rounded-sm bg-inowix-surface/20 overflow-hidden h-full"
+                style={{ borderLeftColor: "rgba(37,99,235,0.4)", borderLeftWidth: 3 }}
+              >
+                <div className="p-8 sm:p-10">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-2">{loc.coordinates}</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-1">{loc.city}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{loc.office} · {loc.country}</p>
+                  <p className="font-mono text-xs text-inowix-com-ai mb-6">Local time: {getLocalTime(loc.tz)}</p>
+                  <div className="flex items-start gap-3 mb-8">
+                    <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                    <p className="text-foreground/90 leading-relaxed">{loc.address}</p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">Phone</p>
+                      {loc.phones.map((phone) => (
+                        <a
+                          key={phone}
+                          href={`tel:${phone}`}
+                          className="flex items-center gap-3 text-lg text-foreground hover:text-primary transition-colors"
+                        >
+                          <Phone className="w-4 h-4" />
+                          {phone}
+                        </a>
+                      ))}
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">Email</p>
+                      <a
+                        href={`mailto:${loc.email}`}
+                        className="flex items-center gap-3 text-lg text-foreground hover:text-primary transition-colors"
+                      >
+                        <Mail className="w-4 h-4" />
+                        {loc.email}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <Button asChild className="rounded-sm">
+          <Link to="/contact-us">
+            Book a discovery call
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </Link>
+        </Button>
       </div>
     </section>
   );

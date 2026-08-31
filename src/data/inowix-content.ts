@@ -74,6 +74,7 @@ export interface InowixProject {
   link: string;
   featured?: boolean;
   hasAppScreenshot?: boolean;
+  metrics?: { label: string; value: string }[];
 }
 
 export interface EngineeringWorld {
@@ -197,6 +198,10 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     hasAppScreenshot: true,
     link: "",
     featured: true,
+    metrics: [
+      { label: "Platform", value: "Mobile + Backend" },
+      { label: "Stack", value: "Flutter · AWS" },
+    ],
   },
   babylox: {
     slug: "babylox",
@@ -238,6 +243,10 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     hasAppScreenshot: true,
     link: "",
     featured: true,
+    metrics: [
+      { label: "Domain", value: "Realtime logistics" },
+      { label: "Scale", value: "Multi-city ops" },
+    ],
   },
   "srl-logistics": {
     slug: "srl-logistics",
@@ -625,3 +634,44 @@ export const LABS_HEADLINE = {
 };
 
 export const DECOR_IMAGES = [bigoImage, carzentraImage, finnovaImage];
+
+export const TRUST_STATS = [
+  { value: 18, suffix: "+", label: "Client brands" },
+  { value: 3, suffix: "", label: "Flagship products" },
+  { value: 3, suffix: "", label: "Engineering hubs" },
+  { value: 8, suffix: "+", label: "Production systems" },
+] as const;
+
+export interface InowixTestimonial {
+  quote: string;
+  name: string;
+  title: string;
+  company: string;
+}
+
+export const INOWIX_TESTIMONIALS: InowixTestimonial[] = [
+  {
+    quote: "Inowix engineered our mobile platform end-to-end — from architecture to production deployment. The system handles our community at scale.",
+    name: "Product Team",
+    title: "Engineering Lead",
+    company: "Babyland",
+  },
+  {
+    quote: "They built our logistics operations platform with realtime tracking and fleet management. Production-grade from day one.",
+    name: "Operations Team",
+    title: "Technology",
+    company: "SRL Logistics",
+  },
+  {
+    quote: "The team delivered a mobility platform with driver dispatch and live tracking — engineered for reliability, not demos.",
+    name: "Platform Team",
+    title: "CTO",
+    company: "SwiftGo",
+  },
+  {
+    quote: "Inowix Labs products show what they can build when they own the stack. COM AI and Beacon are production systems, not prototypes.",
+    name: "Engineering",
+    title: "Product",
+    company: "Inowix Labs",
+  },
+];

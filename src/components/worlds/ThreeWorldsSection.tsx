@@ -3,8 +3,17 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { THREE_WORLDS, HOMEPAGE_COPY, ENGINEERING_LAYERS } from "@/data/inowix-content";
+import { WorldIllustration } from "@/components/illustrations/WorldIllustration";
 import { WorldPanel } from "./WorldPanel";
+import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+
+const worldIllustrationType = {
+  engineering: "engineering",
+  ai: "ai",
+  security: "security",
+} as const;
 
 export const ThreeWorldsSection = () => {
   const reduced = useReducedMotion();
@@ -26,10 +35,9 @@ export const ThreeWorldsSection = () => {
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
         <motion.div
-          initial={reduced ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.6 }}
+          initial={reduced ? false : fadeUp.hidden}
+          whileInView={fadeUp.visible}
+          viewport={defaultViewport}
           className="max-w-4xl mb-14 sm:mb-20"
         >
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">{copy.label}</p>
@@ -39,22 +47,8 @@ export const ThreeWorldsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="hidden lg:block absolute top-[45%] left-[20%] right-[20%] h-px pointer-events-none">
-          <svg className="w-full h-8" viewBox="0 0 800 32" fill="none" aria-hidden="true">
-            <motion.path
-              d="M0 16 H800"
-              stroke="rgba(255,255,255,0.08)"
-              strokeWidth="1"
-              strokeDasharray="4 6"
-              initial={reduced ? false : { pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2 }}
-            />
-          </svg>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
+        {/* Mobile: tap panels */}
+        <div className="lg:hidden grid gap-4 mb-12">
           {THREE_WORLDS.map((world, i) => (
             <WorldPanel
               key={world.id}
@@ -64,6 +58,42 @@ export const ThreeWorldsSection = () => {
               reduced={reduced}
             />
           ))}
+        </div>
+
+        {/* Desktop: bento grid */}
+        <div className="hidden lg:block mb-12">
+          <BentoGrid className="max-w-none md:auto-rows-[20rem]">
+            {THREE_WORLDS.map((world, i) => (
+              <BentoGridItem
+                key={world.id}
+                className={`bg-inowix-surface/20 border border-border/40 dark:bg-inowix-surface/20 ${
+                  i === 0 ? "md:col-span-2" : ""
+                }`}
+                title={
+                  <span style={{ color: world.accent }} className="font-mono text-[10px] uppercase tracking-widest block mb-1">
+                    {world.label}
+                  </span>
+                }
+                description={
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground mb-2">{world.name}</h3>
+                    <p className="text-sm text-muted-foreground">{world.description}</p>
+                  </div>
+                }
+                header={
+                  <div
+                    className="h-32 rounded-sm border border-border/30 p-4"
+                    style={{ background: `radial-gradient(ellipse at 50% 50%, ${world.glow}, transparent 70%)` }}
+                  >
+                    <WorldIllustration
+                      type={worldIllustrationType[world.id as keyof typeof worldIllustrationType] ?? "engineering"}
+                      accent={world.accent}
+                    />
+                  </div>
+                }
+              />
+            ))}
+          </BentoGrid>
         </div>
 
         <div className="flex justify-start">

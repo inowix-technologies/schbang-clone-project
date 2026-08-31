@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { InowixProject } from "@/data/inowix-content";
@@ -14,9 +15,13 @@ interface CaseStudyRowProps {
 
 export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowProps) => {
   const reduced = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [12, -12]);
 
   return (
     <motion.article
+      ref={ref}
       initial={reduced ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
@@ -38,7 +43,22 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
           {project.category}
         </p>
         <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">{project.name}</h3>
-        <p className="text-muted-foreground text-base sm:text-lg mb-8 leading-relaxed">{project.description}</p>
+        <p className="text-muted-foreground text-base sm:text-lg mb-6 leading-relaxed">{project.description}</p>
+
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="flex flex-wrap gap-3 mb-6">
+            {project.metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="rounded-sm border border-border/40 bg-inowix-surface/30 px-4 py-3"
+                style={{ borderLeftColor: project.accent, borderLeftWidth: 2 }}
+              >
+                <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">{metric.label}</p>
+                <p className="text-sm font-semibold mt-1">{metric.value}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="flex flex-wrap gap-2 mb-6">
           {project.capabilities.map((cap) => (
@@ -70,16 +90,16 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
       </div>
 
       <div className="relative flex-1 min-h-[280px] lg:min-h-0 flex items-center justify-center p-6 sm:p-10 lg:p-12">
-        <div
+        <motion.div
+          style={{ y, borderColor: `${project.accent}30`, boxShadow: `0 0 60px ${project.glow}` }}
           className="relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden border"
-          style={{ borderColor: `${project.accent}30`, boxShadow: `0 0 60px ${project.glow}` }}
         >
           <ProjectVisual project={project} variant="case-study" className="min-h-[240px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-inowix-bg/80 via-transparent to-transparent pointer-events-none" />
           <div className="absolute bottom-4 left-4 right-4 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">
             ARCHITECTURE → ENGINEERING → PRODUCTION
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.article>
   );

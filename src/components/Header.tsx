@@ -27,9 +27,15 @@ export const Header = () => {
   const { user, isAdmin } = useAuth();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -46,6 +52,11 @@ export const Header = () => {
       "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
       isScrolled ? "pt-3 px-3 sm:px-4" : "pt-0 px-0"
     )}>
+      <div
+        className="absolute top-0 left-0 h-0.5 bg-primary z-[110] transition-[width] duration-150 ease-out"
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden="true"
+      />
       <motion.div
         layout
         className={cn(

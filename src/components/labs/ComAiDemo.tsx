@@ -25,7 +25,7 @@ export const ComAiDemo = () => {
     <div
       ref={ref}
       id="com-ai-panel"
-      className="relative min-h-[80vh] flex flex-col lg:flex-row border-b border-border/30 overflow-hidden"
+      className="relative min-h-[70vh] flex flex-col lg:flex-row border-b border-border/30 overflow-hidden"
       style={{ borderLeftColor: `${product.accent}30`, borderLeftWidth: 3 }}
     >
       <div

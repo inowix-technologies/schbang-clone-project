@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Linkedin, Twitter, Instagram, ArrowUpRight } from "lucide-react";
 import logo from "../assets/logoinowix.png";
 import { Link } from "react-router-dom";
 import { BuiltByInowix } from "@/components/hero/BuiltByInowix";
+import { Button } from "@/components/ui/button";
 
 const links = {
   company: [
@@ -34,10 +36,49 @@ const socials = [
   { icon: Instagram, href: "https://instagram.com/inowix" },
 ];
 
+const trustBadges = ["Production-Grade Engineering", "DevSecOps Practices", "SOC 2 Ready Architecture"];
+
 export const Footer = () => {
+  const [email, setEmail] = useState("");
+
   return (
     <footer className="bg-inowix-surface border-t border-border/40 relative z-20">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+        <div className="mb-10 pb-10 border-b border-border/30">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight max-w-2xl mb-6">
+            We build technology that businesses <span className="text-primary">run on</span>.
+          </h2>
+          <div className="flex flex-wrap gap-3 mb-8">
+            {trustBadges.map((badge) => (
+              <span
+                key={badge}
+                className="font-mono text-[9px] uppercase tracking-wider px-3 py-1.5 border border-border/40 rounded-sm text-muted-foreground"
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
+          <form
+            className="flex flex-col sm:flex-row gap-2 max-w-md"
+            onSubmit={(e) => {
+              e.preventDefault();
+              window.location.href = `mailto:info@inowix.in?subject=Newsletter&body=Subscribe: ${email}`;
+            }}
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your email for engineering insights"
+              className="flex-1 h-10 px-4 rounded-sm border border-border/40 bg-inowix-bg text-sm"
+              aria-label="Email for newsletter"
+            />
+            <Button type="submit" className="rounded-sm shrink-0">
+              Subscribe
+            </Button>
+          </form>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 mb-12 sm:mb-14">
           <div className="sm:col-span-2 lg:col-span-2 space-y-5">
             <img src={logo} alt="Inowix Technologies" className="h-8 sm:h-9 brightness-0 invert" />

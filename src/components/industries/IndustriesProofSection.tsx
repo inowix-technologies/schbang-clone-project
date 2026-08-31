@@ -2,13 +2,18 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { INDUSTRY_PROOF, INOWIX_PROJECTS, HOMEPAGE_COPY } from "@/data/inowix-content";
+import { IndustryIcon } from "@/components/illustrations/industry-icons";
+import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+import { cn } from "@/lib/utils";
 
 export const IndustryTile = ({
   industry,
   index,
+  large = false,
 }: {
   industry: (typeof INDUSTRY_PROOF)[0];
   index: number;
+  large?: boolean;
 }) => {
   const reduced = useReducedMotion();
   const project = INOWIX_PROJECTS[industry.projectSlug];
@@ -19,9 +24,10 @@ export const IndustryTile = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-5%" }}
       transition={{ duration: 0.45, delay: index * 0.05 }}
+      className={cn(large && "sm:col-span-2")}
     >
       <Link
-        to="/industries"
+        to={project.link}
         className="group block relative p-5 sm:p-6 border border-border/40 rounded-sm bg-inowix-bg/50 hover:bg-inowix-surface/30 transition-all duration-300 overflow-hidden h-full"
         style={{ borderLeftColor: `${industry.accent}40`, borderLeftWidth: 3 }}
       >
@@ -29,6 +35,7 @@ export const IndustryTile = ({
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{ background: `radial-gradient(ellipse at 100% 0%, ${industry.accent}12, transparent 60%)` }}
         />
+        <IndustryIcon slug={industry.slug} accent={industry.accent} className="mb-4 opacity-80" />
         <h3 className="font-semibold text-base sm:text-lg mb-2 group-hover:text-foreground transition-colors relative z-10">
           {industry.name}
         </h3>
@@ -38,9 +45,6 @@ export const IndustryTile = ({
           <span className="font-mono text-[10px] uppercase tracking-wider" style={{ color: industry.accent }}>
             {project.name}
           </span>
-        </div>
-        <div className="absolute top-4 right-4 w-10 h-10 rounded-sm border border-border/30 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity">
-          <img src={project.logo || project.image} alt="" className="w-full h-full object-cover" loading="lazy" />
         </div>
       </Link>
     </motion.div>
@@ -55,10 +59,9 @@ export const IndustriesProofSection = () => {
     <section id="industries" className="relative bg-inowix-bg border-t border-border/40" aria-label="Industries">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
         <motion.div
-          initial={reduced ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.6 }}
+          initial={reduced ? false : fadeUp.hidden}
+          whileInView={fadeUp.visible}
+          viewport={defaultViewport}
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16"
         >
           <div className="max-w-3xl">
@@ -78,7 +81,7 @@ export const IndustriesProofSection = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {INDUSTRY_PROOF.map((industry, i) => (
-            <IndustryTile key={industry.slug} industry={industry} index={i} />
+            <IndustryTile key={industry.slug} industry={industry} index={i} large={i < 2} />
           ))}
         </div>
       </div>
