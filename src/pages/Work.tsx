@@ -28,7 +28,7 @@ const Work = () => {
             <span className="block text-primary">Not for presentations.</span>
           </>
         }
-        subtitle="Real systems engineered for Babyland, SwiftGo, SRL Logistics, and 15+ brands — from architecture to deployment."
+        subtitle="Real systems engineered for Babyland, SwiftGo, SRL Logistics, and 35+ brands — from architecture to deployment."
       />
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 pb-8">

@@ -1,4 +1,4 @@
-import bumpImage from "@/assets/Bump.png";
+import babylandHero from "@/assets/projects/babyland/hero.png";
 import nextstopImage from "@/assets/nextstop-app.jpg";
 import retailxImage from "@/assets/retailx-dashboard.jpg";
 import bigoImage from "@/assets/bigo.webp";
@@ -132,7 +132,7 @@ export const CORE_NODES: CoreNode[] = [
       "REALTIME",
       "INFRASTRUCTURE",
     ],
-    image: bumpImage,
+    image: babylandHero,
     link: "/work",
     builtByInowix: true,
   },

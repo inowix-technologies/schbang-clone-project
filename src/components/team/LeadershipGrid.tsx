@@ -1,13 +1,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Linkedin } from "lucide-react";
-import { FOUNDERS_AND_LEADERS } from "@/data/team";
+import { CO_FOUNDERS } from "@/data/team";
 
 export const LeadershipGrid = () => {
   const reduced = useReducedMotion();
 
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      {FOUNDERS_AND_LEADERS.map((leader, i) => (
+    <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+      {CO_FOUNDERS.map((leader, i) => (
         <motion.article
           key={leader.id}
           initial={reduced ? false : { opacity: 0, y: 20 }}
@@ -17,12 +17,18 @@ export const LeadershipGrid = () => {
           className="group relative border border-border/40 rounded-sm bg-inowix-surface/20 overflow-hidden"
           style={{ borderTopColor: leader.accent, borderTopWidth: 3 }}
         >
-          <div className="aspect-[4/3] overflow-hidden bg-inowix-elevated">
+          <div
+            className="aspect-[3/4] overflow-hidden relative"
+            style={{
+              background: `radial-gradient(ellipse at 50% 90%, ${leader.accent}18, transparent 65%)`,
+            }}
+          >
             <img
               src={leader.photo}
-              alt={leader.name}
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              alt={`${leader.name}, ${leader.title} of Inowix`}
+              className="absolute inset-0 w-full h-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
               loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="p-6 sm:p-8">

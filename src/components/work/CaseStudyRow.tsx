@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import type { InowixProject } from "@/data/inowix-content";
 import { BuiltByInowix } from "@/components/hero/BuiltByInowix";
 import { ProjectVisual } from "./ProjectVisual";
+import { ProjectLogoBadge } from "./ProjectLogoBadge";
 import { cn } from "@/lib/utils";
 
 interface CaseStudyRowProps {
@@ -42,7 +43,10 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
         <p className="font-mono text-[10px] uppercase tracking-widest mb-2" style={{ color: project.accent }}>
           {project.category}
         </p>
-        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">{project.name}</h3>
+        <div className="flex items-center gap-4 mb-5">
+          <ProjectLogoBadge project={project} />
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">{project.name}</h3>
+        </div>
         <p className="text-muted-foreground text-base sm:text-lg mb-6 leading-relaxed">{project.description}</p>
 
         {project.metrics && project.metrics.length > 0 && (

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { InowixProject } from "@/data/inowix-content";
+import { isGenericPlaceholderImage } from "./project-visual-utils";
 
 interface ProjectVisualProps {
   project: InowixProject;
@@ -8,9 +9,16 @@ interface ProjectVisualProps {
 }
 
 export const ProjectVisual = ({ project, variant = "case-study", className }: ProjectVisualProps) => {
-  const showScreenshot = variant === "case-study" && project.hasAppScreenshot && project.image;
+  const hasRealScreenshot =
+    variant === "case-study" &&
+    project.hasAppScreenshot &&
+    Boolean(project.image) &&
+    !isGenericPlaceholderImage(project.image);
+
   const logoSrc = project.logo;
-  const src = showScreenshot ? project.image : logoSrc || project.image;
+  const fallbackImage =
+    project.image && !isGenericPlaceholderImage(project.image) ? project.image : undefined;
+  const src = hasRealScreenshot ? project.image : logoSrc || fallbackImage;
 
   if (!src) {
     return (
@@ -28,13 +36,13 @@ export const ProjectVisual = ({ project, variant = "case-study", className }: Pr
     );
   }
 
-  const isLogoDisplay = !showScreenshot;
+  const isLogoDisplay = !hasRealScreenshot;
 
   return (
     <div
       className={cn(
         "flex items-center justify-center overflow-hidden w-full h-full",
-        isLogoDisplay ? "bg-white" : "bg-inowix-elevated",
+        isLogoDisplay ? "bg-inowix-bg" : "bg-inowix-elevated",
         className
       )}
     >

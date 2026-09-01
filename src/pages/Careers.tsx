@@ -5,7 +5,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { PageSection } from "@/components/layout/PageSection";
 import { EditorialCTA } from "@/components/layout/EditorialCTA";
 import { ContactOfficesCompact } from "@/components/contact/ContactOfficesCompact";
-import { FOUNDERS_AND_LEADERS } from "@/data/team";
+import { CO_FOUNDERS } from "@/data/team";
 import { Button } from "@/components/ui/button";
 
 const openings = [
@@ -58,7 +58,7 @@ const benefits = [
   { title: "Learning Budget", description: "Tools, courses, and conferences to stay at the edge." },
 ];
 
-const founder = FOUNDERS_AND_LEADERS[0];
+const founder = CO_FOUNDERS[0];
 
 const Careers = () => {
   return (
@@ -83,16 +83,48 @@ const Careers = () => {
               If you want to architect, build, and ship, you'll fit here."
             </blockquote>
             <div className="flex items-center gap-4">
-              <img
-                src={founder.photo}
-                alt={founder.name}
-                className="w-12 h-12 rounded-sm object-cover border"
-                style={{ borderColor: `${founder.accent}40` }}
-              />
+              <div
+                className="w-14 h-14 rounded-sm border flex items-end justify-center overflow-hidden shrink-0"
+                style={{
+                  borderColor: `${founder.accent}40`,
+                  background: `radial-gradient(ellipse at 50% 100%, ${founder.accent}20, transparent 70%)`,
+                }}
+              >
+                <img
+                  src={founder.photo}
+                  alt={`${founder.name}, ${founder.title}`}
+                  className="w-full h-[90%] object-contain object-bottom"
+                  loading="lazy"
+                />
+              </div>
               <div>
                 <p className="font-semibold">{founder.name}</p>
                 <p className="text-sm text-muted-foreground">{founder.title}</p>
               </div>
+            </div>
+            <div className="flex items-center gap-4 mt-4">
+              {CO_FOUNDERS[1] && (
+                <>
+                  <div
+                    className="w-14 h-14 rounded-sm border flex items-end justify-center overflow-hidden shrink-0"
+                    style={{
+                      borderColor: `${CO_FOUNDERS[1].accent}40`,
+                      background: `radial-gradient(ellipse at 50% 100%, ${CO_FOUNDERS[1].accent}20, transparent 70%)`,
+                    }}
+                  >
+                    <img
+                      src={CO_FOUNDERS[1].photo}
+                      alt={`${CO_FOUNDERS[1].name}, ${CO_FOUNDERS[1].title}`}
+                      className="w-full h-[90%] object-contain object-bottom"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-semibold">{CO_FOUNDERS[1].name}</p>
+                    <p className="text-sm text-muted-foreground">{CO_FOUNDERS[1].title}</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-4">

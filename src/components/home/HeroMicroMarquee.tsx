@@ -2,7 +2,7 @@ import { CLIENT_LOGO_SLUGS, INOWIX_PROJECTS } from "@/data/inowix-content";
 import { ClientLogoMarquee } from "@/components/home/ClientLogoMarquee";
 
 export const HeroMicroMarquee = () => {
-  const items = CLIENT_LOGO_SLUGS.slice(0, 8).map((slug) => {
+  const items = CLIENT_LOGO_SLUGS.map((slug) => {
     const project = INOWIX_PROJECTS[slug];
     return { name: project.name, image: project.logo || project.image };
   });

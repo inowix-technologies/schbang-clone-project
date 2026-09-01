@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { EditorialCTA } from "@/components/layout/EditorialCTA";
 import { ProjectVisual } from "@/components/work/ProjectVisual";
+import { ProjectLogoBadge } from "@/components/work/ProjectLogoBadge";
 import { ArchitectureFlowStrip } from "@/components/labs/ArchitectureFlowStrip";
 import { INOWIX_PROJECTS, type ProjectSlug } from "@/data/inowix-content";
 import { Button } from "@/components/ui/button";
@@ -49,7 +50,10 @@ const ProjectDetail = () => {
             >
               {project.category}
             </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6">{project.name}</h1>
+            <div className="flex items-center gap-4 mb-6">
+              <ProjectLogoBadge project={project} size="sm" />
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">{project.name}</h1>
+            </div>
             <p className="lead mb-8">{project.description}</p>
 
             <div className="flex flex-wrap gap-2 mb-10">
@@ -82,6 +86,25 @@ const ProjectDetail = () => {
             >
               <ProjectVisual project={project} variant="case-study" />
             </div>
+
+            {project.screenshots && project.screenshots.length > 0 && (
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {project.screenshots.map((src, i) => (
+                  <div
+                    key={i}
+                    className="rounded-sm overflow-hidden border aspect-[9/16]"
+                    style={{ borderColor: `${project.accent}20` }}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.name} app screen ${i + 1}`}
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="p-6 border border-border/40 rounded-sm bg-inowix-surface/20">
               <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">Tech stack</h3>

@@ -8,6 +8,7 @@ import { SystemsEngineeredSection } from "@/components/work/SystemsEngineeredSec
 import { InowixTestimonials } from "@/components/home/InowixTestimonials";
 import { EngineeringStackSection } from "@/components/services/EngineeringStackSection";
 import { IndustriesProofSection } from "@/components/industries/IndustriesProofSection";
+import { FoundersSection } from "@/components/home/FoundersSection";
 import { ContactLocationsSection } from "@/components/ContactLocationsSection";
 import { BannerSection } from "@/components/BannerSection";
 import { FAQSection } from "@/components/FAQSection";
@@ -78,6 +79,7 @@ const Index = () => {
       <InowixTestimonials />
       <EngineeringStackSection />
       <IndustriesProofSection />
+      <FoundersSection />
       <ContactLocationsSection />
       <BannerSection />
       <FAQSection

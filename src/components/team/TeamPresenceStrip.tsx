@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FOUNDERS_AND_LEADERS } from "@/data/team";
+import { CO_FOUNDERS } from "@/data/team";
 
 interface TeamPresenceStripProps {
   title?: string;
@@ -7,25 +7,36 @@ interface TeamPresenceStripProps {
 }
 
 export const TeamPresenceStrip = ({
-  title = "Talk to leadership directly",
-  subtitle = "No account managers. No layers. Engineering leaders who build with you.",
+  title = "Talk to our co-founders directly",
+  subtitle = "No account managers. No layers. The engineers who build with you.",
 }: TeamPresenceStripProps) => (
   <div className="border border-border/40 rounded-sm bg-inowix-surface/20 p-6 sm:p-8">
-    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-inowix-com-ai mb-2">Our team</p>
+    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-inowix-com-ai mb-2">Leadership</p>
     <h3 className="text-lg sm:text-xl font-bold mb-2">{title}</h3>
     <p className="text-sm text-muted-foreground mb-6">{subtitle}</p>
-    <div className="flex flex-wrap items-center gap-4">
-      {FOUNDERS_AND_LEADERS.map((leader) => (
-        <div key={leader.id} className="flex items-center gap-3">
+    <div className="flex flex-col sm:flex-row flex-wrap gap-6">
+      {CO_FOUNDERS.map((leader) => (
+        <div key={leader.id} className="flex items-center gap-4">
           <div
-            className="w-12 h-12 rounded-sm overflow-hidden border border-border/40 shrink-0"
-            style={{ boxShadow: `0 0 16px ${leader.accent}30` }}
+            className="w-16 h-16 rounded-sm overflow-hidden border shrink-0 flex items-end justify-center"
+            style={{
+              borderColor: `${leader.accent}50`,
+              background: `radial-gradient(ellipse at 50% 100%, ${leader.accent}20, transparent 70%)`,
+              boxShadow: `0 0 20px ${leader.accent}25`,
+            }}
           >
-            <img src={leader.photo} alt={leader.name} className="w-full h-full object-cover object-top" />
+            <img
+              src={leader.photo}
+              alt={`${leader.name}, ${leader.title}`}
+              className="w-full h-[90%] object-contain object-bottom"
+              loading="lazy"
+            />
           </div>
           <div>
             <p className="text-sm font-semibold leading-tight">{leader.name}</p>
-            <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">{leader.title}</p>
+            <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
+              {leader.title}
+            </p>
           </div>
         </div>
       ))}

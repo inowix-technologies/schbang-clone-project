@@ -3,17 +3,22 @@
  * Client logos: add to src/assets/projects/clients/ and update imports below.
  */
 
-import bumpImage from "@/assets/Bump.png";
-import nextstopImage from "@/assets/nextstop-app.jpg";
 import retailxImage from "@/assets/retailx-dashboard.jpg";
 import carzentraImage from "@/assets/carzentra-app.jpg";
 import finnovaImage from "@/assets/finnova-app.jpg";
 import bigoImage from "@/assets/bigo.webp";
 import siyaAyurvedaImage from "@/assets/siyaayurveda.webp";
 import amrutamLogo from "@/assets/only_text_Amrutam_Logo_in_Green-09.webp";
+import babylandIcon from "@/assets/projects/babyland/icon.png";
+import babylandHero from "@/assets/projects/babyland/hero.png";
+import babylandScreenFetal from "@/assets/projects/babyland/screen-fetal-development.png";
+import swiftgoLogo from "@/assets/projects/swiftgo/logo.png";
+import instadhamLogo from "@/assets/projects/instadham/logo.png";
+import srlLogisticsLogo from "@/assets/projects/srl-logistics/logo.png";
+import linkedinAutomationHero from "@/assets/projects/linkedin-automation/hero.png";
+import enterpriseChatbotHero from "@/assets/projects/enterprise-chatbot/hero.png";
 
 // Client brand logos (Google Drive — one file per brand, do not cross-assign)
-import babylandLogo from "@/assets/projects/clients/Baby_logo.webp";
 import babyloxLogo from "@/assets/projects/clients/babylox_logo-removebg-preview.webp";
 import bebrootLogo from "@/assets/projects/clients/bebroot_PNg_-_Copy.webp";
 import triplecareLogo from "@/assets/projects/clients/Triplecare.webp";
@@ -24,6 +29,13 @@ import sanchFarmsLogo from "@/assets/projects/clients/SANCH_FARMS_-_registered_F
 import melasLogo from "@/assets/projects/clients/Melas_Logo.avif";
 import aimLogo from "@/assets/projects/clients/aim_new_logo.png";
 import moonDermaLogo from "@/assets/projects/clients/Moon Derma.webp";
+import way2DermaLogo from "@/assets/projects/clients/1771997755_logo.jpeg";
+import whoopyDigitalLogo from "@/assets/projects/clients/279688257_129879022972103_4330482120827127215_n.jpg";
+import zorvexSolarLogo from "@/assets/projects/clients/688980760_18551222839068411_5825055640001513563_n.jpg";
+import aasheyLogo from "@/assets/projects/clients/logo-2.webp";
+import capsCafeLogo from "@/assets/projects/clients/1000003882_145x.avif";
+import wovynLogo from "@/assets/projects/clients/Picsart_25-10-22_22-14-51-631.webp";
+import vedikSecretLogo from "@/assets/projects/clients/WhatsApp_Image_2025-06-21_at_6.48.26_PM-removebg-preview.avif";
 
 export type ProductSlug = "com-ai" | "beacon" | "red-cli";
 
@@ -44,6 +56,13 @@ export type ProjectSlug =
   | "sanch-farms"
   | "melas"
   | "aim"
+  | "way2derma"
+  | "whoopy-digital"
+  | "zorvex-solar"
+  | "aashey"
+  | "the-caps-cafe"
+  | "wovyn"
+  | "vedik-secret"
   | "linkedin-automation"
   | "enterprise-chatbot";
 
@@ -74,6 +93,7 @@ export interface InowixProject {
   link: string;
   featured?: boolean;
   hasAppScreenshot?: boolean;
+  screenshots?: string[];
   metrics?: { label: string; value: string }[];
 }
 
@@ -188,19 +208,20 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     name: "Babyland",
     category: "Healthcare & Parenting",
     description:
-      "Mobile parenting platform with realtime backend, community features, and cloud infrastructure engineered for scale.",
+      "AI-powered parenting platform — cycle and health tracking, fetal development insights, community support, and on-demand medical guidance. Flutter mobile app with realtime backend and cloud infrastructure built for scale.",
     accent: "#F472B6",
     glow: "rgba(244,114,182,0.35)",
-    capabilities: ["MOBILE", "BACKEND", "REALTIME", "INFRASTRUCTURE"],
+    capabilities: ["MOBILE", "HEALTH TRACKING", "COMMUNITY", "AI WELLNESS"],
     technologies: ["Flutter", "Node.js", "PostgreSQL", "AWS"],
-    logo: babylandLogo,
-    image: bumpImage,
+    logo: babylandIcon,
+    image: babylandHero,
     hasAppScreenshot: true,
+    screenshots: [babylandScreenFetal],
     link: "",
     featured: true,
     metrics: [
-      { label: "Platform", value: "Mobile + Backend" },
-      { label: "Stack", value: "Flutter · AWS" },
+      { label: "Platform", value: "Flutter + AWS" },
+      { label: "Experience", value: "Health · Community · AI" },
     ],
   },
   babylox: {
@@ -239,8 +260,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(56,189,248,0.35)",
     capabilities: ["MOBILITY", "TRACKING", "LOGISTICS", "REALTIME"],
     technologies: ["React Native", "Node.js", "Redis", "GCP"],
-    image: nextstopImage,
-    hasAppScreenshot: true,
+    logo: swiftgoLogo,
+    image: swiftgoLogo,
     link: "",
     featured: true,
     metrics: [
@@ -258,8 +279,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(245,158,11,0.35)",
     capabilities: ["LOGISTICS", "INVENTORY", "OPERATIONS", "DASHBOARDS"],
     technologies: ["React", "Python", "PostgreSQL", "Docker"],
-    image: retailxImage,
-    hasAppScreenshot: true,
+    logo: srlLogisticsLogo,
+    image: srlLogisticsLogo,
     link: "",
     featured: true,
   },
@@ -273,7 +294,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(192,132,252,0.35)",
     capabilities: ["MOBILE", "COMMUNITY", "CONTENT", "BACKEND"],
     technologies: ["Flutter", "Firebase", "Node.js"],
-    image: "",
+    logo: instadhamLogo,
+    image: instadhamLogo,
     link: "",
     featured: true,
   },
@@ -400,15 +422,113 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
   },
   aim: {
     slug: "aim",
-    name: "AIM",
-    category: "B2B / Platform",
-    description: "B2B platform with workflow automation, user management, and operational dashboards for business teams.",
+    name: "AIMJOBS.AI",
+    category: "HR Tech / AI",
+    description:
+      "AI-powered hiring platform with job matching, candidate workflows, and recruiter dashboards for modern teams.",
     accent: "#60A5FA",
     glow: "rgba(96,165,250,0.35)",
-    capabilities: ["B2B", "WORKFLOWS", "DASHBOARDS", "AUTOMATION"],
-    technologies: ["React", "Node.js", "PostgreSQL"],
+    capabilities: ["HR TECH", "AI MATCHING", "WORKFLOWS", "DASHBOARDS"],
+    technologies: ["React", "Node.js", "PostgreSQL", "LLM"],
     logo: aimLogo,
     image: aimLogo,
+    link: "",
+  },
+  way2derma: {
+    slug: "way2derma",
+    name: "Way2Derma",
+    category: "Dermatology / Skincare",
+    description:
+      "Skincare brand platform with product education, consultation flows, and ecommerce for dermatology-led care.",
+    accent: "#0EA5E9",
+    glow: "rgba(14,165,233,0.35)",
+    capabilities: ["SKINCARE", "ECOMMERCE", "CONTENT", "BOOKING"],
+    technologies: ["Next.js", "Node.js", "PostgreSQL"],
+    logo: way2DermaLogo,
+    image: way2DermaLogo,
+    link: "",
+  },
+  "whoopy-digital": {
+    slug: "whoopy-digital",
+    name: "Whoopy Digital",
+    category: "Digital Agency",
+    description:
+      "Digital brand platform with campaign landing systems, lead capture, and content management for growth teams.",
+    accent: "#EAB308",
+    glow: "rgba(234,179,8,0.35)",
+    capabilities: ["WEB", "CMS", "LEADS", "ANALYTICS"],
+    technologies: ["Next.js", "Node.js", "PostgreSQL"],
+    logo: whoopyDigitalLogo,
+    image: whoopyDigitalLogo,
+    link: "",
+  },
+  "zorvex-solar": {
+    slug: "zorvex-solar",
+    name: "Zorvex Solar",
+    category: "Renewable Energy",
+    description:
+      "Solar energy brand platform with lead generation, project quoting, and customer education for renewable installs.",
+    accent: "#F59E0B",
+    glow: "rgba(245,158,11,0.35)",
+    capabilities: ["ENERGY", "LEADS", "QUOTING", "CMS"],
+    technologies: ["React", "Node.js", "PostgreSQL"],
+    logo: zorvexSolarLogo,
+    image: zorvexSolarLogo,
+    link: "",
+  },
+  aashey: {
+    slug: "aashey",
+    name: "Aashey",
+    category: "Consumer / Brand",
+    description: "Premium consumer brand platform with catalog, storytelling, and integrated commerce experiences.",
+    accent: "#D97706",
+    glow: "rgba(217,119,6,0.35)",
+    capabilities: ["BRAND", "ECOMMERCE", "CMS", "ANALYTICS"],
+    technologies: ["Next.js", "Shopify", "Node.js"],
+    logo: aasheyLogo,
+    image: aasheyLogo,
+    link: "",
+  },
+  "the-caps-cafe": {
+    slug: "the-caps-cafe",
+    name: "The Caps' Cafe",
+    category: "Retail / Fashion",
+    description:
+      "Premium caps retail platform with product catalog, checkout, and brand storytelling for a D2C storefront.",
+    accent: "#D4A574",
+    glow: "rgba(212,165,116,0.35)",
+    capabilities: ["RETAIL", "ECOMMERCE", "CATALOG", "CHECKOUT"],
+    technologies: ["Shopify", "React", "Node.js"],
+    logo: capsCafeLogo,
+    image: capsCafeLogo,
+    link: "",
+  },
+  wovyn: {
+    slug: "wovyn",
+    name: "Wovyn",
+    category: "Fashion / Sustainability",
+    description:
+      "Sustainable streetwear brand platform with product drops, storytelling, and mobile-first shopping flows.",
+    accent: "#EF4444",
+    glow: "rgba(239,68,68,0.35)",
+    capabilities: ["FASHION", "ECOMMERCE", "DROPS", "MOBILE"],
+    technologies: ["Next.js", "Node.js", "Stripe"],
+    logo: wovynLogo,
+    image: wovynLogo,
+    link: "",
+  },
+  "vedik-secret": {
+    slug: "vedik-secret",
+    name: "Vedik Secret",
+    category: "Ayurvedic Wellness",
+    description:
+      "Ayurvedic wellness brand platform with product catalog, ritual content, and subscription commerce flows.",
+    accent: "#A3E635",
+    glow: "rgba(163,230,53,0.35)",
+    capabilities: ["WELLNESS", "ECOMMERCE", "CONTENT", "SUBSCRIPTIONS"],
+    technologies: ["React", "Node.js", "MongoDB"],
+    logo: vedikSecretLogo,
+    image: vedikSecretLogo,
     link: "",
   },
   "linkedin-automation": {
@@ -421,7 +541,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(14,165,233,0.35)",
     capabilities: ["AUTOMATION", "OUTREACH", "ENRICHMENT", "ANALYTICS"],
     technologies: ["Python", "React", "PostgreSQL", "Redis"],
-    image: "",
+    image: linkedinAutomationHero,
+    hasAppScreenshot: true,
     link: "",
     featured: true,
   },
@@ -435,7 +556,8 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     glow: "rgba(0,255,136,0.35)",
     capabilities: ["AI CHATBOT", "KNOWLEDGE BASE", "TICKETING", "ADMIN"],
     technologies: ["Python", "React", "LLM", "PostgreSQL"],
-    image: "",
+    image: enterpriseChatbotHero,
+    hasAppScreenshot: true,
     link: "",
     featured: true,
   },
@@ -636,10 +758,10 @@ export const LABS_HEADLINE = {
 export const DECOR_IMAGES = [bigoImage, carzentraImage, finnovaImage];
 
 export const TRUST_STATS = [
-  { value: 18, suffix: "+", label: "Client brands" },
+  { value: 35, suffix: "+", label: "Client brands" },
   { value: 3, suffix: "", label: "Flagship products" },
   { value: 3, suffix: "", label: "Engineering hubs" },
-  { value: 8, suffix: "+", label: "Production systems" },
+  { value: 30, suffix: "+", label: "Production systems" },
 ] as const;
 
 export interface InowixTestimonial {

@@ -47,7 +47,7 @@ const AnimatedStat = ({ value, suffix, label }: { value: number; suffix: string;
 
 export const TrustVelocityStrip = () => {
   const reduced = useReducedMotion();
-  const logoItems = CLIENT_LOGO_SLUGS.slice(0, 12).map((slug) => {
+  const logoItems = CLIENT_LOGO_SLUGS.map((slug) => {
     const project = INOWIX_PROJECTS[slug];
     return {
       name: project.name,

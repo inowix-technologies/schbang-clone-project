@@ -1,11 +1,6 @@
 /**
- * Founders & leadership — update names/titles/bios when confirmed.
- * Photo files: src/assets/ow1.png, ow2.png, Lakshay.webp, etc.
+ * Co-founders & leadership — single source of truth for founder surfaces.
  */
-
-import lakshayPhoto from "@/assets/Lakshay.webp";
-import leader1Photo from "@/assets/ow1.png";
-import leader2Photo from "@/assets/ow2.png";
 
 export interface TeamLeader {
   id: string;
@@ -17,39 +12,34 @@ export interface TeamLeader {
   accent?: string;
 }
 
-/** Update with real names, titles, and LinkedIn URLs */
-export const FOUNDERS_AND_LEADERS: TeamLeader[] = [
+export const CO_FOUNDERS: TeamLeader[] = [
   {
-    id: "leader-1",
-    name: "Lakshay",
+    id: "vansh-jhamb",
+    name: "Vansh Jhamb",
     title: "Co-founder & CEO",
-    bio: "Leads Inowix product vision and client engineering — from architecture to production systems shipped across healthcare, logistics, and AI.",
-    photo: lakshayPhoto,
+    bio: "Leads Inowix product vision, client partnerships, and growth — from first architecture conversation to production systems shipped at scale.",
+    photo:
+      "https://res.cloudinary.com/drxu02bbp/image/upload/v1788218249/copy_of_chatgpt_image_sep_1_2026_04_33_17_am_py9ur3.png",
     accent: "#00FF88",
   },
   {
-    id: "leader-2",
-    name: "Leadership",
+    id: "ragib-ali",
+    name: "Ragib Ali",
     title: "Co-founder & CTO",
-    bio: "Architects Inowix Labs products — COM AI, Beacon, and RED CLI — and oversees engineering standards across all client platforms.",
-    photo: leader1Photo,
+    bio: "Architects Inowix Labs products — COM AI, Beacon, and RED CLI — and sets engineering standards across every platform we build.",
+    photo:
+      "https://res.cloudinary.com/drxu02bbp/image/upload/v1788218362/copy_of_chatgpt_image_sep_1_2026_04_44_09_am_onazxy.png",
     accent: "#00D4FF",
   },
-  {
-    id: "leader-3",
-    name: "Leadership",
-    title: "Head of Engineering",
-    bio: "Runs delivery across mobile, backend, and cloud — ensuring every system we build is production-grade, secure, and scalable.",
-    photo: leader2Photo,
-    accent: "#E5E7EB",
-  },
 ];
+
+export const FOUNDERS_AND_LEADERS: TeamLeader[] = CO_FOUNDERS;
 
 export const COMPANY_MILESTONES = [
   { year: "2020", label: "Founded", detail: "Inowix begins as a product engineering studio." },
   { year: "2022", label: "First platforms shipped", detail: "Babyland, SwiftGo, and enterprise client systems in production." },
   { year: "2024", label: "Inowix Labs", detail: "COM AI, Beacon, and RED CLI — proprietary products built in-house." },
-  { year: "2025", label: "Full-stack engineering", detail: "18+ client brands, 3 flagship products, 3 engineering hubs." },
+  { year: "2025", label: "Full-stack engineering", detail: "35+ client brands, 3 flagship products, 3 engineering hubs." },
 ];
 
 export const ENGINEERING_VALUES = [
