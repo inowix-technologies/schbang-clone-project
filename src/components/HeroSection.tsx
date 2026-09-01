@@ -54,7 +54,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.7, duration: 0.5 }}
               className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
-              COM AI. Beacon. RED CLI. Babyland. SwiftGo. SRL Logistics.
+              COM AI. Beacon. RED CLI. Babyland. RideGo. SwiftGo.
               We don't just build software — we engineer systems businesses run on.
             </motion.p>
 

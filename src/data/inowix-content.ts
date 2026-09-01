@@ -13,6 +13,7 @@ import babylandIcon from "@/assets/projects/babyland/icon.png";
 import babylandHero from "@/assets/projects/babyland/hero.png";
 import babylandScreenFetal from "@/assets/projects/babyland/screen-fetal-development.png";
 import swiftgoLogo from "@/assets/projects/swiftgo/logo.png";
+import ridegoLogo from "@/assets/projects/ridego/logo.png";
 import instadhamLogo from "@/assets/projects/instadham/logo.png";
 import srlLogisticsLogo from "@/assets/projects/srl-logistics/logo.png";
 import linkedinAutomationHero from "@/assets/projects/linkedin-automation/hero.png";
@@ -44,6 +45,7 @@ export type ProjectSlug =
   | "babylox"
   | "bebroot"
   | "swiftgo"
+  | "ridego"
   | "srl-logistics"
   | "instadham"
   | "siya-ayurveda"
@@ -267,6 +269,25 @@ export const INOWIX_PROJECTS: Record<ProjectSlug, InowixProject> = {
     metrics: [
       { label: "Domain", value: "Realtime logistics" },
       { label: "Scale", value: "Multi-city ops" },
+    ],
+  },
+  ridego: {
+    slug: "ridego",
+    name: "RideGo Cabs",
+    category: "Mobility / Cab Services",
+    description:
+      "Cab booking and transportation platform launched in Telangana — rider apps, driver onboarding, live dispatch, and payments built for everyday mobility at scale.",
+    accent: "#F97316",
+    glow: "rgba(249,115,22,0.35)",
+    capabilities: ["CAB BOOKING", "DRIVER DISPATCH", "PAYMENTS", "REALTIME"],
+    technologies: ["React Native", "Node.js", "PostgreSQL", "Maps API"],
+    logo: ridegoLogo,
+    image: ridegoLogo,
+    link: "",
+    featured: true,
+    metrics: [
+      { label: "Region", value: "Telangana · Live" },
+      { label: "Domain", value: "Cab & transport" },
     ],
   },
   "srl-logistics": {
@@ -665,7 +686,7 @@ export const ENGINEERING_SERVICES: EngineeringService[] = [
 
 export const INDUSTRY_PROOF: IndustryProof[] = [
   { slug: "healthcare", name: "Healthcare & Parenting", proof: "Mobile + backend systems for Babyland, Triplecare, Moon Derma", projectSlug: "babyland", accent: "#F472B6" },
-  { slug: "logistics", name: "Logistics & Mobility", proof: "Realtime tracking platforms for SwiftGo and SRL Logistics", projectSlug: "swiftgo", accent: "#38BDF8" },
+  { slug: "logistics", name: "Logistics & Mobility", proof: "RideGo Cabs, SwiftGo, and SRL Logistics — realtime mobility in production", projectSlug: "ridego", accent: "#F97316" },
   { slug: "ayurvedic", name: "Ayurvedic & Wellness", proof: "Health and commerce platforms for Siya Ayurveda and Amrutam", projectSlug: "siya-ayurveda", accent: "#4ADE80" },
   { slug: "agriculture", name: "Agriculture", proof: "Farm-to-consumer systems for Sanch Farms and Palatial Farms", projectSlug: "sanch-farms", accent: "#CA8A04" },
   { slug: "ecommerce", name: "Ecommerce & D2C", proof: "Brand storefronts for Bebroot, Melas, and Babylox", projectSlug: "bebroot", accent: "#A855F7" },
@@ -793,6 +814,15 @@ export const INOWIX_TESTIMONIALS: InowixTestimonial[] = [
     company: "SRL Logistics",
     projectSlug: "srl-logistics",
     outcome: "Fleet ops in production",
+  },
+  {
+    quote:
+      "RideGo Cabs is live across Telangana — rider booking, driver dispatch, and payments engineered for reliable everyday transportation.",
+    name: "Operations Team",
+    title: "Product Lead",
+    company: "RideGo Cabs",
+    projectSlug: "ridego",
+    outcome: "Live in Telangana",
   },
   {
     quote:
