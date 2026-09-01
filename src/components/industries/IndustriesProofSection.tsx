@@ -5,6 +5,7 @@ import { INDUSTRY_PROOF, INOWIX_PROJECTS, HOMEPAGE_COPY } from "@/data/inowix-co
 import { IndustryIcon } from "@/components/illustrations/industry-icons";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
 import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB, SECTION_EYEBROW } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 export const IndustryTile = ({
   industry,
