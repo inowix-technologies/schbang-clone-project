@@ -4,6 +4,8 @@ import { AnimatedGrid } from "@/components/ui/animated-grid";
 import { CLIENT_LOGO_SLUGS, INOWIX_PROJECTS, TRUST_STATS } from "@/data/inowix-content";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
 import { ClientLogoMarquee } from "@/components/home/ClientLogoMarquee";
+import { SECTION_BORDER, SECTION_CONTAINER, SECTION_PY } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 const AnimatedStat = ({ value, suffix, label }: { value: number; suffix: string; label: string }) => {
   const reduced = useReducedMotion();
@@ -36,7 +38,7 @@ const AnimatedStat = ({ value, suffix, label }: { value: number; suffix: string;
 
   return (
     <div ref={ref} className="text-center">
-      <p className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+      <p className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
         {shown}
         {suffix}
       </p>
@@ -56,15 +58,18 @@ export const TrustVelocityStrip = () => {
   });
 
   return (
-    <section className="relative border-t border-border/40 bg-inowix-surface/30 overflow-hidden" aria-label="Trust metrics">
+    <section
+      className={cn("relative bg-inowix-surface/30 overflow-hidden", SECTION_BORDER)}
+      aria-label="Trust metrics"
+    >
       <AnimatedGrid pattern="grid" className="opacity-50" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+      <div className={cn("relative z-10", SECTION_CONTAINER, SECTION_PY)}>
         <motion.div
           initial={reduced ? false : fadeUp.hidden}
           whileInView={fadeUp.visible}
           viewport={defaultViewport}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-10 sm:mb-12"
         >
           {TRUST_STATS.map((stat) => (
             <AnimatedStat key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} />

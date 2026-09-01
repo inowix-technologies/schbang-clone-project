@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HOMEPAGE_COPY } from "@/data/inowix-content";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 export const EditorialCTA = () => {
   const copy = HOMEPAGE_COPY.banner;
 
   return (
-    <section className="border-t border-border/40 bg-inowix-surface/30 py-20 sm:py-28">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+    <section className={cn("bg-inowix-surface/30", SECTION_BORDER, SECTION_PY)}>
+      <div className={cn("max-w-3xl mx-auto text-center", SECTION_CONTAINER)}>
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">{copy.label}</p>
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{copy.headline}</h2>
         <p className="text-muted-foreground mb-8">{copy.subline}</p>

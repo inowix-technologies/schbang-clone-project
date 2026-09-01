@@ -9,6 +9,8 @@ import {
 } from "@/data/inowix-content";
 import { CaseStudyRow } from "./CaseStudyRow";
 import { ClientLogoMarquee } from "@/components/home/ClientLogoMarquee";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB, SECTION_EYEBROW } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 export const ClientLogoStrip = () => {
   const logos = CLIENT_LOGO_SLUGS.map((slug) => INOWIX_PROJECTS[slug]);
@@ -18,7 +20,7 @@ export const ClientLogoStrip = () => {
   }));
 
   return (
-    <div className="border-t border-border/30 py-12 sm:py-16 space-y-4">
+    <div className={cn("border-t border-border/30 space-y-4", SECTION_PY)}>
       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-center mb-4">
         {HOMEPAGE_COPY.clientStrip.label}
       </p>
@@ -34,17 +36,17 @@ export const SystemsEngineeredSection = () => {
   const featured = FEATURED_PROJECT_SLUGS.map((slug) => INOWIX_PROJECTS[slug]);
 
   return (
-    <section id="work" className="relative bg-inowix-bg border-t border-border/40" aria-label="Systems we've engineered">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 pt-20 sm:pt-28 pb-4">
+    <section id="work" className={cn("relative bg-inowix-bg", SECTION_BORDER)} aria-label="Systems we've engineered">
+      <div className={cn(SECTION_CONTAINER, SECTION_PY, "pb-6 sm:pb-8")}>
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16"
+          className={cn("flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4", SECTION_HEADER_MB)}
         >
           <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">{copy.label}</p>
+            <p className={SECTION_EYEBROW}>{copy.label}</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]">
               <span className="block">{copy.line1}</span>
               <span className="block text-primary">{copy.line2}</span>
@@ -65,7 +67,7 @@ export const SystemsEngineeredSection = () => {
         ))}
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
+      <div className={SECTION_CONTAINER}>
         <ClientLogoStrip />
       </div>
     </section>

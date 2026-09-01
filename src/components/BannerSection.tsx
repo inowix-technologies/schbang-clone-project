@@ -6,6 +6,8 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
 import { HOMEPAGE_COPY, FEATURED_PROJECT_SLUGS, INOWIX_PROJECTS } from "@/data/inowix-content";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 const tickerNames = FEATURED_PROJECT_SLUGS.slice(0, 6).map((slug) => INOWIX_PROJECTS[slug].name);
 
@@ -14,11 +16,11 @@ export const BannerSection = () => {
   const reduced = useReducedMotion();
 
   return (
-    <section className="py-20 sm:py-28 bg-inowix-surface/30 border-t border-border/40 relative overflow-hidden">
+    <section className={cn("bg-inowix-surface/30 relative overflow-hidden", SECTION_BORDER)}>
       <BackgroundBeams className="opacity-40" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(var(--primary)/0.08),transparent)] pointer-events-none" />
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
+      <div className={cn("max-w-3xl mx-auto text-center relative z-10", SECTION_CONTAINER, SECTION_PY)}>
         <motion.div
           initial={reduced ? false : fadeUp.hidden}
           whileInView={fadeUp.visible}

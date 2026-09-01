@@ -8,6 +8,7 @@ import { LayerStack } from "./LayerStack";
 import { ArchitectureFlowStrip } from "@/components/labs/ArchitectureFlowStrip";
 import { cn } from "@/lib/utils";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB, SECTION_EYEBROW } from "@/lib/section-layout";
 
 export const EngineeringStackSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const reduced = useReducedMotion();
@@ -16,18 +17,18 @@ export const EngineeringStackSection = ({ hideHeader = false }: { hideHeader?: b
   const activeService = ENGINEERING_SERVICES[activeIndex];
 
   return (
-    <section id="services" className="relative bg-inowix-surface/20 border-t border-border/40 overflow-hidden" aria-label="Engineering stack">
+    <section id="services" className={cn("relative bg-inowix-surface/20 overflow-hidden", SECTION_BORDER)} aria-label="Engineering stack">
       <div className="absolute inset-0 pointer-events-none bg-grid-white/[0.02] bg-[length:48px_48px]" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
+      <div className={cn("relative z-10", SECTION_CONTAINER, SECTION_PY)}>
         {!hideHeader && (
           <motion.div
             initial={reduced ? false : fadeUp.hidden}
             whileInView={fadeUp.visible}
             viewport={defaultViewport}
-            className="max-w-4xl mb-14 sm:mb-20"
+            className={cn("max-w-4xl", SECTION_HEADER_MB)}
           >
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">{copy.label}</p>
+            <p className={SECTION_EYEBROW}>{copy.label}</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]">
               <span className="block">{copy.line1}</span>
               <span className="block text-primary">{copy.line2}</span>

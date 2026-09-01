@@ -5,6 +5,7 @@ import { ComAiDemo } from "./ComAiDemo";
 import { BeaconDemo } from "./BeaconDemo";
 import { RedCliDemo } from "./RedCliDemo";
 import { cn } from "@/lib/utils";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB, SECTION_EYEBROW } from "@/lib/section-layout";
 
 const chapters = [
   { id: "com-ai-panel", label: "COM AI", accent: "#00FF88" },
@@ -39,16 +40,16 @@ export const InowixLabsSection = () => {
   };
 
   return (
-    <section id="inowix-labs" className="relative bg-inowix-bg" aria-label="Inowix Labs flagship products">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 pt-20 sm:pt-28 pb-4">
+    <section id="inowix-labs" className={cn("relative bg-inowix-bg", SECTION_BORDER)} aria-label="Inowix Labs flagship products">
+      <div className={cn(SECTION_CONTAINER, SECTION_PY, "pb-6 sm:pb-8")}>
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mb-10 sm:mb-14"
+          className={cn("max-w-4xl", SECTION_HEADER_MB)}
         >
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-inowix-com-ai mb-6">
+          <p className={cn(SECTION_EYEBROW, "text-inowix-com-ai")}>
             {LABS_HEADLINE.label}
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]">

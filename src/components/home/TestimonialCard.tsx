@@ -30,7 +30,7 @@ export const TestimonialCard = ({ testimonial, className }: TestimonialCardProps
   return (
     <article
       className={cn(
-        "relative flex w-[min(380px,85vw)] shrink-0 flex-col rounded-sm border border-border/40 bg-inowix-bg/80 p-6 sm:p-7 backdrop-blur-sm",
+        "relative flex w-[min(340px,88vw)] sm:w-[min(380px,85vw)] shrink-0 flex-col rounded-sm border border-border/40 bg-inowix-bg/80 p-5 sm:p-6 md:p-7 backdrop-blur-sm",
         className
       )}
       style={{ borderLeftColor: accent, borderLeftWidth: 3, boxShadow: `0 0 40px ${accent}12` }}

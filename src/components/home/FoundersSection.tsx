@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { CO_FOUNDERS } from "@/data/team";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_EYEBROW } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 import type { TeamLeader } from "@/data/team";
 
 const FounderCard = ({ founder, index }: { founder: TeamLeader; index: number }) => {
@@ -43,18 +45,18 @@ export const FoundersSection = () => {
   const reduced = useReducedMotion();
 
   return (
-    <section className="relative border-t border-border/40 bg-inowix-bg overflow-hidden" aria-label="Inowix co-founders">
+    <section className={cn("relative bg-inowix-bg overflow-hidden", SECTION_BORDER)} aria-label="Inowix co-founders">
       <div className="absolute inset-0 pointer-events-none bg-grid-white/[0.02] bg-[length:48px_48px]" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-start">
+      <div className={cn("relative z-10", SECTION_CONTAINER, SECTION_PY)}>
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 sm:gap-12 lg:gap-16 items-start">
           <motion.div
             initial={reduced ? false : fadeUp.hidden}
             whileInView={fadeUp.visible}
             viewport={defaultViewport}
             className="lg:sticky lg:top-28"
           >
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-inowix-com-ai mb-6">Leadership</p>
+            <p className={cn(SECTION_EYEBROW, "text-inowix-com-ai")}>Leadership</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[0.95] mb-6">
               Built by founders
               <span className="block text-primary">who ship.</span>

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { INDUSTRY_PROOF, INOWIX_PROJECTS, HOMEPAGE_COPY } from "@/data/inowix-content";
 import { IndustryIcon } from "@/components/illustrations/industry-icons";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
-import { cn } from "@/lib/utils";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB, SECTION_EYEBROW } from "@/lib/section-layout";
 
 export const IndustryTile = ({
   industry,
@@ -56,16 +56,16 @@ export const IndustriesProofSection = () => {
   const copy = HOMEPAGE_COPY.industries;
 
   return (
-    <section id="industries" className="relative bg-inowix-bg border-t border-border/40" aria-label="Industries">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-20 sm:py-28">
+    <section id="industries" className={cn("relative bg-inowix-bg", SECTION_BORDER)} aria-label="Industries">
+      <div className={cn(SECTION_CONTAINER, SECTION_PY)}>
         <motion.div
           initial={reduced ? false : fadeUp.hidden}
           whileInView={fadeUp.visible}
           viewport={defaultViewport}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16"
+          className={cn("flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4", SECTION_HEADER_MB)}
         >
           <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">{copy.label}</p>
+            <p className={SECTION_EYEBROW}>{copy.label}</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]">
               <span className="block">{copy.line1}</span>
               <span className="block text-primary">{copy.line2}</span>

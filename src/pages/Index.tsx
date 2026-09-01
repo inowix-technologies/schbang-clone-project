@@ -67,7 +67,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-inowix-bg text-foreground">
+    <div className="min-h-screen bg-inowix-bg text-foreground overflow-x-hidden">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <NotificationBanner />
       <Header />

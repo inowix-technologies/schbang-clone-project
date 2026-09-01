@@ -6,6 +6,8 @@ import { HeroHeadline } from "@/components/hero/HeroHeadline";
 import { HeroVisualStage } from "@/components/hero/HeroVisualStage";
 import { HeroMicroMarquee } from "@/components/home/HeroMicroMarquee";
 import { HERO_CAPABILITIES } from "@/data/inowix-content";
+import { SECTION_CONTAINER } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 export const HeroSection = () => {
   const prefersReducedMotion = useReducedMotion();
@@ -28,8 +30,8 @@ export const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_40%,hsl(var(--primary)/0.06),transparent)] pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 min-h-[100svh] flex flex-col">
-        <div className="flex-1 grid lg:grid-cols-[42fr_58fr] gap-6 lg:gap-8 items-center pt-24 sm:pt-28 lg:pt-32 pb-8 lg:pb-12 min-h-0">
+      <div className={cn("relative z-10 min-h-[100svh] flex flex-col", SECTION_CONTAINER)}>
+        <div className="flex-1 grid lg:grid-cols-[42fr_58fr] gap-8 lg:gap-10 items-center pt-20 sm:pt-24 lg:pt-28 pb-10 sm:pb-12 lg:pb-14 min-h-0">
           {/* LEFT — copy */}
           <div className="flex flex-col justify-center text-center lg:text-left lg:pr-6 xl:pr-10">
             <motion.div

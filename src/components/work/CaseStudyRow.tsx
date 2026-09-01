@@ -28,7 +28,8 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.55, delay: index * 0.05 }}
       className={cn(
-        "relative flex flex-col lg:flex-row min-h-[60vh] border-b border-border/30 overflow-hidden",
+        "relative flex flex-col lg:flex-row border-b border-border/30 overflow-hidden",
+        "lg:min-h-[60vh]",
         reversed && "lg:flex-row-reverse"
       )}
       style={{ borderLeftColor: `${project.accent}25`, borderLeftWidth: 3 }}
@@ -38,16 +39,16 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
         style={{ background: `radial-gradient(ellipse at ${reversed ? "20%" : "80%"} 50%, ${project.accent}, transparent 55%)` }}
       />
 
-      <div className="relative z-10 flex-1 p-8 sm:p-12 lg:p-16 flex flex-col justify-center max-w-xl">
-        <BuiltByInowix className="mb-5 w-fit" />
+      <div className="relative z-10 flex-1 p-6 sm:p-8 md:p-10 lg:p-14 xl:p-16 flex flex-col justify-center max-w-xl">
+        <BuiltByInowix className="mb-4 sm:mb-5 w-fit" />
         <p className="font-mono text-[10px] uppercase tracking-widest mb-2" style={{ color: project.accent }}>
           {project.category}
         </p>
-        <div className="flex items-center gap-4 mb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-5">
           <ProjectLogoBadge project={project} />
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">{project.name}</h3>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">{project.name}</h3>
         </div>
-        <p className="text-muted-foreground text-base sm:text-lg mb-6 leading-relaxed">{project.description}</p>
+        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-5 sm:mb-6 leading-relaxed">{project.description}</p>
 
         {project.metrics && project.metrics.length > 0 && (
           <div className="flex flex-wrap gap-3 mb-6">
@@ -93,12 +94,12 @@ export const CaseStudyRow = ({ project, reversed = false, index }: CaseStudyRowP
         </Link>
       </div>
 
-      <div className="relative flex-1 min-h-[280px] lg:min-h-0 flex items-center justify-center p-6 sm:p-10 lg:p-12">
+      <div className="relative flex-1 min-h-[220px] sm:min-h-[280px] lg:min-h-0 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
         <motion.div
           style={{ y, borderColor: `${project.accent}30`, boxShadow: `0 0 60px ${project.glow}` }}
           className="relative w-full max-w-lg aspect-[4/3] rounded-sm overflow-hidden border"
         >
-          <ProjectVisual project={project} variant="case-study" className="min-h-[240px]" />
+          <ProjectVisual project={project} variant="case-study" className="min-h-[200px] sm:min-h-[240px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-inowix-bg/80 via-transparent to-transparent pointer-events-none" />
           <div className="absolute bottom-4 left-4 right-4 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">
             ARCHITECTURE → ENGINEERING → PRODUCTION

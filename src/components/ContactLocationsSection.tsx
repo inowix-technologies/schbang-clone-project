@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { GlobalMapVisual, getLocalTime } from "@/components/home/GlobalMapVisual";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB, SECTION_EYEBROW } from "@/lib/section-layout";
 
 const locations = [
   {
@@ -47,13 +48,13 @@ export const ContactLocationsSection = () => {
   const loc = locations[activeLocation];
 
   return (
-    <section className="py-20 sm:py-28 bg-inowix-bg relative overflow-hidden border-t border-border/40" id="contact">
+    <section className={cn("bg-inowix-bg relative overflow-hidden", SECTION_BORDER)} id="contact">
       <div className="absolute inset-0 pointer-events-none bg-grid-white/[0.02] bg-[length:48px_48px]" />
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
+      <div className={cn("relative z-10", SECTION_CONTAINER, SECTION_PY)}>
+        <div className={cn("flex flex-col lg:flex-row lg:items-end justify-between gap-6", SECTION_HEADER_MB)}>
           <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-6">Contact</p>
+            <p className={SECTION_EYEBROW}>Contact</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95] mb-4">
               Engineering hubs across <span className="text-primary">India</span>
             </h2>

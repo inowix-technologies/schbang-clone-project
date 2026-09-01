@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Linkedin, Twitter, Instagram, ArrowUpRight } from "lucide-react";
 import logo from "../assets/logoinowix.png";
 import { Link } from "react-router-dom";
-import { BuiltByInowix } from "@/components/hero/BuiltByInowix";
 import { Button } from "@/components/ui/button";
+import { BuiltByInowix } from "@/components/hero/BuiltByInowix";
+import { SECTION_CONTAINER, SECTION_PY } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 const links = {
   company: [
@@ -43,7 +45,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-inowix-surface border-t border-border/40 relative z-20">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16">
+      <div className={cn(SECTION_CONTAINER, SECTION_PY)}>
         <div className="mb-10 pb-10 border-b border-border/30">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight max-w-2xl mb-6">
             We build technology that businesses <span className="text-primary">run on</span>.

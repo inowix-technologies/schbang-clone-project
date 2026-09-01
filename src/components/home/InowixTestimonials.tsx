@@ -3,6 +3,8 @@ import { INOWIX_TESTIMONIALS, TRUST_STATS } from "@/data/inowix-content";
 import { AnimatedGrid } from "@/components/ui/animated-grid";
 import { TestimonialMarquee } from "@/components/home/TestimonialMarquee";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+import { SECTION_BORDER, SECTION_CONTAINER, SECTION_PY, SECTION_HEADER_MB } from "@/lib/section-layout";
+import { cn } from "@/lib/utils";
 
 const rowA = INOWIX_TESTIMONIALS.filter((_, i) => i % 2 === 0);
 const rowB = INOWIX_TESTIMONIALS.filter((_, i) => i % 2 === 1);
@@ -12,17 +14,17 @@ export const InowixTestimonials = () => {
 
   return (
     <section
-      className="relative border-t border-border/40 bg-inowix-surface/20 overflow-hidden"
+      className={cn("relative bg-inowix-surface/20 overflow-hidden", SECTION_BORDER)}
       aria-label="Client testimonials"
     >
       <AnimatedGrid pattern="grid" className="opacity-40" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-24">
+      <div className={cn("relative z-10", SECTION_CONTAINER, SECTION_PY)}>
         <motion.div
           initial={reduced ? false : fadeUp.hidden}
           whileInView={fadeUp.visible}
           viewport={defaultViewport}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12"
+          className={cn("flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8", SECTION_HEADER_MB)}
         >
           <div className="max-w-3xl">
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">
@@ -32,15 +34,15 @@ export const InowixTestimonials = () => {
               Trusted by teams shipping{" "}
               <span className="text-primary">production systems</span>
             </h2>
-            <p className="mt-4 text-muted-foreground text-base sm:text-lg max-w-2xl">
+            <p className="mt-4 text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl">
               Real outcomes from brands we engineer — mobile apps, logistics platforms, AI products, and
               enterprise systems in production.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-6 lg:gap-8 shrink-0">
+          <div className="flex gap-8 sm:gap-10 shrink-0">
             {TRUST_STATS.slice(0, 2).map((stat) => (
-              <div key={stat.label} className="text-center lg:text-right">
+              <div key={stat.label} className="text-left lg:text-right">
                 <p className="text-2xl sm:text-3xl font-bold tracking-tight">
                   {stat.value}
                   {stat.suffix}
@@ -53,7 +55,7 @@ export const InowixTestimonials = () => {
           </div>
         </motion.div>
 
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5 -mx-4 sm:mx-0">
           <TestimonialMarquee items={rowA} direction="right" speed="slow" />
           <TestimonialMarquee items={rowB} direction="left" speed="slow" />
         </div>

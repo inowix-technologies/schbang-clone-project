@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { fadeUp, defaultViewport } from "@/components/home/HomepageMotion";
+import { SECTION_CONTAINER, SECTION_PY, SECTION_BORDER, SECTION_HEADER_MB } from "@/lib/section-layout";
 
 interface FAQ {
   id: string;
@@ -55,13 +56,14 @@ export const FAQSection = ({
   }, [activeCategory, faqs]);
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-6 relative overflow-hidden bg-inowix-bg border-t border-border/40">
-      <div className="max-w-4xl mx-auto relative z-10">
+    <section className={cn("relative overflow-hidden bg-inowix-bg", SECTION_BORDER)}>
+      <div className={cn(SECTION_CONTAINER, SECTION_PY)}>
+        <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={reduced ? false : fadeUp.hidden}
           whileInView={fadeUp.visible}
           viewport={defaultViewport}
-          className="text-center mb-10 sm:mb-14"
+          className={cn("text-center", SECTION_HEADER_MB)}
         >
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">FAQ</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">{title}</h2>
@@ -114,6 +116,7 @@ export const FAQSection = ({
             </motion.div>
           ))}
         </Accordion>
+        </div>
       </div>
     </section>
   );
