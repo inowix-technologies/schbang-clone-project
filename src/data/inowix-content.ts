@@ -769,31 +769,84 @@ export interface InowixTestimonial {
   name: string;
   title: string;
   company: string;
+  projectSlug?: ProjectSlug;
+  productSlug?: ProductSlug;
+  outcome?: string;
+  accent?: string;
 }
 
 export const INOWIX_TESTIMONIALS: InowixTestimonial[] = [
   {
-    quote: "Inowix engineered our mobile platform end-to-end — from architecture to production deployment. The system handles our community at scale.",
+    quote:
+      "Inowix engineered our mobile platform end-to-end — from architecture to production deployment. The system handles our community at scale.",
     name: "Product Team",
     title: "Engineering Lead",
     company: "Babyland",
+    projectSlug: "babyland",
+    outcome: "Community platform live",
   },
   {
-    quote: "They built our logistics operations platform with realtime tracking and fleet management. Production-grade from day one.",
+    quote:
+      "They built our logistics operations platform with realtime tracking and fleet management. Production-grade from day one.",
     name: "Operations Team",
     title: "Technology",
     company: "SRL Logistics",
+    projectSlug: "srl-logistics",
+    outcome: "Fleet ops in production",
   },
   {
-    quote: "The team delivered a mobility platform with driver dispatch and live tracking — engineered for reliability, not demos.",
+    quote:
+      "The team delivered a mobility platform with driver dispatch and live tracking — engineered for reliability, not demos.",
     name: "Platform Team",
     title: "CTO",
     company: "SwiftGo",
+    projectSlug: "swiftgo",
+    outcome: "Multi-city dispatch",
   },
   {
-    quote: "Inowix Labs products show what they can build when they own the stack. COM AI and Beacon are production systems, not prototypes.",
+    quote:
+      "Our spiritual community app connects devotees with temples and events — mobile-first, scalable backend, shipped on schedule.",
+    name: "Product Team",
+    title: "Founder",
+    company: "Instadham",
+    projectSlug: "instadham",
+    outcome: "Community at scale",
+  },
+  {
+    quote:
+      "From product catalog to consultation booking — Inowix built our skincare platform with ecommerce and content systems that convert.",
+    name: "Brand Team",
+    title: "Digital Lead",
+    company: "Moon Derma",
+    projectSlug: "moon-derma",
+    outcome: "D2C skincare platform",
+  },
+  {
+    quote:
+      "Inowix Labs products show what they can build when they own the stack. COM AI and Beacon are production systems, not prototypes.",
     name: "Engineering",
     title: "Product",
     company: "Inowix Labs",
+    productSlug: "com-ai",
+    accent: "#00FF88",
+    outcome: "3 flagship products live",
+  },
+  {
+    quote:
+      "Their enterprise chatbot layer routes tickets, surfaces knowledge, and gives our ops team admin controls we actually use daily.",
+    name: "IT Team",
+    title: "Operations",
+    company: "Enterprise Client",
+    projectSlug: "enterprise-chatbot",
+    outcome: "AI ops automation",
+  },
+  {
+    quote:
+      "B2B outreach sequences, lead enrichment, and analytics — built as a real product, not a spreadsheet workflow.",
+    name: "Growth Team",
+    title: "Revenue",
+    company: "B2B Platform",
+    projectSlug: "linkedin-automation",
+    outcome: "Pipeline automation",
   },
 ];
