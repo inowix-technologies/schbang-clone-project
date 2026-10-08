@@ -1,44 +1,64 @@
-import { AIA_CONFIG, isPlaceholder } from "./config";
+import { deliverLead, insertContactLead, isWebhookConfigured, postLeadToWebhook } from "@/lib/lead-webhook";
+import { AIA_CONFIG } from "./config";
 
 export type LeadPayload = Record<string, string | boolean>;
 
-const REQUEST_TIMEOUT_MS = 8000;
+export const LEAD_SOURCE = "ai-automation-lp";
 
-const beacon = (url: string, body: string) => {
-  if (!("sendBeacon" in navigator)) return false;
-  // sendBeacon only allows CORS-safelisted content types, so JSON goes out as text/plain.
-  return navigator.sendBeacon(url, new Blob([body], { type: "text/plain;charset=UTF-8" }));
+const webhookReady = () => {
+  if (isWebhookConfigured(AIA_CONFIG.webhookUrl)) return true;
+  console.warn("[ai-automation] Webhook URL is not configured (set VITE_LEADS_WEBHOOK_URL).");
+  return false;
 };
 
-/** Resolves true once the webhook accepted the lead (or the beacon was queued). */
-export const sendLead = async (payload: LeadPayload): Promise<boolean> => {
-  const url = AIA_CONFIG.webhookUrl;
-  if (isPlaceholder(url)) {
-    console.warn("[ai-automation] Webhook URL is not configured; lead payload:", payload);
-    return import.meta.env.DEV;
-  }
+const text = (payload: LeadPayload, key: string) => String(payload[key] ?? "").trim();
 
-  const body = JSON.stringify(payload);
-  const controller = new AbortController();
-  const timer = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+const toContactLead = (payload: LeadPayload) => {
+  const message = [
+    `Wants to automate: ${text(payload, "automation_goal")}`,
+    `Industry: ${text(payload, "industry")}`,
+    `Budget: ${text(payload, "budget")}`,
+    `Timeline: ${text(payload, "timeline")}`,
+    `Note: ${text(payload, "note") || "-"}`,
+    `WhatsApp: ${text(payload, "whatsapp")} (${text(payload, "phone_country")})`,
+    `Qualified budget: ${payload.budget_qualified ? "yes" : "no"}`,
+    "",
+    `utm_source: ${text(payload, "utm_source") || "-"}`,
+    `utm_campaign: ${text(payload, "utm_campaign") || "-"}`,
+    `utm_content: ${text(payload, "utm_content") || "-"}`,
+    `fbclid: ${text(payload, "fbclid") || "-"}`,
+    `Lead ID: ${text(payload, "lead_id")}`,
+  ].join("\n");
 
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body,
-      keepalive: true,
-      signal: controller.signal,
-    });
-    if (res.ok) return true;
-    return beacon(url, body);
-  } catch {
-    return beacon(url, body);
-  } finally {
-    window.clearTimeout(timer);
-  }
+  return {
+    name: text(payload, "full_name"),
+    email: text(payload, "email"),
+    phone: text(payload, "whatsapp") || null,
+    company: text(payload, "note").slice(0, 255) || null,
+    subject: `AI automation | ${text(payload, "budget")} | ${text(payload, "industry")}`,
+    message,
+    source: LEAD_SOURCE,
+  };
 };
 
+/** Step-1 capture: fire-and-forget so a slow network never blocks the visitor from reaching step 2. */
 export const sendLeadInBackground = (payload: LeadPayload) => {
-  void sendLead(payload);
+  if (!webhookReady()) return;
+  postLeadToWebhook(AIA_CONFIG.webhookUrl, payload).catch(() => {});
+};
+
+/** Sends the finished lead to Google Sheets and the admin panel; true when at least one accepted it. */
+export const sendLead = async (payload: LeadPayload): Promise<boolean> => {
+  // Lets the thank-you flow be tested locally before a webhook exists.
+  if (import.meta.env.DEV && !isWebhookConfigured(AIA_CONFIG.webhookUrl)) {
+    console.warn("[ai-automation] Webhook URL is not configured; lead payload:", payload);
+    return true;
+  }
+  return deliverLead({
+    webhook: async () => {
+      if (!webhookReady()) throw new Error("Webhook URL is not configured");
+      await postLeadToWebhook(AIA_CONFIG.webhookUrl, payload);
+    },
+    supabase: () => insertContactLead(toContactLead(payload)),
+  });
 };

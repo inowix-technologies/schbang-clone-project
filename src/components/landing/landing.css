@@ -1,0 +1,35 @@
+.landing-marquee-track {
+  animation: landing-marquee var(--marquee-duration, 50s) linear infinite;
+}
+
+.landing-marquee:hover .landing-marquee-track {
+  animation-play-state: paused;
+}
+
+/* Half the track is a duplicate, so shifting by 50% (plus half the gap) loops seamlessly. */
+@keyframes landing-marquee {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+.landing-float {
+  animation: landing-float 6s ease-in-out infinite;
+}
+
+@keyframes landing-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-marquee-track,
+  .landing-float {
+    animation: none;
+  }
+}

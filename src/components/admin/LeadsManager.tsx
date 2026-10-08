@@ -9,8 +9,32 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { Search, Calendar, Mail, Phone, Building, MessageSquare, Eye, Edit, Archive } from 'lucide-react';
+import { Search, Calendar, Mail, Phone, Building, MessageSquare, Eye, Download, ExternalLink, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
+
+const LEADS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/14iZLzKxNtx32ZPekE6tXsQ2AhESq4Zem008D4rx7mxQ/edit';
+
+const SOURCE_LABELS: Record<string, string> = {
+  website: 'Website contact',
+  'ai-automation-lp': 'UAE landing page',
+  'lp-healthcare-platforms': 'Healthcare landing page',
+};
+
+const SOURCE_TABS = [
+  { value: 'all', label: 'All' },
+  { value: 'website', label: 'Website' },
+  { value: 'ai-automation-lp', label: 'UAE landing page' },
+  { value: 'lp-healthcare-platforms', label: 'Healthcare landing page' },
+  { value: 'other', label: 'Other' },
+];
+
+const sourceLabel = (source: string) => SOURCE_LABELS[source] ?? source;
+
+const matchesSource = (source: string, tab: string) =>
+  tab === 'all' || (tab === 'other' ? !(source in SOURCE_LABELS) : source === tab);
+
+const csvCell = (value: string | null | undefined) => `"${(value ?? '').replace(/"/g, '""')}"`;
 
 interface Lead {
   id: string;
@@ -32,6 +56,8 @@ export const LeadsManager = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [sourceTab, setSourceTab] = useState<string>('all');
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isDetailDialogOpen, setIsDetailDialogOpen] = useState(false);
   const [notes, setNotes] = useState('');
@@ -39,6 +65,7 @@ export const LeadsManager = () => {
 
   const fetchLeads = async () => {
     setIsLoading(true);
+    setLoadError(null);
     try {
       const { data, error } = await supabase
         .from('contact_leads')
@@ -48,6 +75,7 @@ export const LeadsManager = () => {
       if (error) throw error;
       setLeads(data || []);
     } catch (error: any) {
+      setLoadError(error?.message || 'Unknown error');
       toast({
         title: "Error",
         description: "Failed to fetch leads: " + error.message,
@@ -148,8 +176,35 @@ export const LeadsManager = () => {
       (lead.company && lead.company.toLowerCase().includes(searchQuery.toLowerCase())) ||
       lead.message.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    return matchesSearch && matchesStatus && matchesSource(lead.source, sourceTab);
   });
+
+  const visibleTabs = SOURCE_TABS.filter(
+    (tab) => tab.value !== 'other' || leads.some((lead) => matchesSource(lead.source, 'other'))
+  );
+
+  const exportCsv = () => {
+    const header = ['Date', 'Name', 'Email', 'Phone', 'Company / note', 'Source', 'Status', 'Subject', 'Message', 'Notes'];
+    const rows = filteredLeads.map((lead) => [
+      format(new Date(lead.created_at), 'yyyy-MM-dd HH:mm'),
+      lead.name,
+      lead.email,
+      lead.phone,
+      lead.company,
+      sourceLabel(lead.source),
+      lead.status,
+      lead.subject,
+      lead.message,
+      lead.notes,
+    ]);
+    const csv = [header, ...rows].map((row) => row.map(csvCell).join(',')).join('\r\n');
+    const url = URL.createObjectURL(new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `inowix-leads-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   const statusOptions = [
     { value: 'new', label: 'New' },
@@ -160,6 +215,65 @@ export const LeadsManager = () => {
 
   return (
     <div className="space-y-6">
+      <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Lead source">
+        {visibleTabs.map((tab) => {
+          const count = leads.filter((lead) => matchesSource(lead.source, tab.value)).length;
+          const active = sourceTab === tab.value;
+          return (
+            <button
+              key={tab.value}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setSourceTab(tab.value)}
+              className={cn(
+                'inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors',
+                active
+                  ? 'border-accent bg-accent text-accent-foreground'
+                  : 'border-white/20 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white'
+              )}
+            >
+              {tab.label}
+              <span className={cn('rounded-full px-1.5 text-xs tabular-nums', active ? 'bg-black/15' : 'bg-white/10')}>
+                {count}
+              </span>
+            </button>
+          );
+        })}
+        <div className="ml-auto flex flex-wrap gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={exportCsv}
+            disabled={filteredLeads.length === 0}
+            className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+          >
+            <Download className="mr-1.5 h-4 w-4" />
+            Export CSV
+          </Button>
+          <Button asChild variant="outline" size="sm" className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white">
+            <a href={LEADS_SHEET_URL} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="mr-1.5 h-4 w-4" />
+              Open Google Sheet
+            </a>
+          </Button>
+        </div>
+      </div>
+
+      {loadError && (
+        <div role="alert" className="flex gap-3 rounded-lg border border-amber-400/40 bg-amber-400/10 p-4 text-sm text-amber-100">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+          <p>
+            Couldn't load leads from the database ({loadError}). New form submissions are still saved to the{' '}
+            <a href={LEADS_SHEET_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+              Google Sheet
+            </a>{' '}
+            once its webhook is connected.
+          </p>
+        </div>
+      )}
+
       <div className="flex flex-col lg:flex-row gap-4 justify-between">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative">
@@ -257,9 +371,9 @@ export const LeadsManager = () => {
                     </div>
                     
                     <div className="flex items-center justify-between pt-2">
-                      <div className="text-xs text-white">
-                        Source: {lead.source}
-                      </div>
+                      <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs text-white">
+                        {sourceLabel(lead.source)}
+                      </span>
                       <div className="flex items-center gap-2">
                         <Button
                           size="sm"
@@ -296,7 +410,7 @@ export const LeadsManager = () => {
       )}
 
       <Dialog open={isDetailDialogOpen} onOpenChange={setIsDetailDialogOpen}>
-        <DialogContent className="max-w-2xl h-screen overflow-scroll bg-white">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white">
           {selectedLead && (
             <>
               <DialogHeader>
@@ -320,13 +434,13 @@ export const LeadsManager = () => {
                   )}
                   {selectedLead.company && (
                     <div>
-                      <Label className="text-sm font-medium text-[#1f1f1f]">Company</Label>
+                      <Label className="text-sm font-medium text-[#1f1f1f]">Company / note</Label>
                       <p className="text-sm text-gray-600">{selectedLead.company}</p>
                     </div>
                   )}
                   <div>
                     <Label className="text-sm font-medium text-[#1f1f1f]">Source</Label>
-                    <p className="text-sm text-gray-600">{selectedLead.source}</p>
+                    <p className="text-sm text-gray-600">{sourceLabel(selectedLead.source)}</p>
                   </div>
                 </div>
                 

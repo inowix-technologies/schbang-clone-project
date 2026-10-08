@@ -1,15 +1,20 @@
 /**
- * Google Apps Script web app that receives leads from the landing pages
- * (/ai-automation and /healthcare-platforms) and appends them to this spreadsheet.
+ * Google Apps Script web app that receives every website lead (contact page, /ai-automation and
+ * /healthcare-platforms) and appends it to the "Inowix leads and responses" spreadsheet.
  *
- * Paste into Extensions > Apps Script of the target Google Sheet, then
- * Deploy > New deployment > Web app, "Execute as: Me", "Who has access: Anyone".
- * Use the resulting /exec URL for VITE_AIA_WEBHOOK_URL and VITE_HC_WEBHOOK_URL in Vercel.
+ * Setup (one time):
+ * 1. Open the spreadsheet > Extensions > Apps Script, paste this file and save.
+ * 2. Deploy > New deployment > Web app, "Execute as: Me", "Who has access: Anyone". Approve the permissions.
+ * 3. Copy the /exec URL into Vercel as VITE_LEADS_WEBHOOK_URL (Production) and redeploy the site.
+ * After editing this script later, use Deploy > Manage deployments > Edit > New version to keep the same URL.
  */
+
+const SPREADSHEET_ID = "14iZLzKxNtx32ZPekE6tXsQ2AhESq4Zem008D4rx7mxQ";
 
 const NOTIFY_EMAIL = "info@inowix.in";
 
 const SHEET_BY_SOURCE = {
+  website: "Website leads",
   "ai-automation-lp": "UAE leads",
   "lp-healthcare-platforms": "Healthcare leads",
 };
@@ -37,12 +42,17 @@ function doGet() {
   return json_({ ok: true, message: "Lead webhook is running" });
 }
 
+/** Opened by ID so the script works whether it is bound to the sheet or created at script.google.com. */
+function book_() {
+  return SpreadsheetApp.openById(SPREADSHEET_ID);
+}
+
 function getSheet_(name) {
-  const book = SpreadsheetApp.getActiveSpreadsheet();
+  const book = book_();
   return book.getSheetByName(name) || book.insertSheet(name);
 }
 
-/** New payload keys become new columns, so the pages can add fields without editing this script. */
+/** New payload keys become new columns, so the forms can add fields without editing this script. */
 function appendLead_(sheet, lead) {
   const keys = ["received_at"].concat(Object.keys(lead));
   let headers = sheet.getLastColumn() > 0
@@ -63,14 +73,14 @@ function appendLead_(sheet, lead) {
 }
 
 function notify_(lead, sheetName) {
-  const who = lead.full_name || lead.email || "Unknown";
+  const who = lead.full_name || lead.name || lead.email || "Unknown";
   const lines = Object.keys(lead)
     .filter((key) => lead[key] !== "" && lead[key] !== null && lead[key] !== undefined)
     .map((key) => key + ": " + lead[key]);
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
     subject: "New lead (" + sheetName + "): " + who,
-    body: lines.join("\n") + "\n\nSpreadsheet: " + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+    body: lines.join("\n") + "\n\nSpreadsheet: " + book_().getUrl(),
     replyTo: lead.email || NOTIFY_EMAIL,
   });
 }

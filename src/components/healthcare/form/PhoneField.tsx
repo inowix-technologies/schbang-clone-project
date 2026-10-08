@@ -19,7 +19,7 @@ export const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
     const errorId = `${id}-error`;
     return (
       <div>
-        <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-hc-ink">
+        <label htmlFor={id} className="mb-1 block text-sm font-semibold text-hc-ink">
           WhatsApp number
         </label>
         <div className="flex gap-2">
@@ -27,9 +27,9 @@ export const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
           <div className="relative shrink-0">
             <span
               aria-hidden="true"
-              className={cn(fieldClass(false), "flex w-[92px] items-center justify-between gap-1 font-medium")}
+              className={cn(fieldClass(false), "flex w-[108px] items-center justify-between gap-1 font-medium")}
             >
-              <span>
+              <span className="whitespace-nowrap">
                 <span className="text-xs text-hc-muted">{country.iso}</span> +{country.dial}
               </span>
               <ChevronDown className="h-4 w-4 text-hc-muted" />

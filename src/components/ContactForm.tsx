@@ -9,8 +9,10 @@ import { ArrowRight, Clock, Loader2, Mail, ShieldCheck } from 'lucide-react';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
 import { LEAD_FALLBACK_EMAIL, buildLeadMailto } from '@/lib/lead-email-fallback';
+import { LEADS_WEBHOOK_URL, deliverLead, insertContactLead, postLeadToWebhook } from '@/lib/lead-webhook';
 
 const MESSAGE_MAX = 1000;
+const LEAD_SOURCE = 'website';
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -50,20 +52,26 @@ export const ContactForm = () => {
 
     try {
       const validatedData = contactSchema.parse(formData);
-      const { error } = await supabase
-        .from('contact_leads')
-        .insert([{
+      const delivered = await deliverLead({
+        webhook: () => postLeadToWebhook(LEADS_WEBHOOK_URL, {
+          source: LEAD_SOURCE,
+          stage: 'complete',
+          full_name: validatedData.name,
+          email: validatedData.email,
+          message: validatedData.message,
+          page_url: window.location.href,
+          referrer: document.referrer,
+          submitted_at: new Date().toISOString(),
+        }),
+        supabase: () => insertContactLead({
           name: validatedData.name,
           email: validatedData.email,
           message: validatedData.message,
-          company: null,
-          phone: null,
-          subject: null,
-          source: 'website',
-          status: 'new'
-        }]);
+          source: LEAD_SOURCE,
+        }),
+      });
 
-      if (error) throw error;
+      if (!delivered) throw new Error('No lead destination accepted the message');
 
       toast({
         title: "Message sent",

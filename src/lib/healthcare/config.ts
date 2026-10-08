@@ -1,3 +1,6 @@
+import { HEALTHCARE_PROOF_PROJECTS, PROJECTS_SHIPPED } from "@/lib/landing-proof";
+import { LEADS_WEBHOOK_URL } from "@/lib/lead-webhook";
+
 // Every value wrapped in [BRACKETS] is a placeholder that must be replaced before the campaign goes live.
 
 export interface ComplianceBadge {
@@ -5,17 +8,8 @@ export interface ComplianceBadge {
   description: string;
 }
 
-export interface ProofProject {
-  name: string;
-  whatItDoes: string;
-  problem: string;
-  result: string;
-  /** WebP screenshot URL; leave as a placeholder until a real, anonymised screenshot exists. */
-  screenshot: string;
-}
-
 export const HC_CONFIG = {
-  webhookUrl: (import.meta.env.VITE_HC_WEBHOOK_URL as string | undefined) ?? "[WEBHOOK/BEACON ENDPOINT]",
+  webhookUrl: (import.meta.env.VITE_HC_WEBHOOK_URL as string | undefined) || LEADS_WEBHOOK_URL,
   /** Send name, WhatsApp and email to the webhook after step 1 so abandoned step-2 leads can be followed up. */
   sendPartialLeads: true,
   /** International format without "+" or spaces, e.g. 919800000000. */
@@ -24,7 +18,7 @@ export const HC_CONFIG = {
   calendlyUrl: "[CALENDLY LINK]",
   contactEmail: "[CONTACT EMAIL]",
   privacyUrl: "[PRIVACY POLICY URL]",
-  platformsDelivered: "[NUMBER]",
+  platformsDelivered: `${PROJECTS_SHIPPED}+`,
   goLiveWeeks: "[X-Y]",
   timelineFaqAnswer: "[TIMELINE ANSWER, e.g. Most platforms go live in X-Y weeks depending on modules and integrations.]",
   priceLine: "Custom healthcare platforms typically start from ₹5L+",
@@ -35,31 +29,9 @@ export const HC_CONFIG = {
   formAnchorId: "quote",
   /** Add a badge ONLY after the certification or alignment has been confirmed in writing. */
   complianceBadges: [] as ComplianceBadge[],
-  /** Hide proof cards and the quote slot in production while they still contain [PLACEHOLDERS]. */
+  /** Hide the quote slot and other [PLACEHOLDER] copy in production. */
   hidePlaceholderProofInProduction: true,
-  proofProjects: [
-    {
-      name: "[PROJECT NAME]",
-      whatItDoes: "[WHAT IT DOES]",
-      problem: "[PROBLEM IT SOLVED]",
-      result: "[RESULT]",
-      screenshot: "[PROJECT SCREENSHOT]",
-    },
-    {
-      name: "[PROJECT NAME]",
-      whatItDoes: "[WHAT IT DOES]",
-      problem: "[PROBLEM IT SOLVED]",
-      result: "[RESULT]",
-      screenshot: "[PROJECT SCREENSHOT]",
-    },
-    {
-      name: "[PROJECT NAME]",
-      whatItDoes: "[WHAT IT DOES]",
-      problem: "[PROBLEM IT SOLVED]",
-      result: "[RESULT]",
-      screenshot: "[PROJECT SCREENSHOT]",
-    },
-  ] as ProofProject[],
+  proofProjects: HEALTHCARE_PROOF_PROJECTS,
   clientQuote: {
     quote: "[CLIENT QUOTE]",
     attribution: "[NAME, ROLE, ORGANIZATION]",

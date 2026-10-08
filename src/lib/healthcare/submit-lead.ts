@@ -1,21 +1,18 @@
-import { supabase } from "@/integrations/supabase/client";
-import { HC_CONFIG, isPlaceholder } from "./config";
+import { deliverLead, insertContactLead, postLeadToWebhook } from "@/lib/lead-webhook";
+import { HC_CONFIG } from "./config";
 import { captureAttribution, getFbCookies } from "./attribution";
 import { findCountry, toE164 } from "./phone";
 import {
   BUDGET_OPTIONS,
+  BUILD_OPTIONS,
   ORG_TYPE_OPTIONS,
-  ROLE_OPTIONS,
-  SITUATION_OPTIONS,
   TIMELINE_OPTIONS,
   isQualifiedBudget,
   labelFor,
-  sizeLabel,
   type FormValues,
   type StepOneValues,
 } from "./form";
 
-const SUPABASE_TIMEOUT_MS = 10_000;
 const LEAD_SOURCE = "lp-healthcare-platforms";
 
 export const createEventId = () =>
@@ -52,44 +49,35 @@ const contactFields = (v: StepOneValues) => {
   };
 };
 
-/**
- * no-cors + text/plain keeps this a "simple" request: no preflight, and it reaches Zapier, Make or
- * Apps Script hooks that don't send CORS headers. The response is opaque, so delivery = no network error.
- */
-const postToWebhook = async (payload: Record<string, unknown>): Promise<void> => {
-  if (isPlaceholder(HC_CONFIG.webhookUrl)) throw new Error("Webhook URL is not configured");
-  const body = JSON.stringify(payload);
-  try {
-    await fetch(HC_CONFIG.webhookUrl, {
-      method: "POST",
-      mode: "no-cors",
-      keepalive: body.length < 60_000,
-      headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      body,
-    });
-  } catch (error) {
-    const queued = typeof navigator.sendBeacon === "function"
-      && navigator.sendBeacon(HC_CONFIG.webhookUrl, new Blob([body], { type: "text/plain;charset=UTF-8" }));
-    if (!queued) throw error;
-  }
-};
+const buildCompletePayload = (values: FormValues, eventId: string) => ({
+  stage: "complete" as const,
+  event_id: eventId,
+  ...contactFields(values),
+  org_type: values.orgType,
+  org_type_label: labelFor(ORG_TYPE_OPTIONS, values.orgType),
+  build: values.build,
+  build_label: labelFor(BUILD_OPTIONS, values.build),
+  budget: values.budget,
+  budget_label: labelFor(BUDGET_OPTIONS, values.budget),
+  timeline: values.timeline,
+  timeline_label: labelFor(TIMELINE_OPTIONS, values.timeline),
+  note: values.note.trim(),
+  qualified: isQualifiedBudget(values.budget),
+  ...baseContext(),
+});
 
-const withTimeout = <T>(promise: PromiseLike<T>, ms: number) =>
-  Promise.race([
-    Promise.resolve(promise),
-    new Promise<never>((_, reject) => setTimeout(() => reject(new Error("Timed out")), ms)),
-  ]);
-
-const insertIntoSupabase = async (payload: ReturnType<typeof buildCompletePayload>) => {
-  const message = [
-    `Looking to build: ${payload.requirements}`,
-    "",
-    `Role: ${payload.role_label}`,
+const toContactLead = (payload: ReturnType<typeof buildCompletePayload>) => ({
+  name: payload.full_name,
+  email: payload.email,
+  phone: payload.whatsapp,
+  company: payload.note.slice(0, 255) || null,
+  subject: `Healthcare platform | ${payload.budget_label} | ${payload.org_type_label}`,
+  message: [
+    `Looking to build: ${payload.build_label}`,
     `Organization type: ${payload.org_type_label}`,
-    `Size: ${payload.size_label}`,
-    `Current situation: ${payload.situation_label}`,
     `Budget: ${payload.budget_label}`,
     `Timeline: ${payload.timeline_label}`,
+    `Note: ${payload.note || "-"}`,
     `WhatsApp: ${payload.whatsapp}`,
     `Qualified (₹5L+): ${payload.qualified ? "yes" : "no"}`,
     "",
@@ -98,50 +86,19 @@ const insertIntoSupabase = async (payload: ReturnType<typeof buildCompletePayloa
     `utm_content: ${payload.utm_content || "-"}`,
     `fbclid: ${payload.fbclid || "-"}`,
     `Event ID: ${payload.event_id}`,
-  ].join("\n");
-
-  const { error } = await withTimeout(
-    supabase.from("contact_leads").insert([{
-      name: payload.full_name,
-      email: payload.email,
-      phone: payload.whatsapp,
-      company: payload.organization,
-      subject: `Healthcare platform | ${payload.budget_label} | ${payload.org_type_label}`,
-      message,
-      source: LEAD_SOURCE,
-      status: "new",
-    }]),
-    SUPABASE_TIMEOUT_MS,
-  );
-  if (error) throw error;
-};
-
-const buildCompletePayload = (values: FormValues, eventId: string) => ({
-  stage: "complete" as const,
-  event_id: eventId,
-  ...contactFields(values),
-  organization: values.organization.trim(),
-  role: values.role,
-  role_label: labelFor(ROLE_OPTIONS, values.role),
-  org_type: values.orgType,
-  org_type_label: labelFor(ORG_TYPE_OPTIONS, values.orgType),
-  size: values.size,
-  size_label: sizeLabel(values.size),
-  requirements: values.requirements.trim(),
-  situation: values.situation,
-  situation_label: labelFor(SITUATION_OPTIONS, values.situation),
-  budget: values.budget,
-  budget_label: labelFor(BUDGET_OPTIONS, values.budget),
-  timeline: values.timeline,
-  timeline_label: labelFor(TIMELINE_OPTIONS, values.timeline),
-  qualified: isQualifiedBudget(values.budget),
-  ...baseContext(),
+  ].join("\n"),
+  source: LEAD_SOURCE,
 });
 
 /** Fire-and-forget: a failed partial capture must never block the user from reaching step 2. */
 export const sendPartialLead = (values: StepOneValues, eventId: string) => {
   if (!HC_CONFIG.sendPartialLeads) return;
-  postToWebhook({ stage: "partial", event_id: eventId, ...contactFields(values), ...baseContext() }).catch(() => {});
+  postLeadToWebhook(HC_CONFIG.webhookUrl, {
+    stage: "partial",
+    event_id: eventId,
+    ...contactFields(values),
+    ...baseContext(),
+  }).catch(() => {});
 };
 
 export interface SubmitResult {
@@ -149,12 +106,12 @@ export interface SubmitResult {
   qualified: boolean;
 }
 
-/** Succeeds when at least one destination accepted the lead. */
+/** Sends the lead to Google Sheets and the admin panel; succeeds when at least one accepted it. */
 export const submitLead = async (values: FormValues, eventId: string): Promise<SubmitResult> => {
   const payload = buildCompletePayload(values, eventId);
-  const results = await Promise.allSettled([postToWebhook(payload), insertIntoSupabase(payload)]);
-  if (import.meta.env.DEV) {
-    results.forEach((r, i) => r.status === "rejected" && console.warn(["Webhook", "Supabase"][i], "lead write failed:", r.reason));
-  }
-  return { ok: results.some((r) => r.status === "fulfilled"), qualified: payload.qualified };
+  const ok = await deliverLead({
+    webhook: () => postLeadToWebhook(HC_CONFIG.webhookUrl, payload),
+    supabase: () => insertContactLead(toContactLead(payload)),
+  });
+  return { ok, qualified: payload.qualified };
 };

@@ -1,4 +1,5 @@
-import { AIA_CONFIG } from "./config";
+import { AI_PROOF_PROJECTS } from "@/lib/landing-proof";
+import { AIA_CONFIG, isPlaceholder } from "./config";
 
 export const HERO = {
   eyebrow: "AI Automation for UAE Businesses",
@@ -56,29 +57,7 @@ export const STEPS = [
   { title: "Launch and support", body: "We go live, monitor results and keep improving it." },
 ];
 
-export const PROOF_PROJECTS = [
-  {
-    name: "[PROJECT NAME]",
-    tag: "[INDUSTRY]",
-    problem: "[WHAT IT DOES]",
-    result: "[RESULT]",
-    image: "", // e.g. "/ai-automation/project-1.webp" (1200x750)
-  },
-  {
-    name: "[PROJECT NAME]",
-    tag: "[INDUSTRY]",
-    problem: "[WHAT IT DOES]",
-    result: "[RESULT]",
-    image: "",
-  },
-  {
-    name: "[PROJECT NAME]",
-    tag: "[INDUSTRY]",
-    problem: "[WHAT IT DOES]",
-    result: "[RESULT]",
-    image: "",
-  },
-];
+export const PROOF_PROJECTS = AI_PROOF_PROJECTS;
 
 export const CLIENT_QUOTE = {
   quote: "[CLIENT QUOTE]",
@@ -98,35 +77,51 @@ export const FIT = {
   ],
 };
 
-export const FAQS = [
+const ALL_FAQS = [
   {
     q: "What does a project cost?",
     a: `Custom projects typically start from ${AIA_CONFIG.priceLine}, depending on scope. We'll give you a clear quote after a short discovery call.`,
+    placeholder: false,
   },
   {
     q: "How long does it take?",
     a: `Most projects go live in ${AIA_CONFIG.goLiveWeeks} weeks, depending on scope and integrations. You see a working prototype before the full build.`,
+    placeholder: isPlaceholder(AIA_CONFIG.goLiveWeeks),
   },
   {
     q: "Do you integrate with WhatsApp, my CRM and existing tools?",
-    a: "[INTEGRATIONS ANSWER] Draft: Yes. We connect to WhatsApp, your website, and the CRM and tools you already use, so your team keeps working where they work today.",
+    a: "Yes. We connect to WhatsApp, your website, and the CRM and tools you already use, so your team keeps working where they work today.",
+    placeholder: false,
   },
   {
     q: "Will it replace my team?",
     a: "No. It handles the repetitive work, like first replies, data entry and reminders, so your team can focus on closing deals and serving customers. Anything complex is handed to a person.",
+    placeholder: false,
   },
   {
     q: "Who owns the system and data?",
-    a: "[OWNERSHIP ANSWER]",
+    a: "Ownership of the code and your data is agreed in writing before the project starts. Your customer and business data always belongs to your company.",
+    placeholder: false,
   },
   {
     q: "Do you provide support after launch?",
-    a: "[SUPPORT ANSWER]",
+    a: "Yes. Every launch includes a handover and team training, and we offer ongoing support and improvement plans after go-live.",
+    placeholder: false,
   },
 ];
 
+/** Answers that still depend on a [PLACEHOLDER] config value are hidden on the live site. */
+export const FAQS = ALL_FAQS.filter((faq) => !(faq.placeholder && import.meta.env.PROD));
+
 export const FORM_OPTIONS = {
-  roles: ["Founder/Owner", "CEO/MD", "GM", "Operations", "Sales/Marketing", "Other"],
+  goals: [
+    "WhatsApp lead replies",
+    "Sales and CRM follow-ups",
+    "Customer support",
+    "Bookings and reminders",
+    "Internal workflows",
+    "Custom software",
+  ],
   industries: [
     "Real estate",
     "Healthcare/Clinics",
@@ -136,7 +131,6 @@ export const FORM_OPTIONS = {
     "Hospitality",
     "Other",
   ],
-  companySizes: ["1-10", "11-50", "51-200", "200+"],
   budgets: ["Under $3K", "$3K-5K", "$5K-10K", "$10K-25K", "$25K+", "Not decided"],
   timelines: ["Immediately", "Within 30 days", "1-3 months", "Just researching"],
 };

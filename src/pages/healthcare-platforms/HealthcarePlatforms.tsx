@@ -15,6 +15,9 @@ import { QuoteSection } from "@/components/healthcare/QuoteSection";
 import { Faq } from "@/components/healthcare/Faq";
 import { FinalCta } from "@/components/healthcare/FinalCta";
 import { Footer } from "@/components/healthcare/Footer";
+import { ClientLogoMarquee } from "@/components/landing/ClientLogoMarquee";
+import { StatsBand } from "@/components/landing/StatsBand";
+import { HEALTHCARE_CLIENT_LOGOS } from "@/lib/landing-proof";
 
 const TITLE = "Custom Healthcare Platforms for Clinics and Hospitals | Inowix";
 const DESCRIPTION =
@@ -37,12 +40,14 @@ const HealthcarePlatforms = () => {
       <TopBar />
       <main>
         <Hero />
+        <ClientLogoMarquee logos={HEALTHCARE_CLIENT_LOGOS} theme="hc" label="Healthcare and wellness brands we've built for" />
         <PainStrip />
         <Solution />
         <HowItWorks />
         <Proof />
         <Security />
         <WhoFor />
+        <StatsBand theme="hc" title="The engineering team behind your healthcare platform" />
         <QuoteSection />
         <Faq />
         <FinalCta />

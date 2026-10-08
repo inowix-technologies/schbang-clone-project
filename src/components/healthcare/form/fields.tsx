@@ -1,4 +1,5 @@
-import { forwardRef, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Option } from "@/lib/healthcare/form";
 import { fieldClass } from "./field-class";
@@ -15,13 +16,15 @@ interface BaseProps {
   label: string;
   error?: string;
   hint?: ReactNode;
+  optional?: boolean;
 }
 
 export const TextField = forwardRef<HTMLInputElement, BaseProps & InputHTMLAttributes<HTMLInputElement>>(
-  ({ id, label, error, hint, className, ...props }, ref) => (
+  ({ id, label, error, hint, optional, className, ...props }, ref) => (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-hc-ink">
+      <label htmlFor={id} className="mb-1 flex items-baseline justify-between gap-3 text-sm font-semibold text-hc-ink">
         {label}
+        {optional && <span className="text-xs font-normal text-hc-muted">Optional</span>}
       </label>
       <input
         ref={ref}
@@ -38,72 +41,6 @@ export const TextField = forwardRef<HTMLInputElement, BaseProps & InputHTMLAttri
 );
 TextField.displayName = "TextField";
 
-interface SelectFieldProps extends BaseProps, Omit<SelectHTMLAttributes<HTMLSelectElement>, "children" | "id" | "placeholder"> {
-  placeholder: string;
-  options?: Option[];
-  groups?: { label: string; options: Option[] }[];
-}
-
-export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
-  ({ id, label, error, placeholder, options, groups, className, value, ...props }, ref) => (
-    <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-hc-ink">
-        {label}
-      </label>
-      <select
-        ref={ref}
-        id={id}
-        value={value}
-        aria-invalid={!!error}
-        aria-describedby={error ? `${id}-error` : undefined}
-        className={cn(fieldClass(!!error), "hc-select cursor-pointer", !value && "text-hc-muted/80", className)}
-        {...props}
-      >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options?.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-        {groups?.map((g) => (
-          <optgroup key={g.label} label={g.label}>
-            {g.options.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </optgroup>
-        ))}
-      </select>
-      <FieldError id={`${id}-error`} error={error} />
-    </div>
-  ),
-);
-SelectField.displayName = "SelectField";
-
-export const TextAreaField = forwardRef<HTMLTextAreaElement, BaseProps & TextareaHTMLAttributes<HTMLTextAreaElement>>(
-  ({ id, label, error, hint, className, ...props }, ref) => (
-    <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-hc-ink">
-        {label}
-      </label>
-      <textarea
-        ref={ref}
-        id={id}
-        aria-invalid={!!error}
-        aria-describedby={[error ? `${id}-error` : "", hint ? `${id}-hint` : ""].filter(Boolean).join(" ") || undefined}
-        className={cn(fieldClass(!!error), "h-auto min-h-[120px] resize-y py-3 leading-relaxed", className)}
-        {...props}
-      />
-      {hint}
-      <FieldError id={`${id}-error`} error={error} />
-    </div>
-  ),
-);
-TextAreaField.displayName = "TextAreaField";
-
 interface ChipGroupProps {
   name: string;
   legend: string;
@@ -111,43 +48,42 @@ interface ChipGroupProps {
   value: string;
   error?: string;
   onChange: (value: string) => void;
-  columns?: 2 | 3;
   children?: ReactNode;
 }
 
-export const ChipGroup = ({ name, legend, options, value, error, onChange, columns = 2, children }: ChipGroupProps) => (
+/** Tap-to-pick pills: faster than dropdowns on mobile and every option is visible at once. */
+export const ChipGroup = ({ name, legend, options, value, error, onChange, children }: ChipGroupProps) => (
   <fieldset aria-describedby={error ? `${name}-error` : undefined}>
     <legend className="mb-2 text-sm font-semibold text-hc-ink">{legend}</legend>
-    <div className={cn("grid gap-2", columns === 3 ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2")}>
-      {options.map((o) => (
-        <label
-          key={o.value}
-          className={cn(
-            "relative flex min-h-[44px] cursor-pointer items-center rounded-xl border bg-hc-white px-3.5 py-2.5 text-sm font-medium text-hc-body transition-colors",
-            "hover:border-[#C9D3E3] has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-hc-blue/15",
-            value === o.value ? "border-hc-blue bg-hc-blue/[0.06] text-hc-ink" : error ? "border-hc-danger/40" : "border-hc-line",
-          )}
-        >
-          <input
-            type="radio"
-            name={name}
-            value={o.value}
-            checked={value === o.value}
-            onChange={() => onChange(o.value)}
-            className="sr-only"
-          />
-          <span
-            aria-hidden="true"
+    <div className="flex flex-wrap gap-2">
+      {options.map((o) => {
+        const checked = value === o.value;
+        return (
+          <label
+            key={o.value}
             className={cn(
-              "mr-2.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border",
-              value === o.value ? "border-hc-blue" : "border-[#B8C3D6]",
+              "relative inline-flex min-h-[40px] cursor-pointer items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all",
+              "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-hc-blue/20",
+              checked
+                ? "border-transparent text-hc-white hc-gradient-bg shadow-[0_6px_16px_-8px_rgba(59,91,255,0.8)]"
+                : error
+                  ? "border-hc-danger/40 bg-hc-white text-hc-body hover:border-hc-danger/60"
+                  : "border-hc-line bg-hc-white text-hc-body hover:border-hc-blue/40 hover:text-hc-ink",
             )}
           >
-            {value === o.value && <span className="h-2 w-2 rounded-full bg-hc-blue" />}
-          </span>
-          {o.label}
-        </label>
-      ))}
+            <input
+              type="radio"
+              name={name}
+              value={o.value}
+              checked={checked}
+              onChange={() => onChange(o.value)}
+              className="sr-only"
+            />
+            {checked && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
+            {o.label}
+          </label>
+        );
+      })}
     </div>
     {children}
     <FieldError id={`${name}-error`} error={error} />

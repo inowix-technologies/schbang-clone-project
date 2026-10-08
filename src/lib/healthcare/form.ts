@@ -5,16 +5,8 @@ export interface Option {
   label: string;
 }
 
-export const ROLE_OPTIONS: Option[] = [
-  { value: "owner-founder", label: "Owner / Founder" },
-  { value: "hospital-administrator", label: "Hospital Administrator" },
-  { value: "medical-director", label: "Medical Director" },
-  { value: "operations-head", label: "Operations Head" },
-  { value: "startup-founder", label: "Healthcare Startup Founder" },
-  { value: "other", label: "Other" },
-];
-
 export const ORG_TYPE_OPTIONS: Option[] = [
+  { value: "single-clinic", label: "Single clinic" },
   { value: "multi-branch-clinics", label: "Multi-branch clinics" },
   { value: "diagnostic-chain", label: "Diagnostic centre / chain" },
   { value: "hospital", label: "Hospital" },
@@ -22,24 +14,14 @@ export const ORG_TYPE_OPTIONS: Option[] = [
   { value: "other", label: "Other" },
 ];
 
-export const SIZE_BRANCH_OPTIONS: Option[] = [
-  { value: "branches-1", label: "1 branch" },
-  { value: "branches-2-5", label: "2-5 branches" },
-  { value: "branches-6-20", label: "6-20 branches" },
-  { value: "branches-20-plus", label: "20+ branches" },
-];
-
-export const SIZE_BED_OPTIONS: Option[] = [
-  { value: "beds-under-50", label: "Under 50 beds" },
-  { value: "beds-50-200", label: "50-200 beds" },
-  { value: "beds-200-plus", label: "200+ beds" },
-];
-
-export const SITUATION_OPTIONS: Option[] = [
-  { value: "new-project", label: "New project" },
-  { value: "replacing-software", label: "Replacing existing software" },
-  { value: "connecting-systems", label: "Connecting multiple systems" },
-  { value: "scaling-platform", label: "Scaling an existing platform" },
+export const BUILD_OPTIONS: Option[] = [
+  { value: "full-platform", label: "Full platform" },
+  { value: "patient-app", label: "Patient app" },
+  { value: "doctor-app", label: "Doctor app" },
+  { value: "clinic-admin", label: "Clinic / hospital admin" },
+  { value: "appointments", label: "Appointments and reminders" },
+  { value: "records", label: "Patient records (EMR)" },
+  { value: "telemedicine", label: "Telemedicine" },
 ];
 
 export const BUDGET_OPTIONS: Option[] = [
@@ -59,10 +41,8 @@ export const TIMELINE_OPTIONS: Option[] = [
 ];
 
 const QUALIFIED_BUDGETS = new Set(["5-10l", "10-25l", "25l-plus"]);
-const BELOW_FLOOR_BUDGETS = new Set(["under-3l", "3-5l"]);
 
-export const REQUIREMENTS_MIN = 20;
-export const REQUIREMENTS_MAX = 2000;
+export const NOTE_MAX = 300;
 
 export interface StepOneValues {
   fullName: string;
@@ -72,14 +52,11 @@ export interface StepOneValues {
 }
 
 export interface StepTwoValues {
-  organization: string;
-  role: string;
   orgType: string;
-  size: string;
-  requirements: string;
-  situation: string;
+  build: string;
   budget: string;
   timeline: string;
+  note: string;
 }
 
 export type FormValues = StepOneValues & StepTwoValues;
@@ -104,25 +81,17 @@ export const validateStepOne = (v: StepOneValues): FormErrors => {
 
 export const validateStepTwo = (v: StepTwoValues): FormErrors => {
   const errors: FormErrors = {};
-  if (v.organization.trim().length < 2) errors.organization = "Please enter your organization name.";
-  if (!v.role) errors.role = "Please select your role.";
-  if (!v.orgType) errors.orgType = "Please select your organization type.";
-  if (!v.size) errors.size = "Please select the number of branches or beds.";
-  const req = v.requirements.trim();
-  if (req.length < REQUIREMENTS_MIN) errors.requirements = `Please add a little more detail (at least ${REQUIREMENTS_MIN} characters).`;
-  else if (req.length > REQUIREMENTS_MAX) errors.requirements = `Please keep this under ${REQUIREMENTS_MAX} characters.`;
-  if (!v.situation) errors.situation = "Please select your current situation.";
-  if (!v.budget) errors.budget = "Please select a budget range.";
-  if (!v.timeline) errors.timeline = "Please select a timeline.";
+  if (!v.orgType) errors.orgType = "Please pick your organization type.";
+  if (!v.build) errors.build = "Please pick what you want to build.";
+  if (!v.budget) errors.budget = "Please pick a budget range.";
+  if (!v.timeline) errors.timeline = "Please pick a timeline.";
+  if (v.note.trim().length > NOTE_MAX) errors.note = `Please keep this under ${NOTE_MAX} characters.`;
   return errors;
 };
 
 export const isQualifiedBudget = (budget: string) => QUALIFIED_BUDGETS.has(budget);
 
-/** Single-branch practices or budgets below the ₹5L floor get a polite expectation-setting note. */
-export const showBudgetNote = (budget: string, size: string) =>
-  budget === "under-3l" || (size === "branches-1" && BELOW_FLOOR_BUDGETS.has(budget));
+/** Budgets well below the ₹5L floor get a polite expectation-setting note. */
+export const showBudgetNote = (budget: string) => budget === "under-3l";
 
 export const labelFor = (options: Option[], value: string) => options.find((o) => o.value === value)?.label ?? value;
-
-export const sizeLabel = (value: string) => labelFor([...SIZE_BRANCH_OPTIONS, ...SIZE_BED_OPTIONS], value);

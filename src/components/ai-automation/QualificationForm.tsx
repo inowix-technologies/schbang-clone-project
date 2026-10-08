@@ -5,7 +5,7 @@ import { ArrowLeft, Clock, Loader2, Lock, Mail, MessageCircle, ShieldCheck } fro
 import { cn } from "@/lib/utils";
 import { AIA_CONFIG, isPlaceholder } from "@/lib/ai-automation/config";
 import { LEAD_FALLBACK_EMAIL, buildLeadMailto } from "@/lib/lead-email-fallback";
-import { FORM_OPTIONS, LOW_BUDGET_OPTION } from "@/lib/ai-automation/content";
+import { FORM_OPTIONS, LOW_BUDGET_OPTION, PROOF_PROJECTS } from "@/lib/ai-automation/content";
 import { DEFAULT_PHONE_COUNTRY, getPhoneCountry, validatePhone } from "@/lib/ai-automation/phone";
 import {
   captureAttribution,
@@ -19,8 +19,7 @@ import { CtaButton, LpContainer } from "./LpPrimitives";
 import { PhoneInput } from "./PhoneInput";
 import { Reveal } from "./Reveal";
 
-const GOAL_MIN = 20;
-const GOAL_MAX = 2000;
+const NOTE_MAX = 300;
 const MIN_FILL_TIME_MS = 3000;
 
 const step1Schema = z.object({
@@ -29,17 +28,11 @@ const step1Schema = z.object({
 });
 
 const step2Schema = z.object({
-  company: z.string().trim().min(2, "Enter your company name").max(150),
-  role: z.string().min(1, "Select your role"),
-  industry: z.string().min(1, "Select your industry"),
-  companySize: z.string().min(1, "Select your company size"),
-  goal: z
-    .string()
-    .trim()
-    .min(GOAL_MIN, `Please add a bit more detail (at least ${GOAL_MIN} characters)`)
-    .max(GOAL_MAX),
-  budget: z.string().min(1, "Select an estimated budget"),
-  timeline: z.string().min(1, "Select a timeline"),
+  goal: z.string().min(1, "Pick what you want to automate"),
+  industry: z.string().min(1, "Pick your industry"),
+  budget: z.string().min(1, "Pick an estimated budget"),
+  timeline: z.string().min(1, "Pick a timeline"),
+  note: z.string().trim().max(NOTE_MAX, `Keep this under ${NOTE_MAX} characters`),
 });
 
 type Values = z.infer<typeof step1Schema> &
@@ -52,17 +45,15 @@ const INITIAL_VALUES: Values = {
   email: "",
   phone: "",
   phoneCountry: DEFAULT_PHONE_COUNTRY,
-  company: "",
-  role: "",
-  industry: "",
-  companySize: "",
   goal: "",
+  industry: "",
   budget: "",
   timeline: "",
+  note: "",
 };
 
 const fieldClass =
-  "lp-field h-12 w-full rounded-xl border border-lp-line bg-lp-white px-4 text-base text-lp-ink outline-none transition-colors placeholder:text-slate-400 hover:border-slate-300 focus:border-lp-blue focus:ring-4 focus:ring-lp-blue/15 aria-[invalid=true]:border-rose-400";
+  "lp-field h-11 w-full rounded-xl border border-lp-line bg-lp-white px-3.5 text-base text-lp-ink outline-none transition-colors placeholder:text-slate-400 hover:border-slate-300 focus:border-lp-blue focus:ring-4 focus:ring-lp-blue/15 aria-[invalid=true]:border-rose-400 sm:text-[15px]";
 
 const zodErrors = (error: z.ZodError): Errors => {
   const out: Errors = {};
@@ -71,11 +62,6 @@ const zodErrors = (error: z.ZodError): Errors => {
     if (!out[key]) out[key] = issue.message;
   }
   return out;
-};
-
-const summarize = (text: string, max = 60) => {
-  const clean = text.trim().replace(/\s+/g, " ");
-  return clean.length > max ? `${clean.slice(0, max).trimEnd()}...` : clean;
 };
 
 const Field = ({
@@ -92,7 +78,7 @@ const Field = ({
   hint?: ReactNode;
 }) => (
   <div>
-    <div className="mb-1.5 flex items-baseline justify-between gap-3">
+    <div className="mb-1 flex items-baseline justify-between gap-3">
       <label htmlFor={id} className="text-sm font-semibold text-lp-ink">
         {label}
       </label>
@@ -114,7 +100,6 @@ const ChoiceGroup = ({
   value,
   onChange,
   error,
-  columns = "grid-cols-2 sm:grid-cols-3",
 }: {
   name: FieldName;
   label: string;
@@ -122,22 +107,23 @@ const ChoiceGroup = ({
   value: string;
   onChange: (value: string) => void;
   error?: string;
-  columns?: string;
 }) => (
   <fieldset aria-describedby={error ? `${name}-error` : undefined}>
-    <legend className="mb-1.5 text-sm font-semibold text-lp-ink">{label}</legend>
-    <div className={cn("grid gap-2", columns)}>
+    <legend className="mb-2 text-sm font-semibold text-lp-ink">{label}</legend>
+    <div className="flex flex-wrap gap-2">
       {options.map((option) => {
         const checked = value === option;
         return (
           <label
             key={option}
             className={cn(
-              "relative flex min-h-[44px] cursor-pointer items-center justify-center rounded-xl border px-3 py-2 text-center text-sm font-medium transition-all",
+              "relative inline-flex min-h-[40px] cursor-pointer items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all",
               "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-lp-blue/20",
               checked
-                ? "border-lp-blue bg-lp-blue/[0.07] text-lp-blue"
-                : "border-lp-line bg-lp-white text-lp-body hover:border-slate-300"
+                ? "border-lp-blue bg-lp-blue text-lp-white shadow-[0_6px_16px_-8px_rgba(59,91,255,0.8)]"
+                : error
+                  ? "border-rose-300 bg-lp-white text-lp-body hover:border-rose-400"
+                  : "border-lp-line bg-lp-white text-lp-body hover:border-lp-blue/40 hover:text-lp-ink"
             )}
           >
             <input
@@ -171,7 +157,7 @@ export const QualificationForm = () => {
   const [attribution, setAttribution] = useState<Attribution | null>(null);
   const leadId = useRef(createLeadId());
   const mountedAt = useRef(Date.now());
-  const companyRef = useRef<HTMLInputElement>(null);
+  const step2Ref = useRef<HTMLDivElement>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
   const hasNavigatedSteps = useRef(false);
   // Read from the DOM rather than state: bots often set .value without firing input events.
@@ -184,7 +170,8 @@ export const QualificationForm = () => {
 
   useEffect(() => {
     if (!hasNavigatedSteps.current) return;
-    (step === 2 ? companyRef : firstFieldRef).current?.focus();
+    if (step === 2) step2Ref.current?.querySelector<HTMLInputElement>("input")?.focus();
+    else firstFieldRef.current?.focus();
   }, [step]);
 
   const set = <K extends FieldName>(key: K, value: Values[K]) => {
@@ -228,13 +215,11 @@ export const QualificationForm = () => {
     if (stage === "step1") return base;
     return {
       ...base,
-      company: values.company.trim(),
-      role: values.role,
+      automation_goal: values.goal,
       industry: values.industry,
-      company_size: values.companySize,
-      automation_goal: values.goal.trim(),
       budget: values.budget,
       timeline: values.timeline,
+      note: values.note.trim(),
       budget_qualified: values.budget !== LOW_BUDGET_OPTION,
     };
   };
@@ -300,7 +285,7 @@ export const QualificationForm = () => {
     saveSubmission({
       leadId: leadId.current,
       firstName: values.fullName.trim().split(/\s+/)[0] ?? "",
-      automationSummary: summarize(values.goal),
+      automationSummary: values.goal,
       qualified: values.budget !== LOW_BUDGET_OPTION,
       conversionFired: false,
     });
@@ -308,30 +293,25 @@ export const QualificationForm = () => {
   };
 
   const phoneCheck = validatePhone(values.phoneCountry, values.phone);
-  const fallbackMailto = buildLeadMailto(
-    `AI automation enquiry - ${values.company.trim() || values.fullName.trim()}`,
-    {
-      Name: values.fullName,
-      WhatsApp: phoneCheck.ok ? phoneCheck.e164 : values.phone,
-      Email: values.email,
-      Company: values.company,
-      Role: values.role,
-      Industry: values.industry,
-      "Company size": values.companySize,
-      "Want to automate": values.goal,
-      Budget: values.budget,
-      Timeline: values.timeline,
-    }
-  );
+  const fallbackMailto = buildLeadMailto(`AI automation enquiry - ${values.fullName.trim()}`, {
+    Name: values.fullName,
+    WhatsApp: phoneCheck.ok ? phoneCheck.e164 : values.phone,
+    Email: values.email,
+    "Want to automate": values.goal,
+    Industry: values.industry,
+    Budget: values.budget,
+    Timeline: values.timeline,
+    Note: values.note,
+  });
 
   const whatsappFallback = isPlaceholder(AIA_CONFIG.whatsappNumber)
     ? null
     : `https://wa.me/${AIA_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-        `Hi Inowix, I tried to submit a request about ${summarize(values.goal) || "AI automation"}`
+        `Hi Inowix, I tried to submit a request about ${values.goal || "AI automation"}`
       )}`;
 
   return (
-    <section id={AIA_CONFIG.formAnchorId} className="relative overflow-hidden bg-lp-mist py-20 sm:py-24">
+    <section id={AIA_CONFIG.formAnchorId} className="relative overflow-clip bg-lp-mist py-16 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-40 top-10 h-[480px] w-[480px] rounded-full"
@@ -344,7 +324,7 @@ export const QualificationForm = () => {
             Tell us what you want to automate
           </h2>
           <p className="mt-4 text-base text-lp-body sm:text-lg">
-            Two quick steps. A senior team member reviews every request personally.
+            Two quick steps, mostly taps. A senior team member reviews every request personally.
           </p>
           <ol className="mt-8 hidden space-y-5 lg:block">
             {[
@@ -360,18 +340,44 @@ export const QualificationForm = () => {
               </li>
             ))}
           </ol>
+          <div className="mt-8 hidden rounded-2xl border border-lp-line bg-lp-white p-4 shadow-sm lg:block">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-lp-muted">Recently shipped by our team</p>
+            <ul className="mt-3 grid grid-cols-3 gap-3">
+              {PROOF_PROJECTS.map((project) => (
+                <li key={project.slug}>
+                  <div
+                    className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl ring-1 ring-lp-line"
+                    style={{ background: `linear-gradient(135deg, ${project.accent}1f, ${project.accent}45)` }}
+                  >
+                    {project.screenshot ? (
+                      <img src={project.screenshot} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                    ) : (
+                      project.logo && <img src={project.logo} alt="" loading="lazy" decoding="async" className="max-h-8 w-auto max-w-[80%] object-contain" />
+                    )}
+                  </div>
+                  <p className="mt-1.5 truncate text-xs font-semibold text-lp-ink">{project.name}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
 
         <Reveal delay={80}>
           <form
             noValidate
             onSubmit={handleSubmit}
-            className="relative rounded-3xl border border-lp-line bg-lp-white p-5 shadow-[0_24px_60px_-28px_rgba(11,16,32,0.25)] sm:p-8"
+            className="relative rounded-3xl border border-lp-line bg-lp-white p-5 shadow-[0_24px_60px_-28px_rgba(11,16,32,0.25)] sm:p-7"
           >
-            <div className="mb-7">
-              <div className="mb-2 flex items-center justify-between text-xs font-semibold">
-                <span className="text-lp-blue">Step {step} of 2</span>
-                <span className="text-lp-muted">{step === 1 ? "Your details" : "Your project"}</span>
+            <div className="mb-5">
+              <div className="mb-2 flex items-center justify-between gap-3 text-xs font-semibold">
+                <span className="text-lp-blue">
+                  Step {step} of 2 <span className="text-lp-muted">· {step === 1 ? "Your details" : "Your project"}</span>
+                </span>
+                <span className="inline-flex shrink-0 items-center gap-1 text-lp-muted">
+                  <Clock className="h-3.5 w-3.5" aria-hidden />
+                  <span className="sm:hidden">~30 sec</span>
+                  <span className="hidden sm:inline">Takes about 30 seconds</span>
+                </span>
               </div>
               <div
                 className="h-1.5 overflow-hidden rounded-full bg-lp-line"
@@ -409,20 +415,37 @@ export const QualificationForm = () => {
             <input type="hidden" name="lead_id" value={leadId.current} />
 
             {step === 1 ? (
-              <div className="space-y-5">
-                <Field id="fullName" label="Full name" error={errors.fullName}>
-                  <input
-                    ref={firstFieldRef}
-                    id="fullName"
-                    name="full_name"
-                    autoComplete="name"
-                    value={values.fullName}
-                    onChange={(e) => set("fullName", e.target.value)}
-                    placeholder="e.g. Ahmed Khan"
-                    className={fieldClass}
-                    {...errorProps("fullName")}
-                  />
-                </Field>
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field id="fullName" label="Full name" error={errors.fullName}>
+                    <input
+                      ref={firstFieldRef}
+                      id="fullName"
+                      name="full_name"
+                      autoComplete="name"
+                      value={values.fullName}
+                      onChange={(e) => set("fullName", e.target.value)}
+                      placeholder="e.g. Ahmed Khan"
+                      className={fieldClass}
+                      {...errorProps("fullName")}
+                    />
+                  </Field>
+
+                  <Field id="email" label="Work email" error={errors.email}>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      value={values.email}
+                      onChange={(e) => set("email", e.target.value)}
+                      placeholder="you@company.com"
+                      className={fieldClass}
+                      {...errorProps("email")}
+                    />
+                  </Field>
+                </div>
 
                 <Field id="phone" label="WhatsApp number" error={errors.phone}>
                   <PhoneInput
@@ -437,22 +460,7 @@ export const QualificationForm = () => {
                   />
                 </Field>
 
-                <Field id="email" label="Work email" error={errors.email}>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    inputMode="email"
-                    autoComplete="email"
-                    value={values.email}
-                    onChange={(e) => set("email", e.target.value)}
-                    placeholder="you@company.com"
-                    className={fieldClass}
-                    {...errorProps("email")}
-                  />
-                </Field>
-
-                <CtaButton type="submit" className="mt-2 w-full">
+                <CtaButton type="submit" className="mt-1 h-12 w-full">
                   Continue
                 </CtaButton>
                 <p className="flex items-center justify-center gap-1.5 text-xs text-lp-muted">
@@ -461,99 +469,24 @@ export const QualificationForm = () => {
                 </p>
               </div>
             ) : (
-              <div className="space-y-5">
-                <Field id="company" label="Company name" error={errors.company}>
-                  <input
-                    ref={companyRef}
-                    id="company"
-                    name="company"
-                    autoComplete="organization"
-                    value={values.company}
-                    onChange={(e) => set("company", e.target.value)}
-                    className={fieldClass}
-                    {...errorProps("company")}
-                  />
-                </Field>
-
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Field id="role" label="Your role" error={errors.role}>
-                    <select
-                      id="role"
-                      name="role"
-                      value={values.role}
-                      onChange={(e) => set("role", e.target.value)}
-                      className={cn(fieldClass, "lp-select", !values.role && "text-slate-400")}
-                      {...errorProps("role")}
-                    >
-                      <option value="" disabled>
-                        Select your role
-                      </option>
-                      {FORM_OPTIONS.roles.map((o) => (
-                        <option key={o} value={o} className="text-lp-ink">
-                          {o}
-                        </option>
-                      ))}
-                    </select>
-                  </Field>
-
-                  <Field id="industry" label="Industry" error={errors.industry}>
-                    <select
-                      id="industry"
-                      name="industry"
-                      value={values.industry}
-                      onChange={(e) => set("industry", e.target.value)}
-                      className={cn(fieldClass, "lp-select", !values.industry && "text-slate-400")}
-                      {...errorProps("industry")}
-                    >
-                      <option value="" disabled>
-                        Select your industry
-                      </option>
-                      {FORM_OPTIONS.industries.map((o) => (
-                        <option key={o} value={o} className="text-lp-ink">
-                          {o}
-                        </option>
-                      ))}
-                    </select>
-                  </Field>
-                </div>
-
+              <div ref={step2Ref} className="space-y-5">
                 <ChoiceGroup
-                  name="companySize"
-                  label="Company size"
-                  options={FORM_OPTIONS.companySizes}
-                  value={values.companySize}
-                  onChange={(v) => set("companySize", v)}
-                  error={errors.companySize}
-                  columns="grid-cols-4"
+                  name="goal"
+                  label="What do you want to automate?"
+                  options={FORM_OPTIONS.goals}
+                  value={values.goal}
+                  onChange={(v) => set("goal", v)}
+                  error={errors.goal}
                 />
 
-                <Field
-                  id="goal"
-                  label="What do you want to automate or build?"
-                  error={errors.goal}
-                  hint={
-                    <span
-                      className={cn(
-                        "shrink-0 text-xs tabular-nums",
-                        values.goal.trim().length >= GOAL_MIN ? "text-lp-success" : "text-lp-muted"
-                      )}
-                    >
-                      {values.goal.trim().length}/{GOAL_MIN}+
-                    </span>
-                  }
-                >
-                  <textarea
-                    id="goal"
-                    name="automation_goal"
-                    rows={4}
-                    maxLength={GOAL_MAX}
-                    value={values.goal}
-                    onChange={(e) => set("goal", e.target.value)}
-                    placeholder="e.g. We get 200 WhatsApp enquiries a week and can't reply fast enough..."
-                    className={cn(fieldClass, "h-auto min-h-[120px] resize-y py-3 leading-relaxed")}
-                    {...errorProps("goal")}
-                  />
-                </Field>
+                <ChoiceGroup
+                  name="industry"
+                  label="Your industry"
+                  options={FORM_OPTIONS.industries}
+                  value={values.industry}
+                  onChange={(v) => set("industry", v)}
+                  error={errors.industry}
+                />
 
                 <ChoiceGroup
                   name="budget"
@@ -566,13 +499,31 @@ export const QualificationForm = () => {
 
                 <ChoiceGroup
                   name="timeline"
-                  label="Timeline"
+                  label="When do you want to start?"
                   options={FORM_OPTIONS.timelines}
                   value={values.timeline}
                   onChange={(v) => set("timeline", v)}
                   error={errors.timeline}
-                  columns="grid-cols-2"
                 />
+
+                <Field
+                  id="note"
+                  label="Company name or a quick note"
+                  error={errors.note}
+                  hint={<span className="shrink-0 text-xs text-lp-muted">Optional</span>}
+                >
+                  <input
+                    id="note"
+                    name="note"
+                    autoComplete="organization"
+                    maxLength={NOTE_MAX}
+                    value={values.note}
+                    onChange={(e) => set("note", e.target.value)}
+                    placeholder="e.g. Acme Realty, 200 WhatsApp leads a week"
+                    className={fieldClass}
+                    {...errorProps("note")}
+                  />
+                </Field>
 
                 {submitError && (
                   <div role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
@@ -590,16 +541,17 @@ export const QualificationForm = () => {
                   </div>
                 )}
 
-                <div className="flex flex-col-reverse gap-3 pt-1 sm:flex-row sm:items-center">
+                <div className="sticky bottom-0 z-10 -mx-5 flex items-center gap-2 border-t border-lp-line bg-lp-white/95 px-5 py-3 backdrop-blur sm:static sm:mx-0 sm:gap-3 sm:border-0 sm:bg-transparent sm:p-0 sm:pt-1 sm:backdrop-blur-none">
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl px-4 text-sm font-semibold text-lp-body transition-colors hover:bg-lp-mist hover:text-lp-ink"
+                    aria-label="Back to your details"
+                    className="inline-flex h-12 shrink-0 items-center justify-center gap-1.5 rounded-xl px-3 text-sm font-semibold text-lp-body transition-colors hover:bg-lp-mist hover:text-lp-ink sm:px-4"
                   >
                     <ArrowLeft className="h-4 w-4" aria-hidden />
-                    Back
+                    <span className="hidden sm:inline">Back</span>
                   </button>
-                  <CtaButton type="submit" disabled={submitting} className="w-full sm:flex-1">
+                  <CtaButton type="submit" disabled={submitting} className="h-12 min-w-0 flex-1 px-4 text-[15px] sm:px-7 sm:text-base">
                     {submitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

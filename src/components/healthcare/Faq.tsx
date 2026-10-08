@@ -1,10 +1,10 @@
 import { Plus } from "lucide-react";
-import { HC_CONFIG } from "@/lib/healthcare/config";
+import { HC_CONFIG, showPlaceholder } from "@/lib/healthcare/config";
 import { Container, SectionHeading } from "./Primitives";
 import { Reveal } from "./Reveal";
 
 // Answers other than cost and timeline are drafts: confirm them before the campaign goes live.
-const FAQS = [
+const ALL_FAQS = [
   {
     q: "What does a healthcare platform cost?",
     a: "Custom healthcare platforms typically start from ₹5L+, depending on scope and number of branches. You'll get a clear quote after a discovery call.",
@@ -30,6 +30,8 @@ const FAQS = [
     a: "Yes. Every launch includes staff training, and we offer ongoing support and maintenance plans after go-live so the platform keeps up as you add branches.",
   },
 ];
+
+const FAQS = ALL_FAQS.filter(({ a }) => showPlaceholder(a));
 
 export const Faq = () => (
   <section className="bg-hc-white py-16 sm:py-24">

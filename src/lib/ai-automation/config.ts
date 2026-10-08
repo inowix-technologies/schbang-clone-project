@@ -1,7 +1,10 @@
+import { PROJECTS_SHIPPED } from "@/lib/landing-proof";
+import { LEADS_WEBHOOK_URL } from "@/lib/lead-webhook";
+
 // Every value wrapped in [BRACKETS] is a placeholder that must be replaced before the campaign goes live.
 
 export const AIA_CONFIG = {
-  webhookUrl: (import.meta.env.VITE_AIA_WEBHOOK_URL as string | undefined) ?? "[WEBHOOK/BEACON ENDPOINT]",
+  webhookUrl: (import.meta.env.VITE_AIA_WEBHOOK_URL as string | undefined) || LEADS_WEBHOOK_URL,
   /** Send name, WhatsApp and email as soon as step 1 is completed so abandoned step-2 leads can be followed up. */
   sendPartialLeads: true,
   /** International format without "+" or spaces, e.g. 971500000000. */
@@ -9,7 +12,7 @@ export const AIA_CONFIG = {
   bookingUrl: "[BOOKING LINK]",
   contactEmail: "[CONTACT EMAIL]",
   privacyUrl: "[PRIVACY POLICY URL]",
-  projectsDelivered: "[NUMBER]",
+  projectsDelivered: `${PROJECTS_SHIPPED}+`,
   goLiveWeeks: "[X-Y]",
   priceLine: "AED 10,000 / $5K+",
   priceFloorAed: "AED 10,000+",
