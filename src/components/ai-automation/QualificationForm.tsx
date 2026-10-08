@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { ArrowLeft, Clock, Loader2, Lock, MessageCircle, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Clock, Loader2, Lock, Mail, MessageCircle, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AIA_CONFIG, isPlaceholder } from "@/lib/ai-automation/config";
+import { LEAD_FALLBACK_EMAIL, buildLeadMailto } from "@/lib/lead-email-fallback";
 import { FORM_OPTIONS, LOW_BUDGET_OPTION } from "@/lib/ai-automation/content";
 import { DEFAULT_PHONE_COUNTRY, getPhoneCountry, validatePhone } from "@/lib/ai-automation/phone";
 import {
@@ -306,6 +307,23 @@ export const QualificationForm = () => {
     navigate(AIA_CONFIG.thankYouPath);
   };
 
+  const phoneCheck = validatePhone(values.phoneCountry, values.phone);
+  const fallbackMailto = buildLeadMailto(
+    `AI automation enquiry - ${values.company.trim() || values.fullName.trim()}`,
+    {
+      Name: values.fullName,
+      WhatsApp: phoneCheck.ok ? phoneCheck.e164 : values.phone,
+      Email: values.email,
+      Company: values.company,
+      Role: values.role,
+      Industry: values.industry,
+      "Company size": values.companySize,
+      "Want to automate": values.goal,
+      Budget: values.budget,
+      Timeline: values.timeline,
+    }
+  );
+
   const whatsappFallback = isPlaceholder(AIA_CONFIG.whatsappNumber)
     ? null
     : `https://wa.me/${AIA_CONFIG.whatsappNumber}?text=${encodeURIComponent(
@@ -558,18 +576,17 @@ export const QualificationForm = () => {
 
                 {submitError && (
                   <div role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
-                    We couldn't send your request. Please try again
-                    {whatsappFallback ? (
-                      <>
-                        {" "}or{" "}
-                        <a href={whatsappFallback} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
-                          message us on WhatsApp
+                    <p>We couldn't send your request just now. Your answers are still here, so you can send them by email instead.</p>
+                    <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                      <a href={fallbackMailto} className="inline-flex items-center gap-1.5 font-semibold underline">
+                        <Mail className="h-3.5 w-3.5" aria-hidden /> Email them to {LEAD_FALLBACK_EMAIL}
+                      </a>
+                      {whatsappFallback && (
+                        <a href={whatsappFallback} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold underline">
+                          <MessageCircle className="h-3.5 w-3.5" aria-hidden /> Message us on WhatsApp
                         </a>
-                        .
-                      </>
-                    ) : (
-                      "."
-                    )}
+                      )}
+                    </div>
                   </div>
                 )}
 

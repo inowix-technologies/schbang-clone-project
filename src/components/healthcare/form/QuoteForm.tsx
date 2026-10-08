@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, Info, Loader2, Lock, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Info, Loader2, Lock, Mail, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { HC_CONFIG, isPlaceholder, whatsappLink } from "@/lib/healthcare/config";
 import { captureAttribution } from "@/lib/healthcare/attribution";
-import { DEFAULT_COUNTRY_ISO } from "@/lib/healthcare/phone";
+import { DEFAULT_COUNTRY_ISO, findCountry, toE164 } from "@/lib/healthcare/phone";
+import { LEAD_FALLBACK_EMAIL, buildLeadMailto } from "@/lib/lead-email-fallback";
 import {
   BUDGET_OPTIONS,
   ORG_TYPE_OPTIONS,
@@ -14,7 +15,9 @@ import {
   SIZE_BED_OPTIONS,
   SIZE_BRANCH_OPTIONS,
   TIMELINE_OPTIONS,
+  labelFor,
   showBudgetNote,
+  sizeLabel,
   validateStepOne,
   validateStepTwo,
   type FormErrors,
@@ -153,6 +156,23 @@ export const QuoteForm = () => {
   };
 
   const reqLength = values.requirements.trim().length;
+
+  const fallbackMailto = buildLeadMailto(
+    `Healthcare platform enquiry - ${values.organization.trim() || values.fullName.trim()}`,
+    {
+      Name: values.fullName,
+      WhatsApp: values.phone ? toE164(values.phone, findCountry(values.countryIso)) : "",
+      Email: values.email,
+      Organization: values.organization,
+      Role: labelFor(ROLE_OPTIONS, values.role),
+      "Organization type": labelFor(ORG_TYPE_OPTIONS, values.orgType),
+      Size: sizeLabel(values.size),
+      "Looking to build": values.requirements,
+      "Current situation": labelFor(SITUATION_OPTIONS, values.situation),
+      Budget: labelFor(BUDGET_OPTIONS, values.budget),
+      Timeline: labelFor(TIMELINE_OPTIONS, values.timeline),
+    },
+  );
 
   return (
     <form
@@ -349,16 +369,17 @@ export const QuoteForm = () => {
 
           {submitError && (
             <div role="alert" className="rounded-xl bg-hc-danger/5 px-4 py-3 text-sm text-hc-danger ring-1 ring-hc-danger/20">
-              We couldn't send your request just now. Please try again
-              {!isPlaceholder(HC_CONFIG.whatsappNumber) && (
-                <>
-                  {" "}or{" "}
+              <p>We couldn't send your request just now. Your answers are still here, so you can send them by email instead.</p>
+              <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <a href={fallbackMailto} className="inline-flex items-center gap-1.5 font-semibold underline">
+                  <Mail className="h-3.5 w-3.5" /> Email them to {LEAD_FALLBACK_EMAIL}
+                </a>
+                {!isPlaceholder(HC_CONFIG.whatsappNumber) && (
                   <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold underline">
-                    <MessageCircle className="h-3.5 w-3.5" /> message us on WhatsApp
+                    <MessageCircle className="h-3.5 w-3.5" /> Message us on WhatsApp
                   </a>
-                </>
-              )}
-              .
+                )}
+              </div>
             </div>
           )}
 

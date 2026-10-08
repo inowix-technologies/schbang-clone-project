@@ -5,9 +5,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowRight, Clock, Loader2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Clock, Loader2, Mail, ShieldCheck } from 'lucide-react';
 import { z } from 'zod';
 import { cn } from '@/lib/utils';
+import { LEAD_FALLBACK_EMAIL, buildLeadMailto } from '@/lib/lead-email-fallback';
 
 const MESSAGE_MAX = 1000;
 
@@ -28,6 +29,7 @@ const labelClass = "font-mono text-[10px] uppercase tracking-[0.2em] text-muted-
 
 export const ContactForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -35,9 +37,16 @@ export const ContactForm = () => {
   });
   const { toast } = useToast();
 
+  const fallbackMailto = buildLeadMailto(`Project enquiry from ${formData.name.trim() || 'website visitor'}`, {
+    Name: formData.name,
+    Email: formData.email,
+    Message: formData.message,
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setSaveFailed(false);
 
     try {
       const validatedData = contactSchema.parse(formData);
@@ -64,11 +73,16 @@ export const ContactForm = () => {
       setFormData({ name: '', email: '', message: '' });
 
     } catch (error) {
-      toast({
-        title: "Error",
-        description: error instanceof z.ZodError ? error.errors[0].message : "Failed to send message.",
-        variant: "destructive"
-      });
+      if (error instanceof z.ZodError) {
+        toast({ title: "Error", description: error.errors[0].message, variant: "destructive" });
+      } else {
+        setSaveFailed(true);
+        toast({
+          title: "We couldn't send your message",
+          description: `Please email it to ${LEAD_FALLBACK_EMAIL} instead. We've filled it in for you below.`,
+          variant: "destructive"
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -137,6 +151,19 @@ export const ContactForm = () => {
             required
           />
         </div>
+
+        {saveFailed && (
+          <div role="alert" className="rounded-sm border border-destructive/40 bg-destructive/10 p-4 text-sm">
+            <p className="text-foreground">Our form couldn't send your message just now. Your text is still here.</p>
+            <a
+              href={fallbackMailto}
+              className="mt-3 inline-flex items-center gap-2 font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
+              <Mail className="h-4 w-4" />
+              Email it to {LEAD_FALLBACK_EMAIL}
+            </a>
+          </div>
+        )}
 
         <Button
           type="submit"
