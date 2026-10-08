@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
-import { PlannerFlow } from "./PlannerFlow";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight, X } from "lucide-react";
 import { toast } from "sonner";
+
+const PlannerFlow = lazy(() => import("./PlannerFlow").then((m) => ({ default: m.PlannerFlow })));
+
+// Paid-traffic landing pages must stay free of prompts and exit-intent toasts.
+const SUPPRESSED_PATH_PREFIXES = ["/ai-automation", "/healthcare-platforms"];
 
 interface EngagementOrchestratorProps {
   children: React.ReactNode;
@@ -18,6 +23,8 @@ const ENGAGEMENT_COOLDOWN = 7 * 24 * 60 * 60 * 1000; // 7 days
 const MAX_PROMPTS_PER_SESSION = 1;
 
 export const EngagementOrchestrator = ({ children }: EngagementOrchestratorProps) => {
+  const { pathname } = useLocation();
+  const isSuppressed = SUPPRESSED_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   const [showPlannerFlow, setShowPlannerFlow] = useState(false);
   const [showInlinePrompt, setShowInlinePrompt] = useState(false);
   const [engagementState, setEngagementState] = useState<EngagementState>({
@@ -47,6 +54,7 @@ export const EngagementOrchestrator = ({ children }: EngagementOrchestratorProps
 
   // Check if we should show a prompt
   const shouldShowPrompt = () => {
+    if (isSuppressed) return false;
     const now = Date.now();
     const timeSinceLastPrompt = now - engagementState.lastPromptTime;
     
@@ -59,6 +67,7 @@ export const EngagementOrchestrator = ({ children }: EngagementOrchestratorProps
 
   // Contextual scroll-based engagement
   useEffect(() => {
+    if (isSuppressed) return;
     let scrollTimeout: NodeJS.Timeout;
     
     const handleScroll = () => {
@@ -86,10 +95,11 @@ export const EngagementOrchestrator = ({ children }: EngagementOrchestratorProps
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(scrollTimeout);
     };
-  }, [engagementState, showInlinePrompt, showPlannerFlow]);
+  }, [engagementState, showInlinePrompt, showPlannerFlow, isSuppressed]);
 
   // Gentle exit intent detection (only mouse leave from top)
   useEffect(() => {
+    if (isSuppressed) return;
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && shouldShowPrompt() && !showInlinePrompt && !showPlannerFlow) {
         // Show a subtle toast instead of blocking popup
@@ -114,7 +124,7 @@ export const EngagementOrchestrator = ({ children }: EngagementOrchestratorProps
 
     document.addEventListener('mouseleave', handleMouseLeave);
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
-  }, [engagementState, showInlinePrompt, showPlannerFlow]);
+  }, [engagementState, showInlinePrompt, showPlannerFlow, isSuppressed]);
 
   const handleStartPlanner = () => {
     setShowPlannerFlow(true);
@@ -135,13 +145,17 @@ export const EngagementOrchestrator = ({ children }: EngagementOrchestratorProps
       {children}
 
       {/* Professional Planner Flow Dialog */}
-      <PlannerFlow 
-        isOpen={showPlannerFlow} 
-        onClose={() => setShowPlannerFlow(false)} 
-      />
+      {showPlannerFlow && (
+        <Suspense fallback={null}>
+          <PlannerFlow
+            isOpen={showPlannerFlow}
+            onClose={() => setShowPlannerFlow(false)}
+          />
+        </Suspense>
+      )}
 
       {/* Minimal Inline Prompt - Non-blocking */}
-      {showInlinePrompt && !showPlannerFlow && (
+      {showInlinePrompt && !showPlannerFlow && !isSuppressed && (
         <div className="fixed bottom-6 right-6 z-40 max-w-sm animate-in slide-in-from-bottom-2 duration-300">
           <div className="bg-planner-surface-elevated backdrop-blur-sm border border-planner-border rounded-lg shadow-lg p-4">
             <button

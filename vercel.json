@@ -1,4 +1,14 @@
 {
+  "headers": [
+    {
+      "source": "/ai-automation/thank-you",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/healthcare-platforms/thank-you",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ],
   "rewrites": [
     {
       "source": "/:path*",

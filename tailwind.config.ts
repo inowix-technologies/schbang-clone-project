@@ -146,6 +146,39 @@ export default {
           beacon: "hsl(var(--accent-beacon))",
           "red-cli": "hsl(var(--accent-red-cli))",
         },
+        // The global white/black tokens point at undefined CSS variables, so the landing page uses literal hex values.
+        lp: {
+          navy: "#0A0F24",
+          "navy-2": "#111836",
+          blue: "#3B5BFF",
+          violet: "#7C3AED",
+          white: "#FFFFFF",
+          ink: "#0B1020",
+          body: "#475069",
+          muted: "#6B7390",
+          line: "#E3E7F0",
+          mist: "#F5F7FB",
+          success: "#16A34A",
+          wa: "#25D366",
+        },
+        // Same reason as `lp`: global white/red point at undefined variables, so use hc-white / hc-danger.
+        hc: {
+          white: "#FFFFFF",
+          danger: "#DC2626",
+          navy: "#0B1530",
+          "navy-2": "#13204A",
+          teal: "#14B8A6",
+          blue: "#3B5BFF",
+          ink: "#0B1530",
+          body: "#44506B",
+          muted: "#6B7690",
+          line: "#E2E8F2",
+          mist: "#F2F7FD",
+          sky: "#E6F0FC",
+          success: "#0F9F6E",
+          amber: "#B45309",
+          wa: "#25D366",
+        },
       },
       spacing: {
         'section': 'var(--section-padding)',
@@ -198,6 +231,14 @@ export default {
             "background-position": "100% 50%",
           },
         },
+        "lp-glow": {
+          "0%, 100%": { opacity: "0.55", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.06)" },
+        },
+        "hc-glow": {
+          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
+          "50%": { opacity: "0.75", transform: "scale(1.08)" },
+        },
       },
       animation: {
         'marquee': 'marquee var(--marquee-duration) linear infinite',
@@ -210,6 +251,8 @@ export default {
         spotlight: "spotlight 2s ease .75s 1 forwards",
         scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         gradient: "gradient 3s ease infinite",
+        "lp-glow": "lp-glow 8s ease-in-out infinite",
+        "hc-glow": "hc-glow 9s ease-in-out infinite",
       },
 
     },
