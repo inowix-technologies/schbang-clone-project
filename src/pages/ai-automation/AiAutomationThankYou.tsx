@@ -3,7 +3,7 @@ import { CalendarDays, CheckCircle2, MessageCircle } from "lucide-react";
 import "@/components/ai-automation/ai-automation.css";
 import { LpContainer, LpLogo } from "@/components/ai-automation/LpPrimitives";
 import { LpFooter } from "@/components/ai-automation/LpFooter";
-import { AIA_CONFIG } from "@/lib/ai-automation/config";
+import { AIA_CONFIG, isPlaceholder, whatsappLink } from "@/lib/ai-automation/config";
 import { fireConversionOnce, readSubmission, type StoredSubmission } from "@/lib/ai-automation/tracking";
 import { usePageMeta } from "@/lib/ai-automation/usePageMeta";
 
@@ -13,10 +13,7 @@ const META = {
   noindex: true,
 };
 
-const whatsappLink = (summary: string) =>
-  `https://wa.me/${AIA_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-    `Hi Inowix, I just submitted a request about ${summary || "AI automation"}`
-  )}`;
+const hasBooking = !isPlaceholder(AIA_CONFIG.bookingUrl);
 
 const AiAutomationThankYou = () => {
   usePageMeta(META);
@@ -64,9 +61,11 @@ const AiAutomationThankYou = () => {
                   A senior team member will contact you within 30 minutes on business days (UAE 9am-6pm).
                 </p>
 
-                <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                <div className={hasBooking ? "mt-10 grid gap-4 sm:grid-cols-2" : "mx-auto mt-10 grid max-w-sm gap-4"}>
                   <a
-                    href={whatsappLink(submission?.automationSummary ?? "")}
+                    href={whatsappLink(
+                      `Hi Inowix, I just submitted a request about ${submission?.automationSummary || "AI automation"}`
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-16 items-center justify-center gap-3 rounded-2xl bg-lp-wa px-6 text-base font-semibold text-lp-navy shadow-[0_14px_36px_-14px_rgba(37,211,102,0.8)] transition-transform hover:-translate-y-0.5"
@@ -74,15 +73,17 @@ const AiAutomationThankYou = () => {
                     <MessageCircle className="h-5 w-5" aria-hidden />
                     Chat with us on WhatsApp
                   </a>
-                  <a
-                    href={AIA_CONFIG.bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-16 items-center justify-center gap-3 rounded-2xl border border-lp-white/20 bg-lp-white/10 px-6 text-base font-semibold text-lp-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-lp-white/15"
-                  >
-                    <CalendarDays className="h-5 w-5" aria-hidden />
-                    Book a 20-min call
-                  </a>
+                  {hasBooking && (
+                    <a
+                      href={AIA_CONFIG.bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-16 items-center justify-center gap-3 rounded-2xl border border-lp-white/20 bg-lp-white/10 px-6 text-base font-semibold text-lp-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-lp-white/15"
+                    >
+                      <CalendarDays className="h-5 w-5" aria-hidden />
+                      Book a 20-min call
+                    </a>
+                  )}
                 </div>
               </>
             ) : (

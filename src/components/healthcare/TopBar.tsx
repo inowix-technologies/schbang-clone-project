@@ -1,6 +1,9 @@
 import logo from "@/assets/logoinowix.png";
+import { WhatsAppIcon } from "@/components/landing/WhatsAppIcon";
 import { cn } from "@/lib/utils";
-import { scrollToForm } from "@/lib/healthcare/config";
+import { HC_CONFIG, isPlaceholder, scrollToForm, whatsappLink } from "@/lib/healthcare/config";
+
+const HEADER_WHATSAPP_MESSAGE = "Hi Inowix, I'd like to discuss a healthcare platform";
 
 /** The PNG is a white wordmark with heavy transparent padding, so it is cropped and only used on navy. */
 export const Logo = ({ className }: { className?: string }) => (
@@ -15,13 +18,27 @@ export const TopBar = ({ showCta = true }: { showCta?: boolean }) => (
     <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-5 sm:h-16 sm:px-6 lg:px-8">
       <Logo />
       {showCta && (
-        <button
-          type="button"
-          onClick={scrollToForm}
-          className="inline-flex h-9 items-center rounded-lg px-3.5 text-[13px] font-semibold text-hc-white hc-gradient-bg shadow-[0_8px_20px_-8px_rgba(59,91,255,0.7)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hc-teal sm:h-10 sm:px-4 sm:text-sm"
-        >
-          Discuss Your Platform
-        </button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          {!isPlaceholder(HC_CONFIG.whatsappNumber) && (
+            <a
+              href={whatsappLink(HEADER_WHATSAPP_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with us on WhatsApp"
+              className="inline-flex h-9 items-center gap-2 rounded-lg bg-hc-wa px-2 text-sm font-semibold text-[#06301A] shadow-[0_8px_20px_-10px_rgba(37,211,102,0.9)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hc-teal sm:h-10 sm:px-3.5"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              <span className="hidden sm:inline">WhatsApp</span>
+            </a>
+          )}
+          <button
+            type="button"
+            onClick={scrollToForm}
+            className="inline-flex h-9 items-center rounded-lg px-3.5 text-[13px] font-semibold text-hc-white hc-gradient-bg shadow-[0_8px_20px_-8px_rgba(59,91,255,0.7)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hc-teal sm:h-10 sm:px-4 sm:text-sm"
+          >
+            Discuss Your Platform
+          </button>
+        </div>
       )}
     </div>
   </header>

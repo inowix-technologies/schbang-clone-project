@@ -13,7 +13,7 @@ export const HC_CONFIG = {
   /** Send name, WhatsApp and email to the webhook after step 1 so abandoned step-2 leads can be followed up. */
   sendPartialLeads: true,
   /** International format without "+" or spaces, e.g. 919800000000. */
-  whatsappNumber: "[WHATSAPP NUMBER]",
+  whatsappNumber: "918769626027",
   whatsappMessage: "Hi Inowix, I just submitted a request about a healthcare platform",
   calendlyUrl: "[CALENDLY LINK]",
   contactEmail: "[CONTACT EMAIL]",
@@ -47,5 +47,5 @@ export const scrollToForm = () => {
   document.getElementById(HC_CONFIG.formAnchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-export const whatsappLink = () =>
-  `https://wa.me/${HC_CONFIG.whatsappNumber}?text=${encodeURIComponent(HC_CONFIG.whatsappMessage)}`;
+export const whatsappLink = (message: string = HC_CONFIG.whatsappMessage) =>
+  `https://wa.me/${HC_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;

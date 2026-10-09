@@ -8,7 +8,7 @@ export const AIA_CONFIG = {
   /** Send name, WhatsApp and email as soon as step 1 is completed so abandoned step-2 leads can be followed up. */
   sendPartialLeads: true,
   /** International format without "+" or spaces, e.g. 971500000000. */
-  whatsappNumber: "[WHATSAPP NUMBER]",
+  whatsappNumber: "918769626027",
   bookingUrl: "[BOOKING LINK]",
   contactEmail: "[CONTACT EMAIL]",
   privacyUrl: "[PRIVACY POLICY URL]",
@@ -26,3 +26,6 @@ export const isPlaceholder = (value: string) => value.startsWith("[") && value.e
 export const scrollToForm = () => {
   document.getElementById(AIA_CONFIG.formAnchorId)?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
+
+export const whatsappLink = (message = "Hi Inowix, I'd like to know more about AI automation for my business") =>
+  `https://wa.me/${AIA_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;

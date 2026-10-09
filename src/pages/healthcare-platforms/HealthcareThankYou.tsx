@@ -63,13 +63,15 @@ const HealthcareThankYou = () => {
               <MessageCircle className="h-5 w-5" />
               Chat with us on WhatsApp
             </a>
-            <a
-              {...externalLink(hasCalendly ? HC_CONFIG.calendlyUrl : null)}
-              className="inline-flex h-[52px] items-center justify-center gap-2 rounded-xl border border-hc-white/20 bg-hc-white/5 px-6 text-base font-semibold text-hc-white transition-colors hover:bg-hc-white/10"
-            >
-              <CalendarClock className="h-5 w-5" />
-              Book a 20-min call
-            </a>
+            {hasCalendly && (
+              <a
+                {...externalLink(HC_CONFIG.calendlyUrl)}
+                className="inline-flex h-[52px] items-center justify-center gap-2 rounded-xl border border-hc-white/20 bg-hc-white/5 px-6 text-base font-semibold text-hc-white transition-colors hover:bg-hc-white/10"
+              >
+                <CalendarClock className="h-5 w-5" />
+                Book a 20-min call
+              </a>
+            )}
           </div>
 
           <Link
