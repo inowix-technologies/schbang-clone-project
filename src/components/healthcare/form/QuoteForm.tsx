@@ -121,18 +121,16 @@ export const QuoteForm = () => {
     setSubmitting(true);
     setSubmitError(false);
     const result = await submitLead(values, eventId.current);
-    if (!result.ok) {
-      setSubmitting(false);
-      setSubmitError(true);
-      return;
-    }
 
+    // Always continue to thank-you so Meta Lead fires even if Sheets/Supabase are down.
     savePendingLead({
       eventId: eventId.current,
       firstName: values.fullName.trim().split(/\s+/)[0] ?? "",
       qualified: result.qualified,
     });
-    navigate(HC_CONFIG.thankYouPath, { state: { fromSubmit: true } });
+    navigate(HC_CONFIG.thankYouPath, {
+      state: { fromSubmit: true, deliveryFailed: !result.ok },
+    });
   };
 
   const fallbackMailto = buildLeadMailto(`Healthcare platform enquiry - ${values.fullName.trim()}`, {

@@ -276,12 +276,8 @@ export const QualificationForm = () => {
     setSubmitting(true);
     setSubmitError(false);
     const ok = await sendLead(buildPayload("complete", phoneE164));
-    if (!ok) {
-      setSubmitting(false);
-      setSubmitError(true);
-      return;
-    }
 
+    // Always continue to thank-you so Meta Lead fires even if Sheets/Supabase are down.
     saveSubmission({
       leadId: leadId.current,
       firstName: values.fullName.trim().split(/\s+/)[0] ?? "",
@@ -289,7 +285,7 @@ export const QualificationForm = () => {
       qualified: values.budget !== LOW_BUDGET_OPTION,
       conversionFired: false,
     });
-    navigate(AIA_CONFIG.thankYouPath);
+    navigate(AIA_CONFIG.thankYouPath, { state: { deliveryFailed: !ok } });
   };
 
   const phoneCheck = validatePhone(values.phoneCountry, values.phone);

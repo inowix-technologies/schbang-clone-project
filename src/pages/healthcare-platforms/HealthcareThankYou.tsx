@@ -15,6 +15,8 @@ const externalLink = (href: string | null) =>
 
 const HealthcareThankYou = () => {
   const location = useLocation();
+  const navState = location.state as { fromSubmit?: boolean; deliveryFailed?: boolean } | null;
+  const deliveryFailed = navState?.deliveryFailed === true;
   const [firstName] = useState(() => readPendingLead()?.firstName ?? "");
 
   usePageHead({
@@ -27,8 +29,7 @@ const HealthcareThankYou = () => {
     // Only a real submission in this session fires anything; direct visits and refreshes are no-ops.
     const pending = readPendingLead();
     if (!pending) return;
-    const fromSubmit = (location.state as { fromSubmit?: boolean } | null)?.fromSubmit === true;
-    if (fromSubmit) firePageViewOnce(pending.eventId);
+    if (navState?.fromSubmit === true) firePageViewOnce(pending.eventId);
     fireLeadOnce(pending);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,7 +53,9 @@ const HealthcareThankYou = () => {
             {firstName ? `Thanks, ${firstName}.` : "Thanks."} We&apos;ve received your request.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-hc-white/75 sm:text-lg">
-            A senior team member will contact you within 30 minutes on business days (10am-7pm IST).
+            {deliveryFailed
+              ? "If we don't reply quickly, message us on WhatsApp below so we don't miss you."
+              : "A senior team member will contact you within 30 minutes on business days (10am-7pm IST)."}
           </p>
 
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
